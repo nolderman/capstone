@@ -22,17 +22,16 @@ body{
 .loginform ul {  
     padding: 0;  
     margin: 0; 
-    font-family:  'Roboto Slab', serif; 
+ 
 }  
 .loginform li {  
     display: inline;  
     float: left;  
-    font-family:  'Roboto Slab', serif;
-
 }  
 label {  
-    display: block;  
-    color: #999;  
+    display: block; 
+    font-family:  'Roboto Slab', serif; 
+    color: #3dbccc;
 }  
 .cf:before,  
 .cf:after {  
