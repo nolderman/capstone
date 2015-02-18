@@ -1,23 +1,32 @@
 <?php
 require_once 'connect.php';
 
-function NewUser(){
+function NewUser($connection){
 	$firstName = $_POST['firstName'];
 	$lastName = $_POST['lastName'];
+	
 	$email = $_POST['eMail'];
+	
 	$password =  $_POST['password'];
+	
 	$pass = sha1($password, $raw_output = false);
-	$query = "INSERT INTO profile (f_Name,l_Name,email,pass) VALUES ('$firstName','$lastName','$email','$pass')";
-	$data = mysql_query ($query)or die(mysql_error());
+	
+	$sql= "INSERT INTO profile (f_Name,l_Name,email,pass) VALUES ('$firstName','$lastName','$email','$pass')";
+	$result = $connection->query($sql);
+	
+	header('Location: http://glados/capstone/index.html');		//redirect to the loginpage.html
 }
 
-function SignUp(){
+function SignUp($connection){
+	
 	if(!empty($_POST['firstName'])){  //checking the 'firstName' which is from register.html
 		//email from table and getting the POST[eMail] from register.html
-		$query = mysql_query("SELECT * FROM profile WHERE email = '$_POST[eMail]' AND pass = '$_POST[password]'") or die(mysql_error());
+		
+		$sql = "SELECT * FROM profile WHERE email = '$_POST[eMail]' AND pass = '$_POST[password]'";
+		$result = $connection->query($sql);
 	
-		if(!$row = mysql_fetch_array($query) or die(mysql_error())){
-			newuser();
+		if($result){
+			newuser($connection);
 		}
 		else{
 			echo "SORRY...YOU ARE ALREADY REGISTERED USER...";
@@ -26,6 +35,6 @@ function SignUp(){
 }
 
 if(isset($_POST['submit'])){
-	SignUp();
+	SignUp($conn);
 }
 ?>
