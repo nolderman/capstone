@@ -19,7 +19,7 @@
 		<input type="password" name = "password" id="password" class="input password" placeholder="Password"/>
 		<input type="password" name="confirm password" class="input confirm password" placeholder="Confirm Password"/>
 	<div class="footer">
-		<input type="submit" name="submit" value="Sign Up!" class="button" href="index.html"> <!-- should bring user to main page-->
+		<input type="submit" name="submit" value="Sign Up!" class="button"> <!-- should bring user to main page-->
 		<a class="cancel"  style="text-decoration: none" href="index.html">Cancel</a>
     </div>
 	</form>
@@ -28,7 +28,7 @@
 <script language="javascript">
 	function check(form){/*function to check userid & password*/
 		
-		if(form.username.value == "test" && form.password.value == "test"){/*the following code checkes whether the entered userid and password are matching*/
+		if(form.password == form.password.value ){/*the following code checkes whether the entered passwords are matching*/
 			window.open('test.html', '_self')/*opens the target page while Id & password matches*/
 		}
 		else{
