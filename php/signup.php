@@ -9,6 +9,7 @@ function NewUser(){
 	$pass = sha1($password, $raw_output = false);
 	$query = "INSERT INTO profile (f_Name,l_Name,email,pass) VALUES ('$firstName','$lastName','$email','$pass')";
 	$data = mysql_query ($query)or die(mysql_error());
+	header('Location: http://glados/capstone/index.html');		//redirect to the loginpage.html
 }
 
 function SignUp(){
