@@ -1,5 +1,13 @@
 <?php
 require_once 'connect.php';
+require_once 'userLogin.php';
+
+if ($conn->connect_errno) {
+    printf("Connect failed: %s\n", $mysqli->connect_error);
+    exit();
+}
+
+
 
 function getPicture(){
 	$picture = mysql_query("SELECT profilePicture FROM profile WHERE email = '$_POST[eMail]'") or die(mysql_error());
@@ -17,7 +25,7 @@ function getTags(){
 	$tags = mysql_query("SELECT tags FROM profile WHERE email = '$_POST[eMail]'") or die(mysql_error());
 }
 
-function getContacts(){
+function getContacts($conn, $email){
 	$contacts = mysql_query("SELECT contacts FROM profile WHERE email = '$_POST[eMail]'") or die(mysql_error());
 }
 
