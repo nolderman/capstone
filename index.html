@@ -8,31 +8,33 @@
 	</head>
 	
 	<body>
-		<section class="loginform cf" >  
-			<link rel="stylesheet" type="text/css" href="css/login.css">
-			<link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,700' rel='stylesheet' type='text/css'>
-			<form name="login" action="index_submit" method="get" accept-charset="utf-8">  
-			    <ul>  
-			        <li><label for="usermail">Email</label>  
-			        <input type="email" name="usermail" placeholder="example@email.com" required></li>  
-			        <li><label for="password">Password</label>  
-			        <input type="password" name="password" placeholder="password" required></li>  
-			        <li>  
-			        <input type="submit" value="Login"></li>  
-			    </ul>  
-			</form>   
-			</script>
-		</section> 
+
 		<div id = "wrapper">
 		
 			<div class = "header">
 				<h1>Capstone</h1>
+				<link rel="stylesheet" type="text/css" href="css/index.css">
 					<div class=' buttons'>
-						<input type="submit" name="signUp" value="Sign Up!" class="signUp" href="register.html">
-						<input type="submit" name="logIn" value="Log In!" class="logIn" href="userLogin.html">
+						<form name="signUp" action="register.html">
+							<input type="submit" name="signUp" value="Sign Up!" class="signUp" href="register.html">
+						</form>
 					</div>
 			</div>
-			
+		<section class="loginform cf" >  
+			<link rel="stylesheet" type="text/css" href="css/login.css">
+			<link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,700' rel='stylesheet' type='text/css'>
+			<form name="login" action="php/profile.php" method="post" accept-charset="utf-8">  
+			    <ul>  
+			    	<li>  
+			        <input type="submit" value="Login"></li> 
+			        <li><label for="password">Password</label>  
+			        <input type="password" name="password" placeholder="password" required></li>  
+			        <li><label for="usermail">Email</label>  
+			        <input type="email" name="usermail" placeholder="example@email.com" required></li>  
+			    </ul>  
+			</form>   
+			</script>
+		</section> 
 	
 	</body>
 
