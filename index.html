@@ -23,14 +23,18 @@
 		<section class="loginform cf" >  
 			<link rel="stylesheet" type="text/css" href="css/login.css">
 			<link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,700' rel='stylesheet' type='text/css'>
-			<form name="login" action="profile.html" method= "g" accept-charset="utf-8">  
+			
+			<form name="login"  accept-charset="utf-8" method= "POST" action="php/userLogin.php">  
 			    <ul>  
 			    	<li>  
-			        <input type="submit" value="Login"></li> 
+			        <input type="submit" nave = "submit"  value="Login"></li> 
+					
 			        <li><label for="password">Password</label>  
 			        <input type="password" name="password" placeholder="password" required></li>  
+					
 			        <li><label for="usermail">Email</label>  
 			        <input type="email" name="usermail" placeholder="example@email.com" required></li>  
+					
 			    </ul>  
 			</form>   
 			</script>
