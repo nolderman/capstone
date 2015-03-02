@@ -1,4 +1,32 @@
 <!DOCTYPE html>
+
+<?php
+require_once 'php/connect.php';
+
+if(isset($_POST['submit'])){ //if the Login button on index.html is set then do the logging in
+	LogIn($conn);
+}
+
+function LogIn($connection) {
+	//grab info from index.html 
+	$emailname = "email";
+	$passname = "password";
+	$email = $_POST['usermail'];
+	
+	$password = $_POST['password'];
+	
+	$password = sha1($password, $raw_output = false); //get the encrypted password
+	
+	$sql = "SELECT pass FROM profile WHERE email = '$email '";//encrypted password of the user
+
+	$result = $connection->query($sql);
+	
+	if($password){//FIX THE PASSWORD COMPARISON the user was indeed in the table and had the correct password
+		setcookie($emailname , $email, time()+60*60*24);
+        setcookie($passname, $password , time()+60*60*24);
+	}
+}
+?>
 <HTML5>
 	<head>
 		<title>~Capstone~</title>
@@ -6,13 +34,8 @@
 	</head>
 	<body>
 		<div class = "header"> 
-			<h1>Profile</h1>
-			<h1> <?php echo "Balls"; ?> <h1>
+			<h1><?php echo $_COOKIE["email"]; //get the value of the cookie from browsee else?></h1>
 			<img  class = "image" src="images/silhouette.jpg">
-		</div>
-
-		<div id="leftColumn"></div>
-		<div id="centerColumn"></div>
-		<div id="rightColumn"></div>
+		</div> 
 	</body>
 </HTML>
