@@ -32,7 +32,7 @@ function NewUser($connection){
 			$firstNameErr = "First name is required.";
 		}else{ 
 			$firstName = test_Input($_POST['firstName']);
-			if (!preg_match("/^[a-zA-Z ]*$/",$name)) {
+			if (!preg_match("/^[a-zA-Z ]*$/",$firstName)) {
 				$firstNameErr = "Only letters and white space allowed";
 			}
 		}
@@ -41,7 +41,7 @@ function NewUser($connection){
 			$lastNameErr = "Last name is required.";
 		}else{
 			$lastName = test_Input($_POST['lastName']);
-			if (!preg_match("/^[a-zA-Z ]*$/",$name)) {
+			if (!preg_match("/^[a-zA-Z ]*$/",$lastName)) {
 				$lastNameErr = "Only letters and white space allowed";
 			}
 		}
