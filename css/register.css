@@ -84,7 +84,7 @@ position:relative;
 /* Input field */
 .login .content .input {
         width: 290px;
-        padding: 13px 15px;
+        padding: 13px 10px;
         
         font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
         font-weight: 400;
