@@ -18,7 +18,7 @@ function LogIn($connection) {
 	$sql = "SELECT pass FROM profile WHERE email = '$email '";//encrypted password of the user
 
 	$result = $connection->query($sql);
-	$row = $result->fetch_assoc();
+	$row = $result->fetch_array(MYSQLI_ASSOC);
 	
 	if($password == $row['pass'] ){//FIX THE PASSWORD COMPARISON the user was indeed in the table and had the correct password
 		setcookie($emailname , $email, time()+60*60*24, '/');
