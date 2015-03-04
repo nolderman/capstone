@@ -7,41 +7,41 @@
 	<body>
 		<div class = "header"> 
     		<div class="logout">
-			<a href="php/userLogout.php"> Logout</a>
-		</div>
-		
-		<div class="addContact">
-			<form name="addContact" class="addContact"  id="addContact" method= "POST" action="php/addContact.php">  
-				<input type="text" name = "contactEmail" id="contactEmail" class="input email" placeholder="Friend Email"/>
-				
-		
-			<div class="footer">
-				<input type="submit" name="addContact" value="Add Contact" class="button"> 
-				<input type="submit" name="createGroup" value="Create Group" class="button">
+				<a href="php/userLogout.php"> Logout</a>
 			</div>
-		</form>
-		</div>
 		
-		<div class="contacts">
-			<?php
-				require_once 'php/connect.php';
-				$email = $_COOKIE['email'];
-				
-				$sql = "SELECT contactEmail FROM contacts WHERE myEmail= '$email' "; //get all of my contacts
-				
-				$result = $conn->query($sql);
-				
-				/* associative array */
-				//$row = $result->fetch_array(MYSQLI_ASSOC);
-				echo "<ul>";
-				while($row = $result->fetch_array(MYSQLI_ASSOC))
-				{
-					echo  "<li>".$row['contactEmail']."</li>";
-				}
-				echo "</ul>";
-			?>
-		
-		</div>
+			<div class="addContact">
+				<form name="addContact" class="addContact"  id="addContact" method= "POST" action="php/addContact.php">  
+					<input type="text" name = "contactEmail" id="contactEmail" class="input email" placeholder="Friend Email"/>
+					
+			
+				<div class="footer">
+					<input type="submit" name="addContact" value="Add Contact" class="button"> 
+					<input type="submit" name="createGroup" value="Create Group" class="button">
+				</div>
+			</form>
+			</div>
+			
+			<div class="contacts">
+				<?php
+					require_once 'php/connect.php';
+					$email = $_COOKIE['email'];
+					
+					$sql = "SELECT contactEmail FROM contacts WHERE myEmail= '$email' "; //get all of my contacts
+					
+					$result = $conn->query($sql);
+					
+					/* associative array */
+					//$row = $result->fetch_array(MYSQLI_ASSOC);
+					echo "<ul>";
+					while($row = $result->fetch_array(MYSQLI_ASSOC))
+					{
+						echo  "<li>".$row['contactEmail']."</li>";
+					}
+					echo "</ul>";
+				?>
+			
+			</div>
 		</div>
 
 		<div id="columnWrapper">
