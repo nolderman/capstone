@@ -6,35 +6,7 @@
 	</head>
 	<body>
 		<div class = "header"> 
-
-		</div>
-
-			<div id="leftColumn">
-				<h1>Group Notifications</h1>
-				<div class="groupBox">
-					<h3>Test1</h3>
-				</div>
-				<div class="groupBox">
-					<h3>Test2</h3>
-				</div>
-			</div>
-
-			<div id="centerColumn">
-				<h1>User Name</h1>
-				<h1><?php echo $_COOKIE["email"]; //get the value of the cookie from browsee else?></h1>
-				<img  class = "image" src="images/silhouette.jpg">
-			</div>
-
-			<div id="rightColumn">
-				<h1>Conversation Notifications</h1>
-				<div class="convoBox">
-					<h3>Test1</h3>
-				</div>
-				<div class="convoBox">
-					<h3>Test2</h3>
-				</div>
-			</div>
-		<div class="logout">
+    		<div class="logout">
 			<a href="php/userLogout.php"> Logout</a>
 		</div>
 		
@@ -70,5 +42,58 @@
 			?>
 		
 		</div>
+		</div>
+
+		<div id="columnWrapper">
+			<!-- Column for group information and notifications -->
+			<div id="leftColumn">
+				<h1>Group Notifications</h1>
+				<div class="groupBox">
+					<h3>Test1</h3>
+				</div>
+				<div class="groupBox">
+					<h3>Test2</h3>
+				</div>
+			</div>
+
+			<!-- Column for profile information -->
+			<div id="centerColumn">
+				<h1>User Name</h1>
+				<h1><?php echo $_COOKIE["email"]; //get the value of the cookie from browser else?></h1>
+				<img  class = "image" src="images/silhouette.jpg">
+			</div>
+
+			<!-- Column for conversation notifications -->
+			<div id="rightColumn">
+				<div id= "rightColumnHeader">
+					<h1>Conversation Notifications</h1>
+				</div>
+				<div class="convoBox">
+					<a href="conversation.html">Eric Sculac, Broberts...</a>
+				</div>
+				<a href="conversation.html">
+					<div class="convoBox" href="conversation.html">
+						Nate
+					</div>
+				</a>
+				<a href="conversation.html">
+					<div class="convoBox" href="conversation.html">
+						Nate
+					</div>
+				</a>
+				<a href="conversation.html">
+					<div class="convoBox" href="conversation.html">
+						Nate
+					</div>
+				</a>
+				<a href="conversation.html">
+					<div class="convoBox" href="conversation.html">
+						Nate
+					</div>
+				</a>
+			</div>
+	    </div>
+
+
 	</body>
 </HTML>
