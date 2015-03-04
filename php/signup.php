@@ -50,6 +50,11 @@ function NewUser($connection){
 			$emailErr = "Email is required";
 		}else{
 			$email = test_Input($_POST['eMail']);
+			$emailname = "email";
+			
+			setcookie($emailname , $email, time()+60*60*24, '/'); //set the email cookie (log them in basically)
+			echo $_COOKIE["email"];
+			
 			if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 				$emailErr = "Invalid email format";
 			}
@@ -63,7 +68,7 @@ function NewUser($connection){
 	
 	$sql= "INSERT INTO profile (f_Name,l_Name,email,pass) VALUES ('$firstName','$lastName','$email','$pass')";
 	$result = $connection->query($sql);
-	
-	header('Location: http://glados/capstone/index.html');		//redirect to the loginpage.html
+
+	header('Location: http://glados/capstone/profile.html');		//redirect to the loginpage.html
 }
 ?>
