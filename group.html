@@ -21,19 +21,19 @@
 							$groupID = $_COOKIE['groupID'];//get the group we are currently in
 					
 					
-							$sql = "SELECT messageData FROM message WHERE groupID= '$groupID' "; 
+							$sql = "SELECT messageData FROM messages WHERE groupID= '$groupID' "; 
 					
 							$result = $conn->query($sql);//get all of the messages
 							
 							/* associative array */
-							/*
+							
 							echo "<ul>";
 							while($row = $result->fetch_array(MYSQLI_ASSOC))  
 							{
 								echo  "<li>".$row['messageData']."</li>"; //print out the messages in an unordered list on the page
 							}
 							echo "</ul>";
-							*/
+							
 						?>
 		</div>
 	</body>
