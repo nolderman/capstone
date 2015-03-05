@@ -9,31 +9,36 @@ CREATE TABLE IF NOT EXISTS Contacts (
 email VarChar(255) NOT NULL, 
 contactEmail VarChar(255) NOT NULL, 
 dateConnected DATETIME 							--'YYYY-MM-DD HH:MM:SS'
-CONSTRAINT pk_contact PRIMARY KEY(email, contactEmail)
+PRIMARY KEY(email, contactEmail)
 FOREIGN KEY (email) REFERENCES Profile(email)
 ) ;
 
-CREATE TABLE IF NOT EXISTS group (
-groupID INT PRIMARY KEY NOT NULL,
-group_name VarChar(255) NOT NULL
+CREATE TABLE IF NOT EXISTS groups (
+groupID INT NOT NULL AUTO_INCREMENT,
+groupName VarChar(255) NOT NULL,
+dateTimeCreated DATETIME,
+moderator VarChar(255),
+PRIMARY KEY (groupID)
 );
 
 CREATE TABLE IF NOT EXISTS groupMembership (
 groupID INT NOT NULL,
-email VarChar(255) NOT NULL
-CONSTRAINT pk_groupMembership PRIMARY KEY (groupID,email)
-FOREIGN KEY (groupID) REFERENCES Group(groupID)
+email VarChar(255) NOT NULL,
+PRIMARY KEY (groupID,email),
+FOREIGN KEY (groupID) REFERENCES groups(groupID),
 FOREIGN KEY (email) REFERENCES Profile(email)
-ON DELETE CASCADE ON UPDATE CASCADE
+ON DELETE CASCADE
+ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS message (
+CREATE TABLE IF NOT EXISTS messages (
 email VarChar(255) NOT NULL,
 groupID INT NOT NULL,
 dateTimePosted DATETIME NOT NULL,
-messageData VarChar(255)
-CONSTRAINT pk_message PRIMARY KEY(poster_email, groupID, dateTime_posted)
-FOREIGN KEY (groupID) REFERENCES Group(groupID)
+messageData VarChar(255),
+PRIMARY KEY(email, groupID, dateTimePosted),
+FOREIGN KEY (groupID) REFERENCES groups(groupID),
 FOREIGN KEY (email) REFERENCES Profile(email)
-ON DELETE CASCADE ON UPDATE CASCADE
+ON DELETE CASCADE
+ON UPDATE CASCADE
 );
