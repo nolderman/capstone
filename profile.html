@@ -12,43 +12,39 @@
 		
 			<div class="addContact">
 				<form name="addContact" class="addContact"  id="addContact" method= "POST" action="php/addContact.php">  
-					<input type="text" name = "contactEmail" id="contactEmail" class="input email" placeholder="Friend Email"/>
-					
-			
-				<div class="footer">
+					<input type="text" name = "contactEmail" id="contactEmail" class="input email" placeholder="Friend Email"/>							
 					<input type="submit" name="addContact" value="Add Contact" class="button"> 
-					<input type="submit" name="createGroup" value="Create Group" class="button">
-				</div>
-			</form>
+				</form>
+			</div>	
+			
+			<div class="createGroup">
+				<input type="submit" name="createGroup" value="Create Group" class="button">
 			</div>
 			
-			<div class="contacts">
-				<?php
-					require_once 'php/connect.php';
-					$email = $_COOKIE['email'];
-					
-					$sql = "SELECT contactEmail FROM contacts WHERE myEmail= '$email' "; //get all of my contacts
-					
-					$result = $conn->query($sql);
-					
-					/* associative array */
-					//$row = $result->fetch_array(MYSQLI_ASSOC);
-					echo "<ul>";
-					while($row = $result->fetch_array(MYSQLI_ASSOC))
-					{
-						echo  "<li>".$row['contactEmail']."</li>";
-					}
-					echo "</ul>";
-				?>
-			
-			</div>
 		</div>
-
 		<div id="columnWrapper">
 			<!-- Column for group information and notifications -->
 			<div id="leftColumn">
 				<h1>Group Notifications</h1>
 				<div class="groupBox">
+					<div class="contacts">
+						<?php
+							require_once 'php/connect.php';
+							$email = $_COOKIE['email'];
+					
+							$sql = "SELECT contactEmail FROM contacts WHERE myEmail= '$email' "; 
+					
+							$result = $conn->query($sql);  //get all of my contacts
+					
+							/* associative array */
+							echo "<ul>"; //start an unordered list in html
+							while($row = $result->fetch_array(MYSQLI_ASSOC)) //get all of my contacts
+							{
+								echo  "<li>".$row['contactEmail']."</li>"; //list out the contactEmail of each contact
+							}
+							echo "</ul>"; //end the unordered list in html
+						?>
+					</div>
 					<h3>Test1</h3>
 				</div>
 				<div class="groupBox">
@@ -59,7 +55,7 @@
 			<!-- Column for profile information -->
 			<div id="centerColumn">
 				<h1>User Name</h1>
-				<h1><?php echo $_COOKIE["email"]; //get the value of the cookie from browser else?></h1>
+				<h1><?php echo $_COOKIE["email"]; //get the value of the users email from browser else?></h1>
 				<img  class = "image" src="images/silhouette.jpg">
 			</div>
 
