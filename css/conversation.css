@@ -10,13 +10,9 @@ html{
 body{
     height: 1000px;
     width: 1000px;
-	background: rgba(0,113,128,1);
-	background: -moz-linear-gradient(left, rgba(0,113,128,1) 0%, rgba(61,188,204,1) 52%, rgba(0,113,128,1) 100%);
-	background: -webkit-gradient(left top, right top, color-stop(0%, rgba(0,113,128,1)), color-stop(52%, rgba(61,188,204,1)), color-stop(100%, rgba(0,113,128,1)));
-	background: -webkit-linear-gradient(left, rgba(0,113,128,1) 0%, rgba(61,188,204,1) 52%, rgba(0,113,128,1) 100%);
-	background: -o-linear-gradient(left, rgba(0,113,128,1) 0%, rgba(61,188,204,1) 52%, rgba(0,113,128,1) 100%);
-	background: -ms-linear-gradient(left, rgba(0,113,128,1) 0%, rgba(61,188,204,1) 52%, rgba(0,113,128,1) 100%);
-	background: linear-gradient(to right, rgba(0,113,128,1) 0%, rgba(61,188,204,1) 52%, rgba(0,113,128,1) 100%);
+	/*background: rgba(0,113,128,1);*/
+    background: #1BA39C;
+
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 
@@ -92,4 +88,25 @@ body{
     
     border: 1px solid #fff;
     border-radius: 5px;
+}
+#message {
+
+    font-family:  'Roboto Slab', serif;
+    font-weight: 300;
+    font-size: 100%;
+    line-height:34px;
+    position: absolute;
+    width: 90%;
+    height: 95%;
+    left: 0px;
+
+}
+.button {
+    background-color: #27ae60;
+    color: white;
+
+    position: absolute;
+    width: 10%;
+    height: 99%;
+    right:0px;
 }

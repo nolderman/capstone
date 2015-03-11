@@ -3,6 +3,7 @@
 	<head>
 		<title>Conversation Page</title>
 		<link rel="stylesheet" type="text/css" href="css/conversation.css">
+		<link href="css/hover.css" rel="stylesheet" media="all">
 	</head>
 
 	<body>
@@ -14,7 +15,10 @@
 				This is where the conversation's messages from all members will appear in order.
 			</div>
 			<div id="inputField">
-				This is where you will type and send your message.
+					<form name="postMessage" method="POST" action="php/postMessageToConversation.php">
+					<textarea  name="message" id="message" placeholder="Type your message here!"></textarea>
+					<input type="submit" name="postMessage" value="Post Message" class="button hvr-fade">				
+					</form>
 			</div>
 		</div>
 
