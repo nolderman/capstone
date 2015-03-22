@@ -9,7 +9,14 @@ if(isset($_COOKIE["email"])){
 	<head>
 		<title>~Capstone~</title>
 		<link rel="stylesheet" type="text/css" href="css/index.css">
-		<script src="javascript/jquery-1.11.2.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/hover.css">
+		<link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,700' rel='stylesheet' type='text/css'>
+		  <script src='http://codepen.io/assets/libs/fullpage/jquery.js'></script>
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/392/TweenMax.min.js'></script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.1/ScrollMagic.js'></script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.1/plugins/animation.gsap.js'></script>
+		
+		<script src = "javascript/index.js"></script>
 	</head>
 	<body>
 
@@ -17,32 +24,31 @@ if(isset($_COOKIE["email"])){
 		
 			<div class = "header">
 				<h1>Capstone</h1>
-				<link rel="stylesheet" type="text/css" href="css/index.css">
-					<div class=' buttons'>
-						<form name="signUp" action="register.html" method="get">
-							<input type="submit" name="signUp" value="Sign Up!" class="signUp" href="register.html">
-						</form>
-					</div>
-			</div>
-			<section class="loginform cf" >  
-			<link rel="stylesheet" type="text/css" href="css/login.css">
-			<link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,700' rel='stylesheet' type='text/css'>
+				<form name="login" class="loginform cf" accept-charset="utf-8" method= "POST" action="php/userLogin.php">  			       
+					 <input type="email" id="email" name="usermail" placeholder="example@email.com" required>
+					 <input type="password"  id="password" name="password" placeholder="password" required>
+					 <input type="submit" class="submit hvr-fade" name = "submit"  value="Login">
+				</form>   
+				<a href="register.html" class="signup hvr-fade"> Sign Up!</a>
+			</div>	
 			
-			<form name="login"  accept-charset="utf-8" method= "POST" action="php/userLogin.php">  
-			    <ul>  
-			    	<li>  
-			        <input type="submit" name = "submit"  value="Login"></li> 		
-					
-			        <li><label for="password">Password</label>  
-			        <input type="password" name="password" placeholder="password" required></li>  
-					
-			        <li><label for="usermail">Email</label>  
-			        <input type="email" name="usermail" placeholder="example@email.com" required></li>
-					
-			    </ul>  
-			</form>   
-		</section> 
-		</div>
+			<div class="panel">
+				<div class="panel mission">
+					<h2>Mission</h2>
+				</div>
+			
+				<div class="panel features">
+					<h2>Features</h2>
+				</div>
+			
+			
+				<div class="panel aboutus">
+					<h2>About Us</h2>
+				</div>
+				
+				<div class="panel footer">	</div>
+				
+			</div>
 	</body>
 
 
