@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<HTML5>
+	<head>
+		<title>Group Name</title>
+		<link rel="stylesheet" type="text/css" href="css/group.css">
+		<script src="javascript/jquery-1.11.2.min.js"></script>
+	</head>
+	<body>
+		<div class = "header">
+			<p>Some text to show that the header exists</p>
+			<h1><?php echo $_COOKIE['groupName']; ?></h1>
+		</div>
+		<div id="pageWrapper"><!-- wrapper for all divs within the main body of the page. -->
+
+			<div id="postWrapper"><!--wrapper for post input and post feed-->
+				<div id="postMessage">
+					<form name="postMessage" method="POST" action="php/postMessage.php">
+					<textarea cols="50" rows="4" name="message" id="message" placeholder="Type Your Message Here"></textarea>
+					<input type="submit" name="postMessage" value="Post Message" class="button">				
+					</form>
+				</div>
+				<div class="postFeed">
+					<?php
+						require_once 'php/connect.php'; //connect to the database first
+						
+						$groupID = $_COOKIE['groupID'];//get the group we are currently in
+								
+						$sql = "SELECT messageData FROM messages WHERE groupID= '$groupID' "; 
+								
+						$result = $conn->query($sql);//get all of the messages
+										
+						/* associative array */
+										
+						echo "<ul>";
+						while($row = $result->fetch_array(MYSQLI_ASSOC))  
+							{
+								echo  "<li>".$row['messageData']."</li>"; //print out the messages in an unordered list on the page
+							}
+						echo "</ul>";			
+					?>
+				</div>
+			</div>
+
+			<div id="groupSidebar">
+				This is where your list of other groups will appear. 
+			</div>
+
+			<div id="groupConversationWrapper">
+				<div id="conversationFeed">
+					This is where the default and other conversations' messages will appear
+				</div>
+				<div id="conversationInputField">
+					This is where you will type and send your message
+				</div>
+			</div>
+		</div>
+	</body>
+</HTML>

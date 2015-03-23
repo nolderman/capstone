@@ -1,41 +1,66 @@
 <!DOCTYPE html>
+<?php
+if(isset($_COOKIE["email"])){
+		header('Location: http://glados/capstone/profile.html');
+}
+?>
 <HTML5>
 
 	<head>
 		<title>~Capstone~</title>
 		<link rel="stylesheet" type="text/css" href="css/index.css">
-		<script src="javascript/index.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/hover.css">
+		<link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,700' rel='stylesheet' type='text/css'>
+		<script src='http://codepen.io/assets/libs/fullpage/jquery.js'></script>
+		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/392/TweenMax.min.js'></script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.1/ScrollMagic.js'></script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.1/plugins/animation.gsap.js'></script>
+		<script src="javascript/_dependent/greensock/plugins/ScrollToPlugin.min.js"></script>
+		<script src = "javascript/index.js"></script>
 	</head>
-	
 	<body>
 
+
+
 		<div id = "wrapper">
-		
 			<div class = "header">
+			<a id="top"></a>
 				<h1>Capstone</h1>
-				<link rel="stylesheet" type="text/css" href="css/index.css">
-					<div class=' buttons'>
-						<form name="signUp" action="register.html">
-							<input type="submit" name="signUp" value="Sign Up!" class="signUp" href="register.html">
-						</form>
-					</div>
-			</div>
-		<section class="loginform cf" >  
-			<link rel="stylesheet" type="text/css" href="css/login.css">
-			<link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,700' rel='stylesheet' type='text/css'>
-			<form name="login" action="php/profile.php" method="post" accept-charset="utf-8">  
-			    <ul>  
-			    	<li>  
-			        <input type="submit" value="Login"></li> 
-			        <li><label for="password">Password</label>  
-			        <input type="password" name="password" placeholder="password" required></li>  
-			        <li><label for="usermail">Email</label>  
-			        <input type="email" name="usermail" placeholder="example@email.com" required></li>  
-			    </ul>  
-			</form>   
-			</script>
-		</section> 
-	
+				<form name="login" class="loginform cf" accept-charset="utf-8" method= "POST" action="php/userLogin.php">  			       
+					 <input type="email" id="email" name="usermail" placeholder="example@email.com" required>
+					 <input type="password"  id="password" name="password" placeholder="password" required>
+					 <input type="submit" class="submit hvr-fade" name = "submit"  value="Login">
+				</form>   
+				<a href="register.html" class="signup hvr-fade"> Sign Up!</a>
+			</div>	
+			
+	<form class="move">
+		
+			<legend>Anchor Links</legend>
+				<p><a href="#top">Top</a></p>
+				<p><a href="#Mission">Mission</a></p>
+				<p><a href="#Features">Features</a></p>
+				<p><a href="#AboutUs">About Us</a></p>
+	</form>
+			
+				<div class="panel mission">
+					<a id="Mission"></a>
+					<h2>Mission</h2>
+				</div>
+			
+				<div class="panel features">
+				<a id="Features"></a>
+					<h2>Features</h2>
+				</div>
+			
+				<div class="panel aboutus">
+					<a id="AboutUs"></a>
+					<h2>About Us</h2>
+				</div>
+				
+				<div class="footer">	</div>
+				
+			
 	</body>
 
 

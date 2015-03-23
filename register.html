@@ -1,7 +1,11 @@
+<!DOCTYPE html>
+
 <html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="css/register.css">
+			<link rel="stylesheet" type="text/css" href="css/hover.css">
 		<link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,700' rel='stylesheet' type='text/css'>
+		<script src="javascript/jquery-1.11.2.min.js"></script>
 		<title>Capstone</title>
 	</head>
 <body>
@@ -13,28 +17,23 @@
 			<span>Fill in your information and password, then hit Sign Up to start making connections!</span>
 	</div>
 	<div class="content">
+	
 		<input class="input firstName" type="text" name = "firstName" id="firstName" placeholder="firstName"/>
+		
 		<input class="input lastName" type="text" name = "lastName" id="lastName" placeholder="lastName"/>
+		
 		<input type="text" name = "eMail" id="eMail" class="input email" placeholder="Email"/>
+			
 		<input type="password" name = "password" id="password" class="input password" placeholder="Password"/>
+		
 		<input type="password" name="confirm password" class="input confirm password" placeholder="Confirm Password"/>
+			
+		
 	<div class="footer">
-		<input type="submit" name="submit" value="Sign Up!" class="button" href="index.html"> <!-- should bring user to main page-->
+		<input type="submit" class="button hvr-fade" name="submit" value="Sign Up!" > 
 		<a class="cancel"  style="text-decoration: none" href="index.html">Cancel</a>
     </div>
 	</form>
 	</div>
-
-<script language="javascript">
-	function check(form){/*function to check userid & password*/
-		
-		if(form.username.value == "test" && form.password.value == "test"){/*the following code checkes whether the entered userid and password are matching*/
-			window.open('test.html', '_self')/*opens the target page while Id & password matches*/
-		}
-		else{
-			alert("Error Password or Username")/*displays error message*/
-		}
-	}
-</script>
 </body>
 </html>
