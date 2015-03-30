@@ -16,6 +16,7 @@ function AddContact($connection){
 	$sql = "INSERT INTO contacts (myEmail, contactEmail, dateConnected) VALUES ('$_COOKIE[email]', '$_POST[contactEmail]', '$dateTime')"; //put the contact in the database
 
 	$result = $connection->query($sql);
+	
 	header('Location: http://glados/capstone/profile.html');
 }
 

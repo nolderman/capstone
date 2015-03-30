@@ -5,7 +5,7 @@ require_once 'functions.php';
 if(isset($_POST["groupName"])){
 	if($_POST["groupName"] != "") //only save a contact if the user put something in the submit box
 		CreateGroup($conn);
-	header('Location: http://glados/capstone/group.html');
+	//header('Location: http://glados/capstone/group.html');
 }
 
 function CreateGroup($connection){
@@ -22,6 +22,7 @@ function CreateGroup($connection){
 	$sql = "SELECT groupID, groupName, dateTimeCreated, moderator FROM groups WHERE groupName='$_POST[groupName]' AND dateTimeCreated='$dateTime'";
 	$result = $connection->query($sql);
 	$row = $result->fetch_array(MYSQLI_ASSOC); //get the group we inserted
+	//echo $row['groupID'];
 	
 	$groupID = $row['groupID'];
 	$insertMember = "INSERT INTO groupMembership (groupID, email) VALUES ('$groupID', '$_COOKIE[email]')";

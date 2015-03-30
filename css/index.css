@@ -1,85 +1,118 @@
 html{
         height: 100%;
+		width:100%;
+		min-width: 960px;
 }
 
 body{
+		position:absolute;
         height: 100%;
-		background: rgba(0,113,128,1);
-		background: -moz-linear-gradient(left, rgba(0,113,128,1) 0%, rgba(61,188,204,1) 52%, rgba(0,113,128,1) 100%);
-		background: -webkit-gradient(left top, right top, color-stop(0%, rgba(0,113,128,1)), color-stop(52%, rgba(61,188,204,1)), color-stop(100%, rgba(0,113,128,1)));
-		background: -webkit-linear-gradient(left, rgba(0,113,128,1) 0%, rgba(61,188,204,1) 52%, rgba(0,113,128,1) 100%);
-		background: -o-linear-gradient(left, rgba(0,113,128,1) 0%, rgba(61,188,204,1) 52%, rgba(0,113,128,1) 100%);
-		background: -ms-linear-gradient(left, rgba(0,113,128,1) 0%, rgba(61,188,204,1) 52%, rgba(0,113,128,1) 100%);
-		background: linear-gradient(to right, rgba(0,113,128,1) 0%, rgba(61,188,204,1) 52%, rgba(0,113,128,1) 100%);
-		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#007180', endColorstr='#007180', GradientType=1 );
-        font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-        font-weight:300;
-        text-align: left;
-        text-decoration: none;
+		width:100%;
+		overflow-x:hidden;
+		background: #34495e;
+		margin:0;
+		padding:-5;
+}
+
+.move {
+	position:fixed;
+	margin-top: 150px;
+	margin-left:5px;
+	 vertical-align: auto;
+        background: #f3f3f3;
+        border: 1px solid #fff;
+        border-radius: 5px;
+	width: 100px;
+	height: 215px;
+	z-index: 1;
+	
+	font-family: 'Roboto Slab', serif;
+	text-align: center;
 }
 
 .header{
-		position: relative;
+		font-family: 'Roboto Slab', serif;
+		position: absolute;
+		
 		text-align: center;
-
-		width: 600px;
-        margin: 0 auto;
+		width: 100%;
+		height:100px;
+        margin:0;
+		padding:0;
         position: relative;
         vertical-align: auto;
         background: #f3f3f3;
         border: 1px solid #fff;
         border-radius: 5px;
-        
-        box-shadow: 0 1px 3px rgba(255,117,11,0.5);
-        -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-        -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
 }
 
-.header .buttons{
-		position: absolute;
+.header .signup{
+		position: absolute;	
 		
 		float:right;
-        left:65%;
-		top:20%;
-        padding: 11px 25px;
-		
-        overflow: auto;
-        
-        background: #d4dedf;
-        border-top: 1px solid #fff;
+        left:88%;
+		top:22%;
+        padding: 11px 15px;
         
         font-family: 'Roboto Slab', serif;
         font-weight: 300;
         font-size: 18px;
         color: #fff;
         text-shadow: 0px 1px 0 rgba(0,0,0,0.25);
-        
-        background: #f3f3f3;
-        border: 1px solid #46b3d3;
-        border-radius: 5px;
-        cursor: pointer;
 		
-		box-shadow: 0 1px 3px rgba(255,117,11,0.5);
-        -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-        -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-}
-
-.header .buttons .signUp{
-        background: #56c2e1;
-        border: 1px solid #46b3d3;
+		background: #34495e;
         border-radius: 5px;
-        cursor: pointer;
-        box-shadow: inset 0 0 2px rgba(256,256,256,0.75);
-        -moz-box-shadow: inset 0 0 2px rgba(256,256,256,0.75);
-        -webkit-box-shadow: inset 0 0 2px rgba(256,256,256,0.75);
-
+		text-decoration: none;
 }
 
-.header .button .signUp:hover {
-        background: #3f9db8;
-        border: 1px solid rgba(256,256,256,0.75);
-        
-        box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
-        -moz-box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
-        -webkit-box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
+.loginform {
+		position: absolute;		
+		float:right;
+        left:57%;
+		top:22%;
 }
+
+.loginform #email, #password {  
+    padding: 5px;  
+    margin-right: 10px;  
+    border: 1px solid rgba(0, 0, 0, 0.3);  
+    border-radius: 3px;  
+    box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.1),   
+                0px 1px 0px 0px rgba(0, 5, 51, 0.5) ;  
+} 
+
+.loginform .submit {  
+		font-family: 'Roboto Slab', serif;
+        font-weight: 300;
+        font-size: 18px;
+        color: #fff;
+		
+		padding: 9px 15px;  
+	
+		background: #34495e;
+		border: 1px solid #fff;
+        border-radius: 5px;
+		text-decoration: none;
+} 
+
+.panel {
+	font-family: 'Roboto Slab', serif;
+    font-weight: 300;
+    font-size: 18px;
+    color: #fff;
+	text-align:center;
+	position:relative;
+	margin-top: 10%;
+	width: 100%;
+	height: 600px;
+	background:#2980b9;
+}
+
+.footer {
+	height: 200px;
+	margin-top: 10%;
+	background: #f3f3f3;
+    border: 1px solid #fff;
+    border-radius: 5px;
+}
+
