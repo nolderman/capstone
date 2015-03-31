@@ -1,0 +1,112 @@
+#columnWrapper { /*For keeping the right % left sidebar (left and right columns) and the center field (column) aligned*/
+    float: left;
+    font-family:  'Roboto Slab', serif;
+    font-weight: 300;
+    font-size: 150%;
+    line-height:34px;
+    color: white;
+    text-align: center;
+
+    position: absolute;
+    top: 190px;
+    width: 2100px;
+    height: 70%;
+    
+    border: 1px solid #fff;
+    border-radius: 5px;
+}
+
+#leftColumn { /*contains the group notification info*/
+    float: left;
+    font-family:  'Roboto Slab', serif;
+    font-weight: 300;
+    font-size: 90%;
+    line-height:34px;
+    color: black;
+    overflow: auto;
+
+
+    position: absolute;
+    top: 60px;
+    left: 45px;
+    width: 575px;
+    height: 300px;
+    background: #f3f3f3;
+    border: 1px solid #fff;
+    border-radius: 5px;
+
+    
+}
+#leftColumnHeader {
+    font-family:  'Roboto Slab', serif;
+    font-weight: 300;
+    font-size: 75%;
+    line-height:34px;
+    float: top;
+    margin-top:0px;
+
+    position: absolute;
+    left: 45px;
+    height: 70px;
+    width: 578px;
+    background: #f3f3f3;
+}
+#rightColumn { /*contains the conversation notification info*/
+    float: left;
+    font-family:  'Roboto Slab', serif;
+    font-weight: 300;
+    font-size: 90%;
+    line-height:34px;
+    color: white;
+    text-align: center;
+    overflow: auto;
+
+
+    position: absolute;
+    margin-top: 60px;
+    right: 45px;
+    width: 575px;
+    height: 90%;
+    background: #ecf0f1;
+    border: 1px solid #fff;
+    border-radius: 5px;
+
+}
+#rightColumnHeader {
+    font-family:  'Roboto Slab', serif;
+    font-weight: 300;
+    font-size: 75%;
+    line-height:34px;
+    color: black;
+    text-align: center;
+    float: top;
+    margin-top:0px;
+
+    position: absolute;
+    right: 45px;
+    height: 100%;
+    width: 578px;
+    background: #ecf0f1;
+}
+.notificationBox { /*how the individual notifications will appear within each sidebar*/
+    font-family:  'Roboto Slab', serif;
+    font-weight: 300;
+    font-size: 150%;
+    line-height:34px;
+    text-align: left;
+    text-overflow: ellipsis;
+    float: top;
+    margin-top: 5px;
+    width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+
+    background: #4086AA;
+    color: black;
+    border: 1px solid black;
+
+    /*position: absolute;*/
+    left: 37.5%;
+    width: 99%;
+    height:10%;
+}
