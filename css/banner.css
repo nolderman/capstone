@@ -1,4 +1,4 @@
-.header{
+.banner{
 		font-family: 'Roboto Slab', serif;
 		position: absolute;
 		
@@ -14,7 +14,7 @@
         border-radius: 5px;
 }
 
-.header .image{ 
+.banner .image{ 
     display: block;
     margin-top: 25px;
 	margin-left: auto;
@@ -23,13 +23,13 @@
 	width:150px;
 }
 
-.header .logout{
+.banner .logout{
 	width:100px;
 	font-family: 'Roboto Slab', serif;
     text-align:center;
 	background: #34495e;
 }
 
-.header .logout:hover{
+.banner .logout:hover{
 	background: #34495e;
 }
