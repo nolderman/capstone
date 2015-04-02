@@ -51,8 +51,8 @@ function NewUser($connection){
 			$passErr = "Password is required";
 		}else{$password =  test_Input($_POST['password']);}
 	}
-	$pass = sha1($password, $raw_output = false); //encrypt their password																													//uID,email,pass,picture,f_Name,m_name,l_Name,tag_visibility,profile_visibility,block_invites,block_messages
-	$sql= "INSERT INTO user (uID,email,pass,picture,f_Name,m_name,l_Name,tag_visibility,profile_visibility,block_invites,block_messages) VALUES ('NULL','$email','$pass','NULL','$firstName','NULL','$lastName','NULL','NULL','NULL','NULL')"; //make them a profile
+	$pass = sha1($password, $raw_output = false); //encrypt their password
+	$sql= "INSERT INTO user (uID,email,pass,picture,f_Name,m_name,l_Name,tag_visibility,profile_visibility,block_invites,block_messages) VALUES ('NULL','$email','$pass','NULL','$firstName','NULL','$lastName','1','1','0','0')"; //make them a profile
 	$result = $connection->query($sql);
 	
 	$uID =  mysqli_insert_id($connection); //get the id of the last inserted record
