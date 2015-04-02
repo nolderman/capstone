@@ -9,7 +9,6 @@
 
     position: absolute;
     top: 190px;
-    /*width: 2100px;*/
     width: 100%;
     height: 70%;
     
@@ -17,7 +16,7 @@
     border-radius: 5px;
 }
 
-#leftColumn { /*contains the group notification info*/
+#groupSidebar { /*contains the group notification info*/
     float: left;
     font-family:  'Roboto Slab', serif;
     font-weight: 300;
@@ -32,8 +31,8 @@
     left: 45px;
     width: 575px;
     height: 300px;
-    background: #f3f3f3;
-    border: 1px solid #fff;
+    background: #ecf0f1;
+    border: 1px solid #ecf0f1;
     border-radius: 5px;
 
     
@@ -50,9 +49,10 @@
     left: 45px;
     height: 70px;
     width: 578px;
-    background: #f3f3f3;
+    background: #ecf0f1;
 }
-#rightColumn { /*contains the conversation notification info*/
+
+#convSidebar { /*contains the conversation notification info*/
     float: left;
     font-family:  'Roboto Slab', serif;
     font-weight: 300;
@@ -69,11 +69,10 @@
     width: 575px;
     height: 90%;
     background: #ecf0f1;
-    border: 1px solid #fff;
+    border: 1px solid #ecf0f1;
     border-radius: 5px;
-
 }
-#rightColumnHeader {
+#columnHeader {
     font-family:  'Roboto Slab', serif;
     font-weight: 300;
     font-size: 75%;
