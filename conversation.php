@@ -10,7 +10,7 @@
 	</head>
 
 	<body>
-
+		
 		<div class = "banner"> 
     		<div class="logout">
 				<a href="php/userLogout.php">Logout</a>
@@ -19,16 +19,17 @@
 
 		<div id="columnWrapper">
 
+			<!--Generates the links to conversations the person is a part of-->
 			<div id="convSidebar">
-				<!--generates the links to groups the person is a part of-->
 				<?php include 'php/convSidebar.php';?>
 			</div>
 
 			<!-- center column -->
-			<div id="messageWrapper"><!--  wrapper for entire center column -->
+			<div id="messageWrapper">
 				<div id="messageFeed">
 					This is where the conversation's messages from all members will appear in order.
 				</div>
+
 				<!-- input area for your message -->
 				<div id="textInputWrapper"> 
 						<form name="postMessage" method="POST" action="php/postMessageToConversation.php">

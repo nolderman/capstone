@@ -7,9 +7,10 @@
 		<link href="css/sidebars.css" rel="stylesheet" type="text/css"> <!-- CSS file for right and left columns -->
 		<link href="css/banner.css" rel="stylesheet" type="text/css"> <!-- CSS file for header for main pages -->
 	</head>
+
 	<body>
 		<div class = "banner">
-			<p>Some text to show that the banner exists</p>
+			<p>BANNER: Test Text</p>
 			<h1>
 				<?php
 					echo $_SESSION['g_name']; 
@@ -17,7 +18,8 @@
 			</h1>
 		</div>
 
-		<div id="columnWrapper"><!-- wrapper for all divs within the main body of the page. -->
+		<!-- wrapper for all divs within the main body of the page. -->
+		<div id="columnWrapper">
 
 			<!-- Column wrapper for group information and notifications -->
 			<div id="groupSidebar">
@@ -33,38 +35,37 @@
 
 			</div>
 
-
-			<div id="postWrapper"><!--wrapper for post input and post feed-->
+			<!--Group's Posts-->
+			<div id="postWrapper">
+				<!--Form to post a message-->
 				<div id="postMessage">
 					<form name="postMessage" method="POST" action="php/postMessage.php">
 					<textarea cols="50" rows="4" name="message" id="message" placeholder="Type Your Message Here"></textarea>
 					<input type="submit" name="postMessage" value="Post Message" class="button">				
 					</form>
 				</div>
+
+				<!--Posted Messages-->
 				<div class="postFeed">
-				
 					<?php
-					//Display all of the messages for the group
-						require_once 'php/connect.php'; //connect to the database first
+						require_once 'php/connect.php'; //connect to the database
 						
 						$gID = $_SESSION['gID'];//get the group we are currently in
 								
 						$sql = "SELECT content FROM post WHERE gID= '$gID' "; 
-								
 						$result = $conn->query($sql);//get all of the messages
 										
-						/* associative array */
-										
+						//print out the messages in an unordered list on the page
 						echo "<ul>";
-						while($row = $result->fetch_array(MYSQLI_ASSOC))  
-							{
-								echo  "<li>".$row['content']."</li>"; //print out the messages in an unordered list on the page
-							}
+						while($row = $result->fetch_array(MYSQLI_ASSOC)){
+							echo  "<li>".$row['content']."</li>";
+						}
 						echo "</ul>";			
 					?>
 				</div>
 			</div>
 
+			<!--List of conversations the group contains-->
 			<div id="groupConversationWrapper">
 				<div id="conversationFeed">
 					This is where the default and other conversations' messages will appear
