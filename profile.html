@@ -18,11 +18,16 @@
 				}
 		    }
 		</script>
+		<script>
+			function resizePage() {
+				document.body.style.width  = screen.width + "px";
+			}
+		</script> 
 		<script>var x = "Total Width: " + screen.width;</script>
 	</head>
 
 
-	<body>
+	<body onload= "resizePage()">
 		<div class = "header"> 
     		<div class="logout">
 				<a href="php/userLogout.php">Logout</a>
