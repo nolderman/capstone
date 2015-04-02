@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <HTML5>
-
+	<?php session_start(); ?>
 	<head>
 		<title>~Capstone~</title>
 		<link rel="stylesheet" type="text/css" href="css/index.css">

@@ -29,7 +29,6 @@
 
 
 	<body onload= "setScreenWidth()">
-
 		<div class = "banner"> 
     		<div class="logout">
 				<a href="php/userLogout.php">Logout</a>

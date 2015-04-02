@@ -12,8 +12,7 @@
 			<p>Some text to show that the banner exists</p>
 			<h1>
 				<?php
-					session_start();
-					echo $_SESSION['gID']; 
+					echo $_SESSION['g_name']; 
 				?>
 			</h1>
 		</div>
