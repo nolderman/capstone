@@ -9,17 +9,8 @@ if(isset($_POST['submit'])){
 function SignUp($connection){
 	
 	if(!empty($_POST['firstName'])){  //making sure the user input a firstname
-	
-		//get the user profile information  (they entered their eMail and password)
-		$sql = "SELECT * FROM profile WHERE email = '$_POST[eMail]' AND pass = '$_POST[password]'";//
-		$result = $connection->query($sql);
-	
-		if($result){
-			newuser($connection);
-		}
-		else{
-			echo "SORRY...YOU ARE ALREADY REGISTERED USER...";
-		}
+		echo "Sign up!";
+		newuser($connection);
 	}
 }
 
@@ -46,7 +37,7 @@ function NewUser($connection){
 				$lastNameErr = "Only letters and white space allowed";
 			}
 		}
-	
+		echo $_POST['eMail'];
 		if(empty($_POST['eMail'])){
 			$emailErr = "Email is required";
 		}else{
@@ -65,10 +56,10 @@ function NewUser($connection){
 		}else{$password =  test_Input($_POST['password']);}
 	}
 	$pass = sha1($password, $raw_output = false); //encrypt their password
-	
-	$sql= "INSERT INTO profile (f_Name,l_Name,email,pass) VALUES ('$firstName','$lastName','$email','$pass')"; //make them a profile
+	echo "Sign up2!";																														//uID,email,pass,picture,f_Name,m_name,l_Name,tag_visibility,profile_visibility,block_invites,block_messages
+	$sql= "INSERT INTO user (uID,email,pass,picture,f_Name,m_name,l_Name,tag_visibility,profile_visibility,block_invites,block_messages) VALUES ('NULL','$email','$pass','NULL','$firstName','NULL','$lastName','NULL','NULL','NULL','NULL')"; //make them a profile
 	$result = $connection->query($sql);
-
-	header('Location: http://glados/capstone/profile.html');		//log the user in
+	echo "Sign up3!";		
+	//header('Location: http://glados/capstone/profile.html');		//log the user in
 }
 ?>
