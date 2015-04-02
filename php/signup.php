@@ -36,14 +36,11 @@ function NewUser($connection){
 				$lastNameErr = "Only letters and white space allowed";
 			}
 		}
-		echo $_POST['eMail'];
+		
 		if(empty($_POST['eMail'])){
 			$emailErr = "Email is required";
 		}else{
 			$email = test_Input($_POST['eMail']);
-			$emailname = "email";
-			
-			setcookie($emailname , $email, time()+60*60*24, '/'); //set the email cookie (log them in basically)
 			
 			if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 				$emailErr = "Invalid email format";
@@ -57,6 +54,12 @@ function NewUser($connection){
 	$pass = sha1($password, $raw_output = false); //encrypt their password																													//uID,email,pass,picture,f_Name,m_name,l_Name,tag_visibility,profile_visibility,block_invites,block_messages
 	$sql= "INSERT INTO user (uID,email,pass,picture,f_Name,m_name,l_Name,tag_visibility,profile_visibility,block_invites,block_messages) VALUES ('NULL','$email','$pass','NULL','$firstName','NULL','$lastName','NULL','NULL','NULL','NULL')"; //make them a profile
 	$result = $connection->query($sql);
-	echo "Sign up3!";	header('Location: http://glados/capstone/profile.html');		//log the user in
+	
+	$uID =  mysqli_insert_id($connection); //get the id of the last inserted record
+	$uIDName = "uID";
+	session_start();
+	$_SESSION['uID'] = $uID;
+	//setcookie($uIDName, $uID, time()+60*60*24, '/');//set the user ID cookie for a day so we can get all of their information later
+	header('Location: http://glados/capstone/profile.html');		//log the user in
 }
 ?>
