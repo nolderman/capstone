@@ -35,7 +35,6 @@
 				<a href="php/userLogout.php">Logout</a>
 			</div>	
 
-
 			<!--OLD CODE, will be used when designing contact list
 				<div class="addContact">
 					<form name="addContact" class="addContact"  id="addContact" method= "POST" action="php/addContact.php">  
