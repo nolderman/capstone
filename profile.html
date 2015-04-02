@@ -54,16 +54,18 @@
 					<!-- This is PHP code Brandon made to dynamically generate all of the current profile's contacts. -->
 						<?php
 							require_once 'php/connect.php';
-							$email = $_COOKIE['email'];
+							session_start();
+							$userID = $_SESSION['uID'];
+							echo "<h1>".$userID."</h1>";
 							//get the groups we are members of
-							$sql = "SELECT groupID,groupName, dateTimeCreated, moderator FROM groupMembership NATURAL JOIN groups WHERE email= '$email' "; 
+							$sql = "SELECT gID, name FROM members NATURAL JOIN groups WHERE uID= 'userID'"; 
 							$groupIDs = $conn->query($sql);  //get all of my contacts
 							
 							echo "<ul>"; //start an unordered list in html
 							while($row = $groupIDs->fetch_array(MYSQLI_ASSOC)) //get all of my contacts
 							{
 								//groupID and groupName
-								echo  "<li>".$row['groupID'].$row['groupName']."</li>"; //list out the contactEmail of each contact
+								echo  "<li>".$row['gID'].$row['name']."</li>"; //list out the contactEmail of each contact
 							}
 							echo "</ul>"; //end the unordered list in html
 							/*
@@ -102,7 +104,13 @@
 			<!-- Column for profile information -->
 			<div id="centerColumn">
 				<h1>User Name</h1>
-				<h1><?php echo $_COOKIE["email"]; //get the value of the users email from browser else?></h1>
+				<h1>
+				<?php 
+				$var = $_SESSION['uID'];
+				echo $var; //get the value of the users email from browser else
+				
+				?>
+				</h1>
 				<img  class = "image" src="images/silhouette.jpg">
 			</div>
 

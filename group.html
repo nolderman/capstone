@@ -10,7 +10,9 @@
 	<body>
 		<div class = "header">
 			<p>Some text to show that the header exists</p>
-			<h1><?php echo $_COOKIE['groupName']; ?></h1>
+			<h1><?php
+			session_start();
+			echo $_SESSION['gID']; ?></h1>
 		</div>
 
 		<div id="columnWrapper"><!-- wrapper for all divs within the main body of the page. -->
@@ -50,12 +52,14 @@
 					</form>
 				</div>
 				<div class="postFeed">
+				
 					<?php
+					//Display all of the messages for the group
 						require_once 'php/connect.php'; //connect to the database first
 						
-						$groupID = $_COOKIE['groupID'];//get the group we are currently in
+						$gID = $_SESSION['gID'];//get the group we are currently in
 								
-						$sql = "SELECT messageData FROM messages WHERE groupID= '$groupID' "; 
+						$sql = "SELECT content FROM post WHERE gID= '$gID' "; 
 								
 						$result = $conn->query($sql);//get all of the messages
 										
@@ -64,7 +68,7 @@
 						echo "<ul>";
 						while($row = $result->fetch_array(MYSQLI_ASSOC))  
 							{
-								echo  "<li>".$row['messageData']."</li>"; //print out the messages in an unordered list on the page
+								echo  "<li>".$row['content']."</li>"; //print out the messages in an unordered list on the page
 							}
 						echo "</ul>";			
 					?>
