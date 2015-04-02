@@ -77,12 +77,10 @@
 			</div>
 
 			
-
 			<div id="convSidebar">
 				<!--generates the links to groups the person is a part of-->
 				<?php include 'php/convSidebar.php';?>
 			</div>
-
 
 	
 	    </div>

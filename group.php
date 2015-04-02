@@ -10,38 +10,29 @@
 	<body>
 		<div class = "banner">
 			<p>Some text to show that the banner exists</p>
-			<h1><?php
-			session_start();
-			echo $_SESSION['gID']; ?></h1>
+			<h1>
+				<?php
+					session_start();
+					echo $_SESSION['gID']; 
+				?>
+			</h1>
 		</div>
 
 		<div id="columnWrapper"><!-- wrapper for all divs within the main body of the page. -->
 
-			
-			<div id= "leftColumnHeader"> <!-- Sits outside of the wrapper for left column so that it "floats" there and doesn't scroll or overlap any of the notifications. Might be moved down soon.-->
-				<h1>Group Notifications</h1>
-			</div>
 			<!-- Column wrapper for group information and notifications -->
-			<div id="leftColumn">
-				<div class="addContact">
-					<form name="addContact" class="addContact"  id="addContact" method= "POST" action="php/addContact.php">  
-						<input type="text" name = "contactEmail" id="contactEmail" class="input email" placeholder="Friend Email"/>							
-						<input type="submit" name="addContact" value="Add Contact" class="button"> 
-					</form>
-				</div>	
+			<div id="groupSidebar">
+				
+				<!--form to create a group-->
+				<form name="createGroup" class="createGroup"  id="createGroup" method= "POST" action="php/createGroup.php">  
+					<input type="text" name = "groupName" id="groupName" class="input groupName" placeholder="Group Name"/>	
+					<input type="submit" name="createGroup" value="Create Group" class="button">
+				</form>
 
-				<!-- Here is a demo of what the "Notification Box" for group notifications in the right column look like.
-				   notificationBox is the CSS class that determines how the div behaves and looks. 
-				         (both group notification boxes and conversation notifications share the same CSS class)
-				   href should all link to a single php that grabs the group info based off of which div was clicked. 
-				   Right now it just links to conversation.html, and should eventually be the php-integrated conversation.php
-				   This is the format of HTML you'll want PHP to spit out. -->
-				<a href= "group.html">
-					<div class="notificationBox hvr-fade-green">
-						Test2
-					</div>
-				</a>
-			</div> <!-- End of left column wrapper -->
+				<!--generates the links to groups the person is a part of-->
+				<?php include 'php/groupSidebar.php';?>
+
+			</div>
 
 
 			<div id="postWrapper"><!--wrapper for post input and post feed-->
@@ -83,6 +74,8 @@
 					This is where you will type and send your message
 				</div>
 			</div>
+
 		</div>
+
 	</body>
 </HTML>

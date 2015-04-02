@@ -18,23 +18,11 @@
 		</div>
 
 		<div id="columnWrapper">
-			<div id= "rightColumnHeader">
-				<h1>Other Conversations</h1>
-			</div>
-			<div id="rightColumn">
-				<!-- Here is a demo of what the "Notification Box" for conversation notifications in the right column look like.
-				   notificationBox is the CSS class that determines how the div behaves and looks. 
-				         (both group notification boxes and conversation notifications share the same CSS class)
-				   href (the action upon clicking) should all link to a single php that grabs the conversation info based off of which div was clicked. 
-				   Right now it just links to conversation.html, and should eventually be the php-integrated conversation.php
-				   This is the format of HTML you'll want PHP to spit out. -->
-				<a href="conversation.html">
-					<div class="notificationBox hvr-fade-green"> <!-- this includes two CSS classes, notificationBox and hvr-fade-green. Separating by spaces allows multiple CSS classes to be linked. -->
-						Nate
-					</div>
-				</a>
-			</div>
 
+			<div id="convSidebar">
+				<!--generates the links to groups the person is a part of-->
+				<?php include 'php/convSidebar.php';?>
+			</div>
 
 			<!-- center column -->
 			<div id="messageWrapper"><!--  wrapper for entire center column -->
