@@ -14,20 +14,21 @@
 					document.getElementById(divid).style.display = 'block';
 				}
 				else{
-				document.getElementById(divid).style.display = 'none';
+					document.getElementById(divid).style.display = 'none';
 				}
 		    }
 		</script>
 		<script>
-			function resizePage() {
+			//Sets the width for the screen and all wrapper divs within the page. This is meant for just when the page loads. 
+			function setScreenWidth() {
 				document.body.style.width  = screen.width + "px";
+				document.getElementById('columnWrapper').style.width = screen.width + "px";
 			}
 		</script> 
-		<script>var x = "Total Width: " + screen.width;</script>
 	</head>
 
 
-	<body onload= "resizePage()">
+	<body onload= "setScreenWidth()">
 		<div class = "header"> 
     		<div class="logout">
 				<a href="php/userLogout.php">Logout</a>
@@ -36,17 +37,23 @@
 
 		<div id="columnWrapper"> <!-- div that sits around all three columns, keeping them aligned together easily. Move this around (in CSS) if you want to shift or affect all 3 columns.  -->
 
-			<div id= "leftColumnHeader"> <!-- Sits outside of the wrapper for left column so that it "floats" there and doesn't scroll or overlap any of the notifications. Might be moved down soon.-->
-				<h1>Group Notifications</h1>
-			</div>
 			<!-- Column wrapper for group information and notifications -->
-			<div id="leftColumn">
+			<div id="groupSidebar">
+				<div class="createGroup">
+					<form name="createGroup" class="createGroup"  id="createGroup" method= "POST" action="php/createGroup.php">  
+						<input type="text" name = "groupName" id="groupName" class="input groupName" placeholder="Group Name"/>	
+						<input type="submit" name="createGroup" value="Create Group" class="button">
+					</form>
+				</div>
+				
+				<!--OLD CODE, will be used when designing contact list
 				<div class="addContact">
 					<form name="addContact" class="addContact"  id="addContact" method= "POST" action="php/addContact.php">  
 						<input type="text" name = "contactEmail" id="contactEmail" class="input email" placeholder="Friend Email"/>							
 						<input type="submit" name="addContact" value="Add Contact" class="button"> 
 					</form>
 				</div>	
+				-->
 
 
 				<div class="notificationBox"> <!-- Notification box illed with contacts PHP stuff right now until we have a place to put them. -->
@@ -100,7 +107,6 @@
 			</div> <!-- End of left column wrapper -->
 
 
-
 			<!-- Column for profile information -->
 			<div id="centerColumn">
 				<h1>User Name</h1>
@@ -116,47 +122,27 @@
 
 			
 
-			<div id= "rightColumnHeader"> <!-- The header for the right column. Is not included in the wrapper of the column, so it is moved separately in its on CSS. -->
-				<h1>Conversation Notifications</h1>
-			</div>
-			<div id="rightColumn">
-				<div class="createGroup">
-					<form name="createGroup" class="createGroup"  id="createGroup" method= "POST" action="php/createGroup.php">  
-						<input type="text" name = "groupName" id="groupName" class="input groupName" placeholder="Group Name"/>	
-						<input type="submit" name="createGroup" value="Create Group" class="button">
-					</form>
-				</div>
-
-					<!-- Here is a demo of what the "Notification Box" for conversation notifications in the right column look like.
-					   notificationBox is the CSS class that determines how the div behaves and looks. 
-					         (both group notification boxes and conversation notifications share the same CSS class)
-					   href should all link to a single php that grabs the conversation info based off of which div was clicked. 
-					   Right now it just links to conversation.html, and should eventually be the php-integrated conversation.php
-					   This is the format of HTML you'll want PHP to spit out. -->
-					<a href="conversation.html">
-						<div class="notificationBox hvr-fade-green"> <!-- this includes two CSS classes, notificationBox and hvr-fade-green. Separating by spaces allows multiple CSS classes to be linked. -->
-							Nate
-						</div>
-					</a>
+			<div id="convSidebar">
+				<?php include 'php/convSidebar.php';?>
 			</div><!-- end of right column -->
 
 
-
-			<div class="chatWindowWrapper"> <!-- Wrapper div for the chat boxes at the bottom of the page. -->
-      				<div class="hvr-bubble-top" id="smallChatWindow"  href="javascript:;" onmousedown="toggleDiv('bigChatWindow'); toggleDiv('smallChatWindow');" >Click to Expand</div>
-      				<div id="bigChatWindow" style="display:none">
-      					<div class="chatWindowHeader" id="chatWindowHeader" href="javascript:;" onmousedown="toggleDiv('bigChatWindow'); toggleDiv('smallChatWindow');">
-      						minimize
-      					</div>
-    					<div id="inputField">
-							<form name="postMessage" method="POST" action="php/postMessageToConversation.php">
-							<textarea  name="message" id="message" placeholder="Type your message here!"></textarea>
-							<!-- <input type="submit" name="postMessage" value="Post Message" class="button hvr-fade-green">	 -->			
-							</form>
-						</div>
-      				</div>
-			</div>
-			
+	
 	    </div>
+
+		<div class="chatWindowWrapper"> <!-- Wrapper div for the chat boxes at the bottom of the page. -->
+      			<div class="hvr-bubble-top" id="smallChatWindow"  href="javascript:;" onmousedown="toggleDiv('bigChatWindow'); toggleDiv('smallChatWindow');" >Click to Expand</div>
+      			<div id="bigChatWindow" style="display:none">
+      				<div class="chatWindowHeader" id="chatWindowHeader" href="javascript:;" onmousedown="toggleDiv('bigChatWindow'); toggleDiv('smallChatWindow');">
+      					minimize
+      				</div>
+    				<div id="inputField">
+						<form name="postMessage" method="POST" action="php/postMessageToConversation.php">
+						<textarea  name="message" id="message" placeholder="Type your message here!"></textarea>
+						<!-- <input type="submit" name="postMessage" value="Post Message" class="button hvr-fade-green">	 -->			
+						</form>
+					</div>
+      			</div>
+		</div>
 	</body>
 </HTML>
