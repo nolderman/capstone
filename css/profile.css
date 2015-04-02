@@ -1,14 +1,12 @@
-html{
-    height: 100%;
-	width:100%;
-}
 
-body{
-    height: 99%;
-    width: 99%;
+
+body{  
+    /*width: 99%;*/
+    
     background: #34495e;
-	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-	background:#34495e;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    background:#34495e;
+
 }
 
 
