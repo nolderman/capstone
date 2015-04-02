@@ -1,14 +1,8 @@
-
-
-body{  
-    /*width: 99%;*/
-    
+body{
     background: #34495e;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     background:#34495e;
-
 }
-
 
 #centerColumn {
     float: left;
@@ -25,8 +19,8 @@ body{
     
     border: 1px solid #fff;
     border-radius: 5px;
- 
 }
+
 #centerColumn .image{
     display: block;
     margin-top: 25px;

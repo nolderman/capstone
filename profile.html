@@ -14,7 +14,7 @@
 					document.getElementById(divid).style.display = 'block';
 				}
 				else{
-				document.getElementById(divid).style.display = 'none';
+					document.getElementById(divid).style.display = 'none';
 				}
 		    }
 		</script>
@@ -37,19 +37,23 @@
 
 		<div id="columnWrapper"> <!-- div that sits around all three columns, keeping them aligned together easily. Move this around (in CSS) if you want to shift or affect all 3 columns.  -->
 
-
-
-			<div id= "leftColumnHeader"> <!-- Sits outside of the wrapper for left column so that it "floats" there and doesn't scroll or overlap any of the notifications. Might be moved down soon.-->
-				<h1>Group Notifications</h1>
-			</div>
 			<!-- Column wrapper for group information and notifications -->
-			<div id="leftColumn">
+			<div id="groupSidebar">
+				<div class="createGroup">
+					<form name="createGroup" class="createGroup"  id="createGroup" method= "POST" action="php/createGroup.php">  
+						<input type="text" name = "groupName" id="groupName" class="input groupName" placeholder="Group Name"/>	
+						<input type="submit" name="createGroup" value="Create Group" class="button">
+					</form>
+				</div>
+				
+				<!--OLD CODE, will be used when designing contact list
 				<div class="addContact">
 					<form name="addContact" class="addContact"  id="addContact" method= "POST" action="php/addContact.php">  
 						<input type="text" name = "contactEmail" id="contactEmail" class="input email" placeholder="Friend Email"/>							
 						<input type="submit" name="addContact" value="Add Contact" class="button"> 
 					</form>
 				</div>	
+				-->
 
 
 				<div class="notificationBox"> <!-- Notification box illed with contacts PHP stuff right now until we have a place to put them. -->
@@ -110,28 +114,8 @@
 
 			
 
-			<div id= "rightColumnHeader"> <!-- The header for the right column. Is not included in the wrapper of the column, so it is moved separately in its on CSS. -->
-				<h1>Conversation Notifications</h1>
-			</div>
-			<div id="rightColumn">
-				<div class="createGroup">
-					<form name="createGroup" class="createGroup"  id="createGroup" method= "POST" action="php/createGroup.php">  
-						<input type="text" name = "groupName" id="groupName" class="input groupName" placeholder="Group Name"/>	
-						<input type="submit" name="createGroup" value="Create Group" class="button">
-					</form>
-				</div>
-
-					<!-- Here is a demo of what the "Notification Box" for conversation notifications in the right column look like.
-					   notificationBox is the CSS class that determines how the div behaves and looks. 
-					         (both group notification boxes and conversation notifications share the same CSS class)
-					   href should all link to a single php that grabs the conversation info based off of which div was clicked. 
-					   Right now it just links to conversation.html, and should eventually be the php-integrated conversation.php
-					   This is the format of HTML you'll want PHP to spit out. -->
-					<a href="conversation.html">
-						<div class="notificationBox hvr-fade-green"> <!-- this includes two CSS classes, notificationBox and hvr-fade-green. Separating by spaces allows multiple CSS classes to be linked. -->
-							Nate
-						</div>
-					</a>
+			<div id="convSidebar">
+				<?php include 'php/convSidebar.php';?>
 			</div><!-- end of right column -->
 
 
