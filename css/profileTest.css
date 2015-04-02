@@ -1,0 +1,8 @@
+html{
+    min-height: 768px;
+    min-width: 1024px;
+}
+
+body{
+	background:#34495e;
+}
