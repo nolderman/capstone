@@ -9,7 +9,6 @@ if(isset($_POST['submit'])){
 function SignUp($connection){
 	
 	if(!empty($_POST['firstName'])){  //making sure the user input a firstname
-		echo "Sign up!";
 		newuser($connection);
 	}
 }
@@ -55,11 +54,9 @@ function NewUser($connection){
 			$passErr = "Password is required";
 		}else{$password =  test_Input($_POST['password']);}
 	}
-	$pass = sha1($password, $raw_output = false); //encrypt their password
-	echo "Sign up2!";																														//uID,email,pass,picture,f_Name,m_name,l_Name,tag_visibility,profile_visibility,block_invites,block_messages
+	$pass = sha1($password, $raw_output = false); //encrypt their password																													//uID,email,pass,picture,f_Name,m_name,l_Name,tag_visibility,profile_visibility,block_invites,block_messages
 	$sql= "INSERT INTO user (uID,email,pass,picture,f_Name,m_name,l_Name,tag_visibility,profile_visibility,block_invites,block_messages) VALUES ('NULL','$email','$pass','NULL','$firstName','NULL','$lastName','NULL','NULL','NULL','NULL')"; //make them a profile
 	$result = $connection->query($sql);
-	echo "Sign up3!";		
-	//header('Location: http://glados/capstone/profile.html');		//log the user in
+	echo "Sign up3!";	header('Location: http://glados/capstone/profile.html');		//log the user in
 }
 ?>
