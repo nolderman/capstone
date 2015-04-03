@@ -54,9 +54,10 @@
 				$password =  test_Input($_POST['password']);
 			}
 		}
+
 		$pass = sha1($password, $raw_output = false); //encrypt their password
 		$sql= "INSERT INTO user (uID,email,pass,picture,f_Name,m_name,l_Name,tag_visibility,profile_visible,block_invites,block_messages) VALUES ('0','$email','$pass','NULL','$firstName','NULL','$lastName','1','1','0','0')"; //make them a profile
-		$result = $connection->query($sql))
+		$result = $connection->query($sql);
 		
 		$uID =  mysqli_insert_id($connection); //get the id of the last inserted record
 		$uIDName = "uID";
@@ -64,4 +65,5 @@
 		$_SESSION['uID'] = $uID;
 		//setcookie($uIDName, $uID, time()+60*60*24, '/');//set the user ID cookie for a day so we can get all of their information later
 		header('Location: ../profile.php');		//log the user in
-}
+	}
+?>
