@@ -24,7 +24,7 @@ function AddContact($connection){
 	$sql = "INSERT INTO contacts (user, contact) VALUES ('$uID', '$contactID')"; //put the contact in the database
 	$result = $connection->query($sql);
 	
-	header('Location: http://glados/capstone/profile.html');
+	header('Location: ../profile.php');
 }
 
 ?>
