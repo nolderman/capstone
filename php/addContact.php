@@ -8,7 +8,7 @@
 	if(isset($_POST['contactEmail'])){
 		if(isset($_POST['contactEmail'])) //only save a contact if the user put something in the submit box
 			AddContact($conn);
-		header('Location: http://glados/capstone/profile.html');
+		header('Location: ../profile.php');
 	}
 
 	function AddContact($connection){

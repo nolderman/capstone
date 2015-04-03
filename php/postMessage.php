@@ -7,7 +7,7 @@
 	if(isset($_POST['postMessage'])){ //if the user clicks the submit button on the groupPage
 		if(isset($_POST['message']))
 			PostMessage($conn);
-		header('Location: http://glados/capstone/group.php'); //go back to the group page without doing anything
+		header('Location: ../group.php'); //go back to the group page without doing anything
 	}
 
 	function PostMessage($connection){
