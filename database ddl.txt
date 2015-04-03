@@ -7,7 +7,7 @@ f_name VarChar(255) NOT NULL,
 m_name VarChar(255),
 l_name VarChar(255) NOT NULL, 
 tag_visibility TINYINT NOT NULL,
-profile_visibile TINYINT(1) NOT NULL,
+profile_visible TINYINT(1) NOT NULL,
 block_invites TINYINT NOT NULL,
 block_messages TINYINT NOT NULL,
 PRIMARY KEY (uID)
