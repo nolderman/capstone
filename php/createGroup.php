@@ -1,7 +1,9 @@
 <?php
 require_once 'connect.php';
 require_once 'functions.php';
-session_start(); //fetch the session variables from the database
+if (session_status() == PHP_SESSION_NONE) { //we don't have a session already
+		session_start();
+}
 
 if(isset($_POST["groupName"])){
 	if(isset($_POST["groupName"])) //only save a contact if the user put something in the submit box
