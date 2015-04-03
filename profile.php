@@ -25,17 +25,10 @@
 				}
 		    }
 		</script>
-		<script>
-			//Sets the width for the screen and all wrapper divs within the page. This is meant for just when the page loads. 
-			function setScreenWidth() {
-				document.body.style.width  = screen.width + "px";
-				document.getElementById('columnWrapper').style.width = screen.width + "px";
-			}
-		</script> 
 	</head>
 
 
-	<body onload= "setScreenWidth()">
+	<body>
 
 		<div class = "banner"> 
     		<div class="logout">
@@ -52,11 +45,12 @@
 			-->
 		</div>
 
+
 		<!--Sits around all three columns, keeping them aligned together easily. Move this around (in CSS) if you want to shift or affect all 3 columns.  -->
 		<div id="columnWrapper"> 
 
 			<!--Group links and notifications -->
-			<div id="groupSidebar">
+			<div class="sidebar" id="groupSidebar">
 				<!--form to create a group-->
 				<form name="createGroup" class="createGroup"  id="createGroup" method= "POST" action="php/createGroup.php">  
 					<input type="text" name = "groupName" id="groupName" class="input groupName" placeholder="Group Name"/>	
@@ -82,8 +76,23 @@
 
 
 			<!--Conversation links and notifications -->
-			<div id="convSidebar">
+			<div class="sidebar" id="convSidebar">
+	<!-- 			<div class='sidebarHeader'>Conversations</div>
+				<div class='sidebarContent'>
+					<div class='convLink hvr-fade-green'> TESTCONVLINK </div>
+					<div class='convLink'> TESTCONVLINK2 </div>
+					<div class='convLink hvr-fade-green'> TESTCONVLINK </div>
+					<div class='convLink hvr-fade-green'> TESTCONVLINK </div>
+					<div class='convLink hvr-fade-green'> TESTCONVLINK </div>
+					<div class='convLink hvr-fade-green'> TESTCONVLINK </div>
+					<div class='convLink hvr-fade-green'> TESTCONVLINK </div>
+					<div class='convLink hvr-fade-green'> TESTCONVLINK </div>
+					<div class='convLink hvr-fade-green'> TESTCONVLINK </div>
+					<div class='convLink hvr-fade-green'> TESTCONVLINK </div>
+					<div class='convLink hvr-fade-green'> TESTCONVLINK </div>
+				</div> -->
 				<?php include 'php/convSidebar.php';?>
+
 			</div>
 	
 	    </div>

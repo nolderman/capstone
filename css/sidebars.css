@@ -22,7 +22,6 @@ CSS in this block is the "default" or inherited data for the rest of the CSS in 
 
 .sidebar{ /*class for the attributes that both sidebars share*/
     font-size: 90%;
-    overflow: auto;
 
     /*Cloud background color, with a similarly colored border so that it has soft edges.*/
     background: #ecf0f1;
@@ -42,13 +41,19 @@ CSS in this block is the "default" or inherited data for the rest of the CSS in 
 .sidebarHeader { /*General CSS for both sidebar headers.*/
     float: top;
     margin-top:0px;
-
-    font-size: 75%;
+    margin-bottom: 5px;
+    text-align: center;
+    font-size: 150%;
+    text-align: center;
 
     position: absolute;
-    right: 45px;
-    height: 70px;
+    height: 15%;
     width: 100%
+}
+.sidebarContent { /*wrapper for content appearing in sidebars under the header*/
+    overflow: auto;
+    margin-top: 15%;
+    height: 87%;
 }
 
 
@@ -62,8 +67,9 @@ CSS in this block is the "default" or inherited data for the rest of the CSS in 
 }
 
 
-
-.convLink { /*How the individual links to each conversation will appear within each sidebar*/
+/*How the individual links to each conversation will appear within each sidebar
+These will be wrapper inside the sidebarContent section*/
+.convLink {
 
     /*As text runs outside the div, it cuts it off and inserts ellipsis*/
     text-overflow: ellipsis; 
@@ -72,7 +78,10 @@ CSS in this block is the "default" or inherited data for the rest of the CSS in 
 
     float: top; /*Makes it so that as more divs are added, then float in order from top to bottom*/
     margin-top: 5px;
-    width: 250px; /*this may need to be adjusted so that the width resizes with the resizing of the page, up to you Nate*/
+    margin-bottom: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    
 
 
     background: #4086AA; /*Blue background*/
@@ -80,7 +89,6 @@ CSS in this block is the "default" or inherited data for the rest of the CSS in 
 
     /*Position & Sizing*/
     text-align: left;
-    left: 37.5%;
-    width: 99%;
+    width: 95%;
     height:10%;
 }

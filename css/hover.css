@@ -12,7 +12,7 @@
  */
 /* Fade */
 .hvr-fade-green {
-  display: inline-block;
+  /*display: inline-block;*/ /*this is removed because it keeps from centering*/
   vertical-align: middle;
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
@@ -27,7 +27,7 @@
   transition-property: color, background-color;
 }
 .hvr-fade-green:hover, .hvr-fade-green:focus, .hvr-fade-green:active {
-  background-color: #3FC380; /*color to fade into*/
+  background-color: #27AE60; /*green color to fade into*/
   color: black;
 }
 .hvr-fade-blue {

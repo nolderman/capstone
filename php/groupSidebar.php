@@ -14,13 +14,14 @@
 			echo "<div class='sidebarContent' align='center'>";
 			while($groups = $result->fetch_assoc()){
 				echo "<a href = 'group.html?gID=".$groups['gid']."'>";
-				echo "<div class='convLink'>".$groups['name']."</div>";
+				echo "<div class='groupLink'>".$groups['name']."</div>";
 				echo "</a></br>";
 			}
+			echo "</div>";
 		}
 		else{
 			echo "You have no groups!";
 		}
 
-	echo "</div>";
+
 ?>

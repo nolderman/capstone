@@ -15,7 +15,7 @@ function CreateGroup($connection){
 	$groupName = $_POST['groupName'];
 	//make a new group
 		//*********************Need to make sure the contactEmail is in the database before adding them
-	$sql = "INSERT INTO groups (gID, g_name, icon, visible, burn_date) VALUES ('NULL','$groupName', 'NULL', 'NULL', 'NULL')"; //put the contact in the database
+	$sql = "INSERT INTO groups (gID, g_name, icon, visible, burn_date) VALUES ('0','$groupName', 'NULL', 'NULL', 'NULL')"; //put the contact in the database
 	$result = $connection->query($sql);
 	
 	//Put the user in the member table with this group
