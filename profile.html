@@ -28,7 +28,7 @@
 	</head>
 
 
-	<body onload= "setScreenWidth()">
+	<body ><!-- onload= "setScreenWidth()" -->
 		<div class = "header"> 
     		<div class="logout">
 				<a href="php/userLogout.php">Logout</a>
@@ -38,7 +38,7 @@
 		<div id="columnWrapper"> <!-- div that sits around all three columns, keeping them aligned together easily. Move this around (in CSS) if you want to shift or affect all 3 columns.  -->
 
 			<!-- Column wrapper for group information and notifications -->
-			<div id="groupSidebar">
+			<div class= "sidebar" id="groupSidebar">
 				<div class="createGroup">
 					<form name="createGroup" class="createGroup"  id="createGroup" method= "POST" action="php/createGroup.php">  
 						<input type="text" name = "groupName" id="groupName" class="input groupName" placeholder="Group Name"/>	
@@ -114,7 +114,7 @@
 
 			
 
-			<div id="convSidebar">
+			<div class = "sidebar" id="convSidebar">
 				<?php include 'php/convSidebar.php';?>
 			</div><!-- end of right column -->
 
