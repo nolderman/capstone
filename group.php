@@ -51,7 +51,7 @@
 				</div>
 
 				<!--Posted Messages-->
-				<div class="postFeed">
+				<div class="postContent">
 					<?php
 						require_once 'php/connect.php'; //connect to the database
 						

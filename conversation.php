@@ -30,7 +30,7 @@
 			</div>
 
 			<!-- center column -->
-			<div id="messageWrapper">
+			<div id="conversationWrapper">
 				<div id="messageFeed">
 					This is where the conversation's messages from all members will appear in order.
 				</div>
