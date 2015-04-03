@@ -24,6 +24,6 @@ function PostMessage($connection){
 	$sql = "INSERT INTO post (user, gID, date_time, content, edited) VALUES ('$uID', '$gID', '$dateTime', '$message', '0')";
 	$result= $connection->query($sql);
 	
-	header('Location: http://glados/capstone/group.html'); //go back to the group page
+	header('Location: ../group.php'); //go back to the group page
 }
 ?>
