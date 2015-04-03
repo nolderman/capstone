@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <HTML5>
-<?php session_start();?>
 	<head>
 		<title>Profile Page</title>
 		<link rel="stylesheet" type="text/css" href="css/profile.css">
