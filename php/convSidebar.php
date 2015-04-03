@@ -1,5 +1,6 @@
 <?php
 	require_once 'connect.php';
+	session_start(); //fetch the session variables from the database
 	
 	$user = $_SESSION["uID"];
 	$numConversations = 10;

@@ -1,6 +1,6 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <HTML5>
-<?php session_start();?>
 	<head>
 		<title>Group Name</title>
 		<link rel="stylesheet" type="text/css" href="css/group.css">

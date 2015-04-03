@@ -1,5 +1,10 @@
 <?php
-session_start();
-$_SESSION['uID'] = 'NULL';
-header('Location: ../index.php');		//redirect to the loginpage.html
+	// remove all session variables
+	session_unset(); 
+
+	// destroy the session 
+	session_destroy(); 
+
+	//redirect to index page
+	header('Location: ../index.php');		
 ?>

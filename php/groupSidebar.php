@@ -1,6 +1,7 @@
 <?php
 	require_once 'connect.php';
-
+	session_start(); //fetch the session variables from the database
+	
 	$user = $_SESSION['uID'];
 	$numConversations = 10;
 
@@ -17,10 +18,9 @@
 				echo "<div class='convLink'>".$groups['name']."</div>";
 				echo "</a></br>";
 			}
+			echo "</div>";
 		}
 		else{
-			echo "You have no groups!";
+			echo "<div class='convLink'>You have no groups!</div>";
 		}
-
-	echo "</div>";
 ?>
