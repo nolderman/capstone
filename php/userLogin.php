@@ -13,13 +13,15 @@ function LogIn($connection) {
 	$password = $_POST['password'];
 	$password = sha1($password, $raw_output = false); //Encrypt the password the user signed in with
 	
-	$sql = "SELECT pass FROM profile WHERE email = '$email '";//encrypted password of the user signed up with
+	$sql = "SELECT uID, pass FROM user WHERE email = '$email '";//ID and encrypted password of the user
 
 	$result = $connection->query($sql);
-	$row = $result->fetch_array(MYSQLI_ASSOC); //get the array (just one password in this case)
+	$row = $result->fetch_array(MYSQLI_ASSOC); //get the array with uID and pass
 	
 	if($password == $row['pass'] ){//compare the login password with the one they signed up with
-		setcookie($emailname , $email, time()+60*60*24, '/'); //set the email cookie
+		session_start();
+		$_SESSION['uID'] = $row['uID'];
+		//setcookie($emailname , $email, time()+60*60*24, '/'); //set the email cookie
 		header('Location: http://glados/capstone/profile.html'); //go to their profile page
 	}else{
 		echo "Sorry you entered the wrong password";
