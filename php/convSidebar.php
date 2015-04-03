@@ -1,6 +1,6 @@
 <?php
 	require_once 'connect.php';
-
+	
 	$user = $_SESSION["uID"];
 	$numConversations = 10;
 

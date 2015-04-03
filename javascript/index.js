@@ -18,8 +18,7 @@ $(function() {
 		triggerElement:".missionContent"
 		})
 	.setTween(missionFadeIn)
-	.addTo(controller)
-	.addIndicators();
+	.addTo(controller);
 	
 	var featureScene = new ScrollMagic.Scene({triggerElement:".featuresContent"})
 	.setTween(featuresFadeIn)

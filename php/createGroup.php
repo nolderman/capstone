@@ -27,7 +27,7 @@ function CreateGroup($connection){
 	
 	
 	$_SESSION['gID'] = $gID;
-	
+	$_SESSION['g_name'] = $groupName;
 	header('Location: ../group.php');
 }
 
