@@ -27,7 +27,7 @@
 		<div id="columnWrapper">
 
 			<!-- Column wrapper for group information and notifications -->
-			<div id="groupSidebar">
+			<div class="sidebar" id="groupSidebar">
 				
 				<!--form to create a group-->
 				<form name="createGroup" class="createGroup"  id="createGroup" method= "POST" action="php/createGroup.php">  

@@ -25,7 +25,7 @@
 		<div id="columnWrapper">
 
 			<!--Generates the links to conversations the person is a part of-->
-			<div id="convSidebar">
+			<div class= "sidebar" id="convSidebar">
 				<?php include 'php/convSidebar.php';?>
 			</div>
 
