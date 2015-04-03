@@ -7,7 +7,6 @@ if(isset($_POST['submit'])){
 }
 
 function SignUp($connection){
-	
 	if(!empty($_POST['firstName'])){  //making sure the user input a firstname
 		newuser($connection);
 	}
