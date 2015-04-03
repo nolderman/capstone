@@ -6,16 +6,16 @@
 	$numConversations = 10;
 
 
-	echo "<div class='sidebarHeader' align='center'>Conversations</div>";
+	echo "<div class='sidebarHeader'>Conversations</div>";
 	
 		$sql = "SELECT (cID, c_name) FROM (user NATURAL JOIN participates NATURAL JOIN conversation) WHERE (uID = '$user')"; //put the contact in the database
 		
 		if($result = $conn->query($sql)){
 			//write out each conversation name to the sidebar
-			echo "<div class='sidebarContent' align='center'>";
+			echo "<div class='sidebarContent'>";
 			while($convos = $result->fetch_array(MYSQLI_ASSOC)){
 				echo "<a href = 'conversation.php?cID=".$convos['cid']."'>";
-				echo "<div class='convLink'>".$convos['c_name']."</div>";
+				echo "<div class='convLink hvr-fade-green'>".$convos['c_name']."</div>";
 				echo "</a></br>";		
 			}
 			echo "</div>";
