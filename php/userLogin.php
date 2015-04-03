@@ -22,7 +22,7 @@ function LogIn($connection) {
 		session_start();
 		$_SESSION['uID'] = $row['uID'];
 		//setcookie($emailname , $email, time()+60*60*24, '/'); //set the email cookie
-		header('Location: http://glados/capstone/profile.php'); //go to their profile page
+		header('Location: ../profile.php'); //go to their profile page
 	}else{
 		echo "Sorry you entered the wrong password";
 	}

@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <HTML5>
-	<?php session_start(); ?>
+	<?php
+	if (session_status() == PHP_SESSION_NONE) { //we don't have a session already
+		session_start();
+	}
+	?>
 	<head>
 		<title>~Capstone~</title>
 		<link rel="stylesheet" type="text/css" href="css/index.css">
@@ -26,7 +30,7 @@
 					<form name="login" class="loginform cf" accept-charset="utf-8" method= "POST" action="php/userLogin.php">  			       
 						 <input type="email" id="email" name="usermail" placeholder="example@email.com" required>
 						 <input type="password"  id="password" name="password" placeholder="password" required>
-						 <input type="submit" class="submit hvr-fade" name = "submit"  value="Login">
+						 <input type="submit" class="submit hvr-fade-blue" name = "submit"  value="Login">
 					</form>   
 
 				<a href="register.html" class="signup hvr-fade"> Sign Up!</a>
