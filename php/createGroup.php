@@ -5,9 +5,8 @@ if (session_status() == PHP_SESSION_NONE) { //we don't have a session already
 require_once 'connect.php';
 require_once 'functions.php';
 
-if(isset($_POST["groupName"])){
-	if(isset($_POST["groupName"])) //only save a contact if the user put something in the submit box
-		CreateGroup($conn);
+if(isset($_POST["groupName"])){//only save a contact if the user put something in the submit box
+	CreateGroup($conn);
 }
 
 function CreateGroup($connection){
@@ -32,5 +31,4 @@ function CreateGroup($connection){
 	$_SESSION['g_name'] = $groupName;
 	header('Location: ../group.php');
 }
-
 ?>

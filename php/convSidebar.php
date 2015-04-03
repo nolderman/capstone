@@ -8,7 +8,7 @@
 	$numConversations = 10;
 
 	echo "<div class='sidebarHeader'>Conversations</div>";
-		$sql = "SELECT (cID, c_name) FROM (user NATURAL JOIN participates NATURAL JOIN conversation) WHERE (uID = '$user')"; //put the contact in the database
+		$sql = "SELECT cID, c_name FROM (user NATURAL JOIN participates NATURAL JOIN conversation) WHERE (uID = '$user')"; //put the contact in the database
 		echo "<div class='sidebarContent'>";
 			if($result = $conn->query($sql)){
 				//write out each conversation name to the sidebar

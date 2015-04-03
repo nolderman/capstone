@@ -68,6 +68,17 @@
 					?>
 				</h1>
 				<img  class = "image" src="images/silhouette.jpg">
+				
+				</br>
+				
+				<div id="userTags">
+					<!--form for user to tag themself-->
+					<form name="tagUser" class="tagUser"  id="tagUser" method= "POST" action="php/tagUser.php">  
+						<input type="text" name = "tagName" id="tagName" class="input tagName" placeholder="Tag Name"/>	
+						<input type="submit" name="addTag" value="Add Tag" class="button">
+					</form>
+					<?php include 'php/getUserTags.php';?>
+				</div>
 			</div>
 
 
@@ -88,7 +99,6 @@
 					<div class='convLink hvr-fade-green'> TESTCONVLINK </div>
 				</div> -->
 				<?php include 'php/convSidebar.php';?>
-
 			</div>
 	
 	    </div>
