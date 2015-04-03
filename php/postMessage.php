@@ -1,8 +1,8 @@
 <?php
-	require_once 'connect.php'; //connect to the database
 	if (session_status() == PHP_SESSION_NONE) { //we don't have a session already
 		session_start();
 	}
+	require_once 'connect.php'; //connect to the database
 	
 	if(isset($_POST['postMessage'])){ //if the user clicks the submit button on the groupPage
 		if(isset($_POST['message']))

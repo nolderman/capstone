@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<HTML5>
 <?php
 	if (session_status() == PHP_SESSION_NONE) { //we don't have a session already
 		session_start();
 	}
 ?>
+<!DOCTYPE html>
+<HTML5>
 	<head>
 		<title>Group Name</title>
 		<link rel="stylesheet" type="text/css" href="css/group.css">

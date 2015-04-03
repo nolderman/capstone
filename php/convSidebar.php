@@ -1,8 +1,8 @@
 <?php
-	require_once 'connect.php';
 	if (session_status() == PHP_SESSION_NONE) { //we don't have a session already
 		session_start();
 	}
+	require_once 'connect.php';
 	
 	$user = $_SESSION["uID"];
 	$numConversations = 10;

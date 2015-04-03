@@ -1,8 +1,8 @@
 <?php
-require_once 'connect.php';
 if (session_status() == PHP_SESSION_NONE) { //we don't have a session already
 		session_start();
 }
+require_once 'connect.php';
 
 if(isset($_POST['submit'])){ //if the Login button on index.html is set then do the logging in
 		LogIn($conn);

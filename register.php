@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<HTML5>
 <?php
 	if (session_status() == PHP_SESSION_NONE) { //we don't have a session already
 		session_start();
 	}
 ?>
+<!DOCTYPE html>
+<HTML5>
 	<head>
 		<link rel="stylesheet" type="text/css" href="css/register.css">
 		<link rel="stylesheet" type="text/css" href="css/hover.css">
