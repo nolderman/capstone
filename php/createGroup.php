@@ -1,7 +1,8 @@
 <?php
 require_once 'connect.php';
 require_once 'functions.php';
-session_start();
+session_start(); //fetch the session variables from the database
+
 if(isset($_POST["groupName"])){
 	if(isset($_POST["groupName"])) //only save a contact if the user put something in the submit box
 		CreateGroup($conn);
@@ -14,7 +15,6 @@ function CreateGroup($connection){
 	
 	$groupName = $_POST['groupName'];
 	//make a new group
-		//*********************Need to make sure the contactEmail is in the database before adding them
 	$sql = "INSERT INTO groups (gID, g_name, icon, visible, burn_date) VALUES ('0','$groupName', 'NULL', 'NULL', 'NULL')"; //put the contact in the database
 	$result = $connection->query($sql);
 	

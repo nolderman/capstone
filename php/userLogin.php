@@ -1,5 +1,6 @@
 <?php
 require_once 'connect.php';
+session_start(); //fetch the session variables from the database
 
 if(isset($_POST['submit'])){ //if the Login button on index.html is set then do the logging in
 		LogIn($conn);

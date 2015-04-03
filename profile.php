@@ -1,12 +1,6 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <HTML5>
-
-<?php
-	if (session_status() == PHP_SESSION_NONE) { //we don't have a session already
-		session_start();
-	}
-?>
-	
 	<head>
 		<title>Profile Page</title>
 		<link rel="stylesheet" type="text/css" href="css/profile.css">
