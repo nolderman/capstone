@@ -14,13 +14,13 @@
 			//write out each group name to the sidebar and make them links
 			echo "<div class='sidebarContent' align='center'>";
 			while($groups = $result->fetch_assoc()){
-				echo "<a href = 'group.html?gID=".$groups['gid']."'>";
-				echo "<div class='convLink'>".$groups['name']."</div>";
+				echo "<a href = 'group.php?gID=".$groups['gid']."'>";
+				echo "<div class='groupLink'>".$groups['g_name']."</div>";
 				echo "</a></br>";
 			}
 			echo "</div>";
 		}
 		else{
-			echo "<div class='convLink'>You have no groups!</div>";
+			echo "<div class='groupLink'>You have no groups!</div>";
 		}
 ?>

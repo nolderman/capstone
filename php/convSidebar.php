@@ -14,14 +14,13 @@
 			//write out each conversation name to the sidebar
 			echo "<div class='sidebarContent' align='center'>";
 			while($convos = $result->fetch_array(MYSQLI_ASSOC)){
-				echo "<a href = 'group.html?gID=".$convos['cid']."'>";
+				echo "<a href = 'conversation.php?cID=".$convos['cid']."'>";
 				echo "<div class='convLink'>".$convos['c_name']."</div>";
 				echo "</a></br>";		
 			}
+			echo "</div>";
 		}
 		else{
-			echo "You have no conversations!";
+			echo "<div class='convLink'>You have no conversations!</div>";
 		}
-
-	echo "</div>";
 ?>
