@@ -29,7 +29,7 @@
 	<body>
 
 		<div class = "banner"> 
-			<a class = "logout hvr-fade-green" href="php/userLogout.php">Logout</a>
+			<a class = "content logout hvr-fade-green" href="php/userLogout.php">Logout</a>
 			
 
 			<!--OLD CODE, will be used when designing contact list

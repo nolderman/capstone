@@ -25,12 +25,12 @@
 		<div id="columnWrapper">
 
 			<!--Generates the links to conversations the person is a part of-->
-			<div id="convSidebar">
+			<div class= "sidebar" id="convSidebar">
 				<?php include 'php/convSidebar.php';?>
 			</div>
 
 			<!-- center column -->
-			<div id="messageWrapper">
+			<div id="conversationWrapper">
 				<div id="messageFeed">
 					This is where the conversation's messages from all members will appear in order.
 				</div>

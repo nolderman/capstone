@@ -27,7 +27,7 @@
 		<div id="columnWrapper">
 
 			<!-- Column wrapper for group information and notifications -->
-			<div id="groupSidebar">
+			<div class="sidebar" id="groupSidebar">
 				
 				<!--form to create a group-->
 				<form name="createGroup" class="createGroup"  id="createGroup" method= "POST" action="php/createGroup.php">  
@@ -51,7 +51,7 @@
 				</div>
 
 				<!--Posted Messages-->
-				<div class="postFeed">
+				<div class="postContent">
 					<?php
 						require_once 'php/connect.php'; //connect to the database
 						

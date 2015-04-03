@@ -14,75 +14,27 @@ body{
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     background:#34495e;
 }
-#conversationMembers {
-    float: left;
-    font-family:  'Roboto Slab', serif;
-    font-weight: 300;
-    font-size: 150%;
-    line-height:34px;
-    color: white;
-    text-align: center;
 
+
+/*Left column. This is where other members of the conversation will be shown*/
+#conversationMembersWrapper {
+    /*Sizing and positioning*/
     position: absolute;
     left: 0px;
     width: 20%;
     height: 100%;
     
+    /*Temporary border for debugging.*/
     border: 1px solid #fff;
     border-radius: 5px;
 
 }
-#conversationMenu {
-    font-family:  'Roboto Slab', serif;
-    font-weight: 300;
-    font-size: 150%;
-    line-height:34px;
-    background-color: #ECF0F1;
-    color: white;
-    text-align: center;
 
-    margin: 5px;
-    position: absolute;
-    right: 0px;
-    width: 20%;
-    height: 100%;
-    
-    border: 2px solid black;
-    border-radius: 5px;
-}
-.conversationBox { /*within conversation menu*/
-    font-family:  'Roboto Slab', serif;
-    font-weight: 300;
-    font-size: 150%;
-    line-height:34px;
-    text-align: left;
-    text-overflow: ellipsis;
-    float: top;
-    margin-top: 20px;
-    white-space: nowrap;
-    overflow: hidden;
-    border-radius:25px;
 
-    background: #4086AA;
-    color: black;
-    border: 2px solid #7F8C8D;
 
-    /*position: absolute;*/
-    left: 37.5%;
-    width: 90%;
-    height:8%;
-}
-
-#messageWrapper {
-    float: left;
-    font-family:  'Roboto Slab', serif;
-    font-weight: 300;
-    font-size: 150%;
-    line-height:34px;
-    color: white;
-    text-align: center;
-
-    background-color: #34495e;
+/*The center column, where you can send messages and see the messages of the conversation*/
+#conversationWrapper {
+    /*Sizing and positioning*/
     position: absolute;
     top: 0px;
     left: 20%;
@@ -93,49 +45,40 @@ body{
     border-radius: 5px;
 }
 #messageFeed { /*within messageWrapper*/
-    float: left;
-    font-family:  'Roboto Slab', serif;
-    font-weight: 300;
-    font-size: 120%;
+    /*Text settings specific to the message feed*/
+    text-align: left;
+    font-size: 150%;
     line-height:34px;
     color: white;
-    text-align: center;
 
+    /*Sizing and positioning*/
     position: absolute;
     top: 0px;
     left: 0px;
     width: 100%;
     height: 93%;
-    
-    border: 1px solid #fff;
-    border-radius: 5px;
 }
-#textInputWrapper { /*within messageWrapper*/
-    float: left;
-    font-family:  'Roboto Slab', serif;
-    font-weight: 300;
-    font-size: 120%;
-    line-height:34px;
-    color: black;
-    text-align: center;
 
+/*Wrapper containing the text input area and the "Post Message" button*/
+#textInputWrapper { /*within messageWrapper*/
+    /*Sizing and positioning*/
     position: absolute;
     bottom: 0px;
     left: 0px;
     width: 100%;
     height: 9%;
-    
-    border: 1px solid #fff;
-    border-radius: 5px;
 }
-#messageInput { /*within inputWrapper*/
 
-    font-family:  'Roboto Slab', serif;
+/*Text input field for the conversation*/
+#messageInput { /*within inputWrapper*/
     font-weight: 300;
-    font-size: 10px;
+    font-size: 20px;
     line-height:10px;
+
+    resize: none; /*Keep the input box from being resizable (as is the default)*/
+
+    /*Size and positioning of the div*/
     position: absolute;
-    resize: none;
     width: 90%;
     height: 90%;
     left: 0px;
