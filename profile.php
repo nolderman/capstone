@@ -10,7 +10,7 @@
 		<link rel="stylesheet" type="text/css" href="css/profile.css">
 		<link href="css/hover.css" rel="stylesheet" media="all">
 		<link href="css/chatWindows.css" rel="stylesheet" type="text/css">
-		<link href="css/sidebars.css" rel="stylesheet" type="text/css"> <!-- CSS file for right and left columns -->
+		<link href="css/columns.css" rel="stylesheet" type="text/css"> <!-- CSS file for right and left columns -->
 		<link href="css/banner.css" rel="stylesheet" type="text/css"> <!-- CSS file for banner for main pages -->
 		<script src="javascript/expandingWindows.js"></script>
 		<script language="javascript"> 
@@ -29,6 +29,7 @@
 	<body>
 
 		<div class = "banner"> 
+			<img id="connaktSymbol" src="images/banner/center banner.png"></img>
 			<a class = "content logout hvr-fade-green" href="php/userLogout.php">Logout</a>
 			
 
@@ -58,6 +59,10 @@
 				<?php include 'php/groupSidebar.php';?>
 			</div>
 
+			<!--Conversation links and notifications -->
+			<div class="sidebar" id="convSidebar">
+				<?php include 'php/convSidebar.php';?>
+			</div>
 
 			<!-- Column for profile information -->
 			<div id="centerColumn">
@@ -79,26 +84,6 @@
 					</form>
 					<?php include 'php/getUserTags.php';?>
 				</div>
-			</div>
-
-
-			<!--Conversation links and notifications -->
-			<div class="sidebar" id="convSidebar">
-	<!-- 			<div class='sidebarHeader'>Conversations</div>
-				<div class='sidebarContent'>
-					<div class='convLink hvr-fade-green'> TESTCONVLINK </div>
-					<div class='convLink'> TESTCONVLINK2 </div>
-					<div class='convLink hvr-fade-green'> TESTCONVLINK </div>
-					<div class='convLink hvr-fade-green'> TESTCONVLINK </div>
-					<div class='convLink hvr-fade-green'> TESTCONVLINK </div>
-					<div class='convLink hvr-fade-green'> TESTCONVLINK </div>
-					<div class='convLink hvr-fade-green'> TESTCONVLINK </div>
-					<div class='convLink hvr-fade-green'> TESTCONVLINK </div>
-					<div class='convLink hvr-fade-green'> TESTCONVLINK </div>
-					<div class='convLink hvr-fade-green'> TESTCONVLINK </div>
-					<div class='convLink hvr-fade-green'> TESTCONVLINK </div>
-				</div> -->
-				<?php include 'php/convSidebar.php';?>
 			</div>
 	
 	    </div>
