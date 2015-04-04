@@ -29,9 +29,8 @@
 	<body>
 
 		<div class = "banner"> 
-    		<div class="logout">
-				<a href="php/userLogout.php">Logout</a>
-			</div>	
+			<a class = "logout hvr-fade-green" href="php/userLogout.php">Logout</a>
+			
 
 			<!--OLD CODE, will be used when designing contact list
 				<div class="addContact">
@@ -62,11 +61,10 @@
 
 			<!-- Column for profile information -->
 			<div id="centerColumn">
-				<h1>User Name</h1>
 				<h1>
 					<?php 
-						$var = $_SESSION['uID'];
-						echo $var; //get the value of the users email from browser else
+						$userName = $_SESSION['f_name'];
+						echo $userName; //get the value of the users email from browser else
 					?>
 				</h1>
 				<img  class = "image" src="images/silhouette.jpg">

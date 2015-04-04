@@ -65,6 +65,7 @@
 		$uIDName = "uID";
 		
 		$_SESSION['uID'] = $uID;
+		$_SESSION['f_name'] = $firstName;
 		//setcookie($uIDName, $uID, time()+60*60*24, '/');//set the user ID cookie for a day so we can get all of their information later
 		header('Location: ../profile.php');		//log the user in
 	}

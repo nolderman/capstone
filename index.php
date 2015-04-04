@@ -33,7 +33,7 @@
 						 <input type="submit" class="submit hvr-fade-blue" name = "submit"  value="Login">
 					</form>   
 
-				<a href="register.html" class="signup hvr-fade"> Sign Up!</a>
+				<a href="register.php" class="signup hvr-fade"> Sign Up!</a>
 			</div>	
 		</div>
 		
