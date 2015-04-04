@@ -13,7 +13,7 @@ echo "<div class='sidebarHeader'>Groups</div>";
 		if($result = $conn->query($sql)){
 			//write out each group name to the sidebar and make them links
 			while($groups = $result->fetch_assoc()){
-				echo "<a href = 'group.php?gID=".$groups['gid']."'>";
+				echo "<a href = 'group.php?gID=".$groups['gID']."'>";
 				echo "<div class='groupLink'>".$groups['g_name']."</div>";
 				echo "</a></br>";
 			}
