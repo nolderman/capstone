@@ -18,4 +18,5 @@
 		else{
 			echo "<div class='uTags'>You have no tags!</div>";
 		}
+	echo "</div>";
 ?>

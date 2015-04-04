@@ -25,13 +25,10 @@
 		</script>
 	</head>
 
-
 	<body>
-
 		<div class = "banner"> 
 			<a class = "content logout hvr-fade-green" href="php/userLogout.php">Logout</a>
 			
-
 			<!--OLD CODE, will be used when designing contact list
 				<div class="addContact">
 					<form name="addContact" class="addContact"  id="addContact" method= "POST" action="php/addContact.php">  
@@ -48,14 +45,21 @@
 
 			<!--Group links and notifications -->
 			<div class="sidebar" id="groupSidebar">
-				<!--form to create a group-->
+				<!--form to create a group - NOTE: THIS ONLY EXISTS FOR TESTING-->
 				<form name="createGroup" class="createGroup"  id="createGroup" method= "POST" action="php/createGroup.php">  
 					<input type="text" name = "groupName" id="groupName" class="input groupName" placeholder="Group Name"/>	
 					<input type="submit" name="createGroup" value="Create Group" class="button">
 				</form>
 
 				<!--generates the links to groups the person is a part of-->
-				<?php include 'php/groupSidebar.php';?>
+				<?php 
+					if(is_null($_GET['uID'])){
+						include 'php/groupSidebar.php';
+					}
+					else{
+						
+					}
+				?>
 			</div>
 
 
@@ -69,14 +73,26 @@
 				</h1>
 				<img  class = "image" src="images/silhouette.jpg">
 				</br>
-				<div id = "userTags">
-					<!--form for user to tag themself-->
-					<form name="tagUser" class="tagUser"  id="tagUser" method= "POST" action="php/tagUser.php">  
-						<input type="text" name = "tagName" id="tagName" class="input tagName" placeholder="Tag Name"/>	
-						<input type="submit" name="addTag" value="Add Tag" class="button">
-					</form>
-					<?php include 'php/getUserTags.php';?>
-				</div>
+				<?php
+					//get variable will be set if they were redirected to profile through a link, if it isn't set this is "your" profile page
+					//if this is "your" profile page it will be the same as session uID
+					if($_SESSION['uID'] == $_GET['uID'] || is_null($_GET['uID'])){
+						echo "<div id = 'userTags'>";
+							//form for user to tag themself
+							echo "<form name='tagUser' class='tagUser' id='tagUser' method= 'POST' action='php/tagUser.php'>";  
+								echo "<input type='text' name = 'tagName' id='tagName' class='input tagName' placeholder='Tag Name'/>";	
+								echo "<input type='submit' name='addTag' value='Add Tag' class='button'>";
+							echo "</form>";
+
+						include 'php/getUserTags.php';
+					}
+					else{
+						//temporary placeholders - need to add functionality
+						echo "Add Contact";
+						echo "Message";
+						echo "Block";
+					}	
+				?>
 			</div>
 
 
