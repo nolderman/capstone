@@ -1,5 +1,5 @@
 <?php
-require_once 'login.php';
+require_once 'databaseLogin.php';
 
 $conn = mysqli_connect($db_hostname, $db_username, $db_password, $db_database); //connects to the database
 

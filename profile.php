@@ -68,10 +68,8 @@
 					?>
 				</h1>
 				<img  class = "image" src="images/silhouette.jpg">
-				
 				</br>
-				
-				<div id="userTags">
+				<div id = "userTags">
 					<!--form for user to tag themself-->
 					<form name="tagUser" class="tagUser"  id="tagUser" method= "POST" action="php/tagUser.php">  
 						<input type="text" name = "tagName" id="tagName" class="input tagName" placeholder="Tag Name"/>	
@@ -84,20 +82,6 @@
 
 			<!--Conversation links and notifications -->
 			<div class="sidebar" id="convSidebar">
-	<!-- 			<div class='sidebarHeader'>Conversations</div>
-				<div class='sidebarContent'>
-					<div class='convLink hvr-fade-green'> TESTCONVLINK </div>
-					<div class='convLink'> TESTCONVLINK2 </div>
-					<div class='convLink hvr-fade-green'> TESTCONVLINK </div>
-					<div class='convLink hvr-fade-green'> TESTCONVLINK </div>
-					<div class='convLink hvr-fade-green'> TESTCONVLINK </div>
-					<div class='convLink hvr-fade-green'> TESTCONVLINK </div>
-					<div class='convLink hvr-fade-green'> TESTCONVLINK </div>
-					<div class='convLink hvr-fade-green'> TESTCONVLINK </div>
-					<div class='convLink hvr-fade-green'> TESTCONVLINK </div>
-					<div class='convLink hvr-fade-green'> TESTCONVLINK </div>
-					<div class='convLink hvr-fade-green'> TESTCONVLINK </div>
-				</div> -->
 				<?php include 'php/convSidebar.php';?>
 			</div>
 	
