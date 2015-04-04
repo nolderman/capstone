@@ -63,7 +63,7 @@
 			<div id="centerColumn">
 				<h1>
 					<?php 
-						$userName = $_SESSION['f_name'];
+						$userName = $_SESSION['f_name']." ".$_SESSION['l_name'];
 						echo $userName; //get the value of the users email from browser else
 					?>
 				</h1>
