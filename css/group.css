@@ -11,27 +11,6 @@ body{
 
 
 
-#postWrapper { /*center column*/
-    float: top;
-
-    /*How do you want text to appear by default within this wrapper?*/
-    font-weight: 300;
-    font-size: 150%;
-    line-height:34px;
-    text-align: center;
-
-    /*Size and Positioning stuff*/
-    position: absolute;
-    top: 0px;
-    left: 30%;
-    right: 25%;
-    width: 45%;
-    height: 100%;
-   
-    /*Border for debugging purposes*/
-    border: 1px solid #fff;
-    border-radius: 5px;
-}
 
 #postMessage { /*post input wrapper postWrapper*/
     float: top; 

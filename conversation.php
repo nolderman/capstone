@@ -9,8 +9,10 @@
 		<title>Conversation Page</title>
 		<link rel="stylesheet" type="text/css" href="css/conversation.css">
 		<link href="css/hover.css" rel="stylesheet" media="all">
-		<link href="css/sidebars.css" rel="stylesheet" type="text/css"> <!-- CSS file for right and left columns -->
+		<link href="css/columns.css" rel="stylesheet" type="text/css"> <!-- CSS file for right and left columns -->
 		<link href="css/banner.css" rel="stylesheet" type="text/css"> <!-- CSS file for right and left columns -->
+		<link href="css/conversation.css" rel="stylesheet" type="text/css"> <!-- CSS file for right and left columns -->
+
 		<script src="javascript/jquery-1.11.2.min.js"></script>
 	</head>
 
@@ -24,13 +26,10 @@
 
 		<div id="columnWrapper">
 
-			<!--Generates the links to conversations the person is a part of-->
-			<div class= "sidebar" id="convSidebar">
-				<?php include 'php/convSidebar.php';?>
-			</div>
-
+			<!-- Left column -->
+			<div class="sidebar" id="groupSideBar"></div>
 			<!-- center column -->
-			<div id="conversationWrapper">
+			<div id="centerColumn">
 				<div id="messageFeed">
 					This is where the conversation's messages from all members will appear in order.
 				</div>
@@ -42,6 +41,11 @@
 						<input type="submit" name="postMessage" value="Post Message" class="button hvr-fade-green">				
 						</form>
 				</div>
+			</div>
+
+			<!--Left column. Generates the links to conversations the person is a part of-->
+			<div class= "sidebar" id="convSidebar">
+				<?php include 'php/convSidebar.php';?>
 			</div>
 		</div>
 
