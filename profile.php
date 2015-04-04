@@ -59,11 +59,6 @@
 				<?php include 'php/groupSidebar.php';?>
 			</div>
 
-			<!--Conversation links and notifications -->
-			<div class="sidebar" id="convSidebar">
-				<?php include 'php/convSidebar.php';?>
-			</div>
-
 			<!-- Column for profile information -->
 			<div id="centerColumn">
 				<h1>
@@ -73,10 +68,8 @@
 					?>
 				</h1>
 				<img  class = "image" src="images/silhouette.jpg">
-				
 				</br>
-				
-				<div id="userTags">
+				<div id = "userTags">
 					<!--form for user to tag themself-->
 					<form name="tagUser" class="tagUser"  id="tagUser" method= "POST" action="php/tagUser.php">  
 						<input type="text" name = "tagName" id="tagName" class="input tagName" placeholder="Tag Name"/>	
@@ -85,7 +78,12 @@
 					<?php include 'php/getUserTags.php';?>
 				</div>
 			</div>
-	
+
+			<!--Conversation links and notifications -->
+			<div class="sidebar" id="convSidebar">
+				<?php include 'php/convSidebar.php';?>
+			</div>
+
 	    </div>
 
 

@@ -31,6 +31,7 @@ CSS in this block is the "default" or inherited data for the rest of the CSS in 
     /*Centered position*/
     position:absolute;
     left: 365px;
+    right: 365px;
 
     /*Sizing*/
     top:0px;
