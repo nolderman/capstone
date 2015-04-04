@@ -11,12 +11,12 @@
 		if($result = $conn->query($sql)){
 			//write out each tag
 			while($tags = $result->fetch_array(MYSQLI_ASSOC)){
-				echo "<div class='uTags'>".$tags['tag_name']."</div>";
+				echo "<div class='tag'>".$tags['tag_name']."</div>";
 				echo "   ";//spacing between tags		
 			}	
 		}
 		else{
-			echo "<div class='uTags'>You have no tags!</div>";
+			echo "You have no tags!";
 		}
 	echo "</div>";
 ?>
