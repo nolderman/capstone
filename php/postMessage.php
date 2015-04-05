@@ -20,10 +20,6 @@
 		//Insert the message with the user who posted, group posted to, dateTime posted, and the message itself.
 		$uID = $_SESSION['uID'];
 		$gID = $_SESSION['gID'];
-		echo $uID."-";
-		echo $gID."-";
-		echo $dateTime;
-		echo $message;
 		$sql = "INSERT INTO post (uID, gID, date_time, content, edited) VALUES ('$uID', '$gID', '$dateTime', '$message', '0')";
 		$result= $connection->query($sql);
 	

@@ -12,8 +12,11 @@
 		<link href="css/chatWindows.css" rel="stylesheet" type="text/css">
 		<link href="css/sidebars.css" rel="stylesheet" type="text/css"> <!-- CSS file for right and left columns -->
 		<link href="css/banner.css" rel="stylesheet" type="text/css"> <!-- CSS file for banner for main pages -->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script type="text/javascript" src="javascript/bootstrap.js"></script> 
+		<script type="text/javascript" src="javascript/typeahead.js"></script> 
 		<script src="javascript/expandingWindows.js"></script>
-		<script language="javascript"> 
+		<script type="text/javascript" language="javascript"> 
 			function toggleDiv(divid){ //Function for toggling a chat window up and down
 				if(document.getElementById(divid).style.display == 'none'){
 					document.getElementById(divid).style.display = 'block';
@@ -23,23 +26,28 @@
 				}
 		    }
 		</script>
+		
+		
+		<script>
+		$(document).ready(function() {
+			$('input.typeahead').typeahead({
+				name: 'typeahead',
+				remote: 'php/search.php?searchInput=%QUERY'
+			});
+		})
+		</script>
+		
 	</head>
 
 
 	<body>
 
 		<div class = "banner"> 
-			<a class = "content logout hvr-fade-green" href="php/userLogout.php">Logout</a>
-			
-
-			<!--OLD CODE, will be used when designing contact list
-				<div class="addContact">
-					<form name="addContact" class="addContact"  id="addContact" method= "POST" action="php/addContact.php">  
-						<input type="text" name = "contactEmail" id="contactEmail" class="input email" placeholder="Friend Email"/>							
-						<input type="submit" name="addContact" value="Add Contact" class="button"> 
-					</form>
-				</div>	
-			-->
+			<form name="searchBar" class="searchBar" method= "POST" action="php/search.php">  
+				<input type="text" name="typeahead" class="typeahead" placeholder="Search"/>							
+				<input type="submit" name="addContact" value="Add Contact" class="button"> 
+			</form>		
+		<a class = "content logout hvr-fade-green" href="php/userLogout.php">Logout</a>				
 		</div>
 
 
@@ -79,6 +87,8 @@
 					</form>
 					<?php include 'php/getUserTags.php';?>
 				</div>
+				
+			
 			</div>
 
 
