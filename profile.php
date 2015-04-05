@@ -1,7 +1,6 @@
-<?php
-	if (session_status() == PHP_SESSION_NONE) { //we don't have a session already
-		session_start();
-	}
+<?php 
+	require_once 'php/sessionStatus.php';
+	require_once 'php/connect.php';
 ?>
 <!DOCTYPE html>
 <HTML5>
@@ -27,7 +26,6 @@
 		    }
 		</script>
 		
-		
 		<script>
 		$(document).ready(function() {
 			$('input.typeahead').typeahead({
@@ -36,7 +34,6 @@
 			});
 		})
 		</script>
-		
 	</head>
 
 	<body>
@@ -47,7 +44,7 @@
 			</form>		
 		<a class = "content logout hvr-fade-green" href="php/userLogout.php">Logout</a>				
 
-			<img id="connaktSymbol" src="images/banner/center banner.png"></img>
+			<img id="connaktSymbol" src="images/banner/center_banner.png"></img>
 
 		</div>
 
@@ -120,7 +117,7 @@
   					minimize
   				</div>
 				<div id="inputField">
-					<form name="postMessage" method="POST" action="php/postMessageToConversation.php">
+					<form name="postMessage" method="POST" action="php/postMessage.php">
 					<textarea  name="message" id="message" placeholder="Type your message here!"></textarea>
 					<!-- <input type="submit" name="postMessage" value="Post Message" class="button hvr-fade-green">	 -->			
 					</form>

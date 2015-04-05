@@ -1,11 +1,8 @@
 <?php
-if (session_status() == PHP_SESSION_NONE) { //we don't have a session already
-		session_start();
-}
 require_once 'connect.php';
 
 if(isset($_POST['submit'])){ //if the Login button on index.html is set then do the logging in
-		LogIn($conn);
+		LogIn($connection);
 }
 
 function LogIn($connection) {
@@ -28,7 +25,7 @@ function LogIn($connection) {
 		$_SESSION['l_name'] = $row['l_name'];
 		//setcookie($emailname , $email, time()+60*60*24, '/'); //set the email cookie
 		header('Location: ../profile.php'); //go to their profile page
-	}else{
+	} else{
 		echo "Sorry you entered the wrong password";
 	}
 }

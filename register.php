@@ -1,8 +1,4 @@
-<?php
-	if (session_status() == PHP_SESSION_NONE) { //we don't have a session already
-		session_start();
-	}
-?>
+<?php require_once 'php/connect.php'; ?>
 <!DOCTYPE html>
 <HTML5>
 	<head>

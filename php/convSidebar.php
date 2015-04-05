@@ -1,9 +1,4 @@
 <?php
-if (session_status() == PHP_SESSION_NONE) { //we don't have a session already
-	session_start();
-}
-require_once 'connect.php';
-
 $user = $_SESSION["uID"];
 
 echo "<div class='sidebarHeader'>Conversations</div>";
@@ -23,7 +18,7 @@ if(isset($_GET['uID']) && $user <> $_GET['uID']){
 }
 
 echo "<div class='sidebarContent'>";
-	if($result = $conn->query($sql)){
+	if($result = $connection->query($sql)){
 		//write out each conversation name to the sidebar
 		while($convos = $result->fetch_array(MYSQLI_ASSOC)){
 			echo "<a href = 'conversation.php?cID=".$convos['cid']."'>";

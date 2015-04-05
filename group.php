@@ -1,7 +1,6 @@
-<?php
-	if (session_status() == PHP_SESSION_NONE) { //we don't have a session already
-		session_start();
-	}
+<?php 
+	require_once 'php/sessionStatus.php';
+	require_once 'php/connect.php';
 ?>
 <!DOCTYPE html>
 <HTML5>
@@ -58,7 +57,7 @@
 						$gID = $_SESSION['gID'];//get the group we are currently in
 								
 						$sql = "SELECT content FROM post WHERE gID= '$gID' "; 
-						$result = $conn->query($sql);//get all of the messages
+						$result = $connection->query($sql);//get all of the messages
 										
 						//print out the messages in an unordered list on the page
 						echo "<ul>";

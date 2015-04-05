@@ -1,9 +1,7 @@
 <?php
 require_once 'connect.php';
 
-
-Search($conn);
-
+Search($connection);
 
 function Search($connection){
 	
@@ -29,8 +27,4 @@ function Search($connection){
 	echo $jsonArray;
 	return $jsonArray;
 }
-
-
-
-
 ?>
