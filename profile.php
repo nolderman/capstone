@@ -12,8 +12,11 @@
 		<link href="css/chatWindows.css" rel="stylesheet" type="text/css">
 		<link href="css/columns.css" rel="stylesheet" type="text/css"> <!-- CSS file for right and left columns -->
 		<link href="css/banner.css" rel="stylesheet" type="text/css"> <!-- CSS file for banner for main pages -->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script type="text/javascript" src="javascript/bootstrap.js"></script> 
+		<script type="text/javascript" src="javascript/typeahead.js"></script> 
 		<script src="javascript/expandingWindows.js"></script>
-		<script language="javascript"> 
+		<script type="text/javascript" language="javascript"> 
 			function toggleDiv(divid){ //Function for toggling a chat window up and down
 				if(document.getElementById(divid).style.display == 'none'){
 					document.getElementById(divid).style.display = 'block';
@@ -23,21 +26,29 @@
 				}
 		    }
 		</script>
+		
+		
+		<script>
+		$(document).ready(function() {
+			$('input.typeahead').typeahead({
+				name: 'typeahead',
+				remote: 'php/search.php?searchInput=%QUERY'
+			});
+		})
+		</script>
+		
 	</head>
 
 	<body>
 		<div class = "banner"> 
+			<form name="searchBar" class="searchBar" method= "POST" action="php/search.php">  
+				<input type="text" name="typeahead" class="typeahead" placeholder="Search"/>							
+				<input type="submit" name="addContact" value="Add Contact" class="button"> 
+			</form>		
+		<a class = "content logout hvr-fade-green" href="php/userLogout.php">Logout</a>				
+
 			<img id="connaktSymbol" src="images/banner/center banner.png"></img>
-			<a class = "content logout hvr-fade-green" href="php/userLogout.php">Logout</a>
-			
-			<!--OLD CODE, will be used when designing contact list
-				<div class="addContact">
-					<form name="addContact" class="addContact"  id="addContact" method= "POST" action="php/addContact.php">  
-						<input type="text" name = "contactEmail" id="contactEmail" class="input email" placeholder="Friend Email"/>							
-						<input type="submit" name="addContact" value="Add Contact" class="button"> 
-					</form>
-				</div>	
-			-->
+
 		</div>
 
 
@@ -68,6 +79,7 @@
 				</h1>
 				<img  class = "image" src="images/silhouette.jpg">
 				</br>
+
 				<?php
 					//get variable will be set if they were redirected to profile through a link, if it isn't set this is "your" profile page
 					//if this is "your" profile page it will be the same as session uID
@@ -78,6 +90,7 @@
 								echo "<input type='text' name = 'tagName' id='tagName' class='input tagName' placeholder='Tag Name'/>";	
 								echo "<input type='submit' name='addTag' value='Add Tag' class='button'>";
 							echo "</form>";
+
 
 						include 'php/userTags.php';
 						echo "</div>";
