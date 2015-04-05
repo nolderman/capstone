@@ -15,12 +15,12 @@ function CreateGroup($connection){
 	$dateTime = new DateTime(null, new DateTimeZone('America/Los_Angeles'));
 	$dateTime = $dateTime->format('Y-m-d H:i:s');
 
-	$groupName = $_POST['groupName'];
+	$groupName = $_POST["groupName"];
 
 	//make a new group
 	$sql = "INSERT INTO groups (gID, g_name, icon, visible, burn_date) VALUES ('0','$groupName', 'NULL', '1', '0000-00-00 00:00:00')"; //put the contact in the database
 	$result = $connection->query($sql);
-	
+
 	//Put the user in the member table with this group
 	$uID = $_SESSION['uID']; 				//get the creator's uID
 	$gID =  mysqli_insert_id($connection); //get the id of the last inserted record (in this case it is the group ID)

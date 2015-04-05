@@ -1,7 +1,7 @@
 <?php
 //if no group is selected, redirect to profile page
 if(!isset($_GET["gID"])){
-	header('Location: ../profile.php');
+	header('Location: profile.php');
 }
 
 $gID = $_GET["gID"];
@@ -22,6 +22,6 @@ $memberIDs = $result->fetch_array(MYSQLI_ASSOC);
 
 //if they aren't a member, and the group is set to be invisible, redirect them away from the page
 if(!isset($memberIDs['$uID']) && $groupInfo['visible'] == 0){
-	header('Location: ../profile.php');
+	header('Location: profile.php');
 }
 ?>
