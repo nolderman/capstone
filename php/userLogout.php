@@ -1,10 +1,15 @@
 <?php
-	// remove all session variables
-	session_unset(); 
+//set up the session
+if(session_status() == PHP_SESSION_NONE) {
+	session_start();
+}
 
-	// destroy the session 
-	session_destroy(); 
+// remove all session variables
+session_unset(); 
 
-	//redirect to index page
-	header('Location: ../index.php');		
+// destroy the session 
+session_destroy(); 
+
+//redirect to index page
+header('Location: ../index.php');		
 ?>

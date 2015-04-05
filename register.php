@@ -29,7 +29,7 @@
 			<!--Submit and cancel buttons-->
 			<div class="footer">
 				<input type="submit" class="button hvr-fade" name="submit" value="Sign Up!"> 
-				<a class="cancel"  style="text-decoration: none" href="index.">Cancel</a>
+				<a class="cancel"  style="text-decoration: none" href="index.php">Cancel</a>
 		    </div>
 		</form>
 	</div>
