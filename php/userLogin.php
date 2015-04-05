@@ -1,5 +1,6 @@
 <?php
 require_once 'connect.php';
+session_start();
 
 if(isset($_POST['submit'])){ //if the Login button on index.html is set then do the logging in
 		LogIn($connection);
@@ -19,11 +20,11 @@ function LogIn($connection) {
 	$row = $result->fetch_array(MYSQLI_ASSOC); //get the array with uID and pass
 	
 	if($password == $row['pass']){//compare the login password with the one they signed up with
-		session_start();
 		$_SESSION['uID'] = $row['uID'];
 		$_SESSION['f_name'] = $row['f_name'];
 		$_SESSION['l_name'] = $row['l_name'];
-		//setcookie($emailname , $email, time()+60*60*24, '/'); //set the email cookie
+		
+		session_write_close();
 		header('Location: ../profile.php'); //go to their profile page
 	} else{
 		echo "Sorry you entered the wrong password";
