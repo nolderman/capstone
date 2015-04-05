@@ -24,5 +24,4 @@ $memberIDs = $result->fetch_array(MYSQLI_ASSOC);
 if(!isset($memberIDs['$uID']) && $groupInfo['visible'] == 0){
 	header('Location: ../profile.php');
 }
-
 ?>

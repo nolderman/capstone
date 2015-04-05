@@ -98,9 +98,9 @@
 					}
 					else{
 						//temporary placeholders - need to add functionality
-						echo "Add Contact";
-						echo "Message";
-						echo "Block";
+						echo "Add Contact </br>";
+						echo "Message </br>";
+						echo "Block </br>";
 					}	
 				?>
 			</div>

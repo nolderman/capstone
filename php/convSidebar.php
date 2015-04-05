@@ -16,15 +16,23 @@ if(!$ownsPage){
 
 echo "<div class='sidebarContent'>";
 	if($result = $connection->query($sql)){
-		//write out each conversation name to the sidebar
-		while($convos = $result->fetch_array(MYSQLI_ASSOC)){
-			echo "<a href = 'conversation.php?cID=".$convos['cid']."'>";
-			echo "<div class='convLink hvr-fade-green'>".$convos['c_name']."</div>";
-			echo "</a></br>";		
-		}	
+		$convos = $result->fetch_array(MYSQLI_ASSOC);
+
+		//if there are no conversations, will only reach here if this is checking for conversations in common
+		if(empty($convos)){
+			echo "You have no conversations in common!";
+		}
+		else{
+			//write out each conversation name to the sidebar
+			while($convos){
+				echo "<a href = 'conversation.php?cID=".$convos['cid']."'>";
+				echo "<div class='convLink hvr-fade-green'>".$convos['c_name']."</div>";
+				echo "</a></br>";		
+			}	
+		}
 	}
-	else{
-		echo "<div class='convLink'>No conversations to display.</div>";
+	else{//query should fail and come here if there are no conversations for this user
+		echo "You have no conversations!";
 	}
 echo "</div>";
 ?>

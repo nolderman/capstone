@@ -16,16 +16,23 @@ if(!$ownsPage){
 
 echo "<div class='sidebarContent'>";
 	if($result = $connection->query($sql)){
+		$groups = $result->fetch_assoc();
 		
-		//write out each group name to the sidebar and make them links
-		while($groups = $result->fetch_assoc()){
-			echo "<a href = 'group.php?gID=".$groups['gID']."'>";
-			echo "<div class='groupLink'>".$groups['g_name']."</div>";
-			echo "</a></br>";
+		//if there are no groups, will only reach here if checking for groups in common
+		if(empty($groups)){
+			echo "You have no groups in common!";
+		}
+		else{
+			//write out each group name to the sidebar and make them links
+			while($groups){
+				echo "<a href = 'group.php?gID=".$groups['gID']."'>";
+				echo "<div class='groupLink'>".$groups['g_name']."</div>";
+				echo "</a></br>";
+			}
 		}
 	}
-	else{
-		echo "<div class='groupLink'>You have no groups!</div>";
+	else{//query should fail and go here if there are no groups for this user
+		echo "You have no groups!";
 	}
 echo "</div>";
 ?>
