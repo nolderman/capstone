@@ -71,7 +71,7 @@
 				<?php
 					//get variable will be set if they were redirected to profile through a link, if it isn't set this is "your" profile page
 					//if this is "your" profile page it will be the same as session uID
-					if(is_null($_GET['uID']) || $_SESSION['uID'] == $_GET['uID']){
+					if(!isset($_GET['uID']) || $_SESSION['uID'] == $_GET['uID']){
 						echo "<div id = 'userTags'>";
 							//form for user to tag themself
 							echo "<form name='tagUser' class='tagUser' id='tagUser' method= 'POST' action='php/tagUser.php'>";  

@@ -14,7 +14,7 @@ $sql = "SELECT cID, c_name
 		WHERE (uID = '$user')";
 
 //if it isn't their profile page update query to get the conversations the user has in common with this profile
-if(!is_null($_GET['uID']) && $user <> $_GET['uID']){
+if(isset($_GET['uID']) && $user <> $_GET['uID']){
 	$profile = $_GET["uID"];
 	//join user's conversations with participates where the profile is participating to get the convos in common
 	$sql = "SELECT cID, c_name 

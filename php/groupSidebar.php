@@ -14,7 +14,7 @@ $sql = "SELECT gID, g_name
 		WHERE (uID ='$user')";
 
 //if it isn't their profile page update query to get the groups the user has in common with this profile
-if(!is_null($_GET['uID']) && $user <> $_GET['uID']){
+if(isset($_GET['uID']) && $user <> $_GET['uID']){
 	$profile = $_GET["uID"];
 	//join user's groups with members and check where profile is a member to get groups in common
 	$sql = "SELECT gID, g_name 
