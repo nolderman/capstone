@@ -1,6 +1,4 @@
 <?php
-$user = $_SESSION["uID"];
-
 echo "<div class='sidebarHeader'>Conversations</div>";
 	
 //get the user's conversations
@@ -9,11 +7,10 @@ $sql = "SELECT cID, c_name
 		WHERE (uID = '$user')";
 
 //if it isn't their profile page update query to get the conversations the user has in common with this profile
-if(isset($_GET['uID']) && $user <> $_GET['uID']){
-	$profile = $_GET["uID"];
+if(!$ownsPage){
 	//join user's conversations with participates where the profile is participating to get the convos in common
 	$sql = "SELECT cID, c_name 
-			FROM (participates NATURAL JOIN '$sql') 
+			FROM (participates NATURAL JOIN ($sql) subquery0) 
 			WHERE (uID = '$profile')";
 }
 

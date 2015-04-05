@@ -26,7 +26,9 @@
 		<div id="columnWrapper">
 
 			<!-- Left column -->
-			<div class="sidebar" id="groupSideBar"></div>
+			<div class="sidebar" id="groupSideBar">
+				<?php include 'php/participantsSidebar.php';?>
+			</div>
 			<!-- center column -->
 			<div id="centerColumn">
 				<div id="messageFeed">

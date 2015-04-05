@@ -2,15 +2,19 @@
 require_once 'connect.php';
 require_once 'functions.php';
 
+//set up the session
+if(session_status() == PHP_SESSION_NONE) {
+	session_start();
+}
+
 if(isset($_POST["groupName"])){//only save a contact if the user put something in the submit box
 	CreateGroup($connection);
 }
 
 function CreateGroup($connection){
-
 	$dateTime = new DateTime(null, new DateTimeZone('America/Los_Angeles'));
 	$dateTime = $dateTime->format('Y-m-d H:i:s');
-	
+
 	$groupName = $_POST['groupName'];
 
 	//make a new group
@@ -24,8 +28,6 @@ function CreateGroup($connection){
 	$insertMember = "INSERT INTO members (uID,gID,moderator) VALUES ('$uID','$gID','1')";//set the creator to a moderator
 	$insertMember = $connection->query($insertMember);
 	
-	$_SESSION['gID'] = $gID;
-	$_SESSION['g_name'] = $groupName;
-	header('Location: ../group.php');
+	header("Location: ../group.php?gID=$gID");
 }
 ?>

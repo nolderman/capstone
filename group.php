@@ -1,6 +1,7 @@
 <?php 
 	require_once 'php/sessionStatus.php';
 	require_once 'php/connect.php';
+	require_once 'php/getGroupInfo.php';
 ?>
 <!DOCTYPE html>
 <HTML5>
@@ -17,7 +18,7 @@
 			<p>BANNER: Test Text</p>
 			<h1>
 				<?php
-					echo $_SESSION['g_name']; 
+					echo $groupInfo['g_name']; 
 				?>
 			</h1>
 		</div>
@@ -35,7 +36,7 @@
 				</form>
 
 				<!--generates the links to groups the person is a part of-->
-				<?php include 'php/groupSidebar.php';?>
+				<?php include 'php/membersSidebar.php';?>
 
 			</div>
 
@@ -51,12 +52,8 @@
 
 				<!--Posted Messages-->
 				<div class="postContent">
-					<?php
-						require_once 'php/connect.php'; //connect to the database
-						
-						$gID = $_SESSION['gID'];//get the group we are currently in
-								
-						$sql = "SELECT content FROM post WHERE gID= '$gID' "; 
+					<?php		
+						$sql = "SELECT content FROM post WHERE gID = '$gID'"; 
 						$result = $connection->query($sql);//get all of the messages
 										
 						//print out the messages in an unordered list on the page

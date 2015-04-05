@@ -1,6 +1,7 @@
 <?php 
 	require_once 'php/sessionStatus.php';
 	require_once 'php/connect.php';
+	require_once 'php/getProfileInfo.php';
 ?>
 <!DOCTYPE html>
 <HTML5>
@@ -70,11 +71,14 @@
 			<div id="centerColumn">
 				<h1>
 					<?php 
-						$userName = $_SESSION['f_name']." ".$_SESSION['l_name'];
-						echo $userName; //get the value of the users email from browser else
+						//display profile's name
+						echo $profileInfo['f_name']." ".$profileInfo['l_name'];
 					?>
 				</h1>
-				<img  class = "image" src="images/silhouette.jpg">
+
+				<!--change this to profile image when that is implemented-->
+				<img class = "image" src="images/silhouette.jpg">
+				
 				</br>
 
 				<?php
