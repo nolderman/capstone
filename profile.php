@@ -54,12 +54,7 @@
 
 				<!--generates the links to groups the person is a part of-->
 				<?php 
-					if(is_null($_GET['uID'])){
-						include 'php/groupSidebar.php';
-					}
-					else{
-						
-					}
+					include 'php/groupSidebar.php';
 				?>
 			</div>
 
@@ -84,7 +79,8 @@
 								echo "<input type='submit' name='addTag' value='Add Tag' class='button'>";
 							echo "</form>";
 
-						include 'php/getUserTags.php';
+						include 'php/userTags.php';
+						echo "</div>";
 					}
 					else{
 						//temporary placeholders - need to add functionality
