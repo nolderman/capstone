@@ -12,10 +12,15 @@
 
         /*Puts the banner image as a background, 
         centering and not allowing the image to repeat if space needs to be filled (as is the default)*/
-        background: url("../images/banner/bannerNoBack.png") no-repeat center;
+        background: url("../images/banner/arm banner.png") center;
         background-size: 100% 100%;
 }
 
+.banner #connaktSymbol {
+	margin-left: auto;
+	margin-right: auto;
+	height: 100%;
+}
 /*Old code, I dont think this is needed since we arent 
 putting any images other than the background image in the banner. -Eric*/
 /*.banner .image{ 

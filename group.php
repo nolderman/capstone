@@ -9,7 +9,7 @@
 		<title>Group Name</title>
 		<link rel="stylesheet" type="text/css" href="css/group.css">
 		<script src="javascript/jquery-1.11.2.min.js"></script>
-		<link href="css/sidebars.css" rel="stylesheet" type="text/css"> <!-- CSS file for right and left columns -->
+		<link href="css/columns.css" rel="stylesheet" type="text/css"> <!-- CSS file for right and left columns -->
 		<link href="css/banner.css" rel="stylesheet" type="text/css"> <!-- CSS file for header for main pages -->
 	</head>
 
@@ -40,8 +40,8 @@
 
 			</div>
 
-			<!--Group's Posts-->
-			<div id="postWrapper">
+			<!--Group's Posts, center column-->
+			<div id="centerColumn">
 				<!--Form to post a message-->
 				<div id="postMessage">
 					<form name="postMessage" method="POST" action="php/postMessage.php">
@@ -70,8 +70,8 @@
 				</div>
 			</div>
 
-			<!--List of conversations the group contains-->
-			<div id="groupConversationWrapper">
+			<!--Right column. List of conversations the group contains-->
+			<div class="sidebar" id="groupConversationWrapper">
 				<div id="conversationFeed">
 					This is where the default and other conversations' messages will appear
 				</div>
