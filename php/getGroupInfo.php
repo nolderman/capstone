@@ -1,4 +1,4 @@
-<?
+<?php
 //if no group is selected, redirect to profile page
 if(!isset($_GET["gID"])){
 	header('Location: ../profile.php');
