@@ -12,6 +12,7 @@
 		<link href="css/chatWindows.css" rel="stylesheet" type="text/css">
 		<link href="css/columns.css" rel="stylesheet" type="text/css"> <!-- CSS file for right and left columns -->
 		<link href="css/banner.css" rel="stylesheet" type="text/css"> <!-- CSS file for banner for main pages -->
+		<link href="css/searchBar.css" rel="stylesheet" type="text/css"> <!-- CSS file for banner for main pages -->
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script type="text/javascript" src="javascript/bootstrap.js"></script> 
 		<script type="text/javascript" src="javascript/typeahead.js"></script> 
@@ -39,9 +40,9 @@
 
 	<body>
 		<div class = "banner"> 
-			<form name="searchBar" class="searchBar" method= "POST" action="php/search.php">  
+			<form name="searchBar" class="searchBar" method= "POST" action="profile.php?uID=1">  
 				<input type="text" name="typeahead" class="typeahead" placeholder="Search"/>							
-				<input type="submit" name="addContact" value="Add Contact" class="button"> 
+				<input type="submit" name="addContact" value="Go!" class="button"> 
 			</form>		
 		<a class = "content logout hvr-fade-green" href="php/userLogout.php">Logout</a>				
 
@@ -56,6 +57,7 @@
 			<!--Group links and notifications -->
 			<div class="sidebar" id="groupSidebar">
 				<!--form to create a group - NOTE: THIS ONLY EXISTS FOR TESTING-->
+				
 				<form name="createGroup" class="createGroup"  id="createGroup" method= "POST" action="php/createGroup.php">  
 					<input type="text" name = "groupName" id="groupName" class="input groupName" placeholder="Group Name"/>	
 					<input type="submit" name="createGroup" value="Create Group" class="button">

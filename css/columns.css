@@ -43,6 +43,24 @@ CSS in this block is the "default" or inherited data for the rest of the CSS in 
     border-radius: 5px;*/
 }
 
+#centerColumn .message{
+	position: relative;
+	width:600px;
+	height:75px;
+	background: #2980b9;
+	border-style: solid;
+	border-width:2px;
+	border-color:#000000;
+	color:#fff;
+
+}
+
+#centerColumn .subMessage{
+	position:relative;
+	font-size:50%;
+	
+}
+
 
 
 .sidebar{ /*class for the attributes that both sidebars share*/

@@ -1,10 +1,11 @@
 <?php
 require_once 'connect.php';
+require_once 'sessionStatus.php';
 
 if(isset($_POST['postMessage']) && isset($_POST['message'])){ //if the user clicks the submit button on the groupPage
 	PostMessage($connection);
 }
-header('Location: ../group.php'); //go back to the group page
+
 
 function PostMessage($connection){
 	$dateTime = new DateTime();
@@ -14,8 +15,12 @@ function PostMessage($connection){
 	
 	//Insert the message with the user who posted, group posted to, dateTime posted, and the message itself.
 	$uID = $_SESSION['uID'];
-	$gID = $_SESSION['gID'];
+	$gID = $_GET['gID'];
+	echo $gID;
+	
 	$sql = "INSERT INTO post (uID, gID, date_time, content, edited) VALUES ('$uID', '$gID', '$dateTime', '$message', '0')";
-	$result= $connection->query($sql);
+	$result = $connection->query($sql);
+	
+	header("Location: ../group.php?gID=$gID"); //go back to the group page
 }
 ?>

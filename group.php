@@ -1,6 +1,6 @@
 <?php 
-	require_once 'php/sessionStatus.php';
 	require_once 'php/connect.php';
+	require_once 'php/sessionStatus.php';
 	require_once 'php/getGroupInfo.php';
 ?>
 <!DOCTYPE html>
@@ -11,6 +11,7 @@
 		<script src="javascript/jquery-1.11.2.min.js"></script>
 		<link href="css/columns.css" rel="stylesheet" type="text/css"> <!-- CSS file for right and left columns -->
 		<link href="css/banner.css" rel="stylesheet" type="text/css"> <!-- CSS file for header for main pages -->
+		<link href="css/message.css" rel="stylesheet" type="text/css">
 	</head>
 
 	<body>
@@ -44,24 +45,35 @@
 			<div id="centerColumn">
 				<!--Form to post a message-->
 				<div id="postMessage">
-					<form name="postMessage" method="POST" action="php/postMessage.php">
-					<textarea cols="50" rows="4" name="message" id="message" placeholder="Type Your Message Here"></textarea>
-					<input type="submit" name="postMessage" value="Post Message" class="button">				
-					</form>
+				<?php 
+					echo "<form name='postMessage' method='POST' action='php/postMessage.php?gID=$gID'>";
+					echo "<textarea cols='50' rows='4' name='message' id='message' placeholder='Type Your Message Here'></textarea>";     
+					echo "<input type='submit' name='postMessage' value='Post Message' class='button'>";				
+					echo "</form>";
+				?>
 				</div>
 
 				<!--Posted Messages-->
 				<div class="postContent">
 					<?php		
-						$sql = "SELECT content FROM post WHERE gID = '$gID'"; 
+						$sql = "SELECT f_name, date_time, content FROM post NATURAL JOIN user WHERE gID = '$gID' ORDER BY date_time"; 
 						$result = $connection->query($sql);//get all of the messages
 										
 						//print out the messages in an unordered list on the page
-						echo "<ul>";
 						while($row = $result->fetch_array(MYSQLI_ASSOC)){
-							echo  "<li>".$row['content']."</li>";
+							echo"<div class='message'>";
+							
+							echo $row['content'];
+							
+								echo "<div class='subMessage'>";
+									echo $row['f_name']." ".$row['date_time'];
+								echo "</div>";
+							
+							
+							
+							echo  "</div>";
 						}
-						echo "</ul>";			
+									
 					?>
 				</div>
 			</div>
