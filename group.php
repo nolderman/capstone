@@ -7,7 +7,8 @@
 <HTML5>
 	<head>
 		<title>Group Name</title>
-		<link rel="stylesheet" type="text/css" href="css/group.css">
+		<link href="css/group.css" rel="stylesheet" media="all">
+		<link href="css/buttons.css" rel="stylesheet" media="all">
 		<script src="javascript/jquery-1.11.2.min.js"></script>
 		<link href="css/columns.css" rel="stylesheet" type="text/css"> <!-- CSS file for right and left columns -->
 		<link href="css/banner.css" rel="stylesheet" type="text/css"> <!-- CSS file for header for main pages -->
@@ -43,10 +44,10 @@
 			<!--Group's Posts, center column-->
 			<div id="centerColumn">
 				<!--Form to post a message-->
-				<div id="postMessage">
+				<div id="postWrapper">
 					<form name="postMessage" method="POST" action="php/postMessage.php">
-					<textarea cols="50" rows="4" name="message" id="message" placeholder="Type Your Message Here"></textarea>
-					<input type="submit" name="postMessage" value="Post Message" class="button">				
+					<textarea cols="50" rows="4" name="message" id="postInput" placeholder="Type Your Message Here"></textarea>
+					<input type="submit" name="postMessage" value="Post Message" class="button" id="postButton">				
 					</form>
 				</div>
 

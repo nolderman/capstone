@@ -77,6 +77,9 @@
 					</form>
 					<?php include 'php/getUserTags.php';?>
 				</div>
+
+
+				
 			</div>
 
 			<!--Conversation links and notifications -->

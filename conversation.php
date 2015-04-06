@@ -8,7 +8,7 @@
 	<head>
 		<title>Conversation Page</title>
 		<link rel="stylesheet" type="text/css" href="css/conversation.css">
-		<link href="css/hover.css" rel="stylesheet" media="all">
+		<link href="css/buttons.css" rel="stylesheet" media="all">
 		<link href="css/columns.css" rel="stylesheet" type="text/css"> <!-- CSS file for right and left columns -->
 		<link href="css/banner.css" rel="stylesheet" type="text/css"> <!-- CSS file for right and left columns -->
 		<link href="css/conversation.css" rel="stylesheet" type="text/css"> <!-- CSS file for right and left columns -->
