@@ -7,10 +7,10 @@
 <HTML5>
 	<head>
 		<title>Profile Page</title>
-		<link rel="stylesheet" type="text/css" href="css/profile.css">
-		<link href="css/hover.css" rel="stylesheet" media="all">
+		<link href="css/profile.css" rel="stylesheet" media="all">
+		<link href="css/buttons.css" rel="stylesheet" media="all">
 		<link href="css/chatWindows.css" rel="stylesheet" type="text/css">
-		<link href="css/columns.css" rel="stylesheet" type="text/css"> <!-- CSS file for right and left columns -->
+		<link href="css/columns.css" rel="stylesheet" type="text/css"> <!-- CSS file for general styling of the right left and middle columns -->
 		<link href="css/banner.css" rel="stylesheet" type="text/css"> <!-- CSS file for banner for main pages -->
 		<link href="css/searchBar.css" rel="stylesheet" type="text/css"> <!-- CSS file for banner for main pages -->
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -40,11 +40,11 @@
 
 	<body>
 		<div class = "banner"> 
-			<form name="searchBar" class="searchBar" method= "POST" action="profile.php?uID=1">  
-				<input type="text" name="typeahead" class="typeahead" placeholder="Search"/>							
-				<input type="submit" name="addContact" value="Go!" class="button"> 
+			<form name="searchBar" class="content searchBar" method= "POST" action="profile.php?uID=1">  
+				<input type="text" name="typeahead" class="typeahead" id="searchInput" placeholder="Search"/>							
+				<input type="submit" name="addContact" value="Go!" class="hvr-fade-green button" id="searchButton"> 
 			</form>		
-		<a class = "content logout hvr-fade-green" href="php/userLogout.php">Logout</a>				
+		<a class = "hvr-fade-green button content logout" href="php/userLogout.php">Logout</a>				
 
 			<img id="connaktSymbol" src="images/banner/center_banner.png"></img>
 
@@ -60,7 +60,7 @@
 				
 				<form name="createGroup" class="createGroup"  id="createGroup" method= "POST" action="php/createGroup.php">  
 					<input type="text" name = "groupName" id="groupName" class="input groupName" placeholder="Group Name"/>	
-					<input type="submit" name="createGroup" value="Create Group" class="button">
+					<input type="submit" name="createGroup" value="Create Group" class="hvr-fade-green button">
 				</form>
 
 				<!--generates the links to groups the person is a part of-->
@@ -100,9 +100,9 @@
 					}
 					else{
 						//temporary placeholders - need to add functionality
-						echo "Add Contact </br>";
-						echo "Message </br>";
-						echo "Block </br>";
+						echo "<div class='button'>Add Contact</div>";
+						echo "<div class='button'>Message </div>";
+						echo "<div class='button'>Block </div>";
 					}	
 				?>
 			</div>

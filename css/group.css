@@ -46,8 +46,8 @@ body{
 .postContent { /*below postWrapper, contained in center colulmn*/
     float:top; /*if postMessage (or anything else above this) moves up or down vertically, the div for postFeed will move up or down with it.*/
     position: absolute;
-    top: 10%;
-    height: 90%;
+    top: 12%;
+    height: 88%;
 	width:100%;
 }
 

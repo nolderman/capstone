@@ -46,7 +46,7 @@
 			<div id="centerColumn">
 				<!--Form to post a message-->
 
-				<div id="postMessage">
+				<div id="postWrapper">
 				<?php 
 					echo "<form name='postMessage' method='POST' action='php/postMessage.php?gID=$gID'>";
 					echo "<textarea cols='50' rows='4' name='message' id='postInput' placeholder='Type Your Message Here'></textarea>";     

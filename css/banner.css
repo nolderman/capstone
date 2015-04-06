@@ -1,9 +1,10 @@
 .banner{
 		font-family: 'Roboto Slab', serif;
-		position: absolute;
+
 		
 		text-align: center;
 		width: 100%;
+		min-width: 1080px;
 		height:160px;
         margin:0;
 		padding:0;
@@ -21,16 +22,6 @@
 	margin-right: auto;
 	height: 100%;
 }
-/*Old code, I dont think this is needed since we arent 
-putting any images other than the background image in the banner. -Eric*/
-/*.banner .image{ 
-    display: block;
-    margin-top: 25px;
-	margin-left: auto;
-	margin-right:auto;
-	height:150px;
-	width:150px;
-}*/
 
 /*General CSS for content within the banner. Used for things like keeping them all in line and evenly spaced.*/
 .banner .content {
@@ -42,29 +33,26 @@ putting any images other than the background image in the banner. -Eric*/
 		float:right;
         left:88%;
         padding: 10px 15px;
-        
-        font-family: 'Roboto Slab', serif;
+
         font-weight: 300;
         font-size: 18px;
         
         text-shadow: 0px 1px 0 rgba(0,0,0,0.25);
-		
-		background: #34495e;
         border-radius: 5px;
 		color: #fff;
 		text-decoration: none;
 }
 
 .banner .searchBar {
-	position:relative;
+	position:absolute;
 	float:right;
-	margin-top:60px;
-	margin-right:200px;
-	z-index:1051;
+	top: 42%;
+	left: 65%;
+	height: 40px;
 	
 	
 }
 
-/*.banner .logout:hover{
-	background: #34495e;
-}*/
+.banner #searchButton{
+	height: 55%;
+}
