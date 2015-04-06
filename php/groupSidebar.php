@@ -1,16 +1,25 @@
 <?php
-if (session_status() == PHP_SESSION_NONE) { //we don't have a session already
-	session_start();
-}
-require_once 'connect.php';
-
-$user = $_SESSION["uID"];
-$numConversations = 10;
-
 echo "<div class='sidebarHeader'>Groups</div>";
-	$sql = "SELECT gID, g_name FROM (user NATURAL JOIN members NATURAL JOIN groups) WHERE (uID ='$user')"; //put the contact in the database
-	echo "<div class='sidebarContent'>";
-		if($result = $conn->query($sql)){
+
+//get the user's groups
+$sql = "SELECT gID, g_name 
+		FROM (user NATURAL JOIN members NATURAL JOIN groups) 
+		WHERE (uID ='$user')";
+
+//if it isn't their profile page update query to get the groups the user has in common with this profile
+if(!$ownsPage){
+	//join user's groups with members and check where profile is a member to get groups in common
+	$sql = "SELECT gID, g_name 
+			FROM (members NATURAL JOIN ($sql) subquery0) 
+			WHERE (uID = '$profile')";
+}
+
+echo "<div class='sidebarContent'>";
+	if($result = $connection->query($sql)){
+		if($result->num_rows == 0){//if there are no results
+			echo "There are no groups to display!";
+		}
+		else{
 			//write out each group name to the sidebar and make them links
 			while($groups = $result->fetch_assoc()){
 				echo "<a href = 'group.php?gID=".$groups['gID']."'>";
@@ -18,8 +27,6 @@ echo "<div class='sidebarHeader'>Groups</div>";
 				echo "</a></br>";
 			}
 		}
-		else{
-			echo "<div class='groupLink'>You have no groups!</div>";
-		}
-	echo "</div>";
+	}
+echo "</div>";
 ?>

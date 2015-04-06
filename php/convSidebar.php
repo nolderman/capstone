@@ -1,25 +1,32 @@
 <?php
-	if (session_status() == PHP_SESSION_NONE) { //we don't have a session already
-		session_start();
-	}
-	require_once 'connect.php';
+echo "<div class='sidebarHeader'>Conversations</div>";
 	
-	$user = $_SESSION["uID"];
-	$numConversations = 10;
+//get the user's conversations
+$sql = "SELECT cID, c_name 
+		FROM (user NATURAL JOIN participates NATURAL JOIN conversation) 
+		WHERE (uID = '$user')";
 
-	echo "<div class='sidebarHeader'>Conversations</div>";
-		$sql = "SELECT cID, c_name FROM (user NATURAL JOIN participates NATURAL JOIN conversation) WHERE (uID = '$user')";
-		echo "<div class='sidebarContent'>";
-			if($result = $conn->query($sql)){
-				//write out each conversation name to the sidebar
-				while($convos = $result->fetch_array(MYSQLI_ASSOC)){
-					echo "<a href = 'conversation.php?cID=".$convos['cid']."'>";
-					echo "<div class='convLink hvr-fade-green'>".$convos['c_name']."</div>";
-					echo "</a></br>";		
-				}	
-			}
-			else{
-				echo "<div class='convLink'>You have no conversations!</div>";
-			}
-		echo "</div>";
+//if it isn't their profile page update query to get the conversations the user has in common with this profile
+if(!$ownsPage){
+	//join user's conversations with participates where the profile is participating to get the convos in common
+	$sql = "SELECT cID, c_name 
+			FROM (participates NATURAL JOIN ($sql) subquery0) 
+			WHERE (uID = '$profile')";
+}
+
+echo "<div class='sidebarContent'>";
+	if($result = $connection->query($sql)){
+		if($result->num_rows == 0){//if there are no results
+			echo "There are no conversations to display";
+		}
+		else{
+			//write out each conversation name to the sidebar
+			while($convos = $result->fetch_array(MYSQLI_ASSOC)){
+				echo "<a href = 'conversation.php?cID=".$convos['cid']."'>";
+				echo "<div class='convLink hvr-fade-green'>".$convos['c_name']."</div>";
+				echo "</a></br>";		
+			}	
+		}
+	}
+echo "</div>";
 ?>

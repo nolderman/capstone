@@ -55,6 +55,16 @@ putting any images other than the background image in the banner. -Eric*/
 		text-decoration: none;
 }
 
+.banner .searchBar {
+	position:relative;
+	float:right;
+	margin-top:60px;
+	margin-right:200px;
+	z-index:1051;
+	
+	
+}
+
 /*.banner .logout:hover{
 	background: #34495e;
 }*/

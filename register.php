@@ -1,8 +1,4 @@
-<?php
-	if (session_status() == PHP_SESSION_NONE) { //we don't have a session already
-		session_start();
-	}
-?>
+<?php require_once 'php/connect.php'; ?>
 <!DOCTYPE html>
 <HTML5>
 	<head>
@@ -33,7 +29,7 @@
 			<!--Submit and cancel buttons-->
 			<div class="footer">
 				<input type="submit" class="button hvr-fade" name="submit" value="Sign Up!"> 
-				<a class="cancel"  style="text-decoration: none" href="index.">Cancel</a>
+				<a class="cancel"  style="text-decoration: none" href="index.php">Cancel</a>
 		    </div>
 		</form>
 	</div>

@@ -1,7 +1,7 @@
-<?php
-	if (session_status() == PHP_SESSION_NONE) { //we don't have a session already
-		session_start();
-	}
+<?php 
+	require_once 'php/connect.php';
+	require_once 'php/sessionStatus.php';
+	require_once 'php/getGroupInfo.php';
 ?>
 <!DOCTYPE html>
 <HTML5>
@@ -12,6 +12,7 @@
 		<script src="javascript/jquery-1.11.2.min.js"></script>
 		<link href="css/columns.css" rel="stylesheet" type="text/css"> <!-- CSS file for right and left columns -->
 		<link href="css/banner.css" rel="stylesheet" type="text/css"> <!-- CSS file for header for main pages -->
+		<link href="css/message.css" rel="stylesheet" type="text/css">
 	</head>
 
 	<body>
@@ -19,7 +20,7 @@
 			<p>BANNER: Test Text</p>
 			<h1>
 				<?php
-					echo $_SESSION['g_name']; 
+					echo $groupInfo['g_name']; 
 				?>
 			</h1>
 		</div>
@@ -37,36 +38,44 @@
 				</form>
 
 				<!--generates the links to groups the person is a part of-->
-				<?php include 'php/groupSidebar.php';?>
+				<?php include 'php/membersSidebar.php';?>
 
 			</div>
 
 			<!--Group's Posts, center column-->
 			<div id="centerColumn">
 				<!--Form to post a message-->
-				<div id="postWrapper">
-					<form name="postMessage" method="POST" action="php/postMessage.php">
-					<textarea cols="50" rows="4" name="message" id="postInput" placeholder="Type Your Message Here"></textarea>
-					<input type="submit" name="postMessage" value="Post Message" class="button" id="postButton">				
-					</form>
+
+				<div id="postMessage">
+				<?php 
+					echo "<form name='postMessage' method='POST' action='php/postMessage.php?gID=$gID'>";
+					echo "<textarea cols='50' rows='4' name='message' id='postInput' placeholder='Type Your Message Here'></textarea>";     
+					echo "<input type='submit' name='postMessage' value='Post Message' class='button' id='postButton'>";				
+					echo "</form>";
+				?>
 				</div>
 
 				<!--Posted Messages-->
 				<div class="postContent">
-					<?php
-						require_once 'php/connect.php'; //connect to the database
-						
-						$gID = $_SESSION['gID'];//get the group we are currently in
-								
-						$sql = "SELECT content FROM post WHERE gID= '$gID' "; 
-						$result = $conn->query($sql);//get all of the messages
+					<?php		
+						$sql = "SELECT f_name, date_time, content FROM post NATURAL JOIN user WHERE gID = '$gID' ORDER BY date_time"; 
+						$result = $connection->query($sql);//get all of the messages
 										
 						//print out the messages in an unordered list on the page
-						echo "<ul>";
 						while($row = $result->fetch_array(MYSQLI_ASSOC)){
-							echo  "<li>".$row['content']."</li>";
+							echo"<div class='message'>";
+							
+							echo $row['content'];
+							
+								echo "<div class='subMessage'>";
+									echo $row['f_name']." ".$row['date_time'];
+								echo "</div>";
+							
+							
+							
+							echo  "</div>";
 						}
-						echo "</ul>";			
+									
 					?>
 				</div>
 			</div>
