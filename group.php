@@ -81,12 +81,14 @@
 			</div>
 
 			<!--Right column. List of conversations the group contains-->
-			<div class="sidebar" id="groupConversationWrapper">
-				<div id="conversationFeed">
-					This is where the default and other conversations' messages will appear
-				</div>
-				<div id="conversationInputField">
-					This is where you will type and send your message
+			<div class="sidebar" id="convSidebar">
+				<div class="sidebarContent">
+					<div id="conversationFeed">
+						This is where the default and other conversations' messages will appear
+					</div>
+					<div id="conversationInputField">
+						This is where you will type and send your message
+					</div>
 				</div>
 			</div>
 

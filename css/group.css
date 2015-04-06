@@ -59,22 +59,6 @@ body{
 
 
 
-
-/*The wrapper for the right column, where all parts of the group conversations will be contained in.*/
-#groupConversationWrapper {
-    float: left;
-
-    position: absolute;
-    right: 0px;
-    width: 25%;
-    height: 100%;
-    overflow:hidden;
-    
-    /*Temporary border for debugging*/
-    border: 1px solid #fff;
-    border-radius: 5px;
-}
-
 /*The container where the conversation's messages will be put in*/
 #conversationFeed { /*within groupConversationWrapper*/
     float: top;

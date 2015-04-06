@@ -16,7 +16,7 @@ CSS in this block is the "default" or inherited data for the rest of the CSS in 
     Once the width reaches 1080px, the most common of smaller screens, it stops resizing.*/
     width: 99%; /*this is 99% not 100%, because otherwise the right sidebar gets cut off a little*/
     min-width: 1080px;
-    height: 70%;
+    height: 80%;
     /*Centered position*/
 }
 
@@ -73,9 +73,8 @@ CSS in this block is the "default" or inherited data for the rest of the CSS in 
 
     /*Positioning & Size stuff*/
     position: absolute;
-    top: 60px;
     width: 360px;
-    height: 90%;
+    height: 100%;
 }
 
 
