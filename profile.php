@@ -108,13 +108,8 @@
 				
 				</br>
 				
-				<div id = 'userTags'>
-					<?php include "userTags.php"; ?>
-				</div>
-				
-					<!-- else{//otherwise show buttons
-						include 'php/userButtons.php';
-					}	 -->
+				<!-- profile details include tags and if this isn't the user's profile, buttons for interacting with the other user-->
+				<?php include "php/profileDetails.php";?>
 				
 			</div>
 

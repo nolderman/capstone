@@ -8,11 +8,11 @@ if($ownsPage){
 	echo "</form>";
 }
 
-if($ownsPage || ($profileInfo["tags_visible"] = ) )
+if($ownsPage || ($profileInfo["tags_visible"] && !$blockedUser)){
 	$sql = "SELECT tag_name 
 			FROM (user NATURAL JOIN u_tagged) 
-			WHERE (uID = '$user')"; //put the contact in the database
-			
+			WHERE (uID = '$profile')"; //put the contact in the database
+
 	echo "<div class='tags'>";
 		if($result = $connection->query($sql)){
 			//write out each tag
@@ -22,7 +22,7 @@ if($ownsPage || ($profileInfo["tags_visible"] = ) )
 			}	
 		}
 		else{
-			echo "You have no tags!";
+			echo "No tags!";
 		}
 	echo "</div>";
 }
