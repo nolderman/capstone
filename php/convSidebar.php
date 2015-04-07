@@ -22,8 +22,8 @@ echo "<div class='sidebarContent'>";
 		else{
 			//write out each conversation name to the sidebar
 			while($convos = $result->fetch_array(MYSQLI_ASSOC)){
-				echo "<a href = 'conversation.php?cID=".$convos['cid']."'>";
-				echo "<div class='convLink hvr-fade-green'>".$convos['c_name']."</div>";
+				echo "<a href = 'conversation.php?cID=".$convos["cid"]."'>";
+				echo "<div class='convLink hvr-fade-green'>".$convos["c_name"]."</div>";
 				echo "</a></br>";		
 			}	
 		}

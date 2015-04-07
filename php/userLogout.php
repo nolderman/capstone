@@ -1,8 +1,5 @@
 <?php
-//set up the session
-if(session_status() == PHP_SESSION_NONE) {
-	session_start();
-}
+include "sessionStatus.php";
 
 // remove all session variables
 session_unset(); 

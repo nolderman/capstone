@@ -22,7 +22,7 @@ function CreateGroup($connection){
 	$result = $connection->query($sql);
 
 	//Put the user in the member table with this group
-	$uID = $_SESSION['uID']; 				//get the creator's uID
+	$uID = $_SESSION["uID"]; 				//get the creator's uID
 	$gID =  mysqli_insert_id($connection); //get the id of the last inserted record (in this case it is the group ID)
 
 	$insertMember = "INSERT INTO members (uID,gID,moderator) VALUES ('$uID','$gID','1')";//set the creator to a moderator

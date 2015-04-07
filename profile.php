@@ -46,9 +46,9 @@
  
 			function onAutocompleted($e, datum) {
 				console.log('autocompleted');
-				console.log(datum['f_name']);
-				console.log(datum['uID']);
-				document.getElementById('userID').value = datum['uID'];
+				console.log(datum["f_name"]);
+				console.log(datum["uID"]);
+				document.getElementById('userID').value = datum["uID"];
 			}
  
 			function onSelected($e, datum) {
@@ -99,7 +99,7 @@
 				<h1>
 					<?php 
 						//display profile's name
-						echo $profileInfo['f_name']." ".$profileInfo['l_name'];
+						echo $profileInfo["f_name"]." ".$profileInfo["l_name"];
 					?>
 				</h1>
 
@@ -107,25 +107,15 @@
 				<img class = "image" src="images/silhouette.jpg">
 				
 				</br>
-
-				<?php
-					//if this is their profile page, show tags
-					if($ownsPage){
-						echo "<div id = 'userTags'>";
-							//form for user to tag themself
-							echo "<form name='tagUser' class='tagUser' id='tagUser' method= 'POST' action='php/tagUser.php'>";  
-								echo "<input type='text' name = 'tagName' id='tagName' class='input tagName' placeholder='Tag Name'/>";	
-								echo "<input type='submit' name='addTag' value='Add Tag' class='button'>";
-							echo "</form>";
-
-
-						include 'php/userTags.php';
-						echo "</div>";
-					}
-					else{//otherwise show buttons
+				
+				<div id = 'userTags'>
+					<?php include "userTags.php"; ?>
+				</div>
+				
+					<!-- else{//otherwise show buttons
 						include 'php/userButtons.php';
-					}	
-				?>
+					}	 -->
+				
 			</div>
 
 			<!--Conversation links and notifications -->

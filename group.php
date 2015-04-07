@@ -20,7 +20,7 @@
 			<p>BANNER: Test Text</p>
 			<h1>
 				<?php
-					echo $groupInfo['g_name']; 
+					echo $groupInfo["g_name"]; 
 				?>
 			</h1>
 		</div>
@@ -65,10 +65,10 @@
 						while($row = $result->fetch_array(MYSQLI_ASSOC)){
 							echo"<div class='message'>";
 							
-							echo $row['content'];
+							echo $row["content"];
 							
 								echo "<div class='subMessage'>";
-									echo $row['f_name']." ".$row['date_time'];
+									echo $row["f_name"]." ".$row["date_time"];
 								echo "</div>";
 							
 							
