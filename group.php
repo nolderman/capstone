@@ -7,7 +7,8 @@
 <HTML5>
 	<head>
 		<title>Group Name</title>
-		<link rel="stylesheet" type="text/css" href="css/group.css">
+		<link href="css/group.css" rel="stylesheet" media="all">
+		<link href="css/buttons.css" rel="stylesheet" media="all">
 		<script src="javascript/jquery-1.11.2.min.js"></script>
 		<link href="css/columns.css" rel="stylesheet" type="text/css"> <!-- CSS file for right and left columns -->
 		<link href="css/banner.css" rel="stylesheet" type="text/css"> <!-- CSS file for header for main pages -->
@@ -44,11 +45,12 @@
 			<!--Group's Posts, center column-->
 			<div id="centerColumn">
 				<!--Form to post a message-->
-				<div id="postMessage">
+
+				<div id="postWrapper">
 				<?php 
 					echo "<form name='postMessage' method='POST' action='php/postMessage.php?gID=$gID'>";
-					echo "<textarea cols='50' rows='4' name='message' id='message' placeholder='Type Your Message Here'></textarea>";     
-					echo "<input type='submit' name='postMessage' value='Post Message' class='button'>";				
+					echo "<textarea cols='50' rows='4' name='message' id='postInput' placeholder='Type Your Message Here'></textarea>";     
+					echo "<input type='submit' name='postMessage' value='Post Message' class='button' id='postButton'>";				
 					echo "</form>";
 				?>
 				</div>
@@ -79,12 +81,14 @@
 			</div>
 
 			<!--Right column. List of conversations the group contains-->
-			<div class="sidebar" id="groupConversationWrapper">
-				<div id="conversationFeed">
-					This is where the default and other conversations' messages will appear
-				</div>
-				<div id="conversationInputField">
-					This is where you will type and send your message
+			<div class="sidebar" id="convSidebar">
+				<div class="sidebarContent">
+					<div id="conversationFeed">
+						This is where the default and other conversations' messages will appear
+					</div>
+					<div id="conversationInputField">
+						This is where you will type and send your message
+					</div>
 				</div>
 			</div>
 

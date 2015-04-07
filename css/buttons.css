@@ -1,3 +1,11 @@
+/*CSS that will apply to every button in the site.*/
+.button {
+    background-color: #2c3e50;
+    color: white;
+}
+
+
+
 /*!
  * Hover.css (http://ianlunn.github.io/Hover/)
  * Version: 2.0.2
@@ -28,7 +36,7 @@
 }
 .hvr-fade-green:hover, .hvr-fade-green:focus, .hvr-fade-green:active {
   background-color: #27AE60; /*green color to fade into*/
-  color: black;
+  color: #2c3e50;
 }
 .hvr-fade-blue {
   display: inline-block;

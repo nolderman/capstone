@@ -10,26 +10,45 @@ body{
 
 
 
-
-
-#postMessage { /*post input wrapper postWrapper*/
-    float: top; 
-
-    /*Size and positioning*/
-    top: 0px;
-    left: 0px;
-    right: 0px;
+/*Wrapper that surrounds the input field and the button for submitting a post*/
+#postWrapper {
+    position: absolute;
+    height: 10%;
     width: 100%;
-    height:20%;
 }
 
-/*Where the posts will be contained in.*/
-.postContent { /*within postWrapper*/
+/*Text input field for the post*/
+#postInput { /*within postWrapper*/
+    font-weight: 300;
+    font-size: 20px;
+    line-height:10px;
+
+    resize: none; /*Keep the input box from being resizable (as is the default)*/
+
+    /*Size and positioning of the div*/
+    position: absolute;
+    width: 90%;
+    height: 100%;
+    left: 0px;
+}
+
+/*Styling that is specific to the "Submit post" or "Post message" button.*/
+#postButton{/*within postWrapper*/
+    position: absolute;
+    height: 109%;
+    width: 10%;
+    color: white;
+    right: 0px;
+}
+
+
+/*Wrapper where the posts will be contained in.*/
+.postContent { /*below postWrapper, contained in center colulmn*/
     float:top; /*if postMessage (or anything else above this) moves up or down vertically, the div for postFeed will move up or down with it.*/
-
+    position: absolute;
+    top: 12%;
+    height: 88%;
 	width:100%;
-
-    height: auto;/*height is left auto so that it dynamically sizes to the content inside*/
 }
 
 /*CSS for actual posts within the postContent*/
@@ -39,22 +58,6 @@ body{
 
 
 
-
-
-/*The wrapper for the right column, where all parts of the group conversations will be contained in.*/
-#groupConversationWrapper {
-    float: left;
-
-    position: absolute;
-    right: 0px;
-    width: 25%;
-    height: 100%;
-    overflow:hidden;
-    
-    /*Temporary border for debugging*/
-    border: 1px solid #fff;
-    border-radius: 5px;
-}
 
 /*The container where the conversation's messages will be put in*/
 #conversationFeed { /*within groupConversationWrapper*/

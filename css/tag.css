@@ -1,0 +1,28 @@
+/*Common CSS for tags for both group and profile tags.*/
+
+.tagsinput {
+  padding: 6px 1px 1px 6px;
+  margin-bottom: 18px;
+  font-size: 0;
+  text-align: left;
+  background-color: #ffe;
+  border: 2px solid #ebedef;
+  border-radius: 6px;
+  }
+.tagsinput .tag {
+  position: relative;
+  display: inline-block;
+  height: 27px;
+  padding: 6px 21px;
+  margin: 0 5px 5px 0;
+  overflow: hidden;
+  font-size: 13px;
+  line-height: 15px;
+  color: #7b8996;
+  vertical-align: middle;
+  cursor: pointer;
+  background-color: #ebedef;
+  border-radius: 4px;
+  -webkit-transition: .25s linear;
+          transition: .25s linear;
+  }
