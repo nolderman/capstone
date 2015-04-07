@@ -29,21 +29,44 @@
 		</script>
 		
 		<script>
-		$(document).ready(function() {
-			$('input.typeahead').typeahead({
+		$(document).ready(function() {//start looking for this after we have loaded everything on the page
+			$('.typeahead').typeahead({ //input field of typeahead with value of f_name!
 				name: 'typeahead',
+				displayKey: 'f_name',
+				valueKey: 'f_name',
 				remote: 'php/search.php?searchInput=%QUERY'
-			});
+			})
+			.on('typeahead:opened', onOpened)
+			.on('typeahead:selected', onAutocompleted)
+			.on('typeahead:autocompleted', onSelected);
+ 
+			function onOpened($e) {
+				console.log('opened');
+			}
+ 
+			function onAutocompleted($e, datum) {
+				console.log('autocompleted');
+				console.log(datum['f_name']);
+				console.log(datum['uID']);
+				document.getElementById('userID').value = datum['uID'];
+			}
+ 
+			function onSelected($e, datum) {
+				console.log('selected');
+				console.log(datum);
+			}
 		})
 		</script>
 	</head>
 
 	<body>
 		<div class = "banner"> 
-			<form name="searchBar" class="searchBar" method= "POST" action="profile.php?uID=1">  
-				<input type="text" name="typeahead" class="typeahead" placeholder="Search"/>							
+			<form name="searchBar" class="searchBar" method= "POST" action="profile.php">  
+				<input type="text" name="typeahead" class="typeahead" placeholder="Search"/>
+				<input type="hidden" name="hiddenUID" id="userID" value="" />
 				<input type="submit" name="addContact" value="Go!" class="button"> 
 			</form>		
+			
 		<a class = "content logout hvr-fade-green" href="php/userLogout.php">Logout</a>				
 
 			<img id="connaktSymbol" src="images/banner/center_banner.png"></img>
