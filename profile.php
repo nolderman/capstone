@@ -15,7 +15,7 @@
 		<link href="css/searchBar.css" rel="stylesheet" type="text/css"> <!-- CSS file for banner for main pages -->
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script type="text/javascript" src="javascript/bootstrap.js"></script> 
-		<script type="text/javascript" src="javascript/typeahead.js"></script> 
+		<script type="text/javascript" src="javascript/typeahead.js"></script>  	
 		<script src="javascript/expandingWindows.js"></script>
 		<script type="text/javascript" language="javascript"> 
 			function toggleDiv(divid){ //Function for toggling a chat window up and down
@@ -26,8 +26,7 @@
 					document.getElementById(divid).style.display = 'none';
 				}
 		    }
-		</script>
-		
+		</script>		
 		<script>
 		$(document).ready(function() {
 			$('input.typeahead').typeahead({
@@ -39,16 +38,7 @@
 	</head>
 
 	<body>
-		<div class = "banner"> 
-			<form name="searchBar" class="content searchBar" method= "POST" action="profile.php?uID=1">  
-				<input type="text" name="typeahead" class="typeahead" id="searchInput" placeholder="Search"/>							
-				<input type="submit" name="addContact" value="Go!" class="hvr-fade-green button" id="searchButton"> 
-			</form>		
-		<a class = "hvr-fade-green button content logout" href="php/userLogout.php">Logout</a>				
-
-			<img id="connaktSymbol" src="images/banner/center_banner.png"></img>
-
-		</div>
+		<?php include 'php/banner.php';?>
 
 
 		<!--Sits around all three columns, keeping them aligned together easily. Move this around (in CSS) if you want to shift or affect all 3 columns.  -->

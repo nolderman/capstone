@@ -17,11 +17,7 @@
 
 	<body>
 		
-		<div class = "banner"> 
-    		<div class="logout">
-				<a href="php/userLogout.php">Logout</a>
-			</div>	
-		</div>
+		<?php include 'php/banner.php';?>
 
 		<div id="columnWrapper">
 

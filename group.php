@@ -16,14 +16,7 @@
 	</head>
 
 	<body>
-		<div class = "banner">
-			<p>BANNER: Test Text</p>
-			<h1>
-				<?php
-					echo $groupInfo['g_name']; 
-				?>
-			</h1>
-		</div>
+		<?php include 'php/banner.php';?>
 
 		<!-- wrapper for all divs within the main body of the page. -->
 		<div id="columnWrapper">
