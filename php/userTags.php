@@ -1,7 +1,9 @@
 <?php
-$user = $_SESSION["uID"];
 
-$sql = "SELECT tag_name FROM (user NATURAL JOIN u_tagged) WHERE (uID = '$user')"; //put the contact in the database
+$sql = "SELECT tag_name 
+		FROM (user NATURAL JOIN u_tagged) 
+		WHERE (uID = '$user')"; //put the contact in the database
+		
 echo "<div class='tags'>";
 	if($result = $connection->query($sql)){
 		//write out each tag

@@ -84,9 +84,8 @@
 				</br>
 
 				<?php
-					//get variable will be set if they were redirected to profile through a link, if it isn't set this is "your" profile page
-					//if this is "your" profile page it will be the same as session uID
-					if(!isset($_GET['uID']) || $_SESSION['uID'] == $_GET['uID']){
+					//if this is their profile page, show tags
+					if($ownsPage){
 						echo "<div id = 'userTags'>";
 							//form for user to tag themself
 							echo "<form name='tagUser' class='tagUser' id='tagUser' method= 'POST' action='php/tagUser.php'>";  
@@ -98,11 +97,8 @@
 						include 'php/userTags.php';
 						echo "</div>";
 					}
-					else{
-						//temporary placeholders - need to add functionality
-						echo "<div class='button'>Add Contact</div>";
-						echo "<div class='button'>Message </div>";
-						echo "<div class='button'>Block </div>";
+					else{//otherwise show buttons
+						include 'php/userButtons.php';
 					}	
 				?>
 			</div>

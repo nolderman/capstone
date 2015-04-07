@@ -8,16 +8,15 @@ if(isset($_POST["tagName"])){
 
 function CreateTag($connection){
 	//make a new tag
-	$tagName = $_POST['tagName'];
+	$tagName = $_POST["tagName"];
 
 	$insert_tag = "INSERT INTO tag (tag_name) VALUES ('$tagName')";
 	$connection->query($insert_tag);
 	
 	//attach this user with this tag
-	$uID = $_SESSION['uID'];
 	$insert_u_tagged = "INSERT INTO u_tagged (uID,tag_name) VALUES ('$uID','$tagName')";//set the creator to a moderator
 	$connection->query($insert_u_tagged);
-	
+	//var_dump($connection);
 	header('Location: ../profile.php');
 }
 ?>
