@@ -11,8 +11,8 @@ if(isset($_GET["cID"]{
 		if($result = $connection->query($sql)){
 			//write out each participant's name to the sidebar
 			while($participants = $result->fetch_array(MYSQLI_ASSOC)){
-				echo "<a href = 'profile.php?uID=".$participants['uID']."'>";
-				echo "<div class='profileLink hvr-fade-green'>".$participants['f_name']." ".$participants['l_name']."</div>";
+				echo "<a href = 'profile.php?uID=".$participants["uID"]."'>";
+				echo "<div class='profileLink hvr-fade-green'>".$participants["f_name"]." ".$participants["l_name"]."</div>";
 				echo "</a></br>";		
 			}	
 		}

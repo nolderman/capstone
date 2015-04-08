@@ -22,7 +22,7 @@ $result = $connection->query($memberQuery);
 $memberIDs = $result->fetch_array(MYSQLI_ASSOC);
 
 //if they aren't a member, and the group is set to be invisible, redirect them away from the page
-if(!isset($memberIDs['$uID']) && $groupInfo['visible'] == 0){
+if(!isset($memberIDs["$uID"]) && $groupInfo["visible"] == 0){
 	header('Location: profile.php');
 }
 

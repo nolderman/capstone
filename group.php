@@ -16,7 +16,9 @@
 	</head>
 
 	<body>
+
 		<?php include 'php/banner.php';?>
+
 
 		<!-- wrapper for all divs within the main body of the page. -->
 		<div id="columnWrapper">
@@ -58,10 +60,10 @@
 						while($row = $result->fetch_array(MYSQLI_ASSOC)){
 							echo"<div class='post'>";
 							
-							echo $row['content'];
-							
+							echo $row["content"];
 								echo "<div class='subPost'>";
 									echo $row['f_name']." ".$row['date_time'];
+
 								echo "</div>";
 							
 							

@@ -7,12 +7,12 @@ if(session_status() == PHP_SESSION_NONE) {
 	session_start();
 }
 
-if(isset($_POST['submit'])){
+if(isset($_POST["submit"])){
 	SignUp($connection);
 }
 
 function SignUp($connection){
-	if(!empty($_POST['firstName'])){  //making sure the user input a firstname
+	if(!empty($_POST["firstName"])){  //making sure the user input a firstname
 		newuser($connection);
 	}
 }
@@ -23,52 +23,54 @@ function NewUser($connection){
 	
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		
-		if(empty($_POST['firstName'])){
+		if(empty($_POST["firstName"])){
 			$firstNameErr = "First name is required.";
 		} else{ 
-			$firstName = test_Input($_POST['firstName']);
+			$firstName = test_Input($_POST["firstName"]);
 			if (!preg_match("/^[a-zA-Z ]*$/",$firstName)) {
 				$firstNameErr = "Only letters and white space allowed";
 			}
 		}
 	
-		if(empty($_POST['lastName'])){
+		if(empty($_POST["lastName"])){
 			$lastNameErr = "Last name is required.";
 		}else{
-			$lastName = test_Input($_POST['lastName']);
+			$lastName = test_Input($_POST["lastName"]);
 			if (!preg_match("/^[a-zA-Z ]*$/",$lastName)) {
 				$lastNameErr = "Only letters and white space allowed";
 			}
 		}
 		
-		if(empty($_POST['eMail'])){
+		if(empty($_POST["eMail"])){
 			$emailErr = "Email is required";
 		} else{
-			$email = test_Input($_POST['eMail']);
+			$email = test_Input($_POST["eMail"]);
 			
 			if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 				$emailErr = "Invalid email format";
 			}
 		}
 	
-		if(empty($_POST['password'])){
+		if(empty($_POST["password"])){
 			$passErr = "Password is required";
 		}
 		else{
-			$password =  test_Input($_POST['password']);
+			$password =  test_Input($_POST["password"]);
 		}
 	}
 
 	$pass = sha1($password, $raw_output = false); //encrypt their password
-	$sql= "INSERT INTO user (uID,email,pass,picture,f_Name,m_name,l_Name,tag_visibility,profile_visible,block_invites,block_messages) VALUES ('0','$email','$pass','NULL','$firstName','NULL','$lastName','1','1','0','0')"; //make them a profile
+	//$pass = password_hash($password, PASSWORD_DEFAULT);//encrypt their password
+	$sql= "INSERT INTO user (uID,email,pass,picture,f_Name,m_name,l_Name,tags_visible,profile_visible,block_invites,block_messages) 
+			VALUES ('0','$email','$pass','NULL','$firstName','NULL','$lastName','1','1','0','0')"; //make them a profile
 	$result = $connection->query($sql);
 	
 	$uID =  mysqli_insert_id($connection); //get the id of the last inserted record
 	$uIDName = "uID";
 	
-	$_SESSION['uID'] = $uID;
-	$_SESSION['f_name'] = $firstName;
-	$_SESSION['l_name'] = $lastName;
+	$_SESSION["uID"] = $uID;
+	$_SESSION["f_name"] = $firstName;
+	$_SESSION["l_name"] = $lastName;
 	//setcookie($uIDName, $uID, time()+60*60*24, '/');//set the user ID cookie for a day so we can get all of their information later
 	header('Location: ../profile.php');		//log the user in
 }

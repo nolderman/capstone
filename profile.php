@@ -28,18 +28,39 @@
 		    }
 		</script>		
 		<script>
-		$(document).ready(function() {
-			$('input.typeahead').typeahead({
+		$(document).ready(function() {//start looking for this after we have loaded everything on the page
+			$('.typeahead').typeahead({ //input field of typeahead with value of f_name!
 				name: 'typeahead',
+				displayKey: 'f_name',
+				valueKey: 'f_name',
 				remote: 'php/search.php?searchInput=%QUERY'
-			});
+			})
+			.on('typeahead:opened', onOpened)
+			.on('typeahead:selected', onAutocompleted)
+			.on('typeahead:autocompleted', onSelected);
+ 
+			function onOpened($e) {
+				console.log('opened');
+			}
+ 
+			function onAutocompleted($e, datum) {
+				console.log('autocompleted');
+				console.log(datum["f_name"]);
+				console.log(datum["uID"]);
+				document.getElementById('userID').value = datum["uID"];
+			}
+ 
+			function onSelected($e, datum) {
+				console.log('selected');
+				console.log(datum);
+			}
 		})
 		</script>
 	</head>
 
 	<body>
-		<?php include 'php/banner.php';?>
 
+		<?php include 'php/banner.php';?>
 
 		<!--Sits around all three columns, keeping them aligned together easily. Move this around (in CSS) if you want to shift or affect all 3 columns.  -->
 		<div id="columnWrapper"> 
@@ -64,7 +85,7 @@
 				<h1>
 					<?php 
 						//display profile's name
-						echo $profileInfo['f_name']." ".$profileInfo['l_name'];
+						echo $profileInfo["f_name"]." ".$profileInfo["l_name"];
 					?>
 				</h1>
 
@@ -72,29 +93,10 @@
 				<img class = "image" src="images/silhouette.jpg">
 				
 				</br>
-
-				<?php
-					//get variable will be set if they were redirected to profile through a link, if it isn't set this is "your" profile page
-					//if this is "your" profile page it will be the same as session uID
-					if(!isset($_GET['uID']) || $_SESSION['uID'] == $_GET['uID']){
-						echo "<div id = 'userTags'>";
-							//form for user to tag themself
-							echo "<form name='tagUser' class='tagUser' id='tagUser' method= 'POST' action='php/tagUser.php'>";  
-								echo "<input type='text' name = 'tagName' id='tagName' class='input tagName' placeholder='Tag Name'/>";	
-								echo "<input type='submit' name='addTag' value='Add Tag' class='button'>";
-							echo "</form>";
-
-
-						include 'php/userTags.php';
-						echo "</div>";
-					}
-					else{
-						//temporary placeholders - need to add functionality
-						echo "<div class='button'>Add Contact</div>";
-						echo "<div class='button'>Message </div>";
-						echo "<div class='button'>Block </div>";
-					}	
-				?>
+				
+				<!-- profile details include tags and if this isn't the user's profile, buttons for interacting with the other user-->
+				<?php include "php/profileDetails.php";?>
+				
 			</div>
 
 			<!--Conversation links and notifications -->
