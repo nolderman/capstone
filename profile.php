@@ -105,7 +105,7 @@
 	    </div>
 
 
-	    <!-- Wrapper div for the chat boxes at the bottom of the page. -->
+<!-- 	    <!-- Wrapper div for the chat boxes at the bottom of the page. Temporarily taken out so it doesnt overlap things during presentation.
 		<div class="chatWindowWrapper"> 
   			<div class="hvr-bubble-top" id="smallChatWindow"  href="javascript:;" onmousedown="toggleDiv('bigChatWindow'); toggleDiv('smallChatWindow');" >Click to Expand</div>
   			<div id="bigChatWindow" style="display:none">
@@ -115,11 +115,11 @@
 				<div id="inputField">
 					<form name="postMessage" method="POST" action="php/postMessage.php">
 					<textarea  name="message" id="message" placeholder="Type your message here!"></textarea>
-					<!-- <input type="submit" name="postMessage" value="Post Message" class="button hvr-fade-green">	 -->			
+					<!-- <input type="submit" name="postMessage" value="Post Message" class="button hvr-fade-green">			
 					</form>
 				</div>
   			</div>
-		</div>
+		</div> -->
 		
 	</body>
 </HTML>
