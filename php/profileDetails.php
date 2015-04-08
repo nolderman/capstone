@@ -37,18 +37,15 @@ include "userTags.php";
 
 //if it isn't the user's profile, include the buttons
 if(!ownsPage){
-	//buttons still need functionality to be added
 	if(!$blockedUser){
-		echo "<div class='button'>Message </div>";
+		echo "<div class='button'>Message </div> <br>";
 	}
 
 	if(!$contact){
-		echo "<div class='button'>Add Contact</div>";
+		echo "<a href='addContact.php?uID=$profile' class='button'>Add Contact</a> <br>";
 	}
 
 	if(!$blockedProfile){
-		echo "<div class='button'>Block </div>";
+		echo "<a href='blockUser.php?uID=$profile' class='button'>Block </a> <br>";
 	}
 }
-
-?>

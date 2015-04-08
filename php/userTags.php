@@ -1,4 +1,4 @@
-<?php
+	<?php
 //if this is their profile page, show tags
 if($ownsPage){
 	//form for user to tag themself
@@ -13,7 +13,7 @@ if($ownsPage || ($profileInfo["tags_visible"] && !$blockedUser)){
 			FROM (user NATURAL JOIN u_tagged) 
 			WHERE (uID = '$profile')"; //put the contact in the database
 
-	echo "<div class='tags'>";
+	echo "<div id='tagsWrapper'>";
 		if($result = $connection->query($sql)){
 			//write out each tag
 			while($tags = $result->fetch_array(MYSQLI_ASSOC)){

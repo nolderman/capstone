@@ -13,9 +13,10 @@
 		<link href="css/columns.css" rel="stylesheet" type="text/css"> <!-- CSS file for general styling of the right left and middle columns -->
 		<link href="css/banner.css" rel="stylesheet" type="text/css"> <!-- CSS file for banner for main pages -->
 		<link href="css/searchBar.css" rel="stylesheet" type="text/css"> <!-- CSS file for banner for main pages -->
+		<link href="css/tags.css" rel="stylesheet" type="text/css"> <!-- CSS file for tags -->
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script type="text/javascript" src="javascript/bootstrap.js"></script> 
-		<script type="text/javascript" src="javascript/typeahead.js"></script> 
+		<script type="text/javascript" src="javascript/typeahead.js"></script>  	
 		<script src="javascript/expandingWindows.js"></script>
 		<script type="text/javascript" language="javascript"> 
 			function toggleDiv(divid){ //Function for toggling a chat window up and down
@@ -26,8 +27,7 @@
 					document.getElementById(divid).style.display = 'none';
 				}
 		    }
-		</script>
-		
+		</script>		
 		<script>
 		$(document).ready(function() {//start looking for this after we have loaded everything on the page
 			$('.typeahead').typeahead({ //input field of typeahead with value of f_name!
@@ -60,21 +60,8 @@
 	</head>
 
 	<body>
-		<div class = "banner"> 
 
-			<form name="searchBar" class="searchBar" method= "POST" action="profile.php">  
-				<input type="text" name="typeahead" class="typeahead" placeholder="Search"/>
-				<input type="hidden" name="hiddenUID" id="userID" value="" />
-				<input type="submit" name="addContact" value="Go!" class="button"> 
-			</form>		
-			
-		<a class = "hvr-fade-green button content logout" href="php/userLogout.php">Logout</a>				
-
-
-			<img id="connaktSymbol" src="images/banner/center_banner.png"></img>
-
-		</div>
-
+		<?php include 'php/banner.php';?>
 
 		<!--Sits around all three columns, keeping them aligned together easily. Move this around (in CSS) if you want to shift or affect all 3 columns.  -->
 		<div id="columnWrapper"> 
@@ -109,7 +96,7 @@
 				</br>
 				
 				<!-- profile details include tags and if this isn't the user's profile, buttons for interacting with the other user-->
-				<?php include "php/profileDetails.php";?>
+					<?php include "php/profileDetails.php";?>
 				
 			</div>
 
@@ -121,7 +108,7 @@
 	    </div>
 
 
-	    <!-- Wrapper div for the chat boxes at the bottom of the page. -->
+<!-- 	    <!-- Wrapper div for the chat boxes at the bottom of the page. Temporarily taken out so it doesnt overlap things during presentation.
 		<div class="chatWindowWrapper"> 
   			<div class="hvr-bubble-top" id="smallChatWindow"  href="javascript:;" onmousedown="toggleDiv('bigChatWindow'); toggleDiv('smallChatWindow');" >Click to Expand</div>
   			<div id="bigChatWindow" style="display:none">
@@ -131,11 +118,11 @@
 				<div id="inputField">
 					<form name="postMessage" method="POST" action="php/postMessage.php">
 					<textarea  name="message" id="message" placeholder="Type your message here!"></textarea>
-					<!-- <input type="submit" name="postMessage" value="Post Message" class="button hvr-fade-green">	 -->			
+					<!-- <input type="submit" name="postMessage" value="Post Message" class="button hvr-fade-green">			
 					</form>
 				</div>
   			</div>
-		</div>
+		</div> -->
 		
 	</body>
 </HTML>

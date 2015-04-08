@@ -1,6 +1,6 @@
 /*CSS that will apply to every button in the site.*/
 .button {
-    background-color: #2c3e50;
+    background-color: #2980b9;
     color: white;
 }
 
@@ -54,7 +54,7 @@
   transition-property: color, background-color;
 }
 .hvr-fade-blue:hover, .hvr-fade-blue:focus, .hvr-fade-blue:active {
-  background-color: #2c3e50; /*color to fade into*/
+  background-color: #2980b9; /*color to fade into*/
   color: white;
 }
 
