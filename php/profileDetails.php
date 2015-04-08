@@ -36,8 +36,16 @@ if(!$ownsPage){
 include "userTags.php";
 
 //if it isn't the user's profile, include the buttons
-if(!$ownsPage){
-	include "userButtons.php";
-}
+if(!ownsPage){
+	if(!$blockedUser){
+		echo "<div class='button'>Message </div> <br>";
+	}
 
-?>
+	if(!$contact){
+		echo "<a href='addContact.php?uID=$profile' class='button'>Add Contact</a> <br>";
+	}
+
+	if(!$blockedProfile){
+		echo "<a href='blockUser.php?uID=$profile' class='button'>Block </a> <br>";
+	}
+}
