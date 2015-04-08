@@ -4,28 +4,35 @@ if(!isset($_GET["cID"])){
 	header('Location: ../profile.php');
 }
 
+//sets the basic variables
 $user = $_SESSION["uID"];
+$cID = $_GET["cID"];
 $ownsPage = True;//so the conversation sidebar doesn't try to find convos in common with anyone
 
-// $cID = $_GET["cID"];
-// $uID = $_SESSION["uID"];
 
-// //get the info for this group that will be needed
-// $groupQuery = "SELECT gID, g_name, icon, visible
-// 		FROM (groups)
-// 		WHERE (gID= '$gID')";
-// $result = $connection->query($groupQuery);
-// $groupInfo = $result->fetch_array(MYSQLI_ASSOC);
+//query database for the conversation info that will be needed
+//first check if this user is a participant of the conversation, and direct away if they aren't
+$sql = "SELECT uID
+		FROM (participates)
+		WHERE (uID = '$user' AND cID = '$cID')";
+$result = $connection->query($sql);
+if($result->num_rows == 0){
+	header('Location: ../profile.php');
+}
 
-// //get the members of the group
-// $memberQuery = "SELECT uID
-// 		FROM (($groupQuery) subquery0 NATURAL JOIN members)";
-// $result = $connection->query($memberQuery);
-// $memberIDs = $result->fetch_array(MYSQLI_ASSOC);
+//second get the convo name
+$sql = "SELECT c_name
+		FROM (conversation)
+		WHERE (cID = '$cID')";
+$result = $connection->query($sql);
+$getName = $result->fetch_array(MYSQLI_ASSOC);
+$convoName = $getName["c_name"];
 
-// //if they aren't a member, and the group is set to be invisible, redirect them away from the page
-// if(!isset($memberIDs["$uID"]) && $groupInfo["visible"] == 0){
-// 	header('Location: profile.php');
-// }
+//then get the messages
+$sql = "SELECT *
+		FROM (message)
+		WHERE (cID = '$cID')";
+$result = $connection->query($sql);
+$messages = $result->fetch_array(MYSQLI_ASSOC);
 
 ?>
