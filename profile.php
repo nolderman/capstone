@@ -61,7 +61,9 @@
 
 	<body>
 
+		<!-- Banner PHP code, dynamic per page you're on -->
 		<?php include 'php/banner.php';?>
+
 
 		<!--Sits around all three columns, keeping them aligned together easily. Move this around (in CSS) if you want to shift or affect all 3 columns.  -->
 		<div id="columnWrapper"> 

@@ -46,7 +46,7 @@ CSS in this block is the "default" or inherited data for the rest of the CSS in 
     font-size: 90%;
 
     /*Cloud background color, with a similarly colored border so that it has soft edges.*/
-    background: #ecf0f1;
+    background: #ecf0f1; /*Cloud color*/
     border: 1px solid #ecf0f1;
     border-radius: 5px;
 
@@ -86,31 +86,6 @@ CSS in this block is the "default" or inherited data for the rest of the CSS in 
     right: 0px; /*Amount of space between the sidebar and the left margin of columnWrapper*/
 }
 
-/*How the individual links to each conversation will appear within each sidebar
-These will be wrapper inside the sidebarContent section*/
-.groupLink {
-
-    /*As text runs outside the div, it cuts it off and inserts ellipsis*/
-    text-overflow: ellipsis; 
-    white-space: nowrap;
-    overflow: hidden;
-
-    float: top; /*Makes it so that as more divs are added, then float in order from top to bottom*/
-    margin-top: 5px;
-    margin-bottom: 5px;
-    margin-left: auto;
-    margin-right: auto;
-    
-
-
-    background: #4086AA; /*Blue background*/
-    border: 1px solid black; /*Nice border that makes it look more neat, but still a flat UI*/
-
-    /*Position & Sizing*/
-    text-align: left;
-    width: 95%;
-    height:10%;
-}
 
 /*How the individual links to each conversation will appear within each sidebar
 These will be wrapper inside the sidebarContent section*/
@@ -155,6 +130,7 @@ These will be wrapper inside the sidebarContent section*/
 
     /*Position & Sizing*/
     text-align: left;
+    line-height: 60px;
     width: 95%;
     height:10%;
 }

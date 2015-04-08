@@ -13,12 +13,140 @@
     margin-right: 5px;
     
     font-size: 50%;
-
-    background: #4086AA; /*Light Blue background*/
-    border: 1px solid black; /*Nice border that makes it look more neat, but still a flat UI*/
+    /*border and text color is Cloud color*/
+    color: #ecf0f1;
+    border: 1px solid #ecf0f1; /*Nice border that makes it look more neat, but still a flat UI*/
+    border-radius: 10px; /*Rounded corners on the border*/
 
     /*Position & Sizing*/
-    text-align: left;
+    text-align: center;
     width: 100px;
-    height:10%;
+    height:25px;
 }
+
+#tagNameInput {
+  background: #2c3e50;
+}
+
+/*
+
+
+.bootstrap-tagsinput {
+  padding: 6px 1px 1px 6px;
+  margin-bottom: 18px;
+  font-size: 0;
+  text-align: left;
+  background-color: #fff;
+  border: 2px solid #ebedef;
+  border-radius: 6px;
+  }
+.bootstrap-tagsinput .tag {
+  position: relative;
+  display: inline-block;
+  height: 27px;
+  padding: 6px 21px;
+  margin: 0 5px 5px 0;
+  overflow: hidden;
+  font-size: 13px;
+  line-height: 15px;
+  color: #7b8996;
+  vertical-align: middle;
+  cursor: pointer;
+  border-radius: 4px;
+  -webkit-transition: .25s linear;
+          transition: .25s linear;
+  }
+.bootstrap-tagsinput .tag > span {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  width: 100%;
+  padding: 0 10px 0 0;
+  font-size: 12px;
+  color: #fff;
+  text-align: right;
+  text-decoration: none;
+  cursor: pointer;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  -webkit-transition: opacity .25s linear;
+          transition: opacity .25s linear;
+  }
+.bootstrap-tagsinput .tag > span:after {
+  font-family: "Flat-UI-Icons";
+  line-height: 27px;
+  content: "\e609";
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  }
+.bootstrap-tagsinput .tag:hover {
+  padding-right: 28px;
+  padding-left: 14px;
+  color: #fff;
+  background-color: #16a085;
+  }
+.bootstrap-tagsinput .tag:hover > span {
+          filter: none;
+  opacity: 1;
+
+  -webkit-filter: none;
+  }
+.bootstrap-tagsinput input[type="text"] {
+  width: auto !important;
+  min-width: 80px;
+  max-width: inherit;
+  height: 29px;
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+  color: #34495e;
+  vertical-align: top;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  }
+.bootstrap-tagsinput input[type="text"]:first-child {
+  height: 23px;
+  margin: 3px 0 8px;
+  }
+.tags_clear {
+  width: 100%;
+  height: 0;
+  clear: both;
+  }
+.not_valid {
+  margin-left: 5px !important;
+  color: #90111a !important;
+  background: #fbd8db !important;
+  }
+.tagsinput-primary {
+  margin-bottom: 18px;
+  }
+.tagsinput-primary .bootstrap-tagsinput {
+  margin-bottom: 0;
+  border-color: #1abc9c;
+  }
+.tagsinput-primary .tag {
+  color: #fff;
+  background-color: #1abc9c;
+  }
+.tagsinput-primary .tag:hover {
+  color: #fff;
+  background-color: #16a085;
+  }
+.bootstrap-tagsinput .twitter-typeahead {
+  width: auto;
+  vertical-align: top;
+  }
+.bootstrap-tagsinput .twitter-typeahead .tt-input {
+  min-width: 200px;
+  }
+.bootstrap-tagsinput .twitter-typeahead .tt-dropdown-menu {
+  width: auto;
+  min-width: 120px;
+  margin-top: 11px;
+  }*/

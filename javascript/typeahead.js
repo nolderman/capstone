@@ -753,12 +753,7 @@
                 return this.$menu.find(".tt-suggestions > .tt-suggestion");
             },
             _ensureVisibility: function($el) {
-                var menuHeight = this.$menu.height() + parseInt(this.$menu.css("paddingTop"), 10) + parseInt(this.$menu.css("paddingBottom"), 10), menuScrollTop = this.$menu.scrollTop(), elTop = $el.position().top, elBottom = elTop + $el.outerHeight(true);
-                if (elTop < 0) {
-                    this.$menu.scrollTop(menuScrollTop + elTop);
-                } else if (menuHeight < elBottom) {
-                    this.$menu.scrollTop(menuScrollTop + (elBottom - menuHeight));
-                }
+             
             },
             destroy: function() {
                 this.$menu.off(".tt");
