@@ -42,16 +42,16 @@ if(!$ownsPage){
 	}
 
 	if(!$contact){
-		echo "<a href='php/addContact.php?uID=$profile' class='button'>Add Contact</a> <br>";
+		echo "<a href='php/addContact.php?uID=$profile&contact=$contact' class='button'>Add Contact</a> <br>";
 	}
 	else{
-		echo "Remove Contact";
+		echo "<a href='php/addContact.php?uID=$profile&contact=$contact' class='button'>Remove Contact</a> <br>";
 	}
 
 	if(!$blockedProfile){
-		echo "<a href='php/blockUser.php?uID=$profile' class='button'>Block</a> <br>";
+		echo "<a href='php/blockUser.php?uID=$profile&blocked=$blockedProfile' class='button'>Block </a> <br>";
 	}
 	else{
-		echo "Unblock";
+		echo "<a href='php/blockUser.php?uID=$profile&blocked=$blockedProfile' class='button'>Unblock </a> <br>";
 	}
 }
