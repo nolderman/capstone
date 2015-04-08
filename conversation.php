@@ -1,6 +1,7 @@
 <?php 
 	require_once 'php/sessionStatus.php';
 	require_once 'php/connect.php';
+	include 'php/getConvoInfo.php';
 ?>
 <!DOCTYPE html> 
 <HTML5>
