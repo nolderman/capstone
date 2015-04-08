@@ -13,6 +13,7 @@
 		<link href="css/columns.css" rel="stylesheet" type="text/css"> <!-- CSS file for general styling of the right left and middle columns -->
 		<link href="css/banner.css" rel="stylesheet" type="text/css"> <!-- CSS file for banner for main pages -->
 		<link href="css/searchBar.css" rel="stylesheet" type="text/css"> <!-- CSS file for banner for main pages -->
+		<link href="css/tags.css" rel="stylesheet" type="text/css"> <!-- CSS file for tags -->
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script type="text/javascript" src="javascript/bootstrap.js"></script> 
 		<script type="text/javascript" src="javascript/typeahead.js"></script>  	
@@ -95,7 +96,7 @@
 				</br>
 				
 				<!-- profile details include tags and if this isn't the user's profile, buttons for interacting with the other user-->
-				<?php include "php/profileDetails.php";?>
+					<?php include "php/profileDetails.php";?>
 				
 			</div>
 

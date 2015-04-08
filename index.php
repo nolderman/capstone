@@ -20,7 +20,7 @@
 		<div id = "wrapper">
 			<div class = "banner">
 				<a id="top"></a>
-					<h1>Capstone</h1>
+					
 
 					<!--Login Form-->
 					<form name="login" class="content loginform cf" accept-charset="utf-8" method= "POST" action="php/userLogin.php">  			       
@@ -30,6 +30,7 @@
 					</form>   
 
 				<a href="register.php" class="content signup hvr-fade-green"> Sign Up!</a>
+				<img id='connaktSymbol' src='images/banner/center_banner.png'></img>
 			</div>	
 		</div>
 		

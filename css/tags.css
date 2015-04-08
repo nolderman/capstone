@@ -1,0 +1,24 @@
+/*Common CSS for tags for both group and profile tags.*/
+
+.tag {
+    /*As text runs outside the div, it cuts it off and inserts ellipsis*/
+    text-overflow: ellipsis; 
+    white-space: nowrap;
+    overflow: hidden;
+
+    float: left; /*Makes it so that as more divs are added, then float in order from left to right*/
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    
+    font-size: 50%;
+
+    background: #4086AA; /*Light Blue background*/
+    border: 1px solid black; /*Nice border that makes it look more neat, but still a flat UI*/
+
+    /*Position & Sizing*/
+    text-align: left;
+    width: 100px;
+    height:10%;
+}
