@@ -3,7 +3,7 @@
 if($ownsPage){
 	//form for user to tag themself
 	echo "<form name='tagUser' class='tagUser' id='tagUser' method= 'POST' action='php/tagUser.php'>";  
-		echo "<input type='text' name = 'tagName' id='tagName' class='input tagName' placeholder='Tag Name'/>";	
+		echo "<input type='text' name='tagName' id='tagNameInput' class='input tagName' placeholder='Add a tag'/>";	
 		echo "<input type='submit' name='addTag' value='Add Tag' class='button'>";
 	echo "</form>";
 }
