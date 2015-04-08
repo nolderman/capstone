@@ -19,5 +19,5 @@ $sql = "INSERT INTO participates ($uID,$cID)
 		VALUES('$otherUser','$cID')";
 $result = $connection->query($sql);
 
-header('Location: ../conversation.php?cID=$cID');
+header("Location: ../conversation.php?cID=$cID");
 ?>

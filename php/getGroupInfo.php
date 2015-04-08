@@ -2,7 +2,7 @@
 
 //if no group is selected, redirect to profile page
 if(!isset($_GET["gID"])){
-	header('Location: profile.php');
+	header('Location: ../profile.php');
 }
 
 $gID = $_GET["gID"];

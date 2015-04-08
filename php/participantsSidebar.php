@@ -1,5 +1,5 @@
 <?php
-if(isset($_GET["cID"]{
+if(isset($_GET["cID"])){
 	//get the conversation ID
 	$cID = $_GET["cID"];
 
