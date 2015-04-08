@@ -13,7 +13,7 @@ function LogIn($connection) {
 	$email = $_POST["usermail"];
 	$password = $_POST["password"];
 	$password = sha1($password, $raw_output = false); //Encrypt the password the user signed in with
-	
+	//$password = password_hash($password, PASSWORD_DEFAULT);
 	$sql = "SELECT uID, pass, f_name, l_name FROM user WHERE email = '$email '";//ID and encrypted password of the user
 
 	$result = $connection->query($sql);

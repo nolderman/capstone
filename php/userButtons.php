@@ -5,10 +5,11 @@ if(!$blockedUser){
 }
 
 if(!$contact){
-	echo "<div class='button'>Add Contact</div>";
+	echo "<a href='addContact.php?uID=$profile' class='button'>Add Contact</a>";
+	echo "<br>";
 }
 
 if(!$blockedProfile){
-	echo "<div class='button'>Block </div>";
+	echo "<a href='blockUser.php?uID=$profile' class='button'>Block </a>";
 }
 ?>

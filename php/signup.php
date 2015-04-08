@@ -60,6 +60,7 @@ function NewUser($connection){
 	}
 
 	$pass = sha1($password, $raw_output = false); //encrypt their password
+	//$pass = password_hash($password, PASSWORD_DEFAULT);//encrypt their password
 	$sql= "INSERT INTO user (uID,email,pass,picture,f_Name,m_name,l_Name,tags_visible,profile_visible,block_invites,block_messages) 
 			VALUES ('0','$email','$pass','NULL','$firstName','NULL','$lastName','1','1','0','0')"; //make them a profile
 	$result = $connection->query($sql);

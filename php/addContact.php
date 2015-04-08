@@ -1,25 +1,20 @@
 <?php
-require_once 'functions.php';
+	require_once 'functions.php';
+	require_once 'php/sessionStatus.php';
+	require_once 'php/getProfileInfo.php';
 
-if(isset($_POST["contactEmail"])){//only save a contact if the user put something in the submit box
-		AddContact($connection);
-}
-header('Location: ../profile.php');
 
 function AddContact($connection){
-	$dateTime = new DateTime();
+	$dateTime = new DateTime(null, new DateTimeZone('America/Los_Angeles'));
 	$dateTime = $dateTime->format('Y-m-d H:i:s');
-	//insert my email, contacts email, and the current dateTime
-	$contactEmail = $_POST["contactEmail"];
-	$uID = $_SESSION["uID"];
-	
-	$getContactID = "SELECT uID FROM user WHERE email= '$contactEmail'";
-	$result = $connection->query($getContactID);
-	$row = fetch_array(MYSQLI_ASSOC);
-	$contactID = $row["uID"];
+	//insert uID, contacts uID, and the current dateTime
+	$contactID = $_GET["uID"]; //the user id of the contact
+	$uID = $_SESSION["uID"];//the user's ID
 	
 	//*********************Need to make sure the contactEmail is in the database before adding them
-	$sql = "INSERT INTO contacts (user, contact) VALUES ('$uID', '$contactID')"; //put the contact in the database
+	$sql = "INSERT INTO contacts (uID, contact) VALUES ('$uID', '$contactID')"; //put the contact in the database
 	$result = $connection->query($sql);
+	header('Location: ../profile.php');
+
 }
 ?>
