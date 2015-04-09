@@ -12,8 +12,8 @@ body{
     height:150px;
     width:150px;
 }
-#tagsWrapper {	
-	display: inline-block;
+#tagsWrapper {
+  width: 95%;	
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -37,7 +37,7 @@ body{
   padding: 5px 0px 3px 5px; /*top, right, bottom, left*/
   /*Has the same margin, width, and height as an actual tag*/
   margin: 5px 5px 5px 5px; 
-  width: 128px; 
+  width: 120px; 
   height: 20px;
   border: 1px solid transparent; /*it is solid and 1px so there isnt any shift when selecting it*/
   border-radius: 8px;
@@ -49,7 +49,7 @@ body{
   box-shadow: 0 0 5px rgba(81, 203, 238, 1);
   padding: 5px 0px 3px 5px;
   margin: 5px 5px 5px 5px;
-  width: 128px;
+  width: 120px;
   height: 20px;
   border: 1px solid #27ae60;
   border-radius: 8px;
