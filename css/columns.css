@@ -86,17 +86,33 @@ CSS in this block is the "default" or inherited data for the rest of the CSS in 
     width: 360px;
     top: -35px;
     left: -1px;
+
+    cursor: pointer;
 }
-.sidebarAddMini {
+.maximizeAddWrapper{
     position: absolute;
-    background: #ecf0f1;
+    background-color: #ecf0f1;
+    background-image: url("../images/glyphicons_free/glyphicons/png/glyphicons-433-plus.png");
+   /* ../images/glyphicons_free/glyphicons/png/glyphicons-191-circle-plus.png*/ /*another option for the background plus symbol*/
+    background-size: 50% 60%; 
+    background-repeat: no-repeat;
+    background-position: center;
     border: 1px solid #ecf0f1;
     border-radius: 5px;
 
+    cursor: pointer;
     height: 38px;
     width: 50px;
     top: -35px;
     right: -1px;
+}
+.minimizeAddWrapper{
+    /*background: green;*/
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 50px;
+
 }
 
 

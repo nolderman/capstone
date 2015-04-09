@@ -71,12 +71,13 @@
 			<!--Group links and notifications -->
 			<div class="sidebar" id="groupSidebar">
 				<!--form to create a group - NOTE: THIS ONLY EXISTS FOR TESTING-->
-				<div class="sidebarAddMini" id="createGroupMini" href:"javascript:;" onmousedown="toggleDiv('createGroupWrapper'); toggleDiv('createGroupMini');">+</div>
-				<div class="sidebarAddWrapper" id="createGroupWrapper"  href="javascript:;" onmousedown="toggleDiv('createGroupWrapper'); toggleDiv('createGroupMini');" style="display:none">
+				<div class="maximizeAddWrapper" id="createGroupMini" href:"javascript:;" onmousedown="toggleDiv('createGroupWrapper'); toggleDiv('createGroupMini');"></div>
+				<div class="sidebarAddWrapper" id="createGroupWrapper"  style="display:none">
 					<form name="createGroup" class="createGroup"  id="createGroup" method= "POST" action="php/createGroup.php">  
 						<input type="text" name = "groupName" id="groupName" class="input groupName" placeholder="Group Name"/>	
 						<input type="submit" name="createGroup" value="Create Group" class="hvr-fade-green button">
 					</form>
+					<div class="minimizeAddWrapper" href="javascript:;" onmousedown="toggleDiv('createGroupWrapper'); toggleDiv('createGroupMini');" >-</div>
 				</div>
 
 				<!--generates the links to groups the person is a part of-->
