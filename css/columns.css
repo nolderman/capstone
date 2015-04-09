@@ -76,6 +76,29 @@ CSS in this block is the "default" or inherited data for the rest of the CSS in 
     height: 87%;
 }
 
+.sidebarAddWrapper{
+    position: absolute;
+    background: #ecf0f1;
+    border: 1px solid #ecf0f1;
+    border-radius: 5px;
+
+    height: 38px;
+    width: 360px;
+    top: -35px;
+    left: -1px;
+}
+.sidebarAddMini {
+    position: absolute;
+    background: #ecf0f1;
+    border: 1px solid #ecf0f1;
+    border-radius: 5px;
+
+    height: 38px;
+    width: 50px;
+    top: -35px;
+    right: -1px;
+}
+
 
 
 #groupSidebar { /*Contains CSS specific to the group (left) sidebar*/
