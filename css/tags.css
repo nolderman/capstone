@@ -29,10 +29,10 @@
 }
 /*Make it so the tag expands on hover if there is text that would make it stretch above 130px*/
 .tag:hover{
-      cursor: zoom-in;
+  cursor: zoom-in;
 }
 .tag:active {
-  min-width: 130px;
+  min-width: 120px;
   width: auto;
 }
 

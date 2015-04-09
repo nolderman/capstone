@@ -8,6 +8,7 @@ body{
 		position:absolute;
         height: 100%;
 		width:100%;
+		min-width: 1080px;
 		overflow-x:hidden;
 		background: #34495e;
 		margin:0;
@@ -60,7 +61,8 @@ body{
 .loginform {
 		position: absolute;		
 		float:right;
-        left:10%;
+		width: 35%;
+        left:3%;
 }
 
 .loginform #email, #password {  
@@ -68,6 +70,7 @@ body{
     margin-right: 10px;  
     border: 1px solid rgba(0, 0, 0, 0.3);  
     border-radius: 3px;  
+    width: 32%;
 } 
 
 .loginform .submit {  
