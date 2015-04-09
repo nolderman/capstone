@@ -18,6 +18,13 @@ body{
 	margin-right: auto;
 }
 
+#profileButtonsWrapper {
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+}
+/*profile button is in buttons.css*/
+
 
 
 /*CSS specifically for the input field for tags on this page.*/

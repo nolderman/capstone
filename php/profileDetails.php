@@ -31,27 +31,28 @@ if(!$ownsPage){
 	}
 
 }
+//if it isn't the user's profile, include the buttons
+if(!$ownsPage){
+	echo "<div id='profileButtonsWrapper'>";
+		if(!$blockedUser){
+			echo "<a href='php/createConvo.php?uID=$profile' class='button profileButton hvr-fade-blue-green'>Message</a>";
+		}
+
+		if(!$contact){
+			echo "<a href='php/addContact.php?uID=$profile&contact=$contact' class='button profileButton hvr-fade-blue'>Add Contact</a>";
+		}
+		else{
+			echo "<a href='php/addContact.php?uID=$profile&contact=$contact' class='button profileButton hvr-fade-blue'>Remove Contact</a>";
+		}
+
+		if(!$blockedProfile){
+			echo "<a href='php/blockUser.php?uID=$profile&blocked=$blockedProfile' class='button profileButton hvr-fade-green'>Block </a>";
+		}
+		else{
+			echo "<a href='php/blockUser.php?uID=$profile&blocked=$blockedProfile' class='button profileButton hvr-fade-green'>Unblock </a>";
+		}
+	echo "</div>";
+}
 
 //write out the profile's tags
 include "userTags.php";
-
-//if it isn't the user's profile, include the buttons
-if(!$ownsPage){
-	if(!$blockedUser){
-		echo "<a href='php/createConvo.php?uID=$profile' class='button'>Message</a> <br>";
-	}
-
-	if(!$contact){
-		echo "<a href='php/addContact.php?uID=$profile&contact=$contact' class='button'>Add Contact</a> <br>";
-	}
-	else{
-		echo "<a href='php/addContact.php?uID=$profile&contact=$contact' class='button'>Remove Contact</a> <br>";
-	}
-
-	if(!$blockedProfile){
-		echo "<a href='php/blockUser.php?uID=$profile&blocked=$blockedProfile' class='button'>Block </a> <br>";
-	}
-	else{
-		echo "<a href='php/blockUser.php?uID=$profile&blocked=$blockedProfile' class='button'>Unblock </a> <br>";
-	}
-}
