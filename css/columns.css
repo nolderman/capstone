@@ -151,13 +151,18 @@ CSS in this block is the "default" or inherited data for the rest of the CSS in 
 
 /*CSS specific to the conversation sidebar links*/
 .convLink {
-    background: #4086AA; /*Blue background*/
+    background: #2980b9; /*Blue background*/
 }
 
 /*CSS specfic to the group sidebar links*/
 .groupLink{
     color: black;
     background: #27ae60; /*Connakt green as background*/
+}
+
+.profileLink{
+    color: white;
+    background: #2980b9; /*Blue background*/
 }
 
 /*Make it so that links dont appear underlined*/
