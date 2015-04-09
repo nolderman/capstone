@@ -36,7 +36,7 @@ if(!$ownsPage){
 include "userTags.php";
 
 //if it isn't the user's profile, include the buttons
-if(!ownsPage){
+if(!$ownsPage){
 	if(!$blockedUser){
 		echo "<div class='button'>Message </div> <br>";
 	}

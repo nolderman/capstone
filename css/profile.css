@@ -17,3 +17,33 @@ body{
 	margin-left: auto;
 	margin-right: auto;
 }
+
+
+
+/*CSS specifically for the input field for tags on this page.*/
+#tagsWrapper input[type=text], textarea {
+  -webkit-transition: all 0.30s ease-in-out;
+  -moz-transition: all 0.30s ease-in-out;
+  -ms-transition: all 0.30s ease-in-out;
+  -o-transition: all 0.30s ease-in-out;
+  outline: none;
+  padding: 4px 0px 3px 5px; /*top, bottom, right, left*/
+  /*Has the same margin, width, and height as an actual tag*/
+  margin: 5px 5px 5px 5px; 
+  width: 128px; 
+  height: 20px;
+  border: 1px solid transparent; /*it is solid and 1px so there isnt any shift when selecting it*/
+  border-radius: 8px;
+
+}
+ 
+/*When selecting the text field this happens. Highlights emerald green (connakt main green)*/
+#tagsWrapper input[type=text]:focus, textarea:focus {
+  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+  padding: 4px 0px 3px 5px;
+  margin: 5px 5px 5px 5px;
+  width: 128px;
+  height: 20px;
+  border: 1px solid #27ae60;
+  border-radius: 8px;
+}
