@@ -2,8 +2,9 @@
 .button {
     background-color: #2980b9;
     color: white;
+    border: none;
+    border-radius: 4px;
 }
-
 
 
 /*!
@@ -37,6 +38,7 @@
 .hvr-fade-green:hover, .hvr-fade-green:focus, .hvr-fade-green:active {
   background-color: #27ae60; /*green color to fade into*/
   color: white;
+  cursor: pointer;
 }
 .hvr-fade-blue {
   display: inline-block;
@@ -56,7 +58,31 @@
 .hvr-fade-blue:hover, .hvr-fade-blue:focus, .hvr-fade-blue:active {
   background-color: #2980b9; /*color to fade into*/
   color: white;
+  cursor: pointer;
 }
+.hvr-fade-cloud {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: color, background-color;
+  transition-property: color, background-color;
+}
+.hvr-fade-cloud:hover, .hvr-fade-cloud:focus, .hvr-fade-cloud:active {
+  background-color: #ecf0f1; /*color to fade into*/
+  color: #34495e;
+  cursor: pointer;
+}
+
+
+
 
 
 /* Bubble Bottom */

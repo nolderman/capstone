@@ -115,11 +115,11 @@
 }
 
 ::-moz-placeholder {  /* Firefox 19+ */
-   color: #34495e; /*light blue, lighter than our main blue*/  
+   color: #bdc3c7; /*light blue, lighter than our main blue*/  
 }
 
 :-ms-input-placeholder {  
-   color: #34495e; /*light blue, lighter than our main blue*/  
+   color: #bdc3c7; /*light blue, lighter than our main blue*/  
 }
 
 input[type=text], textarea {

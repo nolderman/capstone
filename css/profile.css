@@ -27,7 +27,7 @@ body{
   -ms-transition: all 0.30s ease-in-out;
   -o-transition: all 0.30s ease-in-out;
   outline: none;
-  padding: 4px 0px 3px 5px; /*top, bottom, right, left*/
+  padding: 5px 0px 3px 5px; /*top, right, bottom, left*/
   /*Has the same margin, width, and height as an actual tag*/
   margin: 5px 5px 5px 5px; 
   width: 128px; 
@@ -40,7 +40,7 @@ body{
 /*When selecting the text field this happens. Highlights emerald green (connakt main green)*/
 #tagsWrapper input[type=text]:focus, textarea:focus {
   box-shadow: 0 0 5px rgba(81, 203, 238, 1);
-  padding: 4px 0px 3px 5px;
+  padding: 5px 0px 3px 5px;
   margin: 5px 5px 5px 5px;
   width: 128px;
   height: 20px;

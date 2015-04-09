@@ -12,7 +12,7 @@
     margin-left: 5px;
     margin-right: 5px;
     
-    padding: 1px 0px 3px 3px;
+    padding: 1px 2px 3px 3px;
     font-size: 50%;
     /*border and text color is Cloud color*/
     color: #ecf0f1;
@@ -24,12 +24,19 @@
     width: 130px;
     height:25px;
 }
+/*Make it so the tag expands on hover if there is text that would make it stretch above 130px*/
+.tag:hover {
+  min-width: 130px;
+  width: auto;
+}
 
+/*More details for the input field for tags is located on profile.css*/
 #tagNameInput {
   border: none;
   color: #27ae60; /*Connakt green*/;
   background: transparent;
   float: left;
+  font-size: 15px;
 }
 #tagInputButton{
   visibility: hidden;

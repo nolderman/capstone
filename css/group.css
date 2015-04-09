@@ -35,8 +35,9 @@ body{
 /*Styling that is specific to the "Submit post" or "Post message" button.*/
 #postButton{/*within postWrapper*/
     position: absolute;
-    height: 109%;
-    width: 10%;
+    top: 4px;
+    height: 111%;
+    width: 11%;
     color: white;
     right: 0px;
 }
@@ -53,21 +54,18 @@ body{
 
 /*CSS for actual posts within the postContent*/
 .postContent .post{
-    position: relative;
-    width:100%;
+    display: block;
+    width:99%;
+    margin: 5px 5px 5px 5px;
     height:75px;
     background: #2980b9;
-    border-style: solid;
-    border-width:2px;
-    border-color:#000000;
     color:#fff;
-
 }
 
+/*CSS for if YOU submitted the post.*/
 .postContent .subPost{
     position:relative;
     font-size:50%;
-    
 }
 
 

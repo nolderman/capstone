@@ -1,3 +1,4 @@
+
 	<?php
 
 
@@ -11,7 +12,7 @@ if($ownsPage || ($profileInfo["tags_visible"] && !$blockedUser)){
 		if($result = $connection->query($sql)){
 			//write out each tag
 			while($tags = $result->fetch_array(MYSQLI_ASSOC)){
-				echo "<div class='tag'>".$tags["tag_name"]."</div>";
+				echo "<div class='tag hvr-fade-cloud'>".$tags["tag_name"]."</div>";
 				echo "   ";//spacing between tags		
 			}	
 		}
@@ -20,7 +21,7 @@ if($ownsPage || ($profileInfo["tags_visible"] && !$blockedUser)){
 			echo "No tags!";
 		}
 		//if this is their profile page, show tags
-		//This now appears within the tag wrapper after all the other tags. It will only appear if you are on your own page. 
+		//This now appears within the tag wrapper after all the other tags. It will only appear if you are on your own page. 	
 		if($ownsPage){
 			//form for user to tag themself
 			echo "<form name='tagUser' class='tagUser' id='tagUser' method= 'POST' action='php/tagUser.php'>";  
