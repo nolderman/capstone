@@ -26,18 +26,19 @@
 			<div class="sidebar" id="groupSideBar">
 				<?php include 'php/participantsSidebar.php';?>
 			</div>
+
 			<!-- center column -->
 			<div id="centerColumn">
 				<div id="messageFeed">
-					
+					<?php include 'php/displayMessages.php'; ?>
 				</div>
 
 				<!-- input area for your message -->
-				<div id="postWrapper">
+				<div id="messageWrapper">
 					<?php 
-						echo "<form name='postMessage' method='POST' action='php/sendMessage.php?cID=$cID'>";
-						echo "<textarea cols='50' rows='4' name='message' id='postInput' placeholder='Type Your Message Here'></textarea>";     
-						echo "<input type='submit' name='postMessage' value='Send Message' class='button' id='postButton'>";				
+						echo "<form name='sendMessage' method='POST' action='php/sendMessage.php?cID=$cID'>";
+						echo "<textarea cols='50' rows='4' name='message' id='sendInput' placeholder='Type Your Message Here'></textarea>";     
+						echo "<input type='submit' name='sendMessage' value='Send Message' class='button' id='sendButton'>";				
 						echo "</form>";
 					?>
 				</div>

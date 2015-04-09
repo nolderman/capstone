@@ -1,7 +1,7 @@
 <?php
 //if no conversation is set, redirect to profile page
 if(!isset($_GET["cID"])){
-	header('Location: ../profile.php');
+	header('Location: /profile.php');
 }
 
 //sets the basic variables
