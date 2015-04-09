@@ -21,8 +21,6 @@ function LogIn($connection) {
 	
 	if($password == $row["pass"]){//compare the login password with the one they signed up with
 		$_SESSION["uID"] = $row["uID"];
-		$_SESSION["f_name"] = $row["f_name"];
-		$_SESSION["l_name"] = $row["l_name"];
 		
 		session_write_close();
 		header('Location: ../profile.php'); //go to their profile page

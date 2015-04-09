@@ -9,7 +9,7 @@ function Search($connection){
 	
 	$searchInput = $_GET["searchInput"];
 	
-	$sql = "SELECT uID,f_name, l_name, email FROM user WHERE f_name LIKE '%$searchInput%' OR l_name LIKE '%$searchInput%' OR email LIKE '%$searchInput%'";
+	$sql = "SELECT uID,f_name, l_name, email FROM user WHERE f_name LIKE '%$searchInput%' OR l_name LIKE '%$searchInput%'";
 	$result= $connection->query($sql);
 	
 			

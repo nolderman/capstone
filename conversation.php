@@ -1,6 +1,7 @@
 <?php 
 	require_once 'php/sessionStatus.php';
 	require_once 'php/connect.php';
+	include 'php/getConvoInfo.php';
 ?>
 <!DOCTYPE html> 
 <HTML5>
@@ -28,15 +29,17 @@
 			<!-- center column -->
 			<div id="centerColumn">
 				<div id="messageFeed">
-					This is where the conversation's messages from all members will appear in order.
+					
 				</div>
 
 				<!-- input area for your message -->
-				<div id="textInputWrapper"> 
-						<form name="postMessage" method="POST" action="php/postMessage.php">
-						<textarea  name="message" id="messageInput" placeholder="Type your message here!"></textarea>
-						<input type="submit" name="postMessage" value="Post Message" class="button hvr-fade-green">				
-						</form>
+				<div id="postWrapper">
+					<?php 
+						echo "<form name='postMessage' method='POST' action='php/sendMessage.php?cID=$cID'>";
+						echo "<textarea cols='50' rows='4' name='message' id='postInput' placeholder='Type Your Message Here'></textarea>";     
+						echo "<input type='submit' name='postMessage' value='Send Message' class='button' id='postButton'>";				
+						echo "</form>";
+					?>
 				</div>
 			</div>
 

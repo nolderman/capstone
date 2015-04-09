@@ -22,8 +22,29 @@ echo "<div class='sidebarContent'>";
 		else{
 			//write out each conversation name to the sidebar
 			while($convos = $result->fetch_array(MYSQLI_ASSOC)){
-				echo "<a href = 'conversation.php?cID=".$convos["cid"]."'>";
-				echo "<div class='convLink hvr-fade-green'>".$convos["c_name"]."</div>";
+				$cID = $convos["cID"];
+				echo "<a href = 'conversation.php?cID=$cID'>";
+				
+				//if there is no conversation name, make the conversation name the names of all the participants except the user
+				if($convos["c_name"] == ""){
+					$sql = "SELECT f_name
+							FROM (user NATURAL JOIN participates)
+							WHERE (uID <> '$user' AND cID = '$cID')";
+					$result = $connection->query($sql);
+					$allNames = "";
+					
+					//go through all the names, adding to the string
+					while($names = $result->fetch_array(MYSQLI_ASSOC)){
+						$allNames = $allNames.", ".$names["f_name"];
+					}
+					
+					$allNames = subStr($allNames,2);//take out the leading comma
+					echo "<div class='convLink hvr-fade-green'>".$allNames."</div>";
+				}
+				else{
+					echo "<div class='convLink hvr-fade-green'>".$convos["c_name"]."</div>";
+				}
+				
 				echo "</a></br>";		
 			}	
 		}
