@@ -23,7 +23,7 @@ echo "<div class='sidebarContent'>";
 			//write out each group name to the sidebar and make them links
 			while($groups = $result->fetch_assoc()){
 				echo "<a href = 'group.php?gID=".$groups['gID']."'>";
-				echo "<div class='groupLink hvr-fade-blue'>".$groups['g_name']."</div>";
+				echo "<div class='sidebarLink groupLink hvr-fade-blue'>".$groups['g_name']."</div>";
 				echo "</a></br>";
 			}
 		}

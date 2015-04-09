@@ -94,11 +94,11 @@
 /*CSS for the input field specifically in the banner.*/
 /*Some padding on the right side so the search button doesn't overlap.*/
 .banner input[type=text], textarea {
-	padding-right: 15px;
+	padding-right: 25px;
 	border-width: 0px;
 }
 .banner input[type=text]:focus, textarea:focus {
-	padding-right: 15px;
+	padding-right: 25px;
 	border-width: 0px;
 	border-color: transparent;
 }

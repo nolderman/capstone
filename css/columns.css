@@ -125,32 +125,8 @@ CSS in this block is the "default" or inherited data for the rest of the CSS in 
     right: 0px; /*Amount of space between the sidebar and the left margin of columnWrapper*/
 }
 
-
-/*How the individual links to each conversation will appear within each sidebar
-These will be wrapper inside the sidebarContent section*/
-.convLink {
-    /*As text runs outside the div, it cuts it off and inserts ellipsis*/
-    text-overflow: ellipsis; 
-    white-space: nowrap;
-    overflow: hidden;
-
-    float: top; /*Makes it so that as more divs are added, then float in order from top to bottom*/
-    margin-top: 5px;
-    margin-bottom: 5px;
-    margin-left: auto;
-    margin-right: auto;
-    
-
-
-    background: #4086AA; /*Blue background*/
-    border: 1px solid black; /*Nice border that makes it look more neat, but still a flat UI*/
-
-    /*Position & Sizing*/
-    text-align: left;
-    width: 95%;
-    height:10%;
-}
-.groupLink{
+/*Common CSS for both the sidebar links*/
+.sidebarLink{
     /*As text runs outside the div, it cuts it off and inserts ellipsis*/
     text-overflow: ellipsis; 
     white-space: nowrap;
@@ -162,9 +138,6 @@ These will be wrapper inside the sidebarContent section*/
     margin-left: auto;
     margin-right: auto;
 
-    color: black;
-
-    background: #27ae60; /*Connakt green as background*/
     border: 1px solid black; /*Nice border that makes it look more neat, but still a flat UI*/
 
     /*Position & Sizing*/
@@ -172,6 +145,17 @@ These will be wrapper inside the sidebarContent section*/
     line-height: 60px;
     width: 95%;
     height:10%;
+}
+
+/*CSS specific to the conversation sidebar links*/
+.convLink {
+    background: #4086AA; /*Blue background*/
+}
+
+/*CSS specfic to the group sidebar links*/
+.groupLink{
+    color: black;
+    background: #27ae60; /*Connakt green as background*/
 }
 
 /*Make it so that links dont appear underlined*/
