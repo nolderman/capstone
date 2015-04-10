@@ -31,12 +31,14 @@ body{
     width: 100%;
     height: 85%;
 }
+/*CSS for the messages from the conversation that appear in the message feed*/
 .message {
     margin-left: 2%;
     margin-right: 2%;
     margin-top: 0px;
     margin-bottom: 25px;
     color: #34495e;
+    line-height: 100%;
 }
 
 /*Wrapper containing the text input area and the "Post Message" button*/
