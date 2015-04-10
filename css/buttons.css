@@ -94,8 +94,8 @@
   transition-property: color, background-color;
 }
 .hvr-fade-blue-green:hover, .hvr-fade-blue-green:focus, .hvr-fade-blue-green:active {
-  background-color: #2980b9; /*color to fade into*/
-  color: #27ae60;
+  color: #2980b9; /*color to fade into*/
+  background-color: #27ae60;
   cursor: pointer;
 }
 
@@ -119,6 +119,29 @@
   color: #34495e;
   cursor: pointer;
 }
+
+.hvr-fade-red {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: color, background-color;
+  transition-property: color, background-color;
+}
+.hvr-fade-red:hover, .hvr-fade-red:focus, .hvr-fade-red:active {
+  background-color: #c0392b; /*color to fade into*/
+  border-color: transparent;
+  color: white;
+  cursor: pointer;
+}
+
 
 
 
