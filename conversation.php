@@ -34,11 +34,11 @@
 				</div>
 
 				<!-- input area for your message -->
-				<div id="messageWrapper">
+				<div id="messageInputWrapper">
 					<?php 
 						echo "<form name='sendMessage' method='POST' action='php/sendMessage.php?cID=$cID'>";
-						echo "<textarea cols='50' rows='4' name='message' id='sendInput' placeholder='Type Your Message Here'></textarea>";     
-						echo "<input type='submit' name='sendMessage' value='Send Message' class='button' id='sendButton'>";				
+						echo "<textarea cols='50' rows='4' name='message' id='messageInput' placeholder='Type Your Message Here'></textarea>";     
+						echo "<input type='submit' name='sendMessage' value='Send Message' class='button hvr-fade-green' id='sendButton'>";				
 						echo "</form>";
 					?>
 				</div>
