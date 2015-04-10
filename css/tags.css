@@ -21,12 +21,18 @@
 
     /*Position & Sizing*/
     text-align: center;
-    width: 130px;
+    width: 120px;
     height:25px;
+
+    /*From http://stackoverflow.com/questions/3779534/how-to-disable-text-selection-with-css-or-js  disables highlighting text on double click.*/
+    -moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;
 }
 /*Make it so the tag expands on hover if there is text that would make it stretch above 130px*/
-.tag:hover {
-  min-width: 130px;
+.tag:hover{
+  cursor: zoom-in;
+}
+.tag:active {
+  min-width: 120px;
   width: auto;
 }
 
@@ -37,6 +43,9 @@
   background: transparent;
   float: left;
   font-size: 15px;
+  
+  /*From http://stackoverflow.com/questions/3779534/how-to-disable-text-selection-with-css-or-js  disables highlighting text on double click.*/
+  -moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;
 }
 #tagInputButton{
   visibility: hidden;

@@ -60,6 +60,9 @@ body{
     height:75px;
     background: #2980b9;
     color:#fff;
+
+    /*From http://stackoverflow.com/questions/3779534/how-to-disable-text-selection-with-css-or-js  disables highlighting text on double click.*/
+    -moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;
 }
 
 /*CSS for if YOU submitted the post.*/
