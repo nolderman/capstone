@@ -154,6 +154,7 @@ CSS in this block is the "default" or inherited data for the rest of the CSS in 
 /*CSS specific to the conversation sidebar links*/
 .convLink {
     background: #2980b9; /*Blue background*/
+    color: white;
 }
 
 /*CSS specfic to the group sidebar links*/
