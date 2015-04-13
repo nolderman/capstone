@@ -29,7 +29,9 @@
 
 			<!-- center column -->
 			<div id="centerColumn">
-
+				<div id="messageFeed">
+					<?php include 'php/displayMessages.php'; ?>
+				</div>
 				<!-- input area for your message -->
 				<div id="messageInputWrapper">
 					<?php 
@@ -39,7 +41,6 @@
 						echo "<input type='submit' name='sendMessage' value='Send Message' class='button hvr-fade-green' id='sendButton'>";				
 						echo "</form>";
 						
-						include 'php/displayMessages.php';
 					?>
 				</div>
 			</div>
