@@ -16,49 +16,91 @@ body{
 }
 
 
-#messageFeed { /*within messageWrapper*/
+#messageFeed { /*within center column*/
     /*Text settings specific to the message feed*/
     text-align: left;
     font-size: 150%;
     line-height:34px;
     color: white;
+    overflow: auto;
 
     /*Sizing and positioning*/
     position: absolute;
     top: 0px;
     left: 0px;
     width: 100%;
-    height: 93%;
+    height: 85%;
+}
+/*CSS for the messages from the conversation that appear in the message feed*/
+.message {
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-top: 0px;
+    margin-bottom: 25px;
+    color: #34495e;
+    line-height: 100%;
 }
 
 /*Wrapper containing the text input area and the "Post Message" button*/
-#textInputWrapper { /*within messageWrapper*/
+#messageInputWrapper { /*within center column*/
+    background: #2c3e50;
     /*Sizing and positioning*/
     position: absolute;
-    bottom: 0px;
-    left: 0px;
     width: 100%;
-    height: 9%;
+    height: 15%;
+    bottom: 0px;
 }
 
 /*Text input field for the conversation*/
-#messageInput { /*within inputWrapper*/
+#messageInput { /*within messageInputWrapper*/
     font-weight: 300;
     font-size: 20px;
-    line-height:10px;
-
+    line-height:100%;
     resize: none; /*Keep the input box from being resizable (as is the default)*/
+    color: #34495e;
 
     /*Size and positioning of the div*/
     position: absolute;
-    width: 90%;
-    height: 90%;
-    left: 0px;
+    left:2%;
+    top: 15%;
+    height: 60%;
+    width: 58%;
 }
 
 #sendButton {
     position: absolute;
-    width: 10%;
-    height: 99%;
-    right:0px;
+    width: 100px;
+    top: 20%;
+    height: 65%;
+    right:2%;
+}
+
+#messageInputWrapper input[type=text], textarea {
+    padding-right: 110px;
+
+}
+ 
+#messageInputWrapper input[type=text]:focus, textarea:focus {
+    padding-right: 110px;
+}
+
+input[type=text], textarea {
+  -webkit-transition: all 0.30s ease-in-out;
+  -moz-transition: all 0.30s ease-in-out;
+  -ms-transition: all 0.30s ease-in-out;
+  -o-transition: all 0.30s ease-in-out;
+  outline: none;
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid #DDDDDD;
+  border-radius: 8px;
+
+}
+ 
+input[type=text]:focus, textarea:focus {
+  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid #27ae60;
+  border-radius: 8px;
 }

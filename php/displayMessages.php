@@ -5,11 +5,12 @@ $sql = "SELECT f_name, date_time, content
 		ORDER BY date_time";
 
 $result = $connection->query($sql);//get all of the messages
-
+// var_dump($result);
+// var_dump($);
 //if there are any messages, print them out
 if($result->num_rows > 0){
 	while($row = $result->fetch_array(MYSQLI_ASSOC)){
-		echo "<div class='message'>";		
+		echo "<div class='triangle-right message'>";		
 		echo $row["f_name"].": ".$row["content"];
 		echo "</div>";
 	}	

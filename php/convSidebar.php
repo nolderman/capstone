@@ -39,7 +39,7 @@ echo "<div class='sidebarContent'>";
 					}
 					
 					$allNames = subStr($allNames,2);//take out the leading comma
-					echo "<div class='convLink hvr-fade-green'>".$allNames."</div>";
+					echo "<div class='sidebarLink convLink hvr-fade-green'>".$allNames."</div>";
 				}
 				else{
 					echo "<div class='convLink hvr-fade-green'>".$convos["c_name"]."</div>";
