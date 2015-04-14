@@ -20,10 +20,9 @@ function Search($connection){
 	
 	$searchInput = $_GET["searchInput"];
 	
-	$sql = "SELECT uID,f_name, l_name, email FROM user WHERE f_name LIKE '%$searchInput%' OR l_name LIKE '%$searchInput%'";
+	$sql = "SELECT uID,f_name, l_name FROM user WHERE f_name LIKE '%$searchInput%' OR l_name LIKE '%$searchInput%'";
 	$result= $connection->query($sql);
 	
-			
 	while($row = $result->fetch_array(MYSQLI_ASSOC)){
 	$array = array(); //array we are going to give back to the search
 		if(isset($row["f_name"])){
@@ -130,6 +129,66 @@ function PostMessageToGroup($connection){
 	
 	header("Location: ../group.php?gID=$gID"); //go back to the group page
 }
+
+//--------------------------------------------------DELETE GROUP-------------------------------------------------------------------------//
+
+if(isset($_GET['deleteGroup'])){
+	deleteGroup($connection);
+}
+function deleteGroup($connection){
+	$uID = $_SESSION["uID"];
+	$gID = $_GET["gID"];
+	echo $gID;
+	echo $uID;
+	$sql = "DELETE FROM groups WHERE gID=$gID"; //delete the group 
+	$result = $connection->query($sql);
+	
+	$sql = "DELETE FROM post WHERE gID =$gID";//delete all messages
+	$result = $connection->query($sql);
+
+	$sql = "DELETE FROM members WHERE gID = $gID";//delete all members
+	$result = $connection->query($sql);
+	
+	header("Location: ../profile.php");
+}
+//--------------------------------------------------DELETE POST FROM GROUP-------------------------------------------------------------------------//
+if(isset($_GET["deletePost"])){
+	deletePost($connection);
+}
+function deletePost($connection){
+	$uID = $_GET["uID"];
+	$gID = $_GET["gID"];
+	$date_time = $_GET["date_time"];
+	$sql = "DELETE FROM post WHERE uID=$uID AND gID=$gID AND date_time='$date_time'";//make sure to put quotes around date_time
+	$result = $connection->query($sql);
+	
+	header("Location: ../group.php?gID=$gID");
+}
+//--------------------------------------------------ADD USER TO GROUP-------------------------------------------------------------------------//
+if(isset($_GET["addUserToGroup"])){
+	addUserToGroup($connection);
+}
+function addUserToGroup($connection){
+	$newUser = $_POST["hiddenUID"];
+	$gID = $_GET["gID"];
+	$sql = "INSERT INTO members (uID,gID,moderator) VALUES ($newUser, $gID, '0')"; //insert the user without mod permissions
+	$result = $connection ->query($sql);
+	header("Location: ../group.php?gID=$gID");
+}
+
+//--------------------------------------------------DELETE USER FROM GROUP-------------------------------------------------------------------------//
+if(isset($_GET["removeUserFromGroup"])){
+	removeUserFromGroup($connection);
+}
+function removeUserFromGroup($connection){
+	$uID = $_GET["uID"];
+	$gID = $_GET["gID"];
+	$sql = "DELETE FROM members WHERE uID=$uID AND gID=$gID";
+	$result = $connection->query($sql);
+	
+	header("Location: ../group.php?gID=$gID");
+}
+
 
 //--------------------------------------------------ADD CONTACT OR REMOVE CONTACT--------------------------------------------------------//
 if(isset($_GET['contact'])){

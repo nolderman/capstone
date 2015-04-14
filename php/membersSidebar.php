@@ -7,8 +7,10 @@ echo "<div class='sidebarContent'>";
 	if($result = $connection->query($sql)){
 		//write out each member's name to the sidebar
 		while($members = $result->fetch_array(MYSQLI_ASSOC)){
+			$uID = $members["uID"];
 			echo "<a href = 'profile.php?uID=".$members["uID"]."'>";
-			echo "<div class='sidebarLink profileLink hvr-fade-green'>".$members["f_name"]." ".$members["l_name"]."</div>";
+			echo "<div class='sidebarLink profileLink hvr-fade-green'>".$members["f_name"]." ".$members["l_name"];
+			echo "<a href='php/functions.php?removeUserFromGroup=true&uID=$uID&gID=$gID'> ~Remove~ </a></div>";
 			echo "</a></br>";		
 		}	
 	}
