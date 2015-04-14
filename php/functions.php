@@ -62,7 +62,7 @@ $sql = "INSERT INTO participates (uID,cID)
 		VALUES('$otherUser','$cID')";
 $connection->query($sql);
 
-//header("Location: ../conversation.php?cID=$cID");
+header("Location: ../conversation.php?cID=$cID");
 }
 //--------------------------------------------------SEND MESSAGE IN CONVERSATION--------------------------------------------------------------------------//
 //if the user clicks the submit button on the page
