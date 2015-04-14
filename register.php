@@ -10,7 +10,7 @@
 <body>
 
 	<div id="wrapper">
-		<form name="login" class="login" id = "login" method = "POST" action = "php/signup.php">
+		<form name="login" class="login" id = "login" method = "POST" action = "php/functions.php?signUp=true">
 			
 			<div class="header">
 				<h1> Welcome!</h1>

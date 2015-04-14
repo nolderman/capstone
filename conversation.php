@@ -1,7 +1,8 @@
 <?php 
 	require_once 'php/sessionStatus.php';
 	require_once 'php/connect.php';
-	include 'php/getConvoInfo.php';
+	require_once 'php/getConvoInfo.php';
+	require_once 'php/functions.php';
 ?>
 <!DOCTYPE html> 
 <HTML5>
@@ -36,7 +37,7 @@
 				<div id="messageInputWrapper">
 					<?php 
 						
-						echo "<form name='sendMessage' method='POST' action='php/sendMessage.php?cID=$cID'>";
+						echo "<form name='sendMessage' method='POST' action='php/functions.php?sendMessage=true&cID=$cID'>";
 						echo "<textarea cols='50' rows='4' name='message' id='messageInput' placeholder='Type Your Message Here'></textarea>";     
 						echo "<input type='submit' name='sendMessage' value='Send Message' class='button hvr-fade-green' id='sendButton'>";				
 						echo "</form>";

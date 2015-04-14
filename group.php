@@ -57,7 +57,7 @@
 
 				<div id="postWrapper">
 				<?php 
-					echo "<form name='postMessage' method='POST' action='php/postMessage.php?gID=$gID'>";
+					echo "<form name='postMessage' method='POST' action='php/functions.php?postMessage=true&gID=$gID'>";
 					echo "<textarea cols='50' rows='4' name='message' id='postInput' placeholder='Type Your Message Here'></textarea>";     
 					echo "<input type='submit' name='postMessage' value='Post Message' class='button' id='postButton'>";				
 					echo "</form>";

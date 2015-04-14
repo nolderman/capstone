@@ -10,7 +10,7 @@ echo	"<div class = 'banner'>
 				<input type='submit' name='addContact' value='Go!' class='hvr-fade-green button' id='searchButton' hideFocus='true'> 
 			</form>		
 
-			<a class = 'hvr-fade-green button content logout' href='php/userLogout.php'>Logout</a>				
+			<a class = 'hvr-fade-green button content logout' href='php/functions.php?userLogout=true'>Logout</a>				
 
 			<img id='connaktSymbol' src='images/banner/center_banner.png'></img>";
 
@@ -27,7 +27,7 @@ echo			"<div class = 'banner'>
 					
 
 					<!--Login Form-->
-					<form name='login' class='content loginform cf' accept-charset='utf-8' method= 'POST' action='php/userLogin.php'>  			       
+					<form name='login' class='content loginform cf' accept-charset='utf-8' method= 'POST' action='php/functions.php?userLogin=true'>  			       
 						 <input type='email' id='email' name='usermail' placeholder='example@email.com' required>
 						 <input type='password'  id='password' name='password' placeholder='password' required>
 						 <input type='submit' class='submit hvr-fade-blue' name = 'submit'  value='Login'>

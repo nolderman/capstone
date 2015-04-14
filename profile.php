@@ -34,7 +34,7 @@
 				name: 'typeahead',
 				displayKey: 'f_name',
 				valueKey: 'f_name',
-				remote: 'php/search.php?searchInput=%QUERY'
+				remote: 'php/functions.php?searchInput=%QUERY'
 			})
 			.on('typeahead:opened', onOpened)
 			.on('typeahead:selected', onAutocompleted)
@@ -73,7 +73,7 @@
 				<!--form to create a group - NOTE: THIS ONLY EXISTS FOR TESTING-->
 				<div class="maximizeAddWrapper" id="createGroupMini" href:"javascript:;" onmousedown="toggleDiv('createGroupWrapper'); toggleDiv('createGroupMini');"></div>
 				<div class="sidebarAddWrapper" id="createGroupWrapper"  style="display:none">
-					<form name="createGroup" class="createGroup"  id="createGroup" method= "POST" action="php/createGroup.php">  
+					<form name="createGroup" class="createGroup"  id="createGroup" method= "POST" action="php/functions.php?createGroup=true">  
 						<input type="text" name = "groupName" id="groupName" class="input groupName" placeholder="Group Name"/>	
 						<input type="submit" name="createGroup" value="Create Group" class="hvr-fade-green button">
 					</form>
