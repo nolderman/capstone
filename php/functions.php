@@ -90,56 +90,46 @@ if(isset($_GET["toGroup"])){
 	conversationToGroup($connection);
 }
 function conversationToGroup($connection){
-	
+	$c_name = $_POST["toGroup"];
 	$cID = $_GET["cID"];
 	$uID = $_SESSION["uID"];
-	
-	$sql = "DELETE FROM conversation WHERE cID=$cID";//delete the conversation
-	$result = $connection->query($sql);
 	
 	//make a new group
 	$dateTime = new DateTime(null, new DateTimeZone('America/Los_Angeles'));
 	$dateTime = $dateTime->format('Y-m-d H:i:s');
-	$sql = "INSERT INTO groups (gID, g_name, icon, visible, burn_date) VALUES ('0','', 'NULL', '1', '0000-00-00 00:00:00')";
+	$sql = "INSERT INTO groups (gID, g_name, icon, visible, burn_date) VALUES ('0','$c_name', 'NULL', '1', '0000-00-00 00:00:00')";
 	$result = $connection->query($sql);
+	$gID =  mysqli_insert_id($connection); //get the id of the last inserted record (in this case it is the group ID)
 
 	//Put the user in the member table with this group
-	$uID = $_SESSION["uID"]; 				//get the creator's uID
-	$gID =  mysqli_insert_id($connection); //get the id of the last inserted record (in this case it is the group ID)
 	$insertMember = "INSERT INTO members (uID,gID,moderator) VALUES ('$uID','$gID','1')";//set the creator to a moderator
 	$insertMember = $connection->query($insertMember);
+	
+	//Make the group own the conversation
+	$sql = "INSERTE INTO g_owns (gID,cID) VALUES ($gID, $cID)";
+	$result = $connection->query($sql);
 	
 	//get all of the participants so we can move them into members
 	$sql = "SELECT * FROM participates WHERE cID=$cID";
 	$result = $connection->query($sql);
 	while($row = $result->fetch_array(MYSQLI_ASSOC)){//move all participants into members as non mods
 		$uID = $row["uID"];
-		echo $uID;
 		$moveToMember = "INSERT INTO members (uID,gID,moderator) VALUES ('$uID','$gID','0')";//put in members 
 		$toMemberResult = $connection->query($moveToMember);
 	}
 	
-	$sql = "SELECT * FROM message WHERE cID=$cID";//get all of the messages and put them in the post
+	/**get all of the messages and put them in the post NOT NEEDED BUT IT WAS COOL FOR ABOUT 30 SECONDS SO I AM LEAVING IT
+	$sql = "SELECT * FROM message WHERE cID=$cID";
 	$result = $connection->query($sql);
 	while($row = $result->fetch_array(MYSQLI_ASSOC)){
 		$uID = $row["uID"];
-		echo $uID;
-		echo $content;
 		$content = $row["content"];
 		$date_time = $row["date_time"];
-		$moveToPost = "INSERT INTO post (uID,gID,date_time,content,edited) VALUES ($uID, $gID, $date_time, $content, '0')";//put in post
+		$moveToPost = "INSERT INTO post (uID,gID,date_time,content,edited) VALUES ('$uID', '$gID', '$date_time', '$content', '0')";//put in post
 		$moveResult = $connection->query($moveToPost);
 	}
-	
-	$removeMessage = "DELETE FROM message WHERE cID=$cID";//remove all the messages
-	$removeResult = $connection->query($removeMessage);
-	
-	$removeParticipates = "DELETE FROM participates WHERE cID=$cID";//remove from participates
-	$removeResult = $connection->query($removeParticipates);
-	
+	**/
 	header("Location: ../group.php?gID=$gID");
-	
-	
 }
 
 
