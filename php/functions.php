@@ -85,6 +85,64 @@ function PostMessage($connection){
 	header("Location: ../conversation.php?cID=$cID"); //go back to the group page
 }
 
+//---------------------------------------------------TURN CONVERSATION INTO A GROUP-----------------------------------------------------------//
+if(isset($_GET["toGroup"])){
+	conversationToGroup($connection);
+}
+function conversationToGroup($connection){
+	
+	$cID = $_GET["cID"];
+	$uID = $_SESSION["uID"];
+	
+	$sql = "DELETE FROM conversation WHERE cID=$cID";//delete the conversation
+	$result = $connection->query($sql);
+	
+	//make a new group
+	$dateTime = new DateTime(null, new DateTimeZone('America/Los_Angeles'));
+	$dateTime = $dateTime->format('Y-m-d H:i:s');
+	$sql = "INSERT INTO groups (gID, g_name, icon, visible, burn_date) VALUES ('0','', 'NULL', '1', '0000-00-00 00:00:00')";
+	$result = $connection->query($sql);
+
+	//Put the user in the member table with this group
+	$uID = $_SESSION["uID"]; 				//get the creator's uID
+	$gID =  mysqli_insert_id($connection); //get the id of the last inserted record (in this case it is the group ID)
+	$insertMember = "INSERT INTO members (uID,gID,moderator) VALUES ('$uID','$gID','1')";//set the creator to a moderator
+	$insertMember = $connection->query($insertMember);
+	
+	//get all of the participants so we can move them into members
+	$sql = "SELECT * FROM participates WHERE cID=$cID";
+	$result = $connection->query($sql);
+	while($row = $result->fetch_array(MYSQLI_ASSOC)){//move all participants into members as non mods
+		$uID = $row["uID"];
+		echo $uID;
+		$moveToMember = "INSERT INTO members (uID,gID,moderator) VALUES ('$uID','$gID','0')";//put in members 
+		$toMemberResult = $connection->query($moveToMember);
+	}
+	
+	$sql = "SELECT * FROM message WHERE cID=$cID";//get all of the messages and put them in the post
+	$result = $connection->query($sql);
+	while($row = $result->fetch_array(MYSQLI_ASSOC)){
+		$uID = $row["uID"];
+		echo $uID;
+		echo $content;
+		$content = $row["content"];
+		$date_time = $row["date_time"];
+		$moveToPost = "INSERT INTO post (uID,gID,date_time,content,edited) VALUES ($uID, $gID, $date_time, $content, '0')";//put in post
+		$moveResult = $connection->query($moveToPost);
+	}
+	
+	$removeMessage = "DELETE FROM message WHERE cID=$cID";//remove all the messages
+	$removeResult = $connection->query($removeMessage);
+	
+	$removeParticipates = "DELETE FROM participates WHERE cID=$cID";//remove from participates
+	$removeResult = $connection->query($removeParticipates);
+	
+	header("Location: ../group.php?gID=$gID");
+	
+	
+}
+
+
 //--------------------------------------------------CREATE GROUP-------------------------------------------------------------------------------//
 
 if(isset($_GET['createGroup']) && isset($_POST["groupName"])){//only save a contact if the user put something in the submit box
@@ -97,6 +155,7 @@ function CreateGroup($connection){
 
 	$groupName = $_POST["groupName"];
 
+	
 	//make a new group
 	$sql = "INSERT INTO groups (gID, g_name, icon, visible, burn_date) VALUES ('0','$groupName', 'NULL', '1', '0000-00-00 00:00:00')"; //put the contact in the database
 	$result = $connection->query($sql);
@@ -109,6 +168,7 @@ function CreateGroup($connection){
 	$insertMember = $connection->query($insertMember);
 	
 	header("Location: ../group.php?gID=$gID");
+	
 }
 //--------------------------------------------------POST MESSAGE TO GROUP---------------------------------------------------------------------//
 if(isset($_GET['postMessage']) && isset($_POST["postMessage"]) && isset($_POST["message"])){ //if the user clicks the submit button on the groupPage

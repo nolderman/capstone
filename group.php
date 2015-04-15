@@ -62,7 +62,7 @@
 	<body>
 		<?php 
 			include 'php/banner.php';
-			echo "<a href='php/functions.php?deleteGroup=true&gID=$gID'>Delete Group </a>";
+			echo "<a class='button' href='php/functions.php?deleteGroup=true&gID=$gID'>Delete Group </a>";
 		?>
 
 		<!-- wrapper for all divs within the main body of the page. -->

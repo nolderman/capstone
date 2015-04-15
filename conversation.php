@@ -19,7 +19,11 @@
 
 	<body>
 		
-		<?php include 'php/banner.php';?>
+		<?php 
+		include 'php/banner.php';
+		echo $cID;
+		echo "<a class='button' href='php/functions.php?toGroup=true&cID=$cID'> Turn Into Group </a>";
+		?>
 
 		<div id="columnWrapper">
 
