@@ -1,5 +1,4 @@
-
-	<?php
+<?php
 
 
 if($ownsPage || ($profileInfo["tags_visible"] && !$blockedUser)){

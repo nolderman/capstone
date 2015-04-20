@@ -1,7 +1,9 @@
 <?php 
 	require_once 'php/connect.php';
 	require_once 'php/sessionStatus.php';
+	require_once 'php/functions.php';
 	require_once 'php/getGroupInfo.php';
+	
 ?>
 <!DOCTYPE html>
 <HTML5>
@@ -14,6 +16,7 @@
 		<link href="css/banner.css" rel="stylesheet" type="text/css"> <!-- CSS file for header for main pages -->
 		<link href="css/searchBar.css" rel="stylesheet" type="text/css"> <!-- CSS file for banner for main pages -->
 		<link href="css/message.css" rel="stylesheet" type="text/css">
+		<link href="css/tags.css" rel="stylesheet" type="text/css"> <!-- CSS file for tags -->
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script type="text/javascript" src="javascript/bootstrap.js"></script> 
 		<script type="text/javascript" src="javascript/typeahead.js"></script>  	
@@ -62,7 +65,12 @@
 	<body>
 		<?php 
 			include 'php/banner.php';
-			echo "<a class='button' href='php/functions.php?deleteGroup=true&gID=$gID'>Delete Group </a>";
+			require_once 'php/groupTags.php';
+			if($moderator){
+				echo "<a class='button' href='php/functions.php?deleteGroup=true&gID=$gID'>Delete Group </a>";
+			}
+			
+			
 		?>
 
 		<!-- wrapper for all divs within the main body of the page. -->
@@ -88,7 +96,6 @@
 			<!--Group's Posts, center column-->
 			<div id="centerColumn">
 				<!--Form to post a message-->
-
 				<div id="postWrapper">
 				<?php 
 					echo "<form name='postMessage' method='POST' action='php/functions.php?postMessage=true&gID=$gID'>";
@@ -106,7 +113,7 @@
 						
 						//print out the messages in an unordered list on the page
 						while($row = $result->fetch_array(MYSQLI_ASSOC)){
-							$uID = $row["uID"];
+							$posterID = $row["uID"];
 							$gID = $row["gID"];
 							$date_time = $row["date_time"];
 							$content = $row["content"];
@@ -116,7 +123,9 @@
 							
 								echo "<div class='subPost'>";
 									echo $row['f_name']." ".$row['date_time'];
-									echo "<a href='php/functions.php?deletePost=true&uID=$uID&gID=$gID&date_time=$date_time'>Delete Post</a>";
+									if($posterID == $_SESSION['uID'] || $moderator){
+										echo "<a href='php/functions.php?deletePost=true&uID=$posterID&gID=$gID&date_time=$date_time'>Delete Post</a>";
+									}
 								echo "</div>";
 							
 							
@@ -127,7 +136,6 @@
 					?>
 				</div>
 			</div>
-
 			<!--Right column. List of conversations the group contains-->
 			<div class="sidebar" id="convSidebar">
 				<div class="sidebarContent">

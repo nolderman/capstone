@@ -4,9 +4,10 @@ require_once 'sessionStatus.php';
 
 //Strips the input to reduce hacking 
 function test_input($data) {
+	
   $data = trim($data);  //strip unnecessary chars
-  $data = stripslashes($data); //remove backslashes
   $data = htmlspecialchars($data);//convert special characters to HTML entities
+  $data = stripslashes($data); //remove backslashes
   return $data;
 }
 
@@ -98,7 +99,7 @@ function conversationToGroup($connection){
 	$dateTime = new DateTime(null, new DateTimeZone('America/Los_Angeles'));
 	$dateTime = $dateTime->format('Y-m-d H:i:s');
 	$sql = "INSERT INTO groups (gID, g_name, icon, visible, burn_date) VALUES ('0','$c_name', 'NULL', '1', '0000-00-00 00:00:00')";
-	$result = $connection->query($sql);
+	$result = $connection->query(test_input($sql));
 	$gID =  mysqli_insert_id($connection); //get the id of the last inserted record (in this case it is the group ID)
 
 	//Put the user in the member table with this group
@@ -147,17 +148,21 @@ function CreateGroup($connection){
 
 	
 	//make a new group
-	$sql = "INSERT INTO groups (gID, g_name, icon, visible, burn_date) VALUES ('0','$groupName', 'NULL', '1', '0000-00-00 00:00:00')"; //put the contact in the database
-	$result = $connection->query($sql);
-
-	//Put the user in the member table with this group
-	$uID = $_SESSION["uID"]; 				//get the creator's uID
-	$gID =  mysqli_insert_id($connection); //get the id of the last inserted record (in this case it is the group ID)
-
-	$insertMember = "INSERT INTO members (uID,gID,moderator) VALUES ('$uID','$gID','1')";//set the creator to a moderator
-	$insertMember = $connection->query($insertMember);
+	if(!empty($groupName)){//make sure the user input a name for the group
+		$sql = "INSERT INTO groups (gID, g_name, icon, visible, burn_date) VALUES ('0','$groupName', 'NULL', '1', '0000-00-00 00:00:00')"; //put the contact in the database
+		$result = $connection->query($sql);
 	
-	header("Location: ../group.php?gID=$gID");
+		//Put the user in the member table with this group
+		$uID = $_SESSION["uID"]; 				//get the creator's uID
+		$gID =  mysqli_insert_id($connection); //get the id of the last inserted record (in this case it is the group ID)
+
+		$insertMember = "INSERT INTO members (uID,gID,moderator) VALUES ('$uID','$gID','1')";//set the creator to a moderator
+		$insertMember = $connection->query($insertMember);
+		
+		header("Location: ../group.php?gID=$gID");
+	}
+	
+	header("Location: ../profile.php");
 	
 }
 //--------------------------------------------------POST MESSAGE TO GROUP---------------------------------------------------------------------//
@@ -173,9 +178,10 @@ function PostMessageToGroup($connection){
 	//Insert the message with the user who posted, group posted to, dateTime posted, and the message itself.
 	$uID = $_SESSION["uID"];
 	$gID = $_GET["gID"];
-	
-	$sql = "INSERT INTO post (uID, gID, date_time, content, edited) VALUES ('$uID', '$gID', '$dateTime', '$message', '0')";
-	$result = $connection->query($sql);
+	if(!empty($message)){//only post if not empty
+		$sql = "INSERT INTO post (uID, gID, date_time, content, edited) VALUES ('$uID', '$gID', '$dateTime', '$message', '0')";
+		$result = $connection->query($sql);
+	}
 	
 	header("Location: ../group.php?gID=$gID"); //go back to the group page
 }
@@ -239,6 +245,43 @@ function removeUserFromGroup($connection){
 	header("Location: ../group.php?gID=$gID");
 }
 
+//------------------------------------------------TAG GROUP------------------------------------------//
+if(isset($_GET['tagGroup'])){
+	tagGroup($connection, $_GET['gID']);
+}
+
+function tagGroup($connection, $gID){
+	$tagName = $_POST["tagName"];
+	
+	//make a new tag
+	$insert_tag = "INSERT INTO tag (tag_name) 
+					VALUES ('$tagName')";
+	$connection->query($insert_tag);
+	
+	//attach this user with this tag
+	$insert_g_tagged = "INSERT INTO g_tagged (gID,tag_name) 
+						VALUES ('$gID','$tagName')";
+	$connection->query($insert_g_tagged);
+	header("Location: ../group.php?gID=$gID");
+}
+
+//----------------------------------------------------DELETE GROUP TAG-----------------------------------------------//
+if(isset($_GET['deleteGroupTag'])){
+	deleteGroupTag($connection, $_GET['gID'], $_GET['tag_name']);
+}
+function deleteGroupTag($connection, $gID, $tag_name){
+	echo $gID;
+	echo $tag_name;
+	$sql = "DELETE FROM g_tagged WHERE gID='$gID' AND tag_name='$tag_name'";
+	$result = $connection->query($sql);
+	header("Location: ../group.php?gID=$gID");
+}
+
+//-------------------------------------------------CHECK IF MODERATOR OF GROUP-------------------------------------------//
+function groupModCheck($connection, $uID, $gID){
+$sql = "SELECT moderator FROM members WHERE uID = $uID";
+return $moderator = $connection->query($sql);
+}
 
 //--------------------------------------------------ADD CONTACT OR REMOVE CONTACT--------------------------------------------------------//
 if(isset($_GET['contact'])){
