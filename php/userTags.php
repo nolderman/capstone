@@ -1,5 +1,4 @@
-
-	<?php
+<?php
 
 
 if($ownsPage || ($profileInfo["tags_visible"] && !$blockedUser)){
@@ -24,7 +23,7 @@ if($ownsPage || ($profileInfo["tags_visible"] && !$blockedUser)){
 		//This now appears within the tag wrapper after all the other tags. It will only appear if you are on your own page. 	
 		if($ownsPage){
 			//form for user to tag themself
-			echo "<form name='tagUser' class='tagUser' id='tagUser' method= 'POST' action='php/tagUser.php'>";  
+			echo "<form name='tagUser' class='tagUser' id='tagUser' method= 'POST' action='php/functions.php?tagUser=true'>";  
 				echo "<input type='text' name='tagName' id='tagNameInput' class='input tagName' placeholder='Add a tag'/>";	
 				echo "<input type='submit' name='addTag' value='Add Tag' class='button' id='tagInputButton'>";
 			echo "</form>";

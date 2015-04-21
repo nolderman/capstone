@@ -21,6 +21,14 @@ $memberQuery = "SELECT uID
 $result = $connection->query($memberQuery);
 $memberIDs = $result->fetch_array(MYSQLI_ASSOC);
 
+if(isset($memberIDs["$uID"])){
+	$isMember = true;
+}else{
+	$isMember = false;
+}
+
+$moderator = groupModCheck($connection, $uID, $gID);//check if the current user is a moderator of the group
+
 //if they aren't a member, and the group is set to be invisible, redirect them away from the page
 if(!isset($memberIDs["$uID"]) && $groupInfo["visible"] == 0){
 	header('Location: ../profile.php');

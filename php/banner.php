@@ -2,15 +2,21 @@
 // Parse and find the basename of the page we are on. Profile page -> profile.php -> profile, for example.
 $basename = substr(strtolower(basename($_SERVER['PHP_SELF'])),0,strlen(basename($_SERVER['PHP_SELF']))-4);
 
-if ($basename != 'index') { //if you are not on the index page, aka on profile, group, or conversation pages..
-echo	"<div class = 'banner'> 
-			<form name='searchBar' class='content' id='searchbar' method= 'POST' action='profile.php'>  
-				<input type='text' name='typeahead' class='typeahead' id='searchbarInput' placeholder='Search'/>	
+
+if ($basename != 'index'){ //if you are not on the index page, aka on profile, group, or conversation pages..
+echo	"<div class = 'banner'> ";
+if($basename == 'group'){ //if we are searching on the group page we want to add this user to the group
+	$gID = $_GET["gID"];
+	echo "<form name='searchBar' class='content' id='searchbar' method= 'POST' action='php/functions.php?addUserToGroup=true&gID=$gID'> ";
+}else{
+	echo "<form name='searchBar' class='content' id='searchbar' method= 'POST' action='profile.php'> ";
+}
+	echo "		<input type='text' name='typeahead' class='typeahead' id='searchbarInput' placeholder='Search'/>	
 				<input type='hidden' name='hiddenUID' id='userID' value='' />						
 				<input type='submit' name='addContact' value='Go!' class='hvr-fade-green button' id='searchButton' hideFocus='true'> 
 			</form>		
 
-			<a class = 'hvr-fade-green button content logout' href='php/userLogout.php'>Logout</a>				
+			<a class = 'hvr-fade-green button content logout' href='php/functions.php?userLogout=true'>Logout</a>				
 
 			<img id='connaktSymbol' src='images/banner/center_banner.png'></img>";
 
@@ -27,7 +33,7 @@ echo			"<div class = 'banner'>
 					
 
 					<!--Login Form-->
-					<form name='login' class='content loginform cf' accept-charset='utf-8' method= 'POST' action='php/userLogin.php'>  			       
+					<form name='login' class='content loginform cf' accept-charset='utf-8' method= 'POST' action='php/functions.php?userLogin=true'>  			       
 						 <input type='email' id='email' name='usermail' placeholder='example@email.com' required>
 						 <input type='password'  id='password' name='password' placeholder='password' required>
 						 <input type='submit' class='submit hvr-fade-blue' name = 'submit'  value='Login'>

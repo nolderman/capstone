@@ -35,21 +35,21 @@ if(!$ownsPage){
 if(!$ownsPage){
 	echo "<div id='profileButtonsWrapper'>";
 		if(!$blockedUser){
-			echo "<a href='php/createConvo.php?uID=$profile' class='button profileButton hvr-fade-blue'>Message</a>";
+			echo "<a href='php/functions.php?createConversation=true&uID=$profile' class='button profileButton hvr-fade-blue'>Message</a>";
 		}
 
 		if(!$contact){
-			echo "<a href='php/addContact.php?uID=$profile&contact=$contact' class='button profileButton hvr-fade-green'>Add Contact</a>";
+			echo "<a href='php/functions.php?uID=$profile&contact=$contact' class='button profileButton hvr-fade-green'>Add Contact</a>";
 		}
 		else{
-			echo "<a href='php/addContact.php?uID=$profile&contact=$contact' class='button profileButton hvr-fade-green'>Remove Contact</a>";
+			echo "<a href='php/functions.php?uID=$profile&contact=$contact' class='button profileButton hvr-fade-green'>Remove Contact</a>";
 		}
 
 		if(!$blockedProfile){
-			echo "<a href='php/blockUser.php?uID=$profile&blocked=$blockedProfile' class='button profileButton hvr-fade-red'>Block </a>";
+			echo "<a href='php/functions.php?uID=$profile&blocked=$blockedProfile' class='button profileButton hvr-fade-red'>Block </a>";
 		}
 		else{
-			echo "<a href='php/blockUser.php?uID=$profile&blocked=$blockedProfile' class='button profileButton hvr-fade-red'>Unblock </a>";
+			echo "<a href='php/functions.php?uID=$profile&blocked=$blockedProfile' class='button profileButton hvr-fade-red'>Unblock </a>";
 		}
 	echo "</div>";
 }
