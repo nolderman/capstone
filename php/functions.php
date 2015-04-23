@@ -145,13 +145,15 @@ function CreateGroup($connection){
 	$dateTime = $dateTime->format('Y-m-d H:i:s');
 
 	$groupName = $_POST["groupName"];
-
+	$groupName = htmlspecialchars($groupName);
 	
 	//make a new group
 	if(!empty($groupName)){//make sure the user input a name for the group
+
+		$groupName = addslashes($groupName);
 		$sql = "INSERT INTO groups (gID, g_name, icon, visible, burn_date) VALUES ('0','$groupName', 'NULL', '1', '0000-00-00 00:00:00')"; //put the contact in the database
 		$result = $connection->query($sql);
-	
+
 		//Put the user in the member table with this group
 		$uID = $_SESSION["uID"]; 				//get the creator's uID
 		$gID =  mysqli_insert_id($connection); //get the id of the last inserted record (in this case it is the group ID)
@@ -241,7 +243,6 @@ function removeUserFromGroup($connection){
 	$gID = $_GET["gID"];
 	$sql = "DELETE FROM members WHERE uID=$uID AND gID=$gID";
 	$result = $connection->query($sql);
-	
 	header("Location: ../group.php?gID=$gID");
 }
 

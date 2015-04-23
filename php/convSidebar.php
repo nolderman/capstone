@@ -2,10 +2,15 @@
 echo "<div class='sidebarHeader'>Conversations</div>";
 	
 //get the user's conversations
-$sql = "SELECT cID, c_name 
+$sql = "SELECT cID, c_name
 		FROM (user NATURAL JOIN participates NATURAL JOIN conversation) 
 		WHERE (uID = '$user')";
-
+	//if($result = $connection->query($sql)){	
+	//	$result = $connection->query($sql);
+	//	while($convos = $result->fetch_array(MYSQLI_ASSOC)){
+	//		var_dump($convos);
+	//	}
+//	}
 //if it isn't their profile page update query to get the conversations the user has in common with this profile
 if(!$ownsPage){
 	//join user's conversations with participates where the profile is participating to get the convos in common
@@ -15,13 +20,16 @@ if(!$ownsPage){
 }
 
 echo "<div class='sidebarContent'>";
+	
 	if($result = $connection->query($sql)){
+		
 		if($result->num_rows == 0){//if there are no results
 			echo "There are no conversations to display";
 		}
 		else{
 			//write out each conversation name to the sidebar
 			while($convos = $result->fetch_array(MYSQLI_ASSOC)){
+				//var_dump($convos);
 				$cID = $convos["cID"];
 				echo "<a href = 'conversation.php?cID=$cID'>";
 				

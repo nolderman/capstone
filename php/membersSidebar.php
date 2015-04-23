@@ -2,6 +2,7 @@
 echo "<div class='sidebarHeader'>Members</div>";
 
 $moderator = groupModCheck($connection, $uID, $gID);
+
 //query for the names and IDs of members
 $sql = "SELECT uID, f_name, l_name FROM (($memberQuery) subquery0 NATURAL JOIN user)";
 echo "<div class='sidebarContent'>";
