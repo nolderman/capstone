@@ -207,7 +207,33 @@ function postReply($connection){
 	$result = $connection->query($sql);
 	
 	header("Location: ../group.php?gID=$gID"); //go back to the group page
+}
+
+//--------------------------------------------------EDIT POST--------------------------------------------------------------------------//
+if(isset($_GET['editPost'])){
+	editPost($connection, $_POST['editPost']);
+}
+function editPost($connection, $newContent){
+	$pID = $_GET['pID'];
+	$gID = $_GET['gID'];
 	
+	$sql = "UPDATE post SET content='$newContent' WHERE pID=$pID";
+	$result = $connection->query($sql);
+	
+	header("Location: ../group.php?gID=$gID"); //go back to the group page
+}
+
+//------------------------------------------------EDIT GROUP NAME------------------------------------------------------------------------//
+if(isset($_GET['editName'])){
+	editGroupName($connection, $_POST['editName']);
+}
+function editGroupName($connection,$newName){
+	$gID = $_GET['gID'];
+	
+	$sql = "UPDATE groups SET g_name='$newName' WHERE gID=$gID";
+	$result = $connection->query($sql);
+	
+	header("Location: ../group.php?gID=$gID"); //go back to the group page
 }
 
 

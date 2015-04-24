@@ -29,6 +29,7 @@ if(isset($memberIDs["$uID"])){
 
 $moderator = groupModCheck($connection, $uID, $gID);//check if the current user is a moderator of the group
 
+$g_name = $groupInfo['g_name'];
 //if they aren't a member, and the group is set to be invisible, redirect them away from the page
 if(!isset($memberIDs["$uID"]) && $groupInfo["visible"] == 0){
 	header('Location: ../profile.php');

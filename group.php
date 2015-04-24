@@ -20,17 +20,33 @@
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script type="text/javascript" src="javascript/bootstrap.js"></script> 
 		<script type="text/javascript" src="javascript/typeahead.js"></script>  
-		<script type="text/javascript" language ="javascript">
+		<script type="text/javascript" language="javascript"> 
+			//click to reply function
 			$(function(){
 				$('.reply-post').on('click', function(e){
 					e.preventDefault();
 					$(this).next('.reply-form').show();
 				});
 			});
-		</script>
-		<script type="text/javascript" language="javascript"> 
+			
+			//click to edit post
+			$(function(){
+				$('.edit-post').on('click', function(e){
+					e.preventDefault();
+					$(this).next('.edit-form').show();
+				});
+			});
+			
+			//click to edit group name
+			$(function(){
+				$('.editName').on('click', function(e){
+					e.preventDefault();
+					$(this).next('.editName-form').show();
+				});
+			});
 		
-			function toggleDiv(divid){ //Function for toggling a chat window up and down
+			//Function for toggling a chat window up and down
+			function toggleDiv(divid){ 
 				if(document.getElementById(divid).style.display == 'none'){
 					document.getElementById(divid).style.display = 'block';
 				}
@@ -38,9 +54,9 @@
 					document.getElementById(divid).style.display = 'none';
 				}
 		    }
-		</script>	
-		<script>
-		$(document).ready(function() {//start looking for this after we have loaded everything on the page
+			
+			//function for searching using the php page and %QUERY which is a typeahead constant for the user input
+			$(document).ready(function() {//start looking for this after we have loaded everything on the page
 			$('.typeahead').typeahead({ //input field of typeahead with value of f_name!
 				name: 'typeahead',
 				displayKey: 'f_name',
@@ -67,7 +83,7 @@
 				console.log(datum);
 			}
 		})
-		</script>
+		</script>	
 	</head>
 
 
@@ -107,10 +123,18 @@
 				<!--Form to post a message-->
 				<div id="postWrapper">
 				<?php 
-					echo "<form name='postMessage' method='POST' action='php/functions.php?postMessage=true&gID=$gID'>";
-					echo "<textarea cols='50' rows='4' name='message' id='postInput' placeholder='Type Your Message Here'></textarea>";     
-					echo "<input type='submit' name='postMessage' value='Post' class='button' id='postButton'>";				
-					echo "</form>";
+					echo "<div class='groupName' >$g_name
+							<a href='' id='$gID' class ='editName groupActionLink'> Edit Group Name </a>
+							<form class='editName-form' name='editName' method='POST' action='php/functions.php?editName=true&gID=$gID' >
+								<input name='editName' value='$g_name'  />
+								<input class='button' type='submit' value='Change Name' />
+							</form>	
+						</div>";
+					
+					echo "<form name='postMessage' method='POST' action='php/functions.php?postMessage=true&gID=$gID'>;
+								<textarea cols='50' rows='4' name='message' id='postInput' placeholder='Type Your Message Here'></textarea>;     
+								<input type='submit' name='postMessage' value='Post' class='button' id='postButton'>;				
+						</form>";
 				?>
 				</div>
 
@@ -128,23 +152,31 @@
 							$content = $row["content"];
 							echo"<div class='post'>";
 							
-							echo $row["content"];
-							
+							$content = $row['content'];
+							echo $content;
 								echo "<div class='subPost'>";
 									echo $row['f_name']." ".$row['date_time'];
 									$pID= $row['pID'];
-									if($posterID == $_SESSION['uID'] || $moderator){
-										echo "<a href='php/functions.php?deletePost=true&gID=$gID&pID=$pID'>Delete Post</a>";
-									}
-									echo "<a href='' id='$pID' class ='reply-post'> Reply </a>
+									
+									//reply to the post
+									echo "<a href='' class ='reply-post groupActionLink'> Reply </a>
 										<form class='reply-form' method='POST' action='php/functions.php?replyToPost=true&gID=$gID&pID=$pID' >
 											<textarea cols='20' rows='4' name='message' id='postInput' placeholder='Type Your Message Here'></textarea>
 											<input class='button' type='submit' value='Reply' />
 										</form>";
 									
+									//delete the post
+									if($posterID == $_SESSION['uID'] || $moderator){
+										echo "<a class='groupActionLink' href='php/functions.php?deletePost=true&gID=$gID&pID=$pID'>Delete Post</a>";
+									}
+									
+									//edit the post	
+									echo "<a href='' id='$pID' class ='edit-post groupActionLink'> Edit Post </a>
+										<form class='edit-form' name='editPost' method='POST' action='php/functions.php?editPost=true&gID=$gID&pID=$pID' >
+											<textarea cols='20' rows='4' name='editPost' id='postInput'>$content</textarea>
+											<input class='button' type='submit' value='Accept' />
+										</form>";
 								echo "</div>";
-							
-							
 							//display replies
 							echo  "</div>";
 						}

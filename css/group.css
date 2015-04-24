@@ -9,10 +9,18 @@ body{
 }
 
 
+.groupName{
+	position:relative;
+	width:100%;
+	height:100%;
+	float:center;
+	color:white;
+	background: #2980b9;
+}
 
 /*Wrapper that surrounds the input field and the button for submitting a post*/
 #postWrapper {
-    position: absolute;
+    position: relative;
     height: 10%;
     width: 100%;
 }
@@ -45,10 +53,11 @@ body{
 }
 
 
+
+
 /*Wrapper where the posts will be contained in.*/
 .postContent { /*below postWrapper, contained in center column*/
-    float:top; /*if postMessage (or anything else above this) moves up or down vertically, the div for postFeed will move up or down with it.*/
-    position: absolute;
+    position: relative;
     top: 12%;
     height: 88%;
 	width:100%;
@@ -74,7 +83,7 @@ body{
     font-size:50%;
 }
 
-.postContent .subPost .reply-form{
+.reply-form{
 	display:none;
 }
 
@@ -87,7 +96,37 @@ body{
 	margin-right:5px;
 }
 
+.edit-form{
+	display:none;
+}
 
+.edit-form .button{
+	position:relative;
+	float:right;
+	width: 11%;/*width=11%*/
+	height: 30px;/*height=111%*/
+	margin-top:10px;
+	margin-right:5px;
+}
+
+.editName-form {
+	display:none;
+	position:relative;
+	float:right;
+	margin-top:-10px;
+	margin-right:5px;
+}
+
+.editName-form .button{
+	position:relative;
+}
+
+.groupActionLink{
+	background:#27ae60;
+	font-size:x-small;
+	color:white;
+	margin-right:5px;
+}
 
 /*The container where the conversation's messages will be put in*/
 #conversationFeed { /*within groupConversationWrapper*/
