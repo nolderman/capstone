@@ -169,24 +169,47 @@ function CreateGroup($connection){
 }
 //--------------------------------------------------POST MESSAGE TO GROUP---------------------------------------------------------------------//
 if(isset($_GET['postMessage']) && isset($_POST["postMessage"]) && isset($_POST["message"])){ //if the user clicks the submit button on the groupPage
-	PostMessageToGroup($connection);
+	PostMessageToGroup($connection, $_POST["message"], $_GET['gID']);
 }
-function PostMessageToGroup($connection){
+function PostMessageToGroup($connection, $message, $gID){
 	$dateTime = new DateTime(null, new DateTimeZone('America/Los_Angeles'));
 	$dateTime = $dateTime->format('Y-m-d H:i:s'); //set the dateTime format and put it back in the variable
-	
-	$message = $_POST["message"]; //get the message that was posted 
-	
+
+	$message = addslashes($message);
+
 	//Insert the message with the user who posted, group posted to, dateTime posted, and the message itself.
 	$uID = $_SESSION["uID"];
-	$gID = $_GET["gID"];
 	if(!empty($message)){//only post if not empty
-		$sql = "INSERT INTO post (uID, gID, date_time, content, edited) VALUES ('$uID', '$gID', '$dateTime', '$message', '0')";
+		$sql = "INSERT INTO post (pID, uID, gID, date_time, content, edited) VALUES ('','$uID', '$gID', '$dateTime', '$message', '0')";
 		$result = $connection->query($sql);
 	}
+	$pID =  mysqli_insert_id($connection); //get the id of the last inserted record
+	
+	if(!isset($_GET['replyToPost'])){ //if we came from posting a regular message go back to the group page now
+		header("Location: ../group.php?gID=$gID"); //go back to the group page
+	}else
+		return $pID;
+}
+
+//--------------------------------------------------REPLY TO POST------------------------------------------------------------------------//
+if(isset($_GET['replyToPost'])){
+	postReply($connection);
+}
+
+function postReply($connection){
+	
+	$gID = $_GET["gID"];
+	$pID = PostMessageToGroup($connection, $_POST["message"], $gID);//make a new post with the message and groupID and get the pID of the new reply back
+	$parentID = $_GET['pID']; //take the pID that we are replying to
+	echo $pID;
+	
+	$sql = "INSERT INTO reply (pID, parent) VALUES ('$pID' ,'$parentID')";//set a new reply for the parent post
+	$result = $connection->query($sql);
 	
 	header("Location: ../group.php?gID=$gID"); //go back to the group page
+	
 }
+
 
 //--------------------------------------------------DELETE GROUP-------------------------------------------------------------------------//
 
@@ -299,8 +322,6 @@ function AddContact($connection){
 	//insert uID, contacts uID, and the current dateTime
 	$contactID = $_GET["uID"]; //the user id of the contact
 	$uID = $_SESSION["uID"];//the user's ID
-	echo $uID;
-	echo $contactID;
 
 	$sql = "INSERT INTO contacts (uID, contact) VALUES ('$uID', '$contactID')"; //put the contact in the database
 	$result = $connection->query($sql);
@@ -314,8 +335,6 @@ function RemoveContact($connection){
 	//insert uID, contacts uID, and the current dateTime
 	$contactID = $_GET["uID"]; //the user id of the contact
 	$uID = $_SESSION["uID"];//the user's ID
-	echo $uID;
-	echo $contactID;
 
 	$sql = "DELETE FROM contacts WHERE uID='$uID' AND contact='$contactID'"; //Remove the contact in the database
 	$result = $connection->query($sql);

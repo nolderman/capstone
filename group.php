@@ -19,8 +19,17 @@
 		<link href="css/tags.css" rel="stylesheet" type="text/css"> <!-- CSS file for tags -->
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script type="text/javascript" src="javascript/bootstrap.js"></script> 
-		<script type="text/javascript" src="javascript/typeahead.js"></script>  	
+		<script type="text/javascript" src="javascript/typeahead.js"></script>  
+		<script type="text/javascript" language ="javascript">
+			$(function(){
+				$('.reply-post').on('click', function(e){
+					e.preventDefault();
+					$(this).next('.reply-form').show();
+				});
+			});
+		</script>
 		<script type="text/javascript" language="javascript"> 
+		
 			function toggleDiv(divid){ //Function for toggling a chat window up and down
 				if(document.getElementById(divid).style.display == 'none'){
 					document.getElementById(divid).style.display = 'block';
@@ -100,7 +109,7 @@
 				<?php 
 					echo "<form name='postMessage' method='POST' action='php/functions.php?postMessage=true&gID=$gID'>";
 					echo "<textarea cols='50' rows='4' name='message' id='postInput' placeholder='Type Your Message Here'></textarea>";     
-					echo "<input type='submit' name='postMessage' value='Post Message' class='button' id='postButton'>";				
+					echo "<input type='submit' name='postMessage' value='Post' class='button' id='postButton'>";				
 					echo "</form>";
 				?>
 				</div>
@@ -127,10 +136,16 @@
 									if($posterID == $_SESSION['uID'] || $moderator){
 										echo "<a href='php/functions.php?deletePost=true&gID=$gID&pID=$pID'>Delete Post</a>";
 									}
+									echo "<a href='' id='$pID' class ='reply-post'> Reply </a>
+										<form class='reply-form' method='POST' action='php/functions.php?replyToPost=true&gID=$gID&pID=$pID' >
+											<textarea cols='20' rows='4' name='message' id='postInput' placeholder='Type Your Message Here'></textarea>
+											<input class='button' type='submit' value='Reply' />
+										</form>";
+									
 								echo "</div>";
 							
 							
-							
+							//display replies
 							echo  "</div>";
 						}
 									
