@@ -214,10 +214,10 @@ if(isset($_GET["deletePost"])){
 	deletePost($connection);
 }
 function deletePost($connection){
-	$uID = $_GET["uID"];
+	$pID = $_GET["pID"];
 	$gID = $_GET["gID"];
-	$date_time = $_GET["date_time"];
-	$sql = "DELETE FROM post WHERE uID=$uID AND gID=$gID AND date_time='$date_time'";//make sure to put quotes around date_time
+	
+	$sql = "DELETE FROM post WHERE pID=$pID";//make sure to put quotes around date_time
 	$result = $connection->query($sql);
 	
 	header("Location: ../group.php?gID=$gID");

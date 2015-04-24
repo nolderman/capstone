@@ -108,7 +108,7 @@
 				<!--Posted Messages-->
 				<div class="postContent">
 					<?php		
-						$sql = "SELECT uID, gID, f_name, date_time, content FROM post NATURAL JOIN user WHERE gID = '$gID' ORDER BY date_time"; 
+						$sql = "SELECT pID,uID, gID, f_name, date_time, content FROM post NATURAL JOIN user WHERE gID = '$gID' ORDER BY date_time"; 
 						$result = $connection->query($sql);//get all of the messages
 						
 						//print out the messages in an unordered list on the page
@@ -123,8 +123,9 @@
 							
 								echo "<div class='subPost'>";
 									echo $row['f_name']." ".$row['date_time'];
+									$pID= $row['pID'];
 									if($posterID == $_SESSION['uID'] || $moderator){
-										echo "<a href='php/functions.php?deletePost=true&uID=$posterID&gID=$gID&date_time=$date_time'>Delete Post</a>";
+										echo "<a href='php/functions.php?deletePost=true&gID=$gID&pID=$pID'>Delete Post</a>";
 									}
 								echo "</div>";
 							
