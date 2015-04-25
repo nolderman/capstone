@@ -1,4 +1,4 @@
-    html{
+html{
     height: 100%;
 }
 
@@ -23,6 +23,7 @@ body{
     position: relative;
     height: 10%;
     width: 100%;
+	
 }
 
 /*Text input field for the post*/
@@ -52,15 +53,13 @@ body{
     right: 0px;
 }
 
-
-
-
 /*Wrapper where the posts will be contained in.*/
 .postContent { /*below postWrapper, contained in center column*/
     position: relative;
-    top: 12%;
-    height: 88%;
+    top: 2%;
+    height: 75%;
 	width:100%;
+	overflow-y:scroll;
 }
 
 /*CSS for actual posts within the postContent*/

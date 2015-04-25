@@ -86,16 +86,13 @@
 		</script>	
 	</head>
 
-
 	<body>
 		<?php 
 			include 'php/banner.php';
 			require_once 'php/groupTags.php';
 			if($moderator){
 				echo "<a class='button' href='php/functions.php?deleteGroup=true&gID=$gID'>Delete Group </a>";
-			}
-			
-			
+			}	
 		?>
 
 		<!-- wrapper for all divs within the main body of the page. -->
@@ -123,14 +120,17 @@
 				<!--Form to post a message-->
 				<div id="postWrapper">
 				<?php 
-					echo "<div class='groupName' >$g_name
-							<a href='' id='$gID' class ='editName groupActionLink'> Edit Group Name </a>
-							<form class='editName-form' name='editName' method='POST' action='php/functions.php?editName=true&gID=$gID' >
-								<input name='editName' value='$g_name'  />
-								<input class='button' type='submit' value='Change Name' />
-							</form>	
-						</div>";
-					
+				
+					echo "<div class='groupName' >$g_name";
+					if($moderator){
+						echo	"<a href='' id='$gID' class ='editName groupActionLink'> Edit Group Name </a>
+								<form class='editName-form' name='editName' method='POST' action='php/functions.php?editName=true&gID=$gID' >
+									<input name='editName' value='$g_name'  />
+									<input class='button' type='submit' value='Change Name' />
+								</form>";	
+						}
+						echo "</div>";
+				
 					echo "<form name='postMessage' method='POST' action='php/functions.php?postMessage=true&gID=$gID'>;
 								<textarea cols='50' rows='4' name='message' id='postInput' placeholder='Type Your Message Here'></textarea>;     
 								<input type='submit' name='postMessage' value='Post' class='button' id='postButton'>;				
@@ -165,17 +165,19 @@
 											<input class='button' type='submit' value='Reply' />
 										</form>";
 									
-									//delete the post
+									//delete the post link if the users' post or a moderator
 									if($posterID == $_SESSION['uID'] || $moderator){
 										echo "<a class='groupActionLink' href='php/functions.php?deletePost=true&gID=$gID&pID=$pID'>Delete Post</a>";
 									}
 									
-									//edit the post	
+									//edit the post	if users' post
+									if($posterID == $_SESSION['uID']){
 									echo "<a href='' id='$pID' class ='edit-post groupActionLink'> Edit Post </a>
 										<form class='edit-form' name='editPost' method='POST' action='php/functions.php?editPost=true&gID=$gID&pID=$pID' >
 											<textarea cols='20' rows='4' name='editPost' id='postInput'>$content</textarea>
 											<input class='button' type='submit' value='Accept' />
 										</form>";
+									}
 								echo "</div>";
 							//display replies
 							echo  "</div>";
