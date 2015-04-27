@@ -35,9 +35,9 @@ if(!$ownsPage){
 if(!$ownsPage){
 	echo "<div id='profileButtonsWrapper'>";
 		if(!$blockedUser){
+			echo $profile;
 			echo "<a href='php/functions.php?createConversation=true&uID=$profile' class='button profileButton hvr-fade-blue'>Message</a>";
 		}
-
 		if(!$contact){
 			echo "<a href='php/functions.php?uID=$profile&contact=$contact' class='button profileButton hvr-fade-green'>Add Contact</a>";
 		}
