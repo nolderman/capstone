@@ -27,7 +27,7 @@ $groupInfo = $result->fetch_array(MYSQLI_ASSOC);
 
 //get the members of the group
 $memberQuery = "SELECT uID, f_name, l_name, joined
-				FROM (($groupQuery) subquery0 NATURAL JOIN members)";
+				FROM (($groupQuery) subquery0 NATURAL JOIN members NATURAL JOIN user)";
 $result = $connection->query($memberQuery);
 $members = $result->fetch_array(MYSQLI_ASSOC);
 
@@ -40,7 +40,6 @@ if(isset($members["uID"])){
 else{
 	$isMember = false;
 	$moderator = false;
-	
 }
 
 $g_name = $groupInfo["g_name"];

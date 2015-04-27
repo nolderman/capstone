@@ -31,7 +31,7 @@
 
 			<!-- Left column -->
 			<div class="sidebar" id="groupSideBar">
-				<?php participantSidebar($connection, $cID); ?>
+				<?php participantSidebar($connection, $cID, $user); ?>
 			</div>
 
 			<!-- center column -->

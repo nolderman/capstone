@@ -103,6 +103,7 @@ function conversationSidebar($connection, $user, $profile){
 
 	echo "<div class='sidebarContent'>";
 		if ($result = $connection->query($sql)) {
+
 		    //if there are no results
 		    if ($result->num_rows == 0) {
 		        echo "There are no conversations to display";
@@ -127,9 +128,9 @@ function conversationSidebar($connection, $user, $profile){
 			                }
 			                
 			                $allNames = subStr($allNames, 2); //take out the leading comma
-			                echo "<div class='sidebarLink convLink hvr-fade-green'>" . $allNames . "</div>";
+			                echo "<div class='sidebarLink convLink hvr-fade-green'>".$allNames."</div>";
 			            } else {
-			                echo "<div class='convLink hvr-fade-green'>" . $convos["c_name"] . "</div>";
+			                echo "<div class='convLink hvr-fade-green'>".$convos["c_name"]."</div>";
 			            }
 		            echo "</a></br>";
 		        }
@@ -143,7 +144,7 @@ function conversationSidebar($connection, $user, $profile){
 //Parameters:
 //$connection - the connection to the database
 //$cID - the ID number of the conversation
-function participantSidebar($connection, $cID){
+function participantSidebar($connection, $cID, $user){
 	echo "<div class='sidebarHeader'>Participants</div>";
 
 	//query for the names and IDs of participants
@@ -156,8 +157,11 @@ function participantSidebar($connection, $cID){
 			//write out each participant's name to the sidebar
 			while($participants = $result->fetch_array(MYSQLI_ASSOC)){
 				echo "<a href = 'profile.php?uID=".$participants["uID"]."'>";
-				echo "<div class='sidebarLink profileLink hvr-fade-green'>".$participants["f_name"]." ".$participants["l_name"]."</div>";
-				echo "</a></br>";		
+				echo "<div class='sidebarLink profileLink hvr-fade-green'>".$participants["f_name"]." ".$participants["l_name"];
+				if($participants["uID"] == $user){ 
+					echo "<a href='php/functions.php?removeUserFromConvo=true&cID=$cID'> X </a>";
+				}
+				echo "</div></a></br>";		
 			}	
 		}
 		else{

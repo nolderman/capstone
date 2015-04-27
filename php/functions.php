@@ -98,6 +98,33 @@ function PostMessage($connection)
     header("Location: ../conversation.php?cID=$cID"); //go back to the group page
 }
 
+//--------------------------------------------------DELETE USER FROM CONVERSATION-------------------------------------------------------------------------//
+if (isset($_GET["removeUserFromConvo"])) {
+    removeUserFromConvo($connection);
+}
+
+function removeUserFromConvo($connection){
+    $uID = $_SESSION["uID"];
+    $cID = $_GET["cID"];
+    
+    //delete them out of the participates table
+    $sql = "DELETE FROM participates 
+            WHERE uID = $uID AND cID = $cID";
+    $result = $connection->query($sql);
+
+    //delete any unread messages
+    $messages = "SELECT mID
+                FROM message
+                WHERE uID = $uID AND cID = $cID";
+
+    $sql = "DELETE FROM messageNotRead
+            WHERE mID IN $messages AND uID = $uID";
+    $result = $connection->query($sql);
+    //var_dump($result);
+    header("Location: ../profile.php");
+}
+
+
 //---------------------------------------------------TURN CONVERSATION INTO A GROUP-----------------------------------------------------------//
 if (isset($_GET["toGroup"])) {
     conversationToGroup($connection);
@@ -123,11 +150,7 @@ function conversationToGroup($connection)
     //Make the group own the conversation
     $sql = "INSERT INTO g_owns (gID,cID,o_participation) VALUES ('$gID', '$cID', '0')";
     $result = $connection->query($sql);
-    echo $gID;
-    echo"<br>";
-    var_dump($cID);
-    echo"<br>";
-    var_dump($result);
+
     //get all of the participants so we can move them into members
     $sql    = "SELECT * FROM participates WHERE cID=$cID";
     $result = $connection->query($sql);
@@ -148,7 +171,7 @@ function conversationToGroup($connection)
     $moveResult = $connection->query($moveToPost);
     }
     **/
-    //header("Location: ../group.php?gID=$gID");
+    header("Location: ../group.php?gID=$gID");
 }
 
 
