@@ -78,10 +78,10 @@ function CreateConversation($connection)
 //--------------------------------------------------SEND MESSAGE IN CONVERSATION--------------------------------------------------------------------------//
 //if the user clicks the submit button on the page
 if (isset($_GET['sendMessage']) && isset($_POST["sendMessage"]) && isset($_POST["message"])) {
-    PostMessage($connection);
+    sendMessage($connection);
 }
 
-function PostMessage($connection)
+function sendMessage($connection)
 {
     $dateTime = new DateTime(null, new DateTimeZone('America/Los_Angeles'));
     $dateTime = $dateTime->format('Y-m-d H:i:s'); //set the dateTime format and put it back in the variable
@@ -112,15 +112,34 @@ function removeUserFromConvo($connection){
             WHERE uID = $uID AND cID = $cID";
     $result = $connection->query($sql);
 
-    //delete any unread messages
-    $messages = "SELECT mID
-                FROM message
-                WHERE uID = $uID AND cID = $cID";
-
-    $sql = "DELETE FROM messageNotRead
-            WHERE mID IN $messages AND uID = $uID";
+    //check if there are any other participants of the conversation
+    $sql = "SELECT *
+            FROM participates
+            WHERE cID = $cID";
     $result = $connection->query($sql);
-    //var_dump($result);
+
+    //if there aren't any other participants, delete the conversation and all it's details from the database
+    if($result->num_rows == 0){
+        $sql = "DELETE FROM conversation
+                WHERE cID = $cID";
+        $result = $connection->query($sql);
+
+        //and delete all messages (this should delete unread messages as well)
+        $sql = "DELETE FROM message
+                WHERE cID = $cID";
+        $result = $connection->query($sql);
+    }
+    //otherwise just delete unread messages from this user in this conversation 
+    else { 
+        $messages = "SELECT mID
+                    FROM message
+                    WHERE uID = $uID AND cID = $cID";
+
+        $sql = "DELETE FROM messageNotRead
+                WHERE mID IN $messages AND uID = $uID";
+        $result = $connection->query($sql);
+    }
+    
     header("Location: ../profile.php");
 }
 
