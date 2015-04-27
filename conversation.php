@@ -1,8 +1,9 @@
 <?php 
-	require_once 'php/sessionStatus.php';
 	require_once 'php/connect.php';
-	require_once 'php/getConvoInfo.php';
+	require_once 'php/sessionStatus.php';
 	require_once 'php/functions.php';
+	require_once 'php/sidebars.php';
+	require_once 'php/getConvoInfo.php';
 ?>
 <!DOCTYPE html> 
 <HTML5>
@@ -30,7 +31,7 @@
 
 			<!-- Left column -->
 			<div class="sidebar" id="groupSideBar">
-				<?php include 'php/participantsSidebar.php';?>
+				<?php participantSidebar($connection, $cID); ?>
 			</div>
 
 			<!-- center column -->
@@ -53,7 +54,7 @@
 
 			<!--Left column. Generates the links to conversations the person is a part of-->
 			<div class= "sidebar" id="convSidebar">
-				<?php include 'php/convSidebar.php';?>
+				<?php conversationSidebar($connection, $user, null); ?>
 			</div>
 		</div>
 

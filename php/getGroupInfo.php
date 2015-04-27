@@ -1,42 +1,54 @@
 <?php
+//this file sets up the variables the group page will need
+//variables set:
+//$user - the user's ID
+//$gID - the group's ID
+//$groupInfo - an array of associative arrays with the needed information for this group
+//$members - an array of associative arrays with the needed information for the members of this group
+//$isMember - boolean for whether or not the user is a member of the group
+//$date_joined - date the user joined the group (if they are a member)
+//$moderator - boolean for whether or not the user is a moderator
+//$g_name - name of the group
 
 //if no group is selected, redirect to profile page
 if(!isset($_GET["gID"])){
-	header('Location: ../profile.php');
+	header('Location: profile.php');
 }
 
+$user = $_SESSION["uID"];
 $gID = $_GET["gID"];
-$uID = $_SESSION["uID"];
 
 //get the info for this group that will be needed
 $groupQuery = "SELECT gID, g_name, icon, visible
-		FROM (groups)
-		WHERE (gID= '$gID')";
+				FROM (groups)
+				WHERE (gID = '$gID')";
 $result = $connection->query($groupQuery);
 $groupInfo = $result->fetch_array(MYSQLI_ASSOC);
 
 //get the members of the group
-$memberQuery = "SELECT uID, joined
-		FROM (($groupQuery) subquery0 NATURAL JOIN members)";
+$memberQuery = "SELECT uID, f_name, l_name, joined
+				FROM (($groupQuery) subquery0 NATURAL JOIN members)";
 $result = $connection->query($memberQuery);
-$memberIDs = $result->fetch_array(MYSQLI_ASSOC);
+$members = $result->fetch_array(MYSQLI_ASSOC);
 
 
-if(isset($memberIDs['uID'])){
+if(isset($members["uID"])){
 	$isMember = true;
-	$date_joined = $memberIDs['joined'];
-}else{
+	$moderator = groupModCheck($connection, $user, $gID);//check if the current user is a moderator of the group
+	$date_joined = $memberIDs["joined"];
+}
+else{
 	$isMember = false;
+	$moderator = false;
+	
 }
 
-//information for later use
-$moderator = groupModCheck($connection, $uID, $gID);//check if the current user is a moderator of the group
-$g_name = $groupInfo['g_name'];
-$visible = $groupInfo['visible'];
+$g_name = $groupInfo["g_name"];
+$visible = $groupInfo['visible'] == 1;//get whether or not the group is visible to the public
 
 //if they aren't a member, and the group is set to be invisible, redirect them away from the page
-if(!isset($memberIDs["$uID"]) && $groupInfo["visible"] == 0){
-	header('Location: ../profile.php');
+if(!$isMember && !$visible){
+	header('Location: profile.php');
 }
 
 ?>
