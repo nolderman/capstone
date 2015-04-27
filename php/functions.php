@@ -5,7 +5,6 @@ require_once 'sessionStatus.php';
 //Strips the input to reduce hacking 
 function test_input($data)
 {
-    
     $data = trim($data); //strip unnecessary chars
     $data = htmlspecialchars($data); //convert special characters to HTML entities
     $data = stripslashes($data); //remove backslashes
@@ -354,11 +353,10 @@ function saveGroupSettings($connection){
 	$iconFile = $_POST['fileToUpload'];
 	$visibility = $_POST['visibility'];
 	echo $visibility;
-	echo $iconFile;
 	echo $gID;
-	$sql = "UPDATE groups SET visibility=$visibility WHERE gID=$gID";//put the icon file in later
+	$sql = "UPDATE groups SET visible=$visibility WHERE gID=$gID";//put the icon file in later
 	$result = $connection->query($sql);
-	header("Location: ../group.php?gID=$gID");
+	//header("Location: ../group.php?gID=$gID");
 }
 
 //------------------------------------------------TAG GROUP------------------------------------------//
