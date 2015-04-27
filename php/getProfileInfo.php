@@ -1,5 +1,4 @@
 <?php
-
 $user = $_SESSION["uID"];//will need user's uID no matter what
 
 //set whether or not this is the user's profile page or not, and get the profile's uID

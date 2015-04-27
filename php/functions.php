@@ -45,24 +45,24 @@ if(isset($_GET['createConversation'])){//only save a contact if the user put som
 	CreateConversation($connection);
 }
 function CreateConversation($connection){
-$user = $_SESSION["uID"];
-$otherUser = $_GET["uID"];
+	$user = $_SESSION["uID"];
+	$otherUser = $_GET["uID"];
 
-$sql = "INSERT INTO conversation (cID,c_name) 
-		VALUES ('0', '')";
-$connection->query($sql);
+	$sql = "INSERT INTO conversation (cID,c_name) 
+			VALUES ('0', '')";
+	$connection->query($sql);
 
-$cID =  mysqli_insert_id($connection); //get the id of the last inserted record
+	$cID =  mysqli_insert_id($connection); //get the id of the last inserted record
 
-$sql = "INSERT INTO participates (uID,cID) 
-		VALUES('$user','$cID')";
-$connection->query($sql);
+	$sql = "INSERT INTO participates (uID,cID) 
+			VALUES('$user','$cID')";
+	$connection->query($sql);
 
-$sql = "INSERT INTO participates (uID,cID) 
-		VALUES('$otherUser','$cID')";
-$connection->query($sql);
+	$sql = "INSERT INTO participates (uID,cID) 
+			VALUES('$otherUser','$cID')";
+	$connection->query($sql);
 
-header("Location: ../conversation.php?cID=$cID");
+	header("Location: ../conversation.php?cID=$cID");
 }
 //--------------------------------------------------SEND MESSAGE IN CONVERSATION--------------------------------------------------------------------------//
 //if the user clicks the submit button on the page
@@ -355,7 +355,7 @@ function UnBlockUser($connection){
 }
 
 //--------------------------------------------------TAG USER------------------------------------------------------------------------------//
-if(isset($_GET['tagUser']) && isset($_POST["tagName"])){
+if(isset($_GET['tagUser']) && isset($_POST["tagName"]) && $_POST["tagName"] != ""){
 	CreateTag($connection);
 }
 
