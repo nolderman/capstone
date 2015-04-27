@@ -29,8 +29,10 @@ if(isset($memberIDs['uID'])){
 	$isMember = false;
 }
 
+//information for later use
 $moderator = groupModCheck($connection, $uID, $gID);//check if the current user is a moderator of the group
 $g_name = $groupInfo['g_name'];
+$visible = $groupInfo['visible'];
 
 //if they aren't a member, and the group is set to be invisible, redirect them away from the page
 if(!isset($memberIDs["$uID"]) && $groupInfo["visible"] == 0){

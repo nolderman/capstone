@@ -5,8 +5,14 @@ $basename = substr(strtolower(basename($_SERVER['PHP_SELF'])), 0, strlen(basenam
 
 if ($basename != 'index') { //if you are not on the index page, aka on profile, group, or conversation pages..
     echo "<div class = 'banner'> ";
-    if ($basename == 'group') { //if we are searching on the group page we want to add this user to the group
+	
+    if ($basename == 'group') { //if we are on the group page searching on the group page we want to add this user to the group
         $gID = $_GET["gID"];
+		 
+		if($moderator){ //only allow changing info if a moderator
+			echo "<a href='groupSettings.php?gID=$gID' class ='button'> Settings </a>";
+		}
+		
         echo "<form name='searchBar' class='content' id='searchbar' method= 'POST' action='php/functions.php?addUserToGroup=true&gID=$gID'> ";
     } else {
         echo "<form name='searchBar' class='content' id='searchbar' method= 'POST' action='profile.php'> ";
