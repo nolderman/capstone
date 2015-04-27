@@ -50,7 +50,7 @@
 			<!-- Column wrapper for group information and notifications -->
 			<div class="sidebar" id="groupSidebar">
 				<!--form to create a group - NOTE: THIS ONLY EXISTS FOR TESTING-->
-				<div class="maximizeAddWrapper" id="createGroupMini" href:"javascript:;" onmousedown="toggleDiv('createGroupWrapper'); toggleDiv('createGroupMini');"></div>
+				<div class="maximizeAddWrapper" id="createGroupMini" href:"javascript:;" onmousedown="toggleDiv('createGroupWrapper'); toggleDiv('createGroupMini');></div>
 				<div class="sidebarAddWrapper" id="createGroupWrapper"  style="display:none">
 					<form name="createGroup" class="createGroup"  id="createGroup" method= "POST" action="php/createGroup.php">  
 						<input type="text" name = "groupName" id="groupName" class="input groupName" placeholder="Group Name"/>	

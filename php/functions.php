@@ -206,6 +206,20 @@ function PostMessageToGroup($connection, $message, $gID)
     }
     $pID = mysqli_insert_id($connection); //get the id of the last inserted record
     
+	/*
+	$getMembers = "SELECT uID 
+					FROM members 
+					WHERE gID = $gID";
+	$result = $connection->query($getMembers);
+	
+		//insert into the unread table for every member
+	while($members = $result->fetch_array(MYSQLI_ASSOC)){
+		$uID = $members['uID'];
+		$sql = "INSERT INTO postNotRead (uID,pID) VALUES ($uID, $pID)";
+		$insertUnread = $connection->query($sql);
+	}
+	*/
+	
     if (!isset($_GET['replyToPost'])) { //if we came from posting a regular message go back to the group page now
         header("Location: ../group.php?gID=$gID"); //go back to the group page
     } else
@@ -333,6 +347,38 @@ function removeUserFromGroup($connection)
     $sql    = "DELETE FROM members WHERE uID=$uID AND gID=$gID";
     $result = $connection->query($sql);
     header("Location: ../group.php?gID=$gID");
+}
+
+//-----------------------------------------------BLOCK USER FROM GROUP------------------------------//
+if(isset($_GET['blockUserFromGroup'])){
+	blockUserFromGroup($connection);
+}
+
+function blockUserFromGroup($connection){
+	
+	$blockedUID = $_POST["hiddenUID"];
+	$gID = $_GET['gID'];
+	$sql = "INSERT INTO g_blocks (gID,uID) VALUES ($gID, $blockedUID)";
+	$connection->query($sql);
+	
+	header("Location: ../groupSettings.php?gID=$gID");
+}
+
+//------------------------------------------------SAVE GROUP SETTINGS--------------------------------//
+if(isset($_GET['saveGroupSettings'])){
+	saveGroupSettings($connection);
+}
+
+function saveGroupSettings($connection){
+	$gID = $_GET['gID'];
+	$iconFile = $_POST['fileToUpload'];
+	$visibility = $_POST['visibility'];
+	echo $visibility;
+	echo $iconFile;
+	echo $gID;
+	$sql = "UPDATE groups SET visibility=$visibility WHERE gID=$gID";//put the icon file in later
+	$result = $connection->query($sql);
+	header("Location: ../group.php?gID=$gID");
 }
 
 //------------------------------------------------TAG GROUP------------------------------------------//
