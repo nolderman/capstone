@@ -12,7 +12,7 @@ function test_input($data)
 }
 
 //---------------------------------------------------SEARCH--------------------------------------------------------------------------------//
-if (isset($_GET['searchInput'])) {
+if (isset($_GET["searchInput"])) {
     Search($connection);
 }
 
@@ -78,7 +78,13 @@ function CreateConversation($connection)
 //--------------------------------------------------SEND MESSAGE IN CONVERSATION--------------------------------------------------------------------------//
 //if the user clicks the submit button on the page
 if (isset($_GET['sendMessage']) && isset($_POST["sendMessage"]) && isset($_POST["message"])) {
-    sendMessage($connection);
+    
+    if($_POST["message"] != ""){
+        sendMessage($connection);
+    }
+
+    $cID = $_GET["cID"];
+    header("Location: ../conversation.php?cID=$cID"); //go back to the conversation page
 }
 
 function sendMessage($connection)
@@ -89,13 +95,29 @@ function sendMessage($connection)
     $message = $_POST["message"]; //get the message that was posted 
     $uID     = $_SESSION["uID"];
     $cID     = $_GET["cID"];
-    
+
     //insert the message into the database
-    $sql    = "INSERT INTO message (uID, cID, date_time, content) 
-			VALUES ('$uID', '$cID', '$dateTime', '$message')";
-    $result = $connection->query($sql);
+    $sql     = "INSERT INTO message(mID,uID,cID,date_time,content) 
+                VALUES('0','$uID','$cID','$dateTime','$message')";
+
+    $result  = $connection->query($sql);
+    $mID     = mysqli_insert_id($connection); //get the message ID just inserted
+
+    //insert into the database every other user hasn't read it yet
+    $sql     = "SELECT uID
+                FROM participates
+                WHERE cID = $cID AND uID <> $uID";
+    if($result  = $connection->query($sql)){
+        $otherUsers = $result->fetch_array(MYSQLI_ASSOC);
+
+        foreach($otherUsers as $otherUser) {
+            $sql = "INSERT INTO messageNotRead (uID,mID)
+                    VALUES ($otherUser,$mID)";
+            $result  = $connection->query($sql);
+        }
+    }
+
     
-    header("Location: ../conversation.php?cID=$cID"); //go back to the group page
 }
 
 //--------------------------------------------------DELETE USER FROM CONVERSATION-------------------------------------------------------------------------//
@@ -206,7 +228,7 @@ function CreateGroup($connection)
     $dateTime = $dateTime->format('Y-m-d H:i:s');
     
     $groupName = $_POST["groupName"];
-    $groupName = htmlspecialchars($groupName);
+    $groupName = addslashes($groupName);
     
     //make a new group
     if (!empty($groupName)) { //make sure the user input a name for the group
@@ -219,7 +241,7 @@ function CreateGroup($connection)
         $uID = $_SESSION["uID"]; //get the creator's uID
         $gID = mysqli_insert_id($connection); //get the id of the last inserted record (in this case it is the group ID)
         
-        $insertMember = "INSERT INTO members (uID,gID,moderator) VALUES ('$uID','$gID','1')"; //set the creator to a moderator
+        $insertMember = "INSERT INTO members (uID,gID,moderator,joined) VALUES ('$uID','$gID','1','$dateTime')"; //set the creator to a moderator
         $insertMember = $connection->query($insertMember);
         
         header("Location: ../group.php?gID=$gID");
