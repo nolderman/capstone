@@ -5,7 +5,6 @@ require_once 'sessionStatus.php';
 //Strips the input to reduce hacking 
 function test_input($data)
 {
-    
     $data = trim($data); //strip unnecessary chars
     $data = htmlspecialchars($data); //convert special characters to HTML entities
     $data = stripslashes($data); //remove backslashes
@@ -16,14 +15,16 @@ function test_input($data)
 if (isset($_GET['searchInput'])) {
     Search($connection);
 }
+
 function Search($connection)
-{
-    
+{   
     $jsonArray = array(); //the json array we will be passing back
     
     $searchInput = $_GET["searchInput"];
     
-    $sql    = "SELECT uID,f_name, l_name FROM user WHERE f_name LIKE '%$searchInput%' OR l_name LIKE '%$searchInput%'";
+    $sql = "SELECT uID,f_name, l_name 
+            FROM user 
+            WHERE f_name LIKE '%$searchInput%' OR l_name LIKE '%$searchInput%'";
     $result = $connection->query($sql);
     
     while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
@@ -43,31 +44,37 @@ function Search($connection)
     echo $jsonArray;
     return $jsonArray;
 }
+
 //--------------------------------------------------CREATE CONVERSATION-------------------------------------------------------------------------------//
-if (isset($_GET['createConversation'])) { //only save a contact if the user put something in the submit box
+if (isset($_GET["createConversation"])) { //only save a contact if the user put something in the submit box
     CreateConversation($connection);
 }
+
 function CreateConversation($connection)
 {
+    $dateTime = new DateTime(null, new DateTimeZone('America/Los_Angeles'));
+    $dateTime = $dateTime->format('Y-m-d H:i:s'); //set the dateTime format and put it back in the variable
+
     $user      = $_SESSION["uID"];
     $otherUser = $_GET["uID"];
     
     $sql = "INSERT INTO conversation (cID,c_name) 
-		VALUES ('0', '')";
+	       VALUES ('0', '')";
     $connection->query($sql);
     
     $cID = mysqli_insert_id($connection); //get the id of the last inserted record
     
-    $sql = "INSERT INTO participates (uID,cID) 
-		VALUES('$user','$cID')";
+    $sql = "INSERT INTO participates (uID,cID,joined) 
+	       VALUES('$user','$cID','$dateTime')";
     $connection->query($sql);
     
-    $sql = "INSERT INTO participates (uID,cID) 
-		VALUES('$otherUser','$cID')";
+    $sql = "INSERT INTO participates (uID,cID,joined) 
+	       VALUES('$otherUser','$cID','$dateTime')";
     $connection->query($sql);
-    
+
     header("Location: ../conversation.php?cID=$cID");
 }
+
 //--------------------------------------------------SEND MESSAGE IN CONVERSATION--------------------------------------------------------------------------//
 //if the user clicks the submit button on the page
 if (isset($_GET['sendMessage']) && isset($_POST["sendMessage"]) && isset($_POST["message"])) {
@@ -95,6 +102,7 @@ function PostMessage($connection)
 if (isset($_GET["toGroup"])) {
     conversationToGroup($connection);
 }
+
 function conversationToGroup($connection)
 {
     $c_name = $_POST["toGroup"];
@@ -111,11 +119,15 @@ function conversationToGroup($connection)
     //Put the user in the member table with this group
     $insertMember = "INSERT INTO members (uID,gID,moderator) VALUES ('$uID','$gID','1')"; //set the creator to a moderator
     $insertMember = $connection->query($insertMember);
-    
+
     //Make the group own the conversation
-    $sql    = "INSERTE INTO g_owns (gID,cID) VALUES ($gID, $cID)";
+    $sql = "INSERT INTO g_owns (gID,cID,o_participation) VALUES ('$gID', '$cID', '0')";
     $result = $connection->query($sql);
-    
+    echo $gID;
+    echo"<br>";
+    var_dump($cID);
+    echo"<br>";
+    var_dump($result);
     //get all of the participants so we can move them into members
     $sql    = "SELECT * FROM participates WHERE cID=$cID";
     $result = $connection->query($sql);
@@ -125,7 +137,7 @@ function conversationToGroup($connection)
         $toMemberResult = $connection->query($moveToMember);
     }
     
-    /**get all of the messages and put them in the post NOT NEEDED BUT IT WAS COOL FOR ABOUT 30 SECONDS SO I AM LEAVING IT
+    /**get all of the messages and put them in the post NOT NEEDED BUT IT WAS COOL FOR ABOUT 30 SECONDS SO I AM LEAVING IT <--- lol alright (nate)
     $sql = "SELECT * FROM message WHERE cID=$cID";
     $result = $connection->query($sql);
     while($row = $result->fetch_array(MYSQLI_ASSOC)){
@@ -136,7 +148,7 @@ function conversationToGroup($connection)
     $moveResult = $connection->query($moveToPost);
     }
     **/
-    header("Location: ../group.php?gID=$gID");
+    //header("Location: ../group.php?gID=$gID");
 }
 
 
@@ -171,13 +183,14 @@ function CreateGroup($connection)
         header("Location: ../group.php?gID=$gID");
     }
     
-    header("Location: ../profile.php");
-    
+    header("Location: ../profile.php");    
 }
+
 //--------------------------------------------------POST MESSAGE TO GROUP---------------------------------------------------------------------//
 if (isset($_GET['postMessage']) && isset($_POST["postMessage"]) && isset($_POST["message"])) { //if the user clicks the submit button on the groupPage
     PostMessageToGroup($connection, $_POST["message"], $_GET['gID']);
 }
+
 function PostMessageToGroup($connection, $message, $gID)
 {
     $dateTime = new DateTime(null, new DateTimeZone('America/Los_Angeles'));
@@ -222,6 +235,7 @@ function postReply($connection)
 if (isset($_GET['editPost'])) {
     editPost($connection, $_POST['editPost']);
 }
+
 function editPost($connection, $newContent)
 {
     $pID = $_GET['pID'];
@@ -238,6 +252,7 @@ function editPost($connection, $newContent)
 if (isset($_GET['editName'])) {
     editGroupName($connection, $_POST['editName']);
 }
+
 function editGroupName($connection, $newName)
 {
     $gID = $_GET['gID'];
@@ -250,10 +265,10 @@ function editGroupName($connection, $newName)
 
 
 //--------------------------------------------------DELETE GROUP-------------------------------------------------------------------------//
-
 if (isset($_GET['deleteGroup'])) {
     deleteGroup($connection);
 }
+
 function deleteGroup($connection)
 {
     $uID = $_SESSION["uID"];
@@ -271,10 +286,12 @@ function deleteGroup($connection)
     
     header("Location: ../profile.php");
 }
+
 //--------------------------------------------------DELETE POST FROM GROUP-------------------------------------------------------------------------//
 if (isset($_GET["deletePost"])) {
     deletePost($connection);
 }
+
 function deletePost($connection)
 {
     $pID = $_GET["pID"];
@@ -285,10 +302,12 @@ function deletePost($connection)
     
     header("Location: ../group.php?gID=$gID");
 }
+
 //--------------------------------------------------ADD USER TO GROUP-------------------------------------------------------------------------//
 if (isset($_GET["addUserToGroup"])) {
     addUserToGroup($connection);
 }
+
 function addUserToGroup($connection)
 {
     
@@ -306,6 +325,7 @@ function addUserToGroup($connection)
 if (isset($_GET["removeUserFromGroup"])) {
     removeUserFromGroup($connection);
 }
+
 function removeUserFromGroup($connection)
 {
     $uID    = $_GET["uID"];
@@ -340,6 +360,7 @@ function tagGroup($connection, $gID)
 if (isset($_GET['deleteGroupTag'])) {
     deleteGroupTag($connection, $_GET['gID'], $_GET['tag_name']);
 }
+
 function deleteGroupTag($connection, $gID, $tag_name)
 {
     echo $gID;
@@ -368,6 +389,7 @@ if (isset($_GET['contact'])) {
         RemoveContact($connection);
     }
 }
+
 function AddContact($connection)
 {
     $dateTime  = new DateTime(null, new DateTimeZone('America/Los_Angeles'));
@@ -405,6 +427,7 @@ if (isset($_GET['blocked'])) {
         UnBlockUser($connection);
     }
 }
+
 function BlockUser($connection)
 {
     
@@ -417,6 +440,7 @@ function BlockUser($connection)
     header('Location: ../profile.php');
     
 }
+
 function UnBlockUser($connection)
 {
     
@@ -520,6 +544,7 @@ function SignUp($connection)
 if (isset($_GET['userLogin']) && isset($_POST["submit"])) { //if the Login button on index.html is set then do the logging in
     LogIn($connection);
 }
+
 function LogIn($connection)
 {
     $emailname = "email"; //Constants used for cookie setting
@@ -547,6 +572,7 @@ function LogIn($connection)
 if (isset($_GET['userLogout'])) {
     userLogout();
 }
+
 function userLogout()
 {
     // remove all session variables

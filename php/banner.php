@@ -21,7 +21,7 @@ if ($basename != 'index') { //if you are not on the index page, aka on profile, 
 			<img id='connaktSymbol' src='images/banner/center_banner.png'></img>";
     
     // You are on a different person's profile page, or on group or conversation page, add the "Your Profile" button.
-    if ($basename == 'profile' && !$ownsPage || $basename != 'profile') {
+    if ($basename == 'profile' && !is_null($otherUser) || $basename != 'profile') {
         echo "<a class = 'hvr-fade-green button content' id='yourProfileButton' href='profile.php'>Your Profile</a>";
     }
     

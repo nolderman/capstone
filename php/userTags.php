@@ -1,6 +1,6 @@
 <?php
 
-if ($ownsPage || ($profileInfo["tags_visible"] && !$blockedUser)) {
+if (is_null($otherUser) || ($profileInfo["tags_visible"] && !$blockedUser)) {
     $sql = "SELECT tag_name 
 			FROM (user NATURAL JOIN u_tagged) 
 			WHERE (uID = '$profile')"; //put the contact in the database
@@ -18,9 +18,10 @@ if ($ownsPage || ($profileInfo["tags_visible"] && !$blockedUser)) {
     else {
         echo "No tags!";
     }
+    
     //if this is their profile page, show tags
     //This now appears within the tag wrapper after all the other tags. It will only appear if you are on your own page. 	
-    if ($ownsPage) {
+    if (is_null($otherUser)) {
         //form for user to tag themself
         echo "<form name='tagUser' class='tagUser' id='tagUser' method= 'POST' action='php/functions.php?tagUser=true'>";
         echo "<input type='text' name='tagName' id='tagNameInput' class='input tagName' placeholder='Add a tag'/>";

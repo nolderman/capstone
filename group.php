@@ -2,8 +2,8 @@
 	require_once 'php/connect.php';
 	require_once 'php/sessionStatus.php';
 	require_once 'php/functions.php';
+	require_once 'php/sidebars.php';
 	require_once 'php/getGroupInfo.php';
-	
 ?>
 <!DOCTYPE html>
 <HTML5>
@@ -60,7 +60,7 @@
 				</div>
 
 				<!--generates the links to groups the person is a part of-->
-				<?php include 'php/membersSidebar.php';?>
+				<?php membersSidebar($user,$moderator,$members); ?>
 
 			</div>
 
@@ -88,9 +88,10 @@
 
 				<!--Posted Messages-->
 				<div class="postContent">
-					<?php	require_once 'php/displayPosts.php'; ?>
+					<?php require_once 'php/displayPosts.php'; ?>
 				</div>
 			</div>
+
 			<!--Right column. List of conversations the group contains-->
 			<div class="sidebar" id="convSidebar">
 				<div class="sidebarContent">

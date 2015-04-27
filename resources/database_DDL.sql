@@ -33,6 +33,44 @@ CREATE TABLE IF NOT EXISTS u_blocks (
 );
 
 
+#--------------------------------------------------------------------------------------------
+#----------------------------------------Conversation----------------------------------------
+#--------------------------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS conversation(
+	cID INT NOT NULL AUTO_INCREMENT UNIQUE,
+	c_name VarChar(255),
+	PRIMARY KEY(cID)
+);
+
+CREATE TABLE IF NOT EXISTS participates (
+	uID INT NOT NULL,
+	cID INT NOT NULL,
+	joined DATETIME NOT NULL,
+	PRIMARY KEY(uID,cID),
+	FOREIGN KEY (uID) REFERENCES user(uID) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (cID) REFERENCES conversation(cID) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS message (
+	mID INT NOT NULL AUTO_INCREMENT,
+	uID INT NOT NULL,
+	cID INT NOT NULL,
+	date_time DATETIME NOT NULL,
+	content VarChar(255),
+	PRIMARY KEY(mID),
+	FOREIGN KEY (uID) REFERENCES user(uID) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (cID) REFERENCES conversation(cID) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS messageNotRead(
+	uID INT NOT NULL,
+	mID INT NOT NULL,
+	PRIMARY KEY (uID,mID),
+	FOREIGN KEY (uID) REFERENCES user(uID) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (mID) REFERENCES message(mID) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+
 #-------------------------------------------------------------------------------------
 #----------------------------------------Group----------------------------------------
 #-------------------------------------------------------------------------------------
@@ -94,48 +132,12 @@ CREATE TABLE IF NOT EXISTS g_blocks (
 CREATE TABLE IF NOT EXISTS g_owns (
 	gID INT NOT NULL,
 	cID INT NOT NULL,
-	o_participation TINYINT(1) NOT NULL, #whether or not non-members can participate in the conversation
+	o_participation TINYINT(1) NOT NULL, #whether or not the public can participate in the group
 	PRIMARY KEY (gID,cID),
 	FOREIGN KEY (gID) REFERENCES groups(gID) ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (cID) REFERENCES conversation(cID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-#--------------------------------------------------------------------------------------------
-#----------------------------------------Conversation----------------------------------------
-#--------------------------------------------------------------------------------------------
-CREATE TABLE IF NOT EXISTS conversation(
-	cID INT NOT NULL AUTO_INCREMENT UNIQUE,
-	c_name VarChar(255),
-	PRIMARY KEY(cID)
-);
-
-CREATE TABLE IF NOT EXISTS participates (
-	uID INT NOT NULL,
-	cID INT NOT NULL,
-	joined DATETIME NOT NULL,
-	PRIMARY KEY(uID,cID),
-	FOREIGN KEY (uID) REFERENCES user(uID) ON DELETE CASCADE ON UPDATE CASCADE,
-	FOREIGN KEY (cID) REFERENCES conversation(cID) ON DELETE CASCADE ON UPDATE CASCADE
-);
-
-CREATE TABLE IF NOT EXISTS message (
-	mID INT NOT NULL AUTO_INCREMENT,
-	uID INT NOT NULL,
-	cID INT NOT NULL,
-	date_time DATETIME NOT NULL,
-	content VarChar(255),
-	PRIMARY KEY(mID),
-	FOREIGN KEY (uID) REFERENCES user(uID) ON DELETE CASCADE ON UPDATE CASCADE,
-	FOREIGN KEY (cID) REFERENCES conversation(cID) ON DELETE CASCADE ON UPDATE CASCADE
-);
-
-CREATE TABLE IF NOT EXISTS messageNotRead(
-	uID INT NOT NULL,
-	mID INT NOT NULL,
-	PRIMARY KEY (uID,mID),
-	FOREIGN KEY (uID) REFERENCES user(uID) ON DELETE CASCADE ON UPDATE CASCADE,
-	FOREIGN KEY (mID) REFERENCES message(mID) ON DELETE CASCADE ON UPDATE CASCADE
-);
 
 #-----------------------------------------------------------------------------------
 #----------------------------------------Tag----------------------------------------

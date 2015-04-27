@@ -1,6 +1,7 @@
 <?php 
 	require_once 'php/connect.php';
 	require_once 'php/sessionStatus.php';
+	require_once 'php/sidebars.php';
 	require_once 'php/getProfileInfo.php';
 ?>
 <!DOCTYPE html>
@@ -81,9 +82,7 @@
 				</div>
 
 				<!--generates the links to groups the person is a part of-->
-				<?php 
-					include 'php/groupSidebar.php';
-				?>
+				<?php groupSidebar($connection, $user, $otherUser); ?>
 			</div>
 
 			<!-- Column for profile information -->
@@ -107,7 +106,7 @@
 
 			<!--Conversation links and notifications -->
 			<div class="sidebar" id="convSidebar">
-				<?php include 'php/convSidebar.php';?>
+				<?php conversationSidebar($connection, $user, $otherUser); ?>
 			</div>
 
 	    </div>
