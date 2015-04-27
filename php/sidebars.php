@@ -39,7 +39,7 @@ function groupSidebar($connection, $user, $profile){
 				//write out each group name to the sidebar and make them links
 				while($groups = $result->fetch_assoc()){
 					echo "<a href = 'group.php?gID=".$groups['gID']."'>";
-					echo "<div class='sidebarLink groupLink hvr-fade-blue'>".$groups['g_name']."</div>";
+					echo "<div class='sidebarLink groupLink hvr-fade-blue'>".$groups['g_name']."<div class='notificationBubble'>3</div> </div>";
 					echo "</a></br>";
 				}
 			}
@@ -129,7 +129,7 @@ function conversationSidebar($connection, $user, $profile){
 			                $allNames = subStr($allNames, 2); //take out the leading comma
 			                echo "<div class='sidebarLink convLink hvr-fade-green'>" . $allNames . "</div>";
 			            } else {
-			                echo "<div class='convLink hvr-fade-green'>" . $convos["c_name"] . "</div>";
+			                echo "<div class='convLink hvr-fade-green'>" . $convos["c_name"] . "<div class=notificationBubble> '1' </div></div>";
 			            }
 		            echo "</a></br>";
 		        }

@@ -3,7 +3,7 @@
 if (is_null($otherUser) || ($profileInfo["tags_visible"] && !$blockedUser)) {
     $sql = "SELECT tag_name 
 			FROM (user NATURAL JOIN u_tagged) 
-			WHERE (uID = '$profile')"; //put the contact in the database
+			WHERE (uID = '$otherUser')"; //put the contact in the database
     
     echo "<div id='tagsWrapper'>";
     

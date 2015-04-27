@@ -15,6 +15,7 @@
 		<link href="css/banner.css" rel="stylesheet" type="text/css"> <!-- CSS file for banner for main pages -->
 		<link href="css/searchBar.css" rel="stylesheet" type="text/css"> <!-- CSS file for banner for main pages -->
 		<link href="css/tags.css" rel="stylesheet" type="text/css"> <!-- CSS file for tags -->
+		<link href="css/notifications.css" rel="stylesheet" type="text/css"> <!-- CSS file for tags -->
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script type="text/javascript" src="javascript/bootstrap.js"></script> 
 		<script type="text/javascript" src="javascript/typeahead.js"></script>  	
@@ -90,7 +91,7 @@
 				<h1>
 					<?php 
 						//display profile's name
-						echo $profileInfo["f_name"]." ".$profileInfo["l_name"];
+						echo "<div class='profileName'>".$profileInfo["f_name"]." ".$profileInfo["l_name"]."</div>";
 					?>
 				</h1>
 
