@@ -17,12 +17,16 @@ $cID = $_GET["cID"];
 
 //query database for the conversation info that will be needed
 //first, check if this user is a participant of the conversation, and direct away if they aren't
-$sql = "SELECT uID
+$sql = "SELECT uID, joined
 		FROM (participates)
 		WHERE (uID = '$user' AND cID = '$cID')";
 $result = $connection->query($sql);
 if($result->num_rows == 0){
 	header('Location: profile.php');
+}
+else{
+	$participant = $result->fetch_array(MYSQLI_ASSOC);
+	$joined = $participant["joined"];
 }
 
 //second, get the convo name
@@ -36,7 +40,7 @@ $convoName = $getName["c_name"];
 //then, get the messages
 $sql = "SELECT *
 		FROM (message)
-		WHERE (cID = '$cID')";
+		WHERE (cID = '$cID' AND date_time > '$joined')";
 $result = $connection->query($sql);
 $messages = $result->fetch_array(MYSQLI_ASSOC);
 
