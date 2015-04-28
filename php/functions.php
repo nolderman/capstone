@@ -10,7 +10,7 @@ function test_input($data)
     return $data;
 }
 
-//---------------------------------------------------SEARCH--------------------------------------------------------------------------------//
+//---------------------------------------------------USER SEARCH--------------------------------------------------------------------------------//
 if (isset($_GET["searchInput"])) {
     Search($connection);
 }
@@ -23,7 +23,7 @@ function Search($connection)
     
     $sql = "SELECT uID,f_name, l_name 
             FROM user 
-            WHERE f_name LIKE '%$searchInput%' OR l_name LIKE '%$searchInput%'";
+            WHERE f_name LIKE '%$searchInput%' OR l_name LIKE '%$searchInput%' AND profile_visible=1";
     $result = $connection->query($sql);
     
     while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
@@ -37,6 +37,33 @@ function Search($connection)
             } else {
                 $array[] = $row["f_name"]; //just put the first name in the search
             }
+        }
+    }
+    $jsonArray = json_encode($jsonArray);
+    echo $jsonArray;
+    return $jsonArray;
+}
+//----------------------------------------------------GROUP SEARCH-------------------------------------------------------------------------------------//
+if (isset($_GET["groupSearchInput"])) {
+    groupSearch($connection);
+}
+
+function groupSearch($connection)
+{   
+    $jsonArray = array(); //the json array we will be passing back
+    $searchInput = $_GET["groupSearchInput"];
+    
+    $sql = "SELECT gID, g_name 
+            FROM groups 
+            WHERE g_name LIKE '%$searchInput%' AND visible=1";
+    $result = $connection->query($sql);
+    
+    while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+        $array = array(); //array we are going to give back to the search
+        if (isset($row["g_name"])) {
+			   $array["g_name"] = $row["g_name"];
+               $array["gID"] = $row["gID"];
+               array_push($jsonArray, $array); //put the array of f_name and uID on the jsonArray as a single json
         }
     }
     $jsonArray = json_encode($jsonArray);
@@ -445,9 +472,28 @@ function addUserToGroup($connection)
     $dateTime = new DateTime(null, new DateTimeZone('America/Los_Angeles'));
     $dateTime = $dateTime->format('Y-m-d H:i:s'); //set the dateTime format and put it back in the variable
     $newUser  = $_POST["hiddenUID"];
-    $gID      = $_GET["gID"];
+    $gID      = $_GET["gID"];	
     
-    $sql    = "INSERT INTO members (uID,gID,moderator,joined) VALUES ($newUser, $gID, '0', $dateTime)"; //insert the user without mod permissions
+    $sql    = "INSERT INTO members (uID,gID,moderator,joined) VALUES ('$newUser', '$gID', '0', '$dateTime')"; //insert the user without mod permissions
+    $result = $connection->query($sql);
+	header("Location: ../group.php?gID=$gID");
+}
+
+/*--------------------------------------------------ADD PUBLIC GROUP TO YOUR GROUP LIST------------------------------------------------------------//
+*Adds the current user to the group that they searched for in the group search bar
+*@param $connection
+*@param $gID the group we passed in from the search bar
+*@param $uID the current session uID
+*/
+if(isset($_GET['addGroup'])){
+	addGroup($connection, $_POST['hiddenGID'], $_SESSION['uID']);
+}
+function addGroup($connection, $gID, $uID){
+	$dateTime = new DateTime(null, new DateTimeZone('America/Los_Angeles'));
+    $dateTime = $dateTime->format('Y-m-d H:i:s'); //set the dateTime format and put it back in the variable
+	echo $gID;
+	echo $uID;
+	$sql    = "INSERT INTO members (uID,gID,moderator,joined) VALUES ('$uID', '$gID', '0', '$dateTime')"; //insert the user without mod permissions
     $result = $connection->query($sql);
     header("Location: ../group.php?gID=$gID");
 }
