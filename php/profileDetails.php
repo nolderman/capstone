@@ -34,7 +34,7 @@ if(!is_null($otherUser)){
 
 	echo "<div id='profileButtonsWrapper'>";
 		if(!$blockedUser ){
-			echo "<a href='php/functions.php?createConversation=true&uID=$otherUser' class='button profileButton hvr-fade-blue'>New Message</a>";
+			echo "<a href='php/functions.php?createConversation=true&uID=$otherUser' class='button profileButton hvr-fade-blue'>New Conversation</a>";
 		}
 		if(!$contact){
 			echo "<a href='php/functions.php?uID=$otherUser&contact=$contact' class='button profileButton hvr-fade-green'>Add Contact</a>";
