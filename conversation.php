@@ -50,19 +50,20 @@
 			<!-- Left column -->
 			<div class="sidebar" id="groupSideBar">	
 				<!--form to add a participant-->
-				<?php
-					// <div class="maximizeAddWrapper" id="addParticipantMini" href="javascript:;" onmousedown="toggleDiv('addParticipantWrapper'); toggleDiv('addParticipantMini');"></div>
-					// <div class="sidebarAddWrapper" id="addParticipantWrapper"  style="display:none">
-					// 	<form name="searchBar" class="content"  id="searchbar" method= "POST" action="php/functions.php?addParticipant=true&cID=">  
-					// 		<input type="text" name = "typeaheadToAdd" id="searchbarInput" class="typeaheadToAdd" placeholder="User's Name"/>	
-					// 		<input type='hidden' name='hiddenUID' id='userIDToAdd' value='' />
-					// 		<input type="submit" name="addParticipant" value="Add Participant" class="hvr-fade-green button">
-					// 	</form>
-					// 	<div class="minimizeAddWrapper" href="javascript:;" onmousedown="toggleDiv('addParticipantWrapper'); toggleDiv('addParticipantMini');" >-</div>
-					// </div>
+				
+					<div class="maximizeAddWrapper" id="addParticipantMini" href="javascript:;" onmousedown="toggleDiv('addParticipantWrapper'); toggleDiv('addParticipantMini');"></div>
+					<div class="sidebarAddWrapper" id="addParticipantWrapper"  style="display:none">
+						<?php
+						echo "<form name='searchBar' class='content'  id='searchbar' method= 'POST' action='php/functions.php?addParticipant=true&cID=$cID'>";  
+						?>
+							<input type="text" name = "typeaheadToAdd" id="searchbarInput" class="typeaheadToAdd" placeholder="User's Name"/>	
+							<input type='hidden' name='hiddenUID' id='userIDToAdd' value='' />
+							<input type="submit" name="addParticipant" value="Add Participant" class="hvr-fade-green button">
+						</form>
+						<div class="minimizeAddWrapper" href="javascript:;" onmousedown="toggleDiv('addParticipantWrapper'); toggleDiv('addParticipantMini');" >-</div>
+					</div>
 
-				 participantSidebar($connection, $cID, $user); 
-				 ?>
+				 <?php participantSidebar($connection, $cID, $user); ?>
 			</div>
 
 			<!-- center column -->

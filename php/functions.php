@@ -188,10 +188,12 @@ function addParticipant($connection)
     $dateTime = $dateTime->format('Y-m-d H:i:s'); //set the dateTime format and put it back in the variable
     $newUser  = $_POST["hiddenUID"];
     $cID      = $_GET["cID"];
-    var_dump($cID);
+
     $sql      = "INSERT INTO participates (uID,cID,joined) 
-                 VALUES ($newUser, $cID, $dateTime)"; //insert the user without mod permissions
-    $result = $connection->query($sql);
+                 VALUES ('$newUser', '$cID', '$dateTime')";
+
+    $result   = $connection->query($sql);
+    
     header("Location: ../conversation.php?cID=$cID");
 }
 
