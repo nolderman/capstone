@@ -50,19 +50,27 @@ function groupSidebar($connection, $user, $profile){
 
 //Generates a sidebar listing the members of a given group
 //Parameters: 
+//$connection - the connection to the database
 //$user - the user's ID number
+//$gID - the group's ID number
 //$moderator - boolean of whether or not the user is a moderator of the group
 //$members - the list of members in the group (list of associative arrays)
-function membersSidebar($user, $moderator, $members){
+function membersSidebar($connection, $user, $gID, $moderator, $members){
 	echo "<div class='sidebarHeader'>Members</div>";
 
 	echo "<div class='sidebarContent'>";
+		//get the members of the group
+		$memberQuery = "SELECT uID, gID, f_name, l_name
+						FROM (members NATURAL JOIN user)
+						WHERE gID = $gID";
+		$result = $connection->query($memberQuery);
+
 		//loop though each member of the group
-		foreach($members as $member){
-			$memberID = $member["uID"];
+		while($members = $result->fetch_array(MYSQLI_ASSOC)){
+			$memberID = $members["uID"];
 
 			echo "<a href = 'profile.php?uID=$memberID'>";
-				echo "<div class='sidebarLink profileLink hvr-fade-green'>".$member["f_name"]." ".$member["l_name"];
+				echo "<div class='sidebarLink profileLink hvr-fade-green'>".$members["f_name"]." ".$members["l_name"];
 				//if you are the user or mod, you can delete this user
 				if($memberID == $user || $moderator){ 
 					echo "<a href='php/functions.php?removeUserFromGroup=true&uID=$memberID&gID=$gID'> ~Remove~ </a>";
@@ -103,6 +111,7 @@ function conversationSidebar($connection, $user, $profile){
 
 	echo "<div class='sidebarContent'>";
 		if ($result = $connection->query($sql)) {
+
 		    //if there are no results
 		    if ($result->num_rows == 0) {
 		        echo "There are no conversations to display";
@@ -127,9 +136,11 @@ function conversationSidebar($connection, $user, $profile){
 			                }
 			                
 			                $allNames = subStr($allNames, 2); //take out the leading comma
-			                echo "<div class='sidebarLink convLink hvr-fade-green'>" . $allNames . "</div>";
+			                echo "<div class='sidebarLink convLink hvr-fade-green'>".$allNames."</div>";
 			            } else {
-			                echo "<div class='convLink hvr-fade-green'>" . $convos["c_name"] . "<div class=notificationBubble> '1' </div></div>";
+
+			                echo "<div class='convLink hvr-fade-green'>".$convos["c_name"]."<div class=notificationBubble> '1' </div></div>";
+
 			            }
 		            echo "</a></br>";
 		        }
@@ -143,7 +154,7 @@ function conversationSidebar($connection, $user, $profile){
 //Parameters:
 //$connection - the connection to the database
 //$cID - the ID number of the conversation
-function participantSidebar($connection, $cID){
+function participantSidebar($connection, $cID, $user){
 	echo "<div class='sidebarHeader'>Participants</div>";
 
 	//query for the names and IDs of participants
@@ -156,8 +167,11 @@ function participantSidebar($connection, $cID){
 			//write out each participant's name to the sidebar
 			while($participants = $result->fetch_array(MYSQLI_ASSOC)){
 				echo "<a href = 'profile.php?uID=".$participants["uID"]."'>";
-				echo "<div class='sidebarLink profileLink hvr-fade-green'>".$participants["f_name"]." ".$participants["l_name"]."</div>";
-				echo "</a></br>";		
+				echo "<div class='sidebarLink profileLink hvr-fade-green'>".$participants["f_name"]." ".$participants["l_name"];
+				if($participants["uID"] == $user){ 
+					echo "<a href='php/functions.php?removeUserFromConvo=true&cID=$cID'> X </a>";
+				}
+				echo "</div></a></br>";		
 			}	
 		}
 		else{

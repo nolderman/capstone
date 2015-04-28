@@ -15,7 +15,7 @@
 		<link href="css/banner.css" rel="stylesheet" type="text/css"> <!-- CSS file for banner for main pages -->
 		<link href="css/searchBar.css" rel="stylesheet" type="text/css"> <!-- CSS file for banner for main pages -->
 		<link href="css/tags.css" rel="stylesheet" type="text/css"> <!-- CSS file for tags -->
-		<link href="css/notifications.css" rel="stylesheet" type="text/css"> <!-- CSS file for tags -->
+		<link href="css/notifications.css" rel="stylesheet" type="text/css"> <!-- CSS file for notifications -->
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script type="text/javascript" src="javascript/bootstrap.js"></script> 
 		<script type="text/javascript" src="javascript/typeahead.js"></script>  	
@@ -72,7 +72,7 @@
 
 			<!--Group links and notifications -->
 			<div class="sidebar" id="groupSidebar">
-				<!--form to create a group - NOTE: THIS ONLY EXISTS FOR TESTING-->
+				<!--form to create a group-->
 				<div class="maximizeAddWrapper" id="createGroupMini" href="javascript:;" onmousedown="toggleDiv('createGroupWrapper'); toggleDiv('createGroupMini');"></div>
 				<div class="sidebarAddWrapper" id="createGroupWrapper"  style="display:none">
 					<form name="createGroup" class="createGroup"  id="createGroup" method= "POST" action="php/functions.php?createGroup=true">  
@@ -107,6 +107,15 @@
 
 			<!--Conversation links and notifications -->
 			<div class="sidebar" id="convSidebar">
+				<!--form to create a conversation-->
+				<div class="maximizeAddWrapper" id="createConvMini" href="javascript:;" onmousedown="toggleDiv('createConvWrapper'); toggleDiv('createConvMini');"></div>
+				<div class="sidebarAddWrapper" id="createConvWrapper"  style="display:none">
+					<form name="createConversation" class="createConversation"  id="createConversation" method= "POST" action="php/functions.php?createConversation=true">  
+						<input type="text" name = "conversationName" id="conversationName" class="input conversationName" placeholder="Conversation Name"/>	
+						<input type="submit" name="createConversation" value="Create Conversation" class="hvr-fade-green button">
+					</form>
+					<div class="minimizeAddWrapper" href="javascript:;" onmousedown="toggleDiv('createConvWrapper'); toggleDiv('createConvMini');" >-</div>
+				</div>
 				<?php conversationSidebar($connection, $user, $otherUser); ?>
 			</div>
 

@@ -26,21 +26,19 @@ $result = $connection->query($groupQuery);
 $groupInfo = $result->fetch_array(MYSQLI_ASSOC);
 
 //get the members of the group
-$memberQuery = "SELECT uID, f_name, l_name, joined
+$memberQuery = "SELECT uID, joined
 				FROM (($groupQuery) subquery0 NATURAL JOIN members)";
 $result = $connection->query($memberQuery);
 $members = $result->fetch_array(MYSQLI_ASSOC);
 
-
 if(isset($members["uID"])){
 	$isMember = true;
 	$moderator = groupModCheck($connection, $user, $gID);//check if the current user is a moderator of the group
-	$date_joined = $memberIDs["joined"];
+	$date_joined = $members["joined"];
 }
 else{
 	$isMember = false;
 	$moderator = false;
-	
 }
 
 $g_name = $groupInfo["g_name"];

@@ -39,6 +39,7 @@
 		<?php 
 			include 'php/banner.php';
 			require_once 'php/groupTags.php';
+			//markAsRead($connection, $gID, $_SESSION['uID']);//mark all posts from this group as read by the user
 			if($moderator){
 				echo "<a class='button' href='php/functions.php?deleteGroup=true&gID=$gID'>Delete Group </a>";
 			}	
@@ -50,7 +51,7 @@
 			<!-- Column wrapper for group information and notifications -->
 			<div class="sidebar" id="groupSidebar">
 				<!--form to create a group - NOTE: THIS ONLY EXISTS FOR TESTING-->
-				<div class="maximizeAddWrapper" id="createGroupMini" href:"javascript:;" onmousedown="toggleDiv('createGroupWrapper'); toggleDiv('createGroupMini');></div>
+				<div class="maximizeAddWrapper" id="createGroupMini" href:"javascript:;" onmousedown="toggleDiv('createGroupWrapper'); toggleDiv('createGroupMini');"></div>
 				<div class="sidebarAddWrapper" id="createGroupWrapper"  style="display:none">
 					<form name="createGroup" class="createGroup"  id="createGroup" method= "POST" action="php/createGroup.php">  
 						<input type="text" name = "groupName" id="groupName" class="input groupName" placeholder="Group Name"/>	
@@ -60,7 +61,7 @@
 				</div>
 
 				<!--generates the links to groups the person is a part of-->
-				<?php membersSidebar($user,$moderator,$members); ?>
+				<?php membersSidebar($connection,$user,$_GET["gID"],$moderator,$members); ?>
 
 			</div>
 
