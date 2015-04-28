@@ -89,7 +89,7 @@
 
 				<!--Posted Messages-->
 				<div class="postContent">
-					<?php require_once 'php/displayPosts.php'; ?>
+					<?php require_once 'php/displayPosts.php';?>
 				</div>
 			</div>
 

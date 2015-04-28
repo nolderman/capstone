@@ -116,8 +116,6 @@ function sendMessage($connection)
             $result  = $connection->query($sql);
         }
     }
-
-    
 }
 
 //--------------------------------------------------DELETE USER FROM CONVERSATION-------------------------------------------------------------------------//
@@ -388,6 +386,24 @@ function deletePost($connection)
     
     header("Location: ../group.php?gID=$gID");
 }
+
+//------------------------------------------------DELETE REPLY FROM GROUP---------------------------------------------------------------------------//
+if(isset($_GET['deleteReply'])){
+	deleteReply($connection, $_GET['gID'], $_GET['pID']);
+}
+
+function deleteReply($connection, $gID, $pID){
+	$pID = $_GET["pID"];
+    $gID = $_GET["gID"];
+    $sql    = "DELETE FROM post WHERE pID=$pID"; //make sure to put quotes around date_time
+    $result = $connection->query($sql);
+	
+	$sql = "DELETE FROM reply WHERE pID=$pID";
+	$result = $connection ->query($sql);
+	
+	header("Location: ../group.php?gID=$gID");
+}
+
 
 //--------------------------------------------------ADD USER TO GROUP-------------------------------------------------------------------------//
 if (isset($_GET["addUserToGroup"])) {

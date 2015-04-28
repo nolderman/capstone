@@ -120,12 +120,45 @@ body{
 	position:relative;
 }
 
+.reply{
+    display: block;
+    width:75%;
+    margin-left:5px;
+	margin-top:-5px;
+	
+	border-top: 1px solid;
+    height:75px;
+    background: #2980b9;
+    color:#fff;
+	
+	font-size:55%;
+    /*From http://stackoverflow.com/questions/3779534/how-to-disable-text-selection-with-css-or-js  disables highlighting text on double click.*/
+    -moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;
+}
+
+.edit-reply-form {
+	position:relative;
+	display:none;
+	width: 100%;
+	margin-top:-10px;
+	margin-right:5px;
+}
+
+.edit-reply-form .button {
+	position:relative;
+	width:25%;
+	height:75%;
+	margin-left:50%;
+}
+
 .groupActionLink{
 	background:#27ae60;
 	font-size:x-small;
 	color:white;
 	margin-right:5px;
 }
+
+
 
 /*The container where the conversation's messages will be put in*/
 #conversationFeed { /*within groupConversationWrapper*/
