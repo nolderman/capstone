@@ -27,16 +27,19 @@
 	<?php 
 		echo "<a href='group.php?gID=$gID' class='button'> Back To Group </a>";
 		
+		
+			$public="";//this goes into the radio buttons and checks the one from the database
+			$private="";
 			if($visible){
-				$checked = "checked";
+				$public = "checked";
 			}else{
-				$checked = "";
+				$private = "checked";
 			}
 	echo	"<h5> Visibility</h5>
 			<form action='php/functions.php?gID=$gID&saveGroupSettings=true' method='POST'>
-				<input type='radio' name='visibility' value='0' $checked>Private
+				<input type='radio' name='visibility' value='0' $private>Private
 				<br>
-				<input type='radio' name='visibility' value='1' $checked>Public
+				<input type='radio' name='visibility' value='1' $public>Public
 				<br>
 				<h5>Group Icon</h5>
 				<input type='file' name='fileToUpload' id='fileToUpload'> 

@@ -270,7 +270,7 @@ function PostMessageToGroup($connection, $message, $gID)
     }
     $pID = mysqli_insert_id($connection); //get the id of the last inserted record
     
-	/*
+	
 	$getMembers = "SELECT uID 
 					FROM members 
 					WHERE gID = $gID";
@@ -282,14 +282,22 @@ function PostMessageToGroup($connection, $message, $gID)
 		$sql = "INSERT INTO postNotRead (uID,pID) VALUES ($uID, $pID)";
 		$insertUnread = $connection->query($sql);
 	}
-	*/
 	
     if (!isset($_GET['replyToPost'])) { //if we came from posting a regular message go back to the group page now
         header("Location: ../group.php?gID=$gID"); //go back to the group page
     } else
         return $pID;
 }
-
+//---------------------------------------------------MARK POST AS READ------------------------------------------------------------------//
+function markAsRead($connection, $gID, $uID){
+	
+	//selects all group posts in postNotRead for all members of that group
+	$sql = "SELECT * FROM postNotRead NATURAL JOIN members NATURAL JOIN groups WHERE gID=$gID";
+	
+	$sql = "DELETE FROM ($unread) WHERE uID=$uID";
+	$result = $connection->query($sql);
+	
+}
 //--------------------------------------------------REPLY TO POST------------------------------------------------------------------------//
 if (isset($_GET['replyToPost'])) {
     postReply($connection);
@@ -438,11 +446,10 @@ function saveGroupSettings($connection){
 	$iconFile = $_POST['fileToUpload'];
 	$visibility = $_POST['visibility'];
 	echo $visibility;
-	echo $iconFile;
 	echo $gID;
-	$sql = "UPDATE groups SET visibility=$visibility WHERE gID=$gID";//put the icon file in later
+	$sql = "UPDATE groups SET visible=$visibility WHERE gID=$gID";//put the icon file in later
 	$result = $connection->query($sql);
-	header("Location: ../group.php?gID=$gID");
+	//header("Location: ../group.php?gID=$gID");
 }
 
 //------------------------------------------------TAG GROUP------------------------------------------//
