@@ -18,11 +18,14 @@
 		<link href="css/message.css" rel="stylesheet" type="text/css">
 		<link href="css/tags.css" rel="stylesheet" type="text/css"> <!-- CSS file for tags -->
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		
+		<!-- searching javascript codes -->
 		<script type="text/javascript" src="javascript/bootstrap.js"></script> 
 		<script type="text/javascript" src="javascript/typeahead.js"></script>  
 		<script type="text/javascript" src="javascript/search.js" language="javascript"> </script>
 		<script type="text/javascript" src="javascript/searchToAdd.js" language="javascript"> </script>
 		<script type="text/javascript" src="javascript/groupSearch.js" language="javascript"></script>
+
 		<script type="text/javascript" src="javascript/groupFunctions.js" language="javascript"> </script>
 		<script type="text/javascript" language="javascript">		
 			//Function for toggling a chat window up and down
@@ -55,11 +58,14 @@
 				<!--form to create a group - NOTE: THIS ONLY EXISTS FOR TESTING-->
 				<div class="maximizeAddWrapper" id="createGroupMini" href:"javascript:;" onmousedown="toggleDiv('createGroupWrapper'); toggleDiv('createGroupMini');"></div>
 				<div class="sidebarAddWrapper" id="createGroupWrapper"  style="display:none">
+				<?php
+				echo "
 					<form name='searchBar' class='content' id='searchbar' method= 'POST' action='php/functions.php?addUserToGroup=true&gID=$gID'> 
 						<input type='text' name='typeahead' class='typeaheadToAdd' id='searchbarInput' placeholder='Search'/>	
 						<input type='hidden' name='hiddenUID' id='userIDToAdd' value='' />						
 						<input type='submit' name='addContact' value='Go!' class='hvr-fade-green button' id='searchButton' hideFocus='true'> 
-					</form>	
+					</form>	";
+					?>
 					
 					<div class="minimizeAddWrapper" href="javascript:;" onmousedown="toggleDiv('createGroupWrapper'); toggleDiv('createGroupMini');" >-</div>
 				</div>

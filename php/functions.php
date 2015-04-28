@@ -1,7 +1,6 @@
 <?php
 require_once 'connect.php';
 require_once 'sessionStatus.php';
-
 //Strips the input to reduce hacking 
 function test_input($data)
 {
@@ -74,16 +73,44 @@ function groupSearch($connection)
 
 //--------------------------------------------------CREATE CONVERSATION-------------------------------------------------------------------------------//
 if (isset($_GET["createConversation"])) { //only save a contact if the user put something in the submit box
-    CreateConversation($connection);
+    createConversation($connection);
 }
 
-function CreateConversation($connection)
+function createConversation($connection)
 {
+    $user = $_SESSION["uID"];
+    
+    //check if they have a conversation between them already
+    if(isset($_GET["uID"])){
+        $otherUser = $_GET["uID"];
+
+        //get the user's conversations
+        $userConvos = "SELECT cID
+                       FROM user NATURAL JOIN participates
+                       WHERE uID = $user";
+
+        //get the other people user has a conversation with, to make sure that the later query doesn't include it
+        $otherUserConvos = "SELECT cID
+                            FROM (($userConvos) subQuery0) NATURAL JOIN participates
+                            WHERE (uID <> '$user' OR uID <> '$otherUser')";                  
+
+        //get the conversations they have in common (if any)
+        $convosInCommon = "SELECT cID
+                            FROM user NATURAL JOIN participates
+                            WHERE (cID IN '$userConvos' AND cID NOT IN '$otherUserConvos' AND uID = '$otherUser')";
+        $result = $connection->query($convosInCommon);
+
+        //if they don't have any 
+        if($result->num_rows != 0){
+            //////COMPLETE IT HERE
+        }
+
+
+    }
     $dateTime = new DateTime(null, new DateTimeZone('America/Los_Angeles'));
     $dateTime = $dateTime->format('Y-m-d H:i:s'); //set the dateTime format and put it back in the variable
 
-    $user      = $_SESSION["uID"];
-    $otherUser = $_GET["uID"];
+    
     
     $sql = "INSERT INTO conversation (cID,c_name) 
 	       VALUES ('0', '')";
@@ -95,9 +122,12 @@ function CreateConversation($connection)
 	       VALUES('$user','$cID','$dateTime')";
     $connection->query($sql);
     
-    $sql = "INSERT INTO participates (uID,cID,joined) 
-	       VALUES('$otherUser','$cID','$dateTime')";
-    $connection->query($sql);
+    if(isset($_GET["uID"])){
+        $sql = "INSERT INTO participates (uID,cID,joined) 
+                VALUES('$otherUser','$cID','$dateTime')";
+        $connection->query($sql);
+    }
+    
 
     header("Location: ../conversation.php?cID=$cID");
 }
@@ -119,7 +149,7 @@ function sendMessage($connection)
     $dateTime = new DateTime(null, new DateTimeZone('America/Los_Angeles'));
     $dateTime = $dateTime->format('Y-m-d H:i:s'); //set the dateTime format and put it back in the variable
     
-    $message = $_POST["message"]; //get the message that was posted 
+    $message = addslashes($_POST["message"]); //get the message that was posted 
     $uID     = $_SESSION["uID"];
     $cID     = $_GET["cID"];
 
@@ -143,7 +173,28 @@ function sendMessage($connection)
             $result  = $connection->query($sql);
         }
     }
+
 }
+
+
+//--------------------------------------------------ADD USER TO CONVERSATION-------------------------------------------------------------------------//
+if (isset($_GET["addParticipant"])) {
+    addParticipant($connection);
+}
+
+function addParticipant($connection)
+{   
+    $dateTime = new DateTime(null, new DateTimeZone('America/Los_Angeles'));
+    $dateTime = $dateTime->format('Y-m-d H:i:s'); //set the dateTime format and put it back in the variable
+    $newUser  = $_POST["hiddenUID"];
+    $cID      = $_GET["cID"];
+    var_dump($cID);
+    $sql      = "INSERT INTO participates (uID,cID,joined) 
+                 VALUES ($newUser, $cID, $dateTime)"; //insert the user without mod permissions
+    $result = $connection->query($sql);
+    header("Location: ../conversation.php?cID=$cID");
+}
+
 
 //--------------------------------------------------DELETE USER FROM CONVERSATION-------------------------------------------------------------------------//
 if (isset($_GET["removeUserFromConvo"])) {
@@ -440,16 +491,15 @@ if (isset($_GET["addUserToGroup"])) {
 }
 
 function addUserToGroup($connection)
-{
-    
+{   
     $dateTime = new DateTime(null, new DateTimeZone('America/Los_Angeles'));
     $dateTime = $dateTime->format('Y-m-d H:i:s'); //set the dateTime format and put it back in the variable
     $newUser  = $_POST["hiddenUID"];
-    $gID      = $_GET["gID"];
+    $gID      = $_GET["gID"];	
     
-    $sql    = "INSERT INTO members (uID,gID,moderator,joined) VALUES ($newUser, $gID, '0', $dateTime)"; //insert the user without mod permissions
+    $sql    = "INSERT INTO members (uID,gID,moderator,joined) VALUES ('$newUser', '$gID', '0', '$dateTime')"; //insert the user without mod permissions
     $result = $connection->query($sql);
-    header("Location: ../group.php?gID=$gID");
+	header("Location: ../group.php?gID=$gID");
 }
 
 /*--------------------------------------------------ADD PUBLIC GROUP TO YOUR GROUP LIST------------------------------------------------------------//

@@ -17,8 +17,12 @@
 		<link href="css/tags.css" rel="stylesheet" type="text/css"> <!-- CSS file for tags -->
 		<link href="css/notifications.css" rel="stylesheet" type="text/css"> <!-- CSS file for notifications -->
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		
+		<!-- searching javascript codes -->
 		<script type="text/javascript" src="javascript/bootstrap.js"></script> 
-		<script type="text/javascript" src="javascript/typeahead.js"></script>  	
+		<script type="text/javascript" src="javascript/typeahead.js"></script>  
+		<script type="text/javascript" src="javascript/search.js"></script>  		
+		
 		<script src="javascript/expandingWindows.js"></script>
 		<script type="text/javascript" src="javascript/search.js" language="javascript"></script>
 		<script type="text/javascript" src="javascript/groupSearch.js" language="javascript"></script>
@@ -81,14 +85,15 @@
 			<!--Conversation links and notifications -->
 			<div class="sidebar" id="convSidebar">
 				<!--form to create a conversation-->
-				<div class="maximizeAddWrapper" id="createConvMini" href="javascript:;" onmousedown="toggleDiv('createConvWrapper'); toggleDiv('createConvMini');"></div>
+				<a href="php/functions.php?createConversation=true" class="maximizeAddWrapper"></a>
+				<!-- <div class="maximizeAddWrapper" id="createConvMini" href="javascript:;" onmousedown="toggleDiv('createConvWrapper'); toggleDiv('createConvMini');"></div>
 				<div class="sidebarAddWrapper" id="createConvWrapper"  style="display:none">
 					<form name="createConversation" class="createConversation"  id="createConversation" method= "POST" action="php/functions.php?createConversation=true">  
 						<input type="text" name = "conversationName" id="conversationName" class="input conversationName" placeholder="Conversation Name"/>	
 						<input type="submit" name="createConversation" value="Create Conversation" class="hvr-fade-green button">
 					</form>
 					<div class="minimizeAddWrapper" href="javascript:;" onmousedown="toggleDiv('createConvWrapper'); toggleDiv('createConvMini');" >-</div>
-				</div>
+				</div> -->
 				<?php conversationSidebar($connection, $user, $otherUser); ?>
 			</div>
 
