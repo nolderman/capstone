@@ -27,6 +27,10 @@
 .banner .content {
 	top: 36.5%;
 }
+.banner .button{
+	height: 20px;
+	width: 50px;
+}
 .banner .logout{
 		position: absolute;	
 		

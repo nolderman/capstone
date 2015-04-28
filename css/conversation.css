@@ -19,7 +19,7 @@ body{
 #messageFeed { /*within center column*/
     /*Text settings specific to the message feed*/
     text-align: left;
-    font-size: 150%;
+    font-size: 50%; /*size of the text in the message feed*/
     line-height:34px;
     color: white;
     overflow: auto;
@@ -31,14 +31,37 @@ body{
     width: 100%;
     height: 85%;
 }
+/*CSS for wrapper that contains the message sent by the user, and also the PICTURE of the sending user.*/
+.selfMessageWrapper {
+  display:flex;
+}
+
+.image:after{
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+}
+
+.image {
+  width:40px;
+  height: 40px;
+}
+.image img{
+  width: 40px;
+  height: 100%;
+  display: block;
+}
 /*CSS for the messages from the conversation that appear in the message feed*/
 .message {
-    margin-left: 2%;
-    margin-right: 2%;
-    margin-top: 0px;
-    margin-bottom: 25px;
-    color: #34495e;
-    line-height: 100%;
+  color: #34495e;
+  line-height: 100%;
+  top:0px;
+  left:40px;
+  margin-bottom: 5px;
+  max-width: 80%;
 }
 
 /*Wrapper containing the text input area and the "Post Message" button*/

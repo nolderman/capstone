@@ -82,6 +82,12 @@ body{
     font-size:50%;
 }
 
+/*CSS for REPLIES to posts (any reply should also have the .post class associated with it, but with this added on*/
+.postContent .reply{
+    width: 88%;
+    left: 10px; /*slightly indented.*/
+}
+
 .reply-form{
 	display:none;
 }
