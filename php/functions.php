@@ -104,7 +104,7 @@ function createConversation($connection)
     }
     
 
-    //header("Location: ../conversation.php?cID=$cID");
+    header("Location: ../conversation.php?cID=$cID");
 }
 
 //--------------------------------------------------SEND MESSAGE IN CONVERSATION--------------------------------------------------------------------------//
@@ -136,16 +136,16 @@ function sendMessage($connection)
     $mID     = mysqli_insert_id($connection); //get the message ID just inserted
 
     //insert into the database every other user hasn't read it yet
-    $sql     = "SELECT uID
-                FROM participates
-                WHERE cID = $cID AND uID <> $uID";
-    if($result  = $connection->query($sql)){
-        $otherUsers = $result->fetch_array(MYSQLI_ASSOC);
+    $otherUserQuery = "SELECT uID
+                        FROM participates
+                        WHERE cID = '$cID' AND uID <> '$uID'";
 
-        foreach($otherUsers as $otherUser) {
-            $sql = "INSERT INTO messageNotRead (uID,mID)
-                    VALUES ($otherUser,$mID)";
-            $result  = $connection->query($sql);
+    if($otherUserResult = $connection->query($otherUserQuery)){
+        while($otherUser = $otherUserResult->fetch_array(MYSQLI_ASSOC)) {
+            $otherUserID = $otherUser["uID"];
+            $insertUnreadQuery = "INSERT INTO messageNotRead (uID,mID)
+                                    VALUES ('$otherUserID','$mID')";
+            $connection->query($insertUnreadQuery);
         }
     }
 

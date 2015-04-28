@@ -37,4 +37,7 @@ $result = $connection->query($sql);
 $getName = $result->fetch_array(MYSQLI_ASSOC);
 $convoName = $getName["c_name"];
 
+//third, delete the unread data from the database
+
+
 ?>
