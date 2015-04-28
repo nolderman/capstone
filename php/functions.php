@@ -92,17 +92,30 @@ function createConversation($connection)
     //get the ID of the conversation just created
     $cID = mysqli_insert_id($connection); 
     
+    //insert this user as a participant
     $sql = "INSERT INTO participates (uID,cID,joined) 
 	       VALUES('$user','$cID','$dateTime')";
     $connection->query($sql);
+
+    //insert the tuple for unread messages
+    $sql = "INSERT INTO unreadMessages (uID,cID,count) 
+           VALUES('$user','$cID','0')";
+    $connection->query($sql);
+
     
     if(isset($_GET["uID"])){
         $otherUser = $_GET["uID"];
+
+        //insert this otherUser as a participant
         $sql = "INSERT INTO participates (uID,cID,joined) 
                 VALUES('$otherUser','$cID','$dateTime')";
         $connection->query($sql);
+
+        //insert the tuple for unread messages
+        $sql = "INSERT INTO unreadMessages (uID,cID,count) 
+                VALUES('$otherUser','$cID','0')";
+        $connection->query($sql);
     }
-    
 
     header("Location: ../conversation.php?cID=$cID");
 }
@@ -164,10 +177,15 @@ function addParticipant($connection)
     $newUser  = $_POST["hiddenUID"];
     $cID      = $_GET["cID"];
 
+    //insert this new user into participates table
     $sql      = "INSERT INTO participates (uID,cID,joined) 
                  VALUES ('$newUser', '$cID', '$dateTime')";
+    $connection->query($sql);
 
-    $result   = $connection->query($sql);
+    //insert the tuple for unread messages
+    $sql      = "INSERT INTO unreadMessages (uID,cID,count) 
+                 VALUES('$newUser','$cID','0')";
+    $connection->query($sql);
     
     header("Location: ../conversation.php?cID=$cID");
 }
@@ -199,11 +217,13 @@ function removeUserFromConvo($connection){
                 WHERE cID = $cID";
         $result = $connection->query($sql);
 
-        //and delete all messages (this should delete unread messages as well)
-        $sql = "DELETE FROM message
-                WHERE cID = $cID";
-        $result = $connection->query($sql);
+        //this should happen automatically
+        // //and delete all messages (this should delete unread messages as well)
+        // $sql = "DELETE FROM message
+        //         WHERE cID = $cID";
+        // $result = $connection->query($sql);
     }
+
     //otherwise just delete unread messages from this user in this conversation 
     else { 
         $messages = "SELECT mID

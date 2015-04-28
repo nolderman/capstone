@@ -164,19 +164,12 @@ function conversationSidebar($connection, $user, $profile){
 
 			            //fill out how many unread messages there are for this conversation
 			            echo "<div class=notificationBubble>";
-			            	$unreadQuery = "SELECT mID
-			            					FROM participates NATURAL JOIN messageNotRead
+			            	$unreadQuery = "SELECT count
+			            					FROM unreadMessages
 			            					WHERE cID = '$cID' AND uID = '$user'";
 			            	$unreadResult = $connection->query($unreadQuery);
-			            	$counter = 0;
 			            	
-			            	if($result->num_rows != 0){
-								while ($unread = $unreadResult->fetch_array(MYSQLI_ASSOC)) {
-			                    	$counter++;
-			                	}
-			            	}
-			            	
-			                echo $counter;
+			                echo $unreadResult["count"];
 			            echo "</div></div>";
 
 		            echo "</a></br>";
