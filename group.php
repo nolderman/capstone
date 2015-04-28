@@ -39,7 +39,7 @@
 		<?php 
 			include 'php/banner.php';
 			require_once 'php/groupTags.php';
-			//markAsRead($connection, $gID, $_SESSION['uID']);//mark all posts from this group as read by the user
+			markAsRead($connection, $gID, $_SESSION['uID']);//mark all posts from this group as read by the user
 			if($moderator){
 				echo "<a class='button' href='php/functions.php?deleteGroup=true&gID=$gID'>Delete Group </a>";
 			}	
@@ -89,7 +89,7 @@
 
 				<!--Posted Messages-->
 				<div class="postContent">
-					<?php require_once 'php/displayPosts.php'; ?>
+					<?php require_once 'php/displayPosts.php';?>
 				</div>
 			</div>
 

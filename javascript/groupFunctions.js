@@ -21,3 +21,11 @@
 					$(this).next('.editName-form').show();
 				});
 			});
+			
+			//click to edit reply
+			$(function(){
+				$('.edit-reply').on('click', function(e){
+					e.preventDefault();
+					$(this).next('.edit-reply-form').show();
+				});
+			});
