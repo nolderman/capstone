@@ -289,12 +289,14 @@ function PostMessageToGroup($connection, $message, $gID)
 //---------------------------------------------------MARK POST AS READ------------------------------------------------------------------//
 function markAsRead($connection, $gID, $uID){
 	
-	//selects all group posts in postNotRead for all members of that group
+	//get post from this group and delete the posts
 	$sql = "SELECT * FROM postNotRead NATURAL JOIN members NATURAL JOIN groups WHERE gID=$gID";
-	
-	$sql = "DELETE FROM ($unread) WHERE uID=$uID";
 	$result = $connection->query($sql);
-	
+	while($row = $result->fetch_array(MYSQLI_ASSOC)){
+		$pID = $row['pID'];
+		$sql = "DELETE FROM postNotRead WHERE pID=$pID AND uID=$uID";
+		$deletion = $connection->query($sql);
+	}
 }
 //--------------------------------------------------REPLY TO POST------------------------------------------------------------------------//
 if (isset($_GET['replyToPost'])) {
