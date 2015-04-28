@@ -12,13 +12,17 @@
 		<link rel="stylesheet" type="text/css" href="css/conversation.css">
 		<link href="css/buttons.css" rel="stylesheet" media="all">
 		<link href="css/columns.css" rel="stylesheet" type="text/css"> <!-- CSS file for right and left columns -->
-		<link href="css/searchBar.css" rel="stylesheet" type="text/css"> <!-- CSS file for banner for main pages -->
 		<link href="css/banner.css" rel="stylesheet" type="text/css"> <!-- CSS file for right and left columns -->
 		<link href="css/conversation.css" rel="stylesheet" type="text/css"> <!-- CSS file for right and left columns -->
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+		<!-- searching codes -->
 		<script type="text/javascript" src="javascript/bootstrap.js"></script> 
 		<script type="text/javascript" src="javascript/typeahead.js"></script>  
-		<script type="text/javascript" src="javascript/search.js" language="javascript"> </script>
+		<script type="text/javascript" src="javascript/search.js"> </script>
+		<script type="text/javascript" src="javascript/searchToAdd.js"> </script>
+		<link href="css/searchBar.css" rel="stylesheet" type="text/css"> <!-- CSS file for banner for main pages -->
+
 		<script src="javascript/jquery-1.11.2.min.js"></script>
 		<script type="text/javascript" language="javascript"> 
 			function toggleDiv(divid){ //Function for toggling a chat window up and down
@@ -30,35 +34,6 @@
 				}
 		    }
 		</script>	
-		<script>
-		$(document).ready(function() {//start looking for this after we have loaded everything on the page
-			$('.typeahead').typeahead({ //input field of typeahead with value of f_name!
-				name: 'typeahead',
-				displayKey: 'f_name',
-				valueKey: 'f_name',
-				remote: 'php/functions.php?searchInput=%QUERY'
-			})
-			.on('typeahead:opened', onOpened)
-			.on('typeahead:selected', onAutocompleted)
-			.on('typeahead:autocompleted', onSelected);
- 
-			function onOpened($e) {
-				console.log('opened');
-			}
- 
-			function onAutocompleted($e, datum) {
-				console.log('autocompleted');
-				console.log(datum["f_name"]);
-				console.log(datum["uID"]);
-				document.getElementById('userID').value = datum["uID"];
-			}
- 
-			function onSelected($e, datum) {
-				console.log('selected');
-				console.log(datum);
-			}
-		})
-		</script>
 	</head>
 
 	<body>
@@ -75,16 +50,19 @@
 			<!-- Left column -->
 			<div class="sidebar" id="groupSideBar">	
 				<!--form to add a participant-->
-				<div class="maximizeAddWrapper" id="addParticipantMini" href="javascript:;" onmousedown="toggleDiv('addParticipantWrapper'); toggleDiv('addParticipantMini');"></div>
-				<div class="sidebarAddWrapper" id="addParticipantWrapper"  style="display:none">
-					<form name="searchBar" class="content"  id="searchbar" method= "POST" action="php/functions.php?addParticipant=true">  
-						<input type="text" name = "typeahead" id="searchbarInput" class="typeahead" placeholder="User's Name"/>	
-						<input type='hidden' name='hiddenUID' id='userID' value='' />
-						<input type="submit" name="addParticipant" value="Add Participant" class="hvr-fade-green button">
-					</form>
-					<div class="minimizeAddWrapper" href="javascript:;" onmousedown="toggleDiv('addParticipantWrapper'); toggleDiv('addParticipantMini');" >-</div>
-				</div>
-				<?php participantSidebar($connection, $cID, $user); ?>
+				<?php
+					// <div class="maximizeAddWrapper" id="addParticipantMini" href="javascript:;" onmousedown="toggleDiv('addParticipantWrapper'); toggleDiv('addParticipantMini');"></div>
+					// <div class="sidebarAddWrapper" id="addParticipantWrapper"  style="display:none">
+					// 	<form name="searchBar" class="content"  id="searchbar" method= "POST" action="php/functions.php?addParticipant=true&cID=">  
+					// 		<input type="text" name = "typeaheadToAdd" id="searchbarInput" class="typeaheadToAdd" placeholder="User's Name"/>	
+					// 		<input type='hidden' name='hiddenUID' id='userIDToAdd' value='' />
+					// 		<input type="submit" name="addParticipant" value="Add Participant" class="hvr-fade-green button">
+					// 	</form>
+					// 	<div class="minimizeAddWrapper" href="javascript:;" onmousedown="toggleDiv('addParticipantWrapper'); toggleDiv('addParticipantMini');" >-</div>
+					// </div>
+
+				 participantSidebar($connection, $cID, $user); 
+				 ?>
 			</div>
 
 			<!-- center column -->

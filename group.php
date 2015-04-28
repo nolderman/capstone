@@ -18,9 +18,12 @@
 		<link href="css/message.css" rel="stylesheet" type="text/css">
 		<link href="css/tags.css" rel="stylesheet" type="text/css"> <!-- CSS file for tags -->
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		
+		<!-- searching javascript codes -->
 		<script type="text/javascript" src="javascript/bootstrap.js"></script> 
 		<script type="text/javascript" src="javascript/typeahead.js"></script>  
 		<script type="text/javascript" src="javascript/search.js" language="javascript"> </script>
+		
 		<script type="text/javascript" src="javascript/groupFunctions.js" language="javascript"> </script>
 		<script type="text/javascript" language="javascript">		
 			//Function for toggling a chat window up and down
