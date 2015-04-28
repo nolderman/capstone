@@ -1,7 +1,7 @@
 <?php		
 $sql = "SELECT f_name, date_time, content 
 		FROM (message NATURAL JOIN user)
-		WHERE (cID = '$cID')
+		WHERE (cID = '$cID' AND date_time > '$joined')
 		ORDER BY date_time";
 
 $result = $connection->query($sql);//get all of the messages

@@ -4,7 +4,7 @@
 //$user - the user's ID
 //$cID - the conversation's ID
 //$convoName - the name of this conversation (name only exists if the convo is attached to a group)
-//$messages - an array of associative arrays of all the messages for this conversation
+//$joined - date the user joined the conversation
 
 //if no conversation is set, redirect to profile page
 if(!isset($_GET["cID"])){
@@ -36,12 +36,5 @@ $sql = "SELECT c_name
 $result = $connection->query($sql);
 $getName = $result->fetch_array(MYSQLI_ASSOC);
 $convoName = $getName["c_name"];
-
-//then, get the messages
-$sql = "SELECT *
-		FROM (message)
-		WHERE (cID = '$cID' AND date_time > '$joined')";
-$result = $connection->query($sql);
-$messages = $result->fetch_array(MYSQLI_ASSOC);
 
 ?>
