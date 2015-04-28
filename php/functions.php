@@ -92,7 +92,7 @@ function sendMessage($connection)
     $dateTime = new DateTime(null, new DateTimeZone('America/Los_Angeles'));
     $dateTime = $dateTime->format('Y-m-d H:i:s'); //set the dateTime format and put it back in the variable
     
-    $message = $_POST["message"]; //get the message that was posted 
+    $message = addslashes($_POST["message"]); //get the message that was posted 
     $uID     = $_SESSION["uID"];
     $cID     = $_GET["cID"];
 

@@ -167,7 +167,7 @@ function participantSidebar($connection, $cID, $user){
 				echo "<a href = 'profile.php?uID=".$participants["uID"]."'>";
 				echo "<div class='sidebarLink profileLink hvr-fade-green'>".$participants["f_name"]." ".$participants["l_name"];
 				if($participants["uID"] == $user){ 
-					echo "<a href='php/functions.php?removeUserFromConvo=true&cID=$cID'> X </a>";
+					echo "<a href='php/functions.php?removeUserFromConvo=true&cID=$cID'>        X </a>";
 				}
 				echo "</div></a></br>";		
 			}	
