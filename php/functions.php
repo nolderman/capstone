@@ -31,7 +31,6 @@ function Search($connection)
         if (isset($row["f_name"])) {
             if (isset($row["l_name"])) { //if the first name and last name were found put them both together in the search
                 $array["f_name"] = $row["f_name"] . " " . $row["l_name"];
-                ;
                 $array["uID"] = $row["uID"];
                 array_push($jsonArray, $array); //put the array of f_name and uID on the jsonArray as a single json
             } else {
@@ -365,10 +364,14 @@ function PostMessageToGroup($connection, $message, $gID)
 function markAsRead($connection, $gID, $uID){
 	
 	//get post from this group and delete the posts
-	$sql = "SELECT * FROM postNotRead NATURAL JOIN members NATURAL JOIN groups WHERE gID=$gID";
+	$sql = "SELECT (postNotRead.uID) AS user, pID FROM postNotRead NATURAL JOIN post WHERE post.gID=$gID AND postNotRead.uID=$uID";
 	$result = $connection->query($sql);
+	//var_dump($result);
 	while($row = $result->fetch_array(MYSQLI_ASSOC)){
+		$user = $row['user'];
 		$pID = $row['pID'];
+		echo $pID;
+		echo $user;
 		$sql = "DELETE FROM postNotRead WHERE pID=$pID AND uID=$uID";
 		$deletion = $connection->query($sql);
 	}
@@ -402,7 +405,7 @@ function editPost($connection, $newContent)
     $pID = $_GET['pID'];
     $gID = $_GET['gID'];
     
-    $sql    = "UPDATE post SET content='$newContent', edited='true' WHERE pID=$pID";
+    $sql    = "UPDATE post SET content='$newContent', edited='1' WHERE pID=$pID";
     $result = $connection->query($sql);
     
     
@@ -547,6 +550,69 @@ function blockUserFromGroup($connection){
 	header("Location: ../groupSettings.php?gID=$gID");
 }
 
+
+//-------------------------------------------------UNBLOCK USER FROM GROUP----------------------------//
+if(isset($_GET['unblockUserFromGroup'])){
+	unblockUserFromGroup($connection, $_GET['gID'], $_GET['uID']);
+}
+
+function unblockUserFromGroup($connection, $gID, $uID){
+	$sql = "DELETE FROM g_blocks WHERE (gID='$gID' AND uID='$uID')";
+	$result = $connection->query($sql);
+	header("Location: ../groupSettings.php?gID=$gID");
+}
+
+//------------------------------------------------UPLOAD GROUP ICON----------------------------------//
+//save the image to file and put the path in the database
+function uploadGroupIcon($connection,$gID){
+	
+$target_dir = "../uploads/";
+//$target_dir = addSlashes($target_dir);
+$target_name = basename($_FILES["fileToUpload"]["name"]);
+$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+$uploadOk = 1;
+$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+// Check if image file is a actual image or fake image
+if(isset($_POST["submit"])) {
+    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+    if($check !== false) {
+        echo "File is an image - " . $check["mime"] . ".";
+        $uploadOk = 1;
+    } else {
+        echo "File is not an image.";
+        $uploadOk = 0;
+    }
+}
+// Check if file already exists
+if (file_exists($target_file)) {
+    echo "Sorry, file already exists.";
+    $uploadOk = 0;
+}
+// Check file size
+if ($_FILES["fileToUpload"]["size"] > 500000) {
+    echo "Sorry, your file is too large.";
+    $uploadOk = 0;
+}
+// Allow certain file formats
+if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+&& $imageFileType != "gif" ) {
+    echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+    $uploadOk = 0;
+}
+// Check if $uploadOk is set to 0 by an error
+if ($uploadOk == 0) {
+    echo "Sorry, your file was not uploaded.";
+// if everything is ok, try to upload file
+} else {
+    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+		$sql = "UPDATE groups SET icon='$target_name' WHERE gID='$gID'"; //put the path in the server
+		$connection->query($sql);
+        echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+    } else {
+        echo "Sorry, there was an error uploading your file.";
+    }
+}	
+}
 //------------------------------------------------SAVE GROUP SETTINGS--------------------------------//
 if(isset($_GET['saveGroupSettings'])){
 	saveGroupSettings($connection);
@@ -554,13 +620,15 @@ if(isset($_GET['saveGroupSettings'])){
 
 function saveGroupSettings($connection){
 	$gID = $_GET['gID'];
-	$iconFile = $_POST['fileToUpload'];
 	$visibility = $_POST['visibility'];
 	echo $visibility;
 	echo $gID;
 	$sql = "UPDATE groups SET visible=$visibility WHERE gID=$gID";//put the icon file in later
 	$result = $connection->query($sql);
-	//header("Location: ../group.php?gID=$gID");
+	
+	uploadGroupIcon($connection, $gID); //save the image to file and put the path in the database
+
+	header("Location: ../group.php?gID=$gID");
 }
 
 //------------------------------------------------TAG GROUP------------------------------------------//

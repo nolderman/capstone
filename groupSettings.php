@@ -36,7 +36,7 @@
 				$private = "checked";
 			}
 	echo	"<h5> Visibility</h5>
-			<form action='php/functions.php?gID=$gID&saveGroupSettings=true' method='POST'>
+			<form enctype='multipart/form-data' action='php/functions.php?gID=$gID&saveGroupSettings=true' method='POST'>
 				<input type='radio' name='visibility' value='0' $private>Private
 				<br>
 				<input type='radio' name='visibility' value='1' $public>Public
@@ -56,8 +56,19 @@
 				<input type='submit' name='addContact' value='Go!' class='hvr-fade-green button' id='searchButton' hideFocus='true'> 
 			</form>";
 			
+			
+				$sql = "SELECT * FROM g_blocks	NATURAL JOIN user WHERE gID=$gID";
+				$result = $connection->query($sql);
+		
+				while($row = $result->fetch_array(MYSQLI_ASSOC)){
+						echo $row['f_name']." ".$row['l_name'];
+						$uID = $row['uID'];
+						echo "<a href='php/functions.php?unblockUserFromGroup=true&gID=$gID&uID=$uID'> Unblock </a>";
+				}
+	
 			?>
 				
 	</div>
+	
 	</body>
 </html>

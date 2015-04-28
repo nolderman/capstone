@@ -49,11 +49,11 @@ function groupSidebar($connection, $user, $profile){
 					
 					$gID = $groups['gID'];
 					$uID = $_SESSION['uID'];
-					$sql = "SELECT COUNT(*) FROM postNotRead NATURAL JOIN members NATURAL JOIN groups WHERE gID=$gID AND uID=$uID";
+					$countQuery = "SELECT COUNT(*) FROM postNotRead NATURAL JOIN members NATURAL JOIN groups WHERE gID='$gID' AND uID='$uID'";
 					
-					$unread = $connection->query($sql);
-					$count = $unread->fetch_array(MYSQLI_ASSOC);
-					$count = $count['COUNT(*)'];
+					$unread = $connection->query($countQuery);
+					$counted = $unread->fetch_array(MYSQLI_ASSOC);
+					$count = $counted['COUNT(*)'];
 					echo "<a href = 'group.php?gID=".$groups['gID']."'>";
 					echo "<div class='sidebarLink groupLink hvr-fade-blue'>".$groups['g_name']."<div class='notificationBubble'>$count</div> </div>";
 					echo "</a></br>";
