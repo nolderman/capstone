@@ -1,0 +1,18 @@
+.notificationBubble{
+	background: #e74c3c;
+
+	/*round the edges of the div*/
+	border-radius: 40px;
+
+	/*center the text*/
+	text-align: center;
+	line-height: 200%; 
+	color: white;
+
+
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	top: 10px;
+	right: 10px;
+}

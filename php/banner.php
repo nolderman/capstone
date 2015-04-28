@@ -14,7 +14,9 @@ if ($basename != 'index') { //if you are not on the index page, aka on profile, 
 		}
 		
         echo "<form name='searchBar' class='content' id='searchbar' method= 'POST' action='php/functions.php?addUserToGroup=true&gID=$gID'> ";
-    } else {
+    } 
+
+    else { 
         echo "<form name='searchBar' class='content' id='searchbar' method= 'POST' action='profile.php'> ";
     }
     echo "		<input type='text' name='typeahead' class='typeahead' id='searchbarInput' placeholder='Search'/>	
@@ -26,13 +28,17 @@ if ($basename != 'index') { //if you are not on the index page, aka on profile, 
 
 			<img id='connaktSymbol' src='images/banner/center_banner.png'></img>";
     
+
     // You are on a different person's profile page, or on group or conversation page, add the "Your Profile" button.
     if ($basename == 'profile' && !is_null($otherUser) || $basename != 'profile') {
-        echo "<a class = 'hvr-fade-green button content' id='yourProfileButton' href='profile.php'>Your Profile</a>";
+        echo "<a class = 'hvr-fade-green button content' id='yourProfileButton' href='profile.php'>Profile</a>";
     }
     
     echo "</div>";
-} else {
+} 
+
+
+else { //this is if you're on the index page. 
     echo "<div class = 'banner'>
 				<a id='top'></a>
 					
