@@ -20,6 +20,8 @@
 		<script type="text/javascript" src="javascript/bootstrap.js"></script> 
 		<script type="text/javascript" src="javascript/typeahead.js"></script>  	
 		<script src="javascript/expandingWindows.js"></script>
+		<script type="text/javascript" src="javascript/search.js" language="javascript"></script>
+		<script type="text/javascript" src="javascript/groupSearch.js" language="javascript"></script>
 		<script type="text/javascript" language="javascript"> 
 			function toggleDiv(divid){ //Function for toggling a chat window up and down
 				if(document.getElementById(divid).style.display == 'none'){
@@ -30,35 +32,6 @@
 				}
 		    }
 		</script>		
-		<script>
-		$(document).ready(function() {//start looking for this after we have loaded everything on the page
-			$('.typeahead').typeahead({ //input field of typeahead with value of f_name!
-				name: 'typeahead',
-				displayKey: 'f_name',
-				valueKey: 'f_name',
-				remote: 'php/functions.php?searchInput=%QUERY'
-			})
-			.on('typeahead:opened', onOpened)
-			.on('typeahead:selected', onAutocompleted)
-			.on('typeahead:autocompleted', onSelected);
- 
-			function onOpened($e) {
-				console.log('opened');
-			}
- 
-			function onAutocompleted($e, datum) {
-				console.log('autocompleted');
-				console.log(datum["f_name"]);
-				console.log(datum["uID"]);
-				document.getElementById('userID').value = datum["uID"];
-			}
- 
-			function onSelected($e, datum) {
-				console.log('selected');
-				console.log(datum);
-			}
-		})
-		</script>
 	</head>
 
 	<body>

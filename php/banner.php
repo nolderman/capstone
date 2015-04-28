@@ -10,16 +10,12 @@ if ($basename != 'index') { //if you are not on the index page, aka on profile, 
         $gID = $_GET["gID"];
 		 
 		if($moderator){ //only allow changing info if a moderator
-			echo "<a href='groupSettings.php?gID=$gID' class ='button'> Settings </a>";
+			echo "<a href='groupSettings.php?gID=$gID' class ='button groupSettings'> Settings </a>";
 		}
-		
-        echo "<form name='searchBar' class='content' id='searchbar' method= 'POST' action='php/functions.php?addUserToGroup=true&gID=$gID'> ";
     } 
 
-    else { 
-        echo "<form name='searchBar' class='content' id='searchbar' method= 'POST' action='profile.php'> ";
-    }
-    echo "		<input type='text' name='typeahead' class='typeahead' id='searchbarInput' placeholder='Search'/>	
+	echo "<form name='searchBar' class='content' id='searchbar' method= 'POST' action='profile.php'> 
+				<input type='text' name='typeahead' class='typeahead' id='searchbarInput' placeholder='Search'/>	
 				<input type='hidden' name='hiddenUID' id='userID' value='' />						
 				<input type='submit' name='addContact' value='Go!' class='hvr-fade-green button' id='searchButton' hideFocus='true'> 
 			</form>		
