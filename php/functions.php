@@ -52,57 +52,32 @@ if (isset($_GET["createConversation"])) { //only save a contact if the user put 
 function createConversation($connection)
 {
     $user = $_SESSION["uID"];
-    
-    //check if they have a conversation between them already
-    if(isset($_GET["uID"])){
-        $otherUser = $_GET["uID"];
 
-        //get the user's conversations
-        $userConvos = "SELECT cID
-                       FROM user NATURAL JOIN participates
-                       WHERE uID = $user";
-
-        //get the other people user has a conversation with, to make sure that the later query doesn't include it
-        $otherUserConvos = "SELECT cID
-                            FROM (($userConvos) subQuery0) NATURAL JOIN participates
-                            WHERE (uID <> '$user' OR uID <> '$otherUser')";                  
-
-        //get the conversations they have in common (if any)
-        $convosInCommon = "SELECT cID
-                            FROM user NATURAL JOIN participates
-                            WHERE (cID IN '$userConvos' AND cID NOT IN '$otherUserConvos' AND uID = '$otherUser')";
-        $result = $connection->query($convosInCommon);
-
-        //if they don't have any 
-        if($result->num_rows != 0){
-            //////COMPLETE IT HERE
-        }
-
-
-    }
+    //create a conversation between them
     $dateTime = new DateTime(null, new DateTimeZone('America/Los_Angeles'));
     $dateTime = $dateTime->format('Y-m-d H:i:s'); //set the dateTime format and put it back in the variable
-
     
     
     $sql = "INSERT INTO conversation (cID,c_name) 
 	       VALUES ('0', '')";
     $connection->query($sql);
     
-    $cID = mysqli_insert_id($connection); //get the id of the last inserted record
+    //get the ID of the conversation just created
+    $cID = mysqli_insert_id($connection); 
     
     $sql = "INSERT INTO participates (uID,cID,joined) 
 	       VALUES('$user','$cID','$dateTime')";
     $connection->query($sql);
     
     if(isset($_GET["uID"])){
+        $otherUser = $_GET["uID"];
         $sql = "INSERT INTO participates (uID,cID,joined) 
                 VALUES('$otherUser','$cID','$dateTime')";
         $connection->query($sql);
     }
     
 
-    header("Location: ../conversation.php?cID=$cID");
+    //header("Location: ../conversation.php?cID=$cID");
 }
 
 //--------------------------------------------------SEND MESSAGE IN CONVERSATION--------------------------------------------------------------------------//
