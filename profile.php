@@ -95,7 +95,7 @@
 					</form>";
 				}
 				?>
-				
+
 				<?php
 					//display profile picture
 					//If the string is "NULL" (aka, no picture in the database for this person) then upload a silhouette instead.
@@ -103,7 +103,7 @@
 						echo "<img class = 'image' src='images/silhouette.jpg'>";
 					}
 					else{
-						echo "<img class = 'image' src='images/profile_images/" .$profileInfo["picture"]. "'>";
+						echo "<img class = 'image' src='uploads/profile_images/" .$profileInfo["picture"]. "'>";
 					}
 				?>
 				
