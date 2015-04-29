@@ -14,7 +14,6 @@ while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
     
     if ($date_time > $date_joined) {
         echo "<div class='post'>";
-        
         $content = $row['content'];
 			
         echo $content;
@@ -52,7 +51,8 @@ while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
 				echo $replyContent;
 
 				$replyPID = $replies['pID'];
-
+				echo $posterID;
+				echo $_SESSION['uID'];
 			//delete the post link if the users' post or a moderator
 			if ($posterID == $_SESSION['uID'] || $moderator) {
 				echo "<a class='groupActionLink' href='php/functions.php?deleteReply=true&gID=$gID&pID=$replyPID'> Delete Post</a>";

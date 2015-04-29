@@ -82,7 +82,23 @@
 				<!--Form to post a message-->
 				<div id="postWrapper">
 				<?php 
-					echo "<div class='groupName' >$g_name";
+					
+			
+					
+					echo "<div class='groupName' >";
+					$sql = "SELECT icon FROM groups WHERE gID='$gID'";
+					$result = $connection->query($sql);
+					$row = $result->fetch_array(MYSQLI_ASSOC);
+					if(isset($row['icon'])){
+						$imageLocation = $row['icon'];
+						echo  "<img src='uploads/$imageLocation' height='42' width='42'>"; 
+					}else{
+						echo "<img src='images/worldBase.png' height='42' width='42'>"; 
+					}
+					
+					echo "$g_name";
+					
+					
 					if($moderator){
 						echo	"<a href='' id='$gID' class ='editName groupActionLink'> Edit Group Name </a>
 								<form class='editName-form' name='editName' method='POST' action='php/functions.php?editName=true&gID=$gID' >
