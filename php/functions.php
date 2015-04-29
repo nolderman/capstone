@@ -338,7 +338,6 @@ if (isset($_GET['replyToPost'])) {
 
 function postReply($connection)
 {
-    
     $gID      = $_GET["gID"];
     $pID      = PostMessageToGroup($connection, $_POST["message"], $gID); //make a new post with the message and groupID and get the pID of the new reply back
     $parentID = $_GET['pID']; //take the pID that we are replying to
@@ -625,7 +624,7 @@ if (isset($_GET['tagGroup'])) {
 
 function tagGroup($connection, $gID)
 {
-    $tagName = $_POST["tagName"];
+    $tagName = addslashes($_POST["tagName"]);
     
     //make a new tag
     $insert_tag = "INSERT INTO tag (tag_name) 
@@ -765,7 +764,7 @@ if(isset($_GET['tagUser']) && isset($_POST["tagName"]) && $_POST["tagName"] != "
 
 function CreateTag($connection)
 {
-    $tagName = $_POST["tagName"];
+    $tagName = addslashes($_POST["tagName"]);
     $user    = $_SESSION["uID"]; //doesn't have access to this variable because it is a separate php page
     
     //make a new tag
