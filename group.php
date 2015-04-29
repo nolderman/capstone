@@ -61,9 +61,9 @@
 				<?php
 				echo "
 					<form name='searchBar' class='content' id='searchbar' method= 'POST' action='php/functions.php?addUserToGroup=true&gID=$gID'> 
-						<input type='text' name='typeahead' class='typeaheadToAdd' id='searchbarInput' placeholder='Search'/>	
+						<input type='text' name='typeahead' class='typeaheadToAdd' id='searchbarInput' placeholder='Add User'/>	
 						<input type='hidden' name='hiddenUID' id='userIDToAdd' value='' />						
-						<input type='submit' name='addContact' value='Go!' class='hvr-fade-green button' id='searchButton' hideFocus='true'> 
+						<input type='submit' name='addContact' value='Add User' class='hvr-fade-green button' id='searchButton' hideFocus='true'> 
 					</form>	";
 					?>
 					

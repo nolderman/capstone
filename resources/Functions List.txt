@@ -1,0 +1,34 @@
+User Search
+Group Search
+Create Conversation
+Send Message in Conversation
+Add User to Conversation
+Delete User From Conversation
+Turn Conversation Into a Group
+Create Group
+Post Message to Group
+Mark Post as Read
+Reply to Post
+Edit Post
+Edit Group Name
+Delete Group
+Delete Post From Group
+Delete Reply From Group
+Add User To Group
+Add Public Group to User Group List
+Delete User From Group
+Block User From Group
+Unblock User From Group
+Upload Group Icon
+Save Group Settings
+Tag Group
+Delete Group Tag
+Check if Moderator of Group
+Add Contact
+Remove Contact
+Block User
+Unblock User
+Tag User
+User Signup
+User Login
+User Logout

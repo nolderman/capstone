@@ -23,7 +23,7 @@ if ($result = $connection->query($sql)) {
 if ($isMember) {
     //do something maybe
 }
-echo "<form name='tagUser' class='tagUser' id='tagUser' method= 'POST' action='php/functions.php?tagGroup=true&gID=$gID'>;
+echo "<form name='tagUser' class='tagUser' id='tagUser' method= 'POST' action='php/functions.php?tagGroup=true&gID=$gID'>
 		<input type='text' name='tagName' id='tagNameInput' class='input tagName' placeholder='Add a tag'/>
 		<input type='submit' name='addTag' value='Add Tag' class='button' id='tagInputButton'>
 	</form>
