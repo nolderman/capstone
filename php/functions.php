@@ -515,7 +515,7 @@ function blockUserFromGroup($connection){
 	$sql = "INSERT INTO g_blocks (gID,uID) VALUES ($gID, $blockedUID)";
 	$connection->query($sql);
 	
-	header("Location: ../groupSettings.php?gID=$gID");
+	header("Location: ../group.php?gID=$gID");
 }
 
 
@@ -527,7 +527,7 @@ if(isset($_GET['unblockUserFromGroup'])){
 function unblockUserFromGroup($connection, $gID, $uID){
 	$sql = "DELETE FROM g_blocks WHERE (gID='$gID' AND uID='$uID')";
 	$result = $connection->query($sql);
-	header("Location: ../groupSettings.php?gID=$gID");
+	header("Location: ../group.php?gID=$gID");
 }
 
 //------------------------------------------------UPLOAD GROUP ICON----------------------------------//
@@ -598,7 +598,7 @@ function saveProfileSettings($connection){
     $sql = "UPDATE user SET tags_visible=$tags_visible WHERE uID=$uID";
     $result = $connection->query($sql);
 
-	header("Location: ../profileSettings.php");
+	header("Location: ../profile.php");
 }
 
 //------------------------------------------------SAVE GROUP SETTINGS--------------------------------//
@@ -730,7 +730,7 @@ function BlockUser($connection)
     $sql    = "INSERT INTO u_blocks (uID, blocked) VALUES ('$uID', '$contactID')"; //put the block in the database
     $result = $connection->query($sql);
     
-    header('Location: ../profileSettings.php');
+    header('Location: ../profile.php');
     
 }
 
@@ -752,7 +752,7 @@ function UnBlockUser($connection)
     $sql    = "DELETE FROM u_blocks WHERE uID='$uID' AND blocked='$contactID'"; //remove the block from the database
     $result = $connection->query($sql);
 
-    header('Location: ../profileSettings.php');
+    header('Location: ../profile.php');
     
 }
 

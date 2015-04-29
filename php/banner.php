@@ -12,7 +12,7 @@ if ($basename != 'index') { //if you are not on the index page, aka on profile, 
         $gID = $_GET["gID"];
 		 
 		if($moderator){ //only allow changing info if a moderator
-			echo "<a href='groupSettings.php?gID=$gID' class ='button content osettingsButton'> Settings </a>";
+			echo "<a  class ='hvr-fade-green button content settingsButton' onmousedown='toggleDiv(\"groupSettings\");'> Settings </a>";
 		}
     } 
 
@@ -30,8 +30,8 @@ if ($basename != 'index') { //if you are not on the index page, aka on profile, 
 
     // If you are on YOUR profile page
     if ($basename == 'profile' && is_null($otherUser)){
-        echo "<a class='content button settingsButton' href='profileSettings.php'>Settings</a>";
-        echo "<a href='php/functions.php?removeUserFromAll=true'> X </a>";
+        echo "<a class='hvr-fade-green button content settingsButton' onmousedown='toggleDiv(\"profileSettings\");'>Settings</a>";
+
     	require_once 'php/getContacts.php';
     	echo "<div class = 'hvr-fade-green button content' id='yourProfileButton' onmousedown='toggleDiv(\"contactsList\");'>Contacts</div>"; //shares id with 'yourProfileButton' because it has the exact same positioning as that button.
     	echo "<div class = 'content' id='contactsList' style='display:none'>";
@@ -50,18 +50,18 @@ if ($basename != 'index') { //if you are not on the index page, aka on profile, 
 
 else { //this is if you're on the index page. 
     echo "<div class = 'banner'>
-				<a id='top'></a>
+			<a id='top'></a>
 					
 
-					<!--Login Form-->
-					<form name='login' class='content loginform cf' accept-charset='utf-8' method= 'POST' action='php/functions.php?userLogin=true'>  			       
-						 <input type='email' id='email' name='usermail' placeholder='example@email.com' required>
-						 <input type='password'  id='password' name='password' placeholder='password' required>
-						 <input type='submit' class='submit hvr-fade-blue' name = 'submit'  value='Login'>
-					</form>   
+			<!--Login Form-->
+			<form name='login' class='content loginform cf' accept-charset='utf-8' method= 'POST' action='php/functions.php?userLogin=true'>  			       
+				 <input type='email' id='email' name='usermail' placeholder='example@email.com' required>
+				 <input type='password'  id='password' name='password' placeholder='password' required>
+				 <input type='submit' class='submit hvr-fade-blue' name = 'submit'  value='Login'>
+			</form>   
 
-				<a href='register.php' class='content signup hvr-fade-green'> Sign Up!</a>
-				<img id='connaktSymbol' src='images/banner/center_banner.png'></img>
-			</div>";
+		    <a href='register.php' class='content signup hvr-fade-green'> Sign Up!</a>
+			<img id='connaktSymbol' src='images/banner/center_banner.png'></img>
+		  </div>";
 }
 ?>

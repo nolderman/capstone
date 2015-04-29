@@ -141,7 +141,7 @@ function conversationSidebar($connection, $user, $profile){
 		            $cID = $convos["cID"];
 
 		            echo "<a href = 'conversation.php?cID=$cID'>";
-		            echo "<div class='convLink hvr-fade-green'>";
+		            echo "<div class='sidebarLink convLink hvr-fade-green'>";
 			            //if there is no conversation name, make the conversation name the names of all the participants except the user
 			            if ($convos["c_name"] == "") {
 			                $nameQuery = "SELECT f_name

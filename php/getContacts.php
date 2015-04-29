@@ -3,12 +3,8 @@
 	require_once 'php/sessionStatus.php';
 	require_once 'php/getProfileInfo.php';
 
-//Generates a sidebar listing the groups the user is a member of
-//if on a profile page that is not the user's, the sidebar will only display groups in common with the viewed profile
-//Parameters:
-//$connection - the connection to the database
-//$user - the user's ID number
-//$profile - ID number of the profile the user is viewing (if on profile page and it is not the user's)
+
+
 function contactList($connection, $user, $profile){
 
 	//get the contact's information
@@ -17,6 +13,7 @@ function contactList($connection, $user, $profile){
 			WHERE (uID ='$user')";
 	$result = $connection->query($sql);
 	$contactResult = $result->fetch_assoc();
+
 	$contactID = $contactResult['contact'];
 	$sql2 = "SELECT  f_name, l_name
 			FROM (user) 
@@ -39,9 +36,6 @@ function contactList($connection, $user, $profile){
 			}
 		}
 }
-
-
-
 ?>
 
 
