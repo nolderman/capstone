@@ -7,14 +7,13 @@ $basename = substr(strtolower(basename($_SERVER['PHP_SELF'])), 0, strlen(basenam
 if ($basename != 'index') { //if you are not on the index page, aka on profile, group, or conversation pages..
     echo "<div class = 'banner'> ";
 	
+    
     if ($basename == 'group') { //if we are on the group page searching on the group page we want to add this user to the group
         $gID = $_GET["gID"];
 		 
 		if($moderator){ //only allow changing info if a moderator
-			echo "<a href='groupSettings.php?gID=$gID' class ='button'> Settings </a>";
+			echo "<a href='groupSettings.php?gID=$gID' class ='button content settingsButton'> Settings </a>";
 		}
-		
-        echo "<form name='searchBar' class='content' id='searchbar' method= 'POST' action='php/functions.php?addUserToGroup=true&gID=$gID'> ";
     } 
     // Otherwise, if we are not on the group, then we do normal search.
     else { 
@@ -30,8 +29,11 @@ if ($basename != 'index') { //if you are not on the index page, aka on profile, 
 
 		  <img id='connaktSymbol' src='images/banner/center_banner.png'></img>";
     
+
+
     // If you are on YOUR profile page
     if ($basename == 'profile' && is_null($otherUser)){
+        echo "<a class='content button settingsButton' href='profileSettings.php'>Settings</a>";
         echo "<a href='php/functions.php?removeUserFromAll=true'> X </a>";
     	require_once 'php/getContacts.php';
     	echo "<div class = 'hvr-fade-green button content' id='yourProfileButton' onmousedown='toggleDiv(\"contactsList\");'>Contacts</div>"; //shares id with 'yourProfileButton' because it has the exact same positioning as that button.

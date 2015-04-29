@@ -4,12 +4,11 @@ $user = $_SESSION["uID"]; //for checking if it is ours or another's message.
 
 $sql = "SELECT uID, picture, f_name, date_time, content 
 		FROM (message NATURAL JOIN user)
-		WHERE (cID = '$cID')
+		WHERE (cID = '$cID' AND date_time > '$joined')
 		ORDER BY date_time";
 
 $result = $connection->query($sql);//get all of the messages
-// var_dump($result);
-// var_dump($);
+
 //if there are any messages, print them out
 if($result->num_rows > 0){
 	while($row = $result->fetch_array(MYSQLI_ASSOC)){

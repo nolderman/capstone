@@ -3,13 +3,12 @@
 if (is_null($otherUser) || ($profileInfo["tags_visible"] && !$blockedUser)) {
     $sql = "SELECT tag_name 
 			FROM (user NATURAL JOIN u_tagged) 
-			WHERE (uID = '$otherUser')"; //put the contact in the database
+			WHERE (uID = '$user')";
     
     echo "<div id='tagsWrapper'>";
     
     if ($result = $connection->query($sql)) {
         //write out each tag
-        echo "This part of the code is executing.";
         while ($tags = $result->fetch_array(MYSQLI_ASSOC)) {
             echo "<div class='tag hvr-fade-cloud'>".$tags["tag_name"]."</div>";
             echo "   "; //spacing between tags		

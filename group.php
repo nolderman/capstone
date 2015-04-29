@@ -18,9 +18,14 @@
 		<link href="css/message.css" rel="stylesheet" type="text/css">
 		<link href="css/tags.css" rel="stylesheet" type="text/css"> <!-- CSS file for tags -->
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		
+		<!-- searching javascript codes -->
 		<script type="text/javascript" src="javascript/bootstrap.js"></script> 
 		<script type="text/javascript" src="javascript/typeahead.js"></script>  
 		<script type="text/javascript" src="javascript/search.js" language="javascript"> </script>
+		<script type="text/javascript" src="javascript/searchToAdd.js" language="javascript"> </script>
+		<script type="text/javascript" src="javascript/groupSearch.js" language="javascript"></script>
+
 		<script type="text/javascript" src="javascript/groupFunctions.js" language="javascript"> </script>
 		<script type="text/javascript" language="javascript">		
 			//Function for toggling a chat window up and down
@@ -39,7 +44,7 @@
 		<?php 
 			include 'php/banner.php';
 			require_once 'php/groupTags.php';
-			//markAsRead($connection, $gID, $_SESSION['uID']);//mark all posts from this group as read by the user
+			markAsRead($connection, $gID, $_SESSION['uID']);//mark all posts from this group as read by the user
 			if($moderator){
 				echo "<a class='button' href='php/functions.php?deleteGroup=true&gID=$gID'>Delete Group </a>";
 			}	
@@ -53,15 +58,22 @@
 				<!--form to create a group - NOTE: THIS ONLY EXISTS FOR TESTING-->
 				<div class="maximizeAddWrapper" id="createGroupMini" href:"javascript:;" onmousedown="toggleDiv('createGroupWrapper'); toggleDiv('createGroupMini');"></div>
 				<div class="sidebarAddWrapper" id="createGroupWrapper"  style="display:none">
-					<form name="createGroup" class="createGroup"  id="createGroup" method= "POST" action="php/createGroup.php">  
-						<input type="text" name = "groupName" id="groupName" class="input groupName" placeholder="Group Name"/>	
-						<input type="submit" name="createGroup" value="Create Group" class="hvr-fade-green button">
-					</form>
+				<?php
+				echo "
+					<form name='searchBar' class='content' id='searchbar' method= 'POST' action='php/functions.php?addUserToGroup=true&gID=$gID'> 
+						<input type='text' name='typeahead' class='typeaheadToAdd' id='searchbarInput' placeholder='Search'/>	
+						<input type='hidden' name='hiddenUID' id='userIDToAdd' value='' />						
+						<input type='submit' name='addContact' value='Go!' class='hvr-fade-green button' id='searchButton' hideFocus='true'> 
+					</form>	";
+					?>
+					
 					<div class="minimizeAddWrapper" href="javascript:;" onmousedown="toggleDiv('createGroupWrapper'); toggleDiv('createGroupMini');" >-</div>
 				</div>
 
 				<!--generates the links to groups the person is a part of-->
-				<?php membersSidebar($connection,$user,$_GET["gID"],$moderator,$members); ?>
+				<?php				
+					membersSidebar($connection,$user,$_GET["gID"],$moderator,$members);
+				?>
 
 			</div>
 
@@ -70,7 +82,23 @@
 				<!--Form to post a message-->
 				<div id="postWrapper">
 				<?php 
-					echo "<div class='groupName' >$g_name";
+					
+			
+					
+					echo "<div class='groupName' >";
+					$sql = "SELECT icon FROM groups WHERE gID='$gID'";
+					$result = $connection->query($sql);
+					$row = $result->fetch_array(MYSQLI_ASSOC);
+					if(isset($row['icon'])){
+						$imageLocation = $row['icon'];
+						echo  "<img src='uploads/$imageLocation' height='42' width='42'>"; 
+					}else{
+						echo "<img src='images/worldBase.png' height='42' width='42'>"; 
+					}
+					
+					echo "$g_name";
+					
+					
 					if($moderator){
 						echo	"<a href='' id='$gID' class ='editName groupActionLink'> Edit Group Name </a>
 								<form class='editName-form' name='editName' method='POST' action='php/functions.php?editName=true&gID=$gID' >
@@ -89,7 +117,7 @@
 
 				<!--Posted Messages-->
 				<div class="postContent">
-					<?php require_once 'php/displayPosts.php'; ?>
+					<?php require_once 'php/displayPosts.php';?>
 				</div>
 			</div>
 

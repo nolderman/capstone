@@ -158,7 +158,6 @@
 }
 
 
-
 /*Here is code that is meant to apply to placeholder text on all pages. there are multiple classes for different versions of browsers.*/
 ::-webkit-input-placeholder {
    color: #bdc3c7; /*light blue, lighter than our main blue*/

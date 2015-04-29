@@ -44,6 +44,11 @@ else{
 $g_name = $groupInfo["g_name"];
 $visible = $groupInfo['visible'] == 1;//get whether or not the group is visible to the public
 
+
+if(!$isMember && $visible){ //if the group is visible redirect to the permissions page
+	echo "<a href ='php/functions.php?requestGroupMembership=true&uID=$user'> Request Membership </a>";
+	echo "<a href ='profile.php'> Back to Profile </a>";
+}
 //if they aren't a member, and the group is set to be invisible, redirect them away from the page
 if(!$isMember && !$visible){
 	header('Location: profile.php');

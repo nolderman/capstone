@@ -14,6 +14,14 @@
 		<link href="css/columns.css" rel="stylesheet" type="text/css"> <!-- CSS file for right and left columns -->
 		<link href="css/banner.css" rel="stylesheet" type="text/css"> <!-- CSS file for right and left columns -->
 		<link href="css/conversation.css" rel="stylesheet" type="text/css"> <!-- CSS file for right and left columns -->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+		<!-- searching codes -->
+		<script type="text/javascript" src="javascript/bootstrap.js"></script> 
+		<script type="text/javascript" src="javascript/typeahead.js"></script>  
+		<script type="text/javascript" src="javascript/search.js"> </script>
+		<script type="text/javascript" src="javascript/searchToAdd.js"> </script>
+		<link href="css/searchBar.css" rel="stylesheet" type="text/css"> <!-- CSS file for banner for main pages -->
 
 		<script src="javascript/jquery-1.11.2.min.js"></script>
 		<script type="text/javascript" language="javascript"> 
@@ -41,16 +49,21 @@
 
 			<!-- Left column -->
 			<div class="sidebar" id="groupSideBar">	
-							<!--form to add a participant-->
-				<div class="maximizeAddWrapper" id="addParticipantMini" href="javascript:;" onmousedown="toggleDiv('addParticipantWrapper'); toggleDiv('addParticipantMini');"></div>
-				<div class="sidebarAddWrapper" id="addParticipantWrapper"  style="display:none">
-					<form name="addParticipant" class="addParticipant"  id="addParticipant" method= "POST" action="php/functions.php?addParticipant=true">  
-						<input type="text" name = "participantName" id="participantName" class="input participantName" placeholder="User Name"/>	
-						<input type="submit" name="addParticipant" value="Add Participant" class="hvr-fade-green button">
-					</form>
-					<div class="minimizeAddWrapper" href="javascript:;" onmousedown="toggleDiv('addParticipantWrapper'); toggleDiv('addParticipantMini');" >-</div>
-				</div>
-				<?php participantSidebar($connection, $cID, $user); ?>
+				<!--form to add a participant-->
+				
+					<div class="maximizeAddWrapper" id="addParticipantMini" href="javascript:;" onmousedown="toggleDiv('addParticipantWrapper'); toggleDiv('addParticipantMini');"></div>
+					<div class="sidebarAddWrapper" id="addParticipantWrapper"  style="display:none">
+						<?php
+						echo "<form name='searchBar' class='content'  id='searchbar' method= 'POST' action='php/functions.php?addParticipant=true&cID=$cID'>";  
+						?>
+							<input type="text" name = "typeaheadToAdd" id="searchbarInput" class="typeaheadToAdd" placeholder="User's Name"/>	
+							<input type='hidden' name='hiddenUID' id='userIDToAdd' value='' />
+							<input type="submit" name="addParticipant" value="Add Participant" class="hvr-fade-green button">
+						</form>
+						<div class="minimizeAddWrapper" href="javascript:;" onmousedown="toggleDiv('addParticipantWrapper'); toggleDiv('addParticipantMini');" >-</div>
+					</div>
+
+				 <?php participantSidebar($connection, $cID, $user); ?>
 			</div>
 
 			<!-- center column -->
@@ -61,7 +74,6 @@
 				<!-- input area for your message -->
 				<div id="messageInputWrapper">
 					<?php 
-						
 						echo "<form name='sendMessage' method='POST' action='php/functions.php?sendMessage=true&cID=$cID'>";
 						echo "<textarea cols='50' rows='4' name='message' id='messageInput' placeholder='Type Your Message Here'></textarea>";     
 						echo "<input type='submit' name='sendMessage' value='Send Message' class='button hvr-fade-green' id='sendButton'>";				
@@ -74,14 +86,15 @@
 			<!--Left column. Generates the links to conversations the person is a part of-->
 			<div class= "sidebar" id="convSidebar">
 				<!--form to create a conversation-->
-				<div class="maximizeAddWrapper" id="createConvMini" href="javascript:;" onmousedown="toggleDiv('createConvWrapper'); toggleDiv('createConvMini');"></div>
+				<a href="php/functions.php?createConversation=true" class="maximizeAddWrapper"></a>
+				<!-- <div class="maximizeAddWrapper" id="createConvMini" href="javascript:;" onmousedown="toggleDiv('createConvWrapper'); toggleDiv('createConvMini');"></div>
 				<div class="sidebarAddWrapper" id="createConvWrapper"  style="display:none">
 					<form name="createConversation" class="createConversation"  id="createConversation" method= "POST" action="php/functions.php?createConversation=true">  
 						<input type="text" name = "conversationName" id="conversationName" class="input conversationName" placeholder="Conversation Name"/>	
 						<input type="submit" name="createConversation" value="Create Conversation" class="hvr-fade-green button">
 					</form>
 					<div class="minimizeAddWrapper" href="javascript:;" onmousedown="toggleDiv('createConvWrapper'); toggleDiv('createConvMini');" >-</div>
-				</div>
+				</div> -->
 				<?php conversationSidebar($connection, $user, null); ?>
 			</div>
 		</div>

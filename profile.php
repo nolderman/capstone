@@ -17,9 +17,15 @@
 		<link href="css/tags.css" rel="stylesheet" type="text/css"> <!-- CSS file for tags -->
 		<link href="css/notifications.css" rel="stylesheet" type="text/css"> <!-- CSS file for notifications -->
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		
+		<!-- searching javascript codes -->
 		<script type="text/javascript" src="javascript/bootstrap.js"></script> 
-		<script type="text/javascript" src="javascript/typeahead.js"></script>  	
+		<script type="text/javascript" src="javascript/typeahead.js"></script>  
+		<script type="text/javascript" src="javascript/search.js"></script>  		
+		
 		<script src="javascript/expandingWindows.js"></script>
+		<script type="text/javascript" src="javascript/search.js" language="javascript"></script>
+		<script type="text/javascript" src="javascript/groupSearch.js" language="javascript"></script>
 		<script type="text/javascript" language="javascript"> 
 			function toggleDiv(divid){ //Function for toggling a chat window up and down
 				if(document.getElementById(divid).style.display == 'none'){
@@ -30,35 +36,6 @@
 				}
 		    }
 		</script>		
-		<script>
-		$(document).ready(function() {//start looking for this after we have loaded everything on the page
-			$('.typeahead').typeahead({ //input field of typeahead with value of f_name!
-				name: 'typeahead',
-				displayKey: 'f_name',
-				valueKey: 'f_name',
-				remote: 'php/functions.php?searchInput=%QUERY'
-			})
-			.on('typeahead:opened', onOpened)
-			.on('typeahead:selected', onAutocompleted)
-			.on('typeahead:autocompleted', onSelected);
- 
-			function onOpened($e) {
-				console.log('opened');
-			}
- 
-			function onAutocompleted($e, datum) {
-				console.log('autocompleted');
-				console.log(datum["f_name"]);
-				console.log(datum["uID"]);
-				document.getElementById('userID').value = datum["uID"];
-			}
- 
-			function onSelected($e, datum) {
-				console.log('selected');
-				console.log(datum);
-			}
-		})
-		</script>
 	</head>
 
 	<body>
@@ -96,25 +73,29 @@
 					?>
 				</h1>
 
-				<!-- Uploading profile picture -->
-				<form action="uploadPicture.php" enctype="multipart/form-data" method="post">
-					<table style="border-collapse: collapse; font: 12px Tahoma;" border="1" cellspacing="5" cellpadding="5">
-						<tbody><tr>
-						<td>
-						<input name="uploadedimage" type="file">
-						</td>
+				<?php 
+				//If this is our profile
+				if(is_null($otherUser)){
+					echo "<!-- Uploading profile picture -->
+					<form action='uploadPicture.php' enctype='multipart/form-data' method='post'>
+						<table style='border-collapse: collapse; font: 12px Tahoma;' border='1' cellspacing='5' cellpadding='5'>
+							<tbody><tr>
+							<td>
+							<input name='uploadedimage' type='file'>
+							</td>
 
-						</tr>
+							</tr>
 
-						<tr>
-						<td>
-						<input name="Upload Now" class= "button hvr-fade-green" type="submit" value="Upload Image">
-						</td>
-						</tr>
-					</tbody></table>
-				</form>
-
-				<!--change this to profile image when that is implemented-->
+							<tr>
+							<td>
+							<input name='Upload Now' class= 'button hvr-fade-green' type='submit' value='Upload Image'>
+							</td>
+							</tr>
+						</tbody></table>
+					</form>";
+				}
+				?>
+				
 				<?php
 					//display profile picture
 					//If the string is "NULL" (aka, no picture in the database for this person) then upload a silhouette instead.
@@ -136,14 +117,15 @@
 			<!--Conversation links and notifications -->
 			<div class="sidebar" id="convSidebar">
 				<!--form to create a conversation-->
-				<div class="maximizeAddWrapper" id="createConvMini" href="javascript:;" onmousedown="toggleDiv('createConvWrapper'); toggleDiv('createConvMini');"></div>
+				<a href="php/functions.php?createConversation=true" class="maximizeAddWrapper"></a>
+				<!-- <div class="maximizeAddWrapper" id="createConvMini" href="javascript:;" onmousedown="toggleDiv('createConvWrapper'); toggleDiv('createConvMini');"></div>
 				<div class="sidebarAddWrapper" id="createConvWrapper"  style="display:none">
 					<form name="createConversation" class="createConversation"  id="createConversation" method= "POST" action="php/functions.php?createConversation=true">  
 						<input type="text" name = "conversationName" id="conversationName" class="input conversationName" placeholder="Conversation Name"/>	
 						<input type="submit" name="createConversation" value="Create Conversation" class="hvr-fade-green button">
 					</form>
 					<div class="minimizeAddWrapper" href="javascript:;" onmousedown="toggleDiv('createConvWrapper'); toggleDiv('createConvMini');" >-</div>
-				</div>
+				</div> -->
 				<?php conversationSidebar($connection, $user, $otherUser); ?>
 			</div>
 
