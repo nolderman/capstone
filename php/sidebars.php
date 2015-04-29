@@ -136,7 +136,6 @@ function conversationSidebar($connection, $user, $profile){
 		        echo "There are no conversations to display";
 		    } 
 		    else{
-
 		        //write out each conversation to the sidebar
 		        while ($convos = $result->fetch_array(MYSQLI_ASSOC)) {
 		            $cID = $convos["cID"];
@@ -164,15 +163,14 @@ function conversationSidebar($connection, $user, $profile){
 
 			            //fill out how many unread messages there are for this conversation
 			            echo "<div class=notificationBubble>";
-			            	$unreadQuery = "SELECT count
-			            					FROM unreadMessages
-			            					WHERE cID = '$cID' AND uID = '$user'";
+			            	$unreadQuery = "SELECT unread_count
+			            					FROM participates
+			            					WHERE uID = '$user' AND cID = '$cID'";
 			            	$unreadResult = $connection->query($unreadQuery);
-			            	
-			                echo $unreadResult["count"];
-			            echo "</div></div>";
-
-		            echo "</a></br>";
+			            	$unread = $unreadResult->fetch_array(MYSQLI_ASSOC);
+			                echo $unread["unread_count"];
+			        	echo "</div>";
+		            echo "</div></a></br>";
 		        }
 		    }
 		}
