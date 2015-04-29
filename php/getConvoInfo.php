@@ -37,4 +37,12 @@ $result = $connection->query($sql);
 $getName = $result->fetch_array(MYSQLI_ASSOC);
 $convoName = $getName["c_name"];
 
+//third, delete the unread data from the database
+$sql = "SELECT uID, mID
+		FROM messageNotRead, message
+		WHERE (messageNotRead.mID = message.mID AND messageNotRead.uID <> message.uID, AND messageNotRead.uID = '$user' AND message.cID = '$cID')";
+$test = "DELETE FROM messageNotRead
+		WHERE uID IN (('$sql') subquery0) AND mID in (('$sql') subquery1)";
+		$result = $connection->query($sql);
+var_dump($result);
 ?>
