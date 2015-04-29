@@ -1,6 +1,6 @@
 <?php
 
-//if this is not user's profile page, $otherUser will not be null
+//if this is the user's profile page, $otherUser will be null
 if(!is_null($otherUser)){
 	//check if this profile is the user's contact
 	$contact = True;
@@ -33,7 +33,7 @@ if(!is_null($otherUser)){
 	}
 
 	echo "<div id='profileButtonsWrapper'>";
-		if(!$blockedUser ){
+		if(!$blockedUser){
 			echo "<a href='php/functions.php?createConversation=true&uID=$otherUser' class='button profileButton hvr-fade-blue'>New Conversation</a>";
 		}
 		if(!$contact){
@@ -43,12 +43,6 @@ if(!is_null($otherUser)){
 			echo "<a href='php/functions.php?uID=$otherUser&contact=$contact' class='button profileButton hvr-fade-green'>Remove Contact</a>";
 		}
 
-		if(!$blockedProfile){
-			echo "<a href='php/functions.php?uID=$otherUser&blocked=$blockedProfile' class='button profileButton hvr-fade-red'>Block </a>";
-		}
-		else{
-			echo "<a href='php/functions.php?uID=$otherUser&blocked=$blockedProfile' class='button profileButton hvr-fade-red'>Unblock </a>";
-		}
 	echo "</div>";
 }
 

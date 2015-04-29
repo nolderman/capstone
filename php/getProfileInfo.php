@@ -22,7 +22,7 @@ if((isset($_POST["hiddenUID"]) && $_SESSION["uID"] != $_POST["hiddenUID"]) || (i
 	}
 
 	//get the info for this profile that will be needed
-	$sql = "SELECT uID, f_name, l_name, tags_visible, profile_visible, block_invites, block_messages 
+	$sql = "SELECT uID, f_name, l_name, picture, tags_visible, profile_visible, block_invites, block_messages 
 			FROM user 
 			WHERE (uID = '$otherUser')";
 }
@@ -30,11 +30,14 @@ else{
 	$otherUser = null; 
 
 	//get the info for this profile that will be needed
-	$sql = "SELECT uID, f_name, l_name, tags_visible, profile_visible, block_invites, block_messages 
+	$sql = "SELECT uID, f_name, l_name, picture, tags_visible, profile_visible, block_invites, block_messages 
 			FROM user 
 			WHERE (uID = '$user')";
 }
 
 $result = $connection->query($sql);
 $profileInfo = $result->fetch_array(MYSQLI_ASSOC);
+
+$tags_visible = $profileInfo['tags_visible'] == 1;//get whether or not the profile's tags are visible to other users
+$profile_visible = $profileInfo['profile_visible'] == 1;//get whether or not the profile is visible to other users
 ?>

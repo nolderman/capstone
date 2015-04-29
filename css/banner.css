@@ -1,4 +1,4 @@
-.banner{
+	.banner{
 		font-family: 'Roboto Slab', serif;
 
 		
@@ -26,6 +26,9 @@
 /*General CSS for content within the banner. Used for things like keeping them all in line and evenly spaced.*/
 .banner .content {
 	top: 36.5%;
+	text-align: center;
+	/*From http://stackoverflow.com/questions/3779534/how-to-disable-text-selection-with-css-or-js  disables highlighting text on double click.*/
+    -moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;
 }
 .banner .button{
 	height: 20px;
@@ -51,13 +54,60 @@
 		
 		float:right;
         left:12%;
-        padding: 10px 15px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 20px;
 
         font-weight: 300;
         font-size: 18px;
         
         border-radius: 5px;
 		text-decoration: none;
+}
+.banner #contactsList {/* wrapper for list of contacts*/
+		position: absolute;	
+		background: #27ae60; /*Emerald green as background*/;
+		
+		float:right;
+		top: 60%;
+        left:12%;
+        z-index: 1;/* makes this div appear in the front over all others (ordering in the z direction, essentially)*/
+        padding: 10px 15px;
+
+        width: 150px;
+
+        font-weight: 300;
+        font-size: 18px;
+        
+        border-radius: 5px;
+		text-decoration: none;
+}
+.banner .contactLink {
+    text-overflow: ellipsis; 
+    white-space: nowrap;
+    overflow: hidden;
+
+    float: top; /*Makes it so that as more divs are added, then float in order from top to bottom*/
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: auto;
+    margin-right: auto;
+
+    padding-left: 5px;
+
+    /*Position & Sizing*/
+    text-align: center;
+    font-size: 18px;
+    line-height: 35px; /*line height = height so text is centered vertically.*/
+    width: 95%;
+    height:35px;
+
+    border-radius: 5px; /*rounded corners*/
+
+    /*border text coloring*/
+    border: 1px solid #2980b9; /*Blue border*/;
+    color: white;
 }
 /*Wrapper for the searchbarInput and searchButton*/
 .banner #searchbar {

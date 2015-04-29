@@ -1,4 +1,4 @@
-gradients generated at http://www.colorzilla.com/gradient-editor/
+  gradients generated at http://www.colorzilla.com/gradient-editor/
 
 login css derived from http://cssdeck.com/labs/amazing-css3-login-form*/
 
@@ -33,10 +33,25 @@ body{
 }
 /*CSS for wrapper that contains the message sent by the user, and also the PICTURE of the sending user.*/
 .selfMessageWrapper {
-  display:flex;
+  display: flex;
+   /* switch horizontal layout */
+  justify-content: flex-end;
+  /* switch vertical layout */
+  align-items: flex-end;
+}
+.otherMessageWrapper {
+  display: flex;
+}
+.selfMessageWrapper .image:after{
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
 }
 
-.image:after{
+.otherMessageWrapper .image:after{
   content: "";
   position: absolute;
   top: 0;
@@ -55,11 +70,20 @@ body{
   display: block;
 }
 /*CSS for the messages from the conversation that appear in the message feed*/
-.message {
+.selfMessageWrapper .message {
   color: #34495e;
   line-height: 100%;
   top:0px;
-  left:40px;
+  right:0px;
+  margin-bottom: 5px;
+  max-width: 70%;
+}
+/*CSS for the messages from the conversation that appear in the message feed*/
+.otherMessageWrapper .message {
+  color: #34495e;
+  line-height: 100%;
+  top:0px;
+  left:0px;
   margin-bottom: 5px;
   max-width: 80%;
 }

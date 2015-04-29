@@ -144,7 +144,6 @@ function sendMessage($connection)
     $connection->query($updateUnreadQuery);
 }
 
-
 //--------------------------------------------------ADD USER TO CONVERSATION-------------------------------------------------------------------------//
 if (isset($_GET["addParticipant"])) {
     addParticipant($connection);
@@ -265,7 +264,7 @@ function CreateGroup($connection)
     if (!empty($groupName)) { //make sure the user input a name for the group
         
         $groupName = addslashes($groupName);
-        $sql       = "INSERT INTO groups (gID, g_name, icon, visible, burn_date) VALUES ('0','$groupName', 'NULL', '1', '0000-00-00 00:00:00')"; //put the contact in the database
+        $sql       = "INSERT INTO groups (gID, g_name, icon, visible, burn_date) VALUES ('0','$groupName', 'NULL', '1', '0000-00-00 00:00:00')"; //put the group in the database
         $result    = $connection->query($sql);
         
         //Put the user in the member table with this group
@@ -302,39 +301,36 @@ function PostMessageToGroup($connection, $message, $gID)
     $pID = mysqli_insert_id($connection); //get the id of the last inserted record
     
 	
-	$getMembers = "SELECT uID 
+	$getMembers = "SELECT uID, unread_count
 					FROM members 
 					WHERE gID = $gID";
-	$result = $connection->query($getMembers);
+	$result = $connection->query($getMembers); //gets members and unread_count
 	
-		//insert into the unread table for every member
+	//update the number of unread posts for every member
 	while($members = $result->fetch_array(MYSQLI_ASSOC)){
 		$uID = $members['uID'];
-		$sql = "INSERT INTO postNotRead (uID,pID) VALUES ($uID, $pID)";
+		$unreadCount = $members['unread_count'] + 1;
+		$sql = "UPDATE members SET unread_count=$unreadCount WHERE gID=$gID AND uID=$uID";
 		$insertUnread = $connection->query($sql);
 	}
 	
     if (!isset($_GET['replyToPost'])) { //if we came from posting a regular message go back to the group page now
-        header("Location: ../group.php?gID=$gID"); //go back to the group page
+      header("Location: ../group.php?gID=$gID"); //go back to the group page
     } else
         return $pID;
 }
+
+
 //---------------------------------------------------MARK POST AS READ------------------------------------------------------------------//
-function markAsRead($connection, $gID, $uID){
-	
-	//get post from this group and delete the posts
-	$sql = "SELECT (postNotRead.uID) AS user, pID FROM postNotRead NATURAL JOIN post WHERE post.gID=$gID AND postNotRead.uID=$uID";
-	$result = $connection->query($sql);
-	
-	while($row = $result->fetch_array(MYSQLI_ASSOC)){
-		$user = $row['user'];
-		$pID = $row['pID'];
-		echo $pID;
-		echo $user;
-		$sql = "DELETE FROM postNotRead WHERE pID=$pID AND uID=$uID";
-		$deletion = $connection->query($sql);
-	}
+function markAsRead($connection, $gID, $uID)
+{
+	//var_dump($result);
+	$sql = "UPDATE members SET unread_count='0' WHERE gID=$gID AND uID=$uID";
+	$deletion = $connection->query($sql);	
+
 }
+
+
 //--------------------------------------------------REPLY TO POST------------------------------------------------------------------------//
 if (isset($_GET['replyToPost'])) {
     postReply($connection);
@@ -379,7 +375,7 @@ if (isset($_GET['editName'])) {
 function editGroupName($connection, $newName)
 {
     $gID = $_GET['gID'];
-    
+    $newName = addSlashes($newName);
     $sql    = "UPDATE groups SET g_name='$newName' WHERE gID=$gID";
     $result = $connection->query($sql);
     
@@ -461,7 +457,7 @@ function addUserToGroup($connection)
 	header("Location: ../group.php?gID=$gID");
 }
 
-/*--------------------------------------------------ADD PUBLIC GROUP TO YOUR GROUP LIST------------------------------------------------------------//
+/*--------------------------------------------------ADD PUBLIC GROUP TO USER GROUP LIST------------------------------------------------------------//
 *Adds the current user to the group that they searched for in the group search bar
 *@param $connection
 *@param $gID the group we passed in from the search bar
@@ -473,17 +469,31 @@ if(isset($_GET['addGroup'])){
 function addGroup($connection, $gID, $uID){
 	$dateTime = new DateTime(null, new DateTimeZone('America/Los_Angeles'));
     $dateTime = $dateTime->format('Y-m-d H:i:s'); //set the dateTime format and put it back in the variable
-	echo $gID;
-	echo $uID;
+	
 	$sql    = "INSERT INTO members (uID,gID,moderator,joined) VALUES ('$uID', '$gID', '0', '$dateTime')"; //insert the user without mod permissions
     $result = $connection->query($sql);
     header("Location: ../group.php?gID=$gID");
+}
+
+//--------------------------------------------------DELETE USER PROFILE-------------------------------------------------------------------------//
+if (isset($_GET["removeUserFromAll"])) {
+    removeUserFromAll($connection);
+}
+
+function removeUserFromAll($connection){
+
+    $uID = $_SESSION["uID"];
+    // Should cascade down and delete everything that uses this uID
+    $sql    = "DELETE FROM user WHERE uID=$uID";
+    $result = $connection->query($sql);
+    header("Location: ../index.php");
 }
 
 //--------------------------------------------------DELETE USER FROM GROUP-------------------------------------------------------------------------//
 if (isset($_GET["removeUserFromGroup"])) {
     removeUserFromGroup($connection);
 }
+
 
 function removeUserFromGroup($connection)
 {
@@ -526,7 +536,6 @@ function unblockUserFromGroup($connection, $gID, $uID){
 function uploadGroupIcon($connection,$gID){
 	
 $target_dir = "../uploads/";
-//$target_dir = addSlashes($target_dir);
 $target_name = basename($_FILES["fileToUpload"]["name"]);
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
@@ -572,22 +581,41 @@ if ($uploadOk == 0) {
     }
 }	
 }
+//------------------------------------------------SAVE PROFILE SETTINGS--------------------------------//
+if(isset($_GET['saveProfileSettings'])){
+	saveProfileSettings($connection);
+}
+
+function saveProfileSettings($connection){
+	$uID = $_SESSION['uID'];
+	$tags_visible = $_POST['tags_visible'];
+    $profile_visible = $_POST['profile_visible'];
+	echo $tags_visible;
+	echo $profile_visible;
+    //set profile  visible or not (1 or 0)
+	$sql = "UPDATE user SET profile_visible=$profile_visible WHERE uID=$uID";
+	$result = $connection->query($sql);
+    //set tags visible or not (1 or 0)
+    $sql = "UPDATE user SET tags_visible=$tags_visible WHERE uID=$uID";
+    $result = $connection->query($sql);
+
+	header("Location: ../profileSettings.php");
+}
+
 //------------------------------------------------SAVE GROUP SETTINGS--------------------------------//
 if(isset($_GET['saveGroupSettings'])){
-	saveGroupSettings($connection);
+    saveGroupSettings($connection);
 }
 
 function saveGroupSettings($connection){
 	$gID = $_GET['gID'];
 	$visibility = $_POST['visibility'];
-	echo $visibility;
-	echo $gID;
+	
 	$sql = "UPDATE groups SET visible=$visibility WHERE gID=$gID";//put the icon file in later
 	$result = $connection->query($sql);
-	
 	uploadGroupIcon($connection, $gID); //save the image to file and put the path in the database
 
-	header("Location: ../group.php?gID=$gID");
+    header("Location: ../group.php?gID=$gID");
 }
 
 //------------------------------------------------TAG GROUP------------------------------------------//
@@ -673,39 +701,59 @@ function RemoveContact($connection)
     
 }
 
-//-------------------------------------------------BLOCK OR UNBLOCK USER------------------------------------------------------------------//
-if (isset($_GET['blocked'])) {
-    $blockedUser = $_GET['blocked'];
-    if (!$blockedUser) {
-        BlockUser($connection);
-    } else {
-        UnBlockUser($connection);
-    }
+//-------------------------------------------------BLOCK USER------------------------------------------------------------------//
+// if (isset($_GET['blocked'])) {
+//     $blockedUser = $_POST['hiddenUID'];
+//     //If the user is not currently blocked, block them!
+//     if (!$blockedUser) {
+//         BlockUser($connection);
+//     } 
+//     //Otherwise, unblock the user.
+//     else {
+//         UnBlockUser($connection);
+//     }
+// }
+if (isset($_GET['blockUser'])) {
+    BlockUser($connection);
 }
 
 function BlockUser($connection)
 {
     
     //insert uID and contacts uID
-    $contactID = $_GET["uID"]; //the user id of the contact (passed from userButtons.php)
+    $contactID = $_POST["hiddenUID"]; //the user id of the contact (passed from profileSettings.php)
     $uID       = $_SESSION["uID"]; //the user's ID
+
+    // For testing
+    // echo "BLOCKED!";
+    // var_dump($contactID,$uID);
     
     $sql    = "INSERT INTO u_blocks (uID, blocked) VALUES ('$uID', '$contactID')"; //put the block in the database
     $result = $connection->query($sql);
-    header('Location: ../profile.php');
+    
+    header('Location: ../profileSettings.php');
     
 }
 
+//-------------------------------------------------UNBLOCK USER------------------------------------------------------------------//
+if (isset($_GET['unBlockUser'])) {
+    UnBlockUser($connection);
+}
 function UnBlockUser($connection)
 {
     
     //insert uID and contacts uID
-    $contactID = $_GET["uID"]; //the user id of the contact (passed from userButtons.php)
+    $contactID = $_GET["blockedUser"]; //the user id of the contact (passed from userButtons.php)
     $uID       = $_SESSION["uID"]; //the user's ID
     
+    // For testing
+    // echo "UNBLOCKED!";
+    // var_dump($contactID,$uID);
+
     $sql    = "DELETE FROM u_blocks WHERE uID='$uID' AND blocked='$contactID'"; //remove the block from the database
     $result = $connection->query($sql);
-    header('Location: ../profile.php');
+
+    header('Location: ../profileSettings.php');
     
 }
 
