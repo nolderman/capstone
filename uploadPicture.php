@@ -47,7 +47,7 @@ if (!empty($_FILES["uploadedimage"]["name"])) {
 	}
   
 }
-
+ header("Location: profile.php");
 
 if (isset($_GET['editName'])) {
     editGroupName($connection, $_POST['editName']);

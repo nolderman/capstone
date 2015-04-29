@@ -415,20 +415,7 @@ if (isset($_GET["removeUserFromAll"])) {
 function removeUserFromAll($connection){
 
     $uID = $_SESSION["uID"];
-    $sql    = "DELETE FROM members WHERE uID=$uID";
-    $result = $connection->query($sql);
-    $sql    = "DELETE FROM u_blocks WHERE uID=$uID OR blocked=$uID";
-    $result = $connection->query($sql);
-    $sql    = "DELETE FROM g_blocks WHERE uID=$uID";
-    $result = $connection->query($sql);
-    $sql    = "DELETE FROM contacts WHERE uID=$uID OR contact=$uID";
-    $result = $connection->query($sql);
-    $sql    = "DELETE FROM messageNotRead WHERE uID=$uID";
-    $result = $connection->query($sql);
-    $sql    = "DELETE FROM participates WHERE uID=$uID";
-    $result = $connection->query($sql);
-    $sql    = "DELETE FROM conversation WHERE uID=$uID";
-    $result = $connection->query($sql);
+    // Should cascade down and delete everything that uses this uID
     $sql    = "DELETE FROM user WHERE uID=$uID";
     $result = $connection->query($sql);
     header("Location: ../index.php");
