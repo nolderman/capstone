@@ -626,6 +626,7 @@ function tagGroup($connection, $gID)
 {
     $tagName = $_POST["tagName"];
     
+	$tagName = addSlashes($tagName);
     //make a new tag
     $insert_tag = "INSERT INTO tag (tag_name) 
 					VALUES ('$tagName')";
@@ -647,9 +648,10 @@ function deleteGroupTag($connection, $gID, $tag_name)
 {
     echo $gID;
     echo $tag_name;
+	$tag_name = addSlashes($tag_name);
     $sql    = "DELETE FROM g_tagged WHERE gID='$gID' AND tag_name='$tag_name'";
     $result = $connection->query($sql);
-    header("Location: ../group.php?gID=$gID");
+   //header("Location: ../group.php?gID=$gID");
 }
 
 //-------------------------------------------------CHECK IF MODERATOR OF GROUP-------------------------------------------//
