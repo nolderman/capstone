@@ -42,6 +42,8 @@ function Search($connection)
     echo $jsonArray;
     return $jsonArray;
 }
+
+
 //----------------------------------------------------GROUP SEARCH-------------------------------------------------------------------------------------//
 if (isset($_GET["groupSearchInput"])) {
     groupSearch($connection);
@@ -70,6 +72,7 @@ function groupSearch($connection)
     return $jsonArray;
 }
 
+
 //--------------------------------------------------CREATE CONVERSATION-------------------------------------------------------------------------------//
 if (isset($_GET["createConversation"])) { //only save a contact if the user put something in the submit box
     createConversation($connection);
@@ -83,22 +86,17 @@ function createConversation($connection)
     $dateTime = new DateTime(null, new DateTimeZone('America/Los_Angeles'));
     $dateTime = $dateTime->format('Y-m-d H:i:s'); //set the dateTime format and put it back in the variable
     
-    
+    //add new conversation
     $sql = "INSERT INTO conversation (cID,c_name) 
-	       VALUES ('0', '')";
+	        VALUES ('0', '')";
     $connection->query($sql);
     
     //get the ID of the conversation just created
     $cID = mysqli_insert_id($connection); 
     
     //insert this user as a participant
-    $sql = "INSERT INTO participates (uID,cID,joined) 
-	       VALUES('$user','$cID','$dateTime')";
-    $connection->query($sql);
-
-    //insert the tuple for unread messages
-    $sql = "INSERT INTO unreadMessages (uID,cID,count) 
-           VALUES('$user','$cID','0')";
+    $sql = "INSERT INTO participates (uID,cID,joined,unread_count) 
+	       VALUES('$user','$cID','$dateTime','0')";
     $connection->query($sql);
 
     
@@ -106,13 +104,8 @@ function createConversation($connection)
         $otherUser = $_GET["uID"];
 
         //insert this otherUser as a participant
-        $sql = "INSERT INTO participates (uID,cID,joined) 
-                VALUES('$otherUser','$cID','$dateTime')";
-        $connection->query($sql);
-
-        //insert the tuple for unread messages
-        $sql = "INSERT INTO unreadMessages (uID,cID,count) 
-                VALUES('$otherUser','$cID','0')";
+        $sql = "INSERT INTO participates (uID,cID,joined,unread_count) 
+                VALUES('$otherUser','$cID','$dateTime','0')";
         $connection->query($sql);
     }
 
@@ -141,25 +134,14 @@ function sendMessage($connection)
     $cID     = $_GET["cID"];
 
     //insert the message into the database
-    $sql     = "INSERT INTO message(mID,uID,cID,date_time,content) 
-                VALUES('0','$uID','$cID','$dateTime','$message')";
-
+    $sql     = "INSERT INTO message(uID,cID,date_time,content) 
+                VALUES('$uID','$cID','$dateTime','$message')";
     $result  = $connection->query($sql);
-    $mID     = mysqli_insert_id($connection); //get the message ID just inserted
 
-    //insert into the database every other user hasn't read it yet
-    $otherUserQuery = "SELECT uID
-                        FROM participates
-                        WHERE cID = '$cID' AND uID <> '$uID'";
-
-    if($otherUserResult = $connection->query($otherUserQuery)){
-        while($otherUser = $otherUserResult->fetch_array(MYSQLI_ASSOC)) {
-            $otherUserID = $otherUser["uID"];
-            $insertUnreadQuery = "INSERT INTO messageNotRead (uID,mID)
-                                    VALUES ('$otherUserID','$mID')";
-            $connection->query($insertUnreadQuery);
-        }
-    }
+    $updateUnreadQuery = "UPDATE participates
+                          SET unread_count = (unread_count + 1)
+                          WHERE uID != '$uID' AND cID = '$cID'";
+    $connection->query($updateUnreadQuery);
 }
 
 //--------------------------------------------------ADD USER TO CONVERSATION-------------------------------------------------------------------------//
@@ -175,13 +157,8 @@ function addParticipant($connection)
     $cID      = $_GET["cID"];
 
     //insert this new user into participates table
-    $sql      = "INSERT INTO participates (uID,cID,joined) 
-                 VALUES ('$newUser', '$cID', '$dateTime')";
-    $connection->query($sql);
-
-    //insert the tuple for unread messages
-    $sql      = "INSERT INTO unreadMessages (uID,cID,count) 
-                 VALUES('$newUser','$cID','0')";
+    $sql      = "INSERT INTO participates (uID,cID,joined,unread_count) 
+                 VALUES ('$newUser', '$cID', '$dateTime','0')";
     $connection->query($sql);
     
     header("Location: ../conversation.php?cID=$cID");
@@ -212,23 +189,6 @@ function removeUserFromConvo($connection){
     if($result->num_rows == 0){
         $sql = "DELETE FROM conversation
                 WHERE cID = $cID";
-        $result = $connection->query($sql);
-
-        //this should happen automatically
-        // //and delete all messages (this should delete unread messages as well)
-        // $sql = "DELETE FROM message
-        //         WHERE cID = $cID";
-        // $result = $connection->query($sql);
-    }
-
-    //otherwise just delete unread messages from this user in this conversation 
-    else { 
-        $messages = "SELECT mID
-                    FROM message
-                    WHERE uID = $uID AND cID = $cID";
-
-        $sql = "DELETE FROM messageNotRead
-                WHERE mID IN $messages AND uID = $uID";
         $result = $connection->query($sql);
     }
     
@@ -304,7 +264,7 @@ function CreateGroup($connection)
     if (!empty($groupName)) { //make sure the user input a name for the group
         
         $groupName = addslashes($groupName);
-        $sql       = "INSERT INTO groups (gID, g_name, icon, visible, burn_date) VALUES ('0','$groupName', 'NULL', '1', '0000-00-00 00:00:00')"; //put the contact in the database
+        $sql       = "INSERT INTO groups (gID, g_name, icon, visible, burn_date) VALUES ('0','$groupName', 'NULL', '1', '0000-00-00 00:00:00')"; //put the group in the database
         $result    = $connection->query($sql);
         
         //Put the user in the member table with this group
@@ -359,13 +319,18 @@ function PostMessageToGroup($connection, $message, $gID)
     } else
         return $pID;
 }
+
+
 //---------------------------------------------------MARK POST AS READ------------------------------------------------------------------//
-function markAsRead($connection, $gID, $uID){
-	
+function markAsRead($connection, $gID, $uID)
+{
 	//var_dump($result);
 	$sql = "UPDATE members SET unread_count='0' WHERE gID=$gID AND uID=$uID";
 	$deletion = $connection->query($sql);	
+
 }
+
+
 //--------------------------------------------------REPLY TO POST------------------------------------------------------------------------//
 if (isset($_GET['replyToPost'])) {
     postReply($connection);
@@ -373,7 +338,6 @@ if (isset($_GET['replyToPost'])) {
 
 function postReply($connection)
 {
-    
     $gID      = $_GET["gID"];
     $pID      = PostMessageToGroup($connection, $_POST["message"], $gID); //make a new post with the message and groupID and get the pID of the new reply back
     $parentID = $_GET['pID']; //take the pID that we are replying to
@@ -510,10 +474,25 @@ function addGroup($connection, $gID, $uID){
     header("Location: ../group.php?gID=$gID");
 }
 
+//--------------------------------------------------DELETE USER PROFILE-------------------------------------------------------------------------//
+if (isset($_GET["removeUserFromAll"])) {
+    removeUserFromAll($connection);
+}
+
+function removeUserFromAll($connection){
+
+    $uID = $_SESSION["uID"];
+    // Should cascade down and delete everything that uses this uID
+    $sql    = "DELETE FROM user WHERE uID=$uID";
+    $result = $connection->query($sql);
+    header("Location: ../index.php");
+}
+
 //--------------------------------------------------DELETE USER FROM GROUP-------------------------------------------------------------------------//
 if (isset($_GET["removeUserFromGroup"])) {
     removeUserFromGroup($connection);
 }
+
 
 function removeUserFromGroup($connection)
 {
@@ -601,9 +580,30 @@ if ($uploadOk == 0) {
     }
 }	
 }
+//------------------------------------------------SAVE PROFILE SETTINGS--------------------------------//
+if(isset($_GET['saveProfileSettings'])){
+	saveProfileSettings($connection);
+}
+
+function saveProfileSettings($connection){
+	$uID = $_SESSION['uID'];
+	$tags_visible = $_POST['tags_visible'];
+    $profile_visible = $_POST['profile_visible'];
+	echo $tags_visible;
+	echo $profile_visible;
+    //set profile  visible or not (1 or 0)
+	$sql = "UPDATE user SET profile_visible=$profile_visible WHERE uID=$uID";
+	$result = $connection->query($sql);
+    //set tags visible or not (1 or 0)
+    $sql = "UPDATE user SET tags_visible=$tags_visible WHERE uID=$uID";
+    $result = $connection->query($sql);
+
+	header("Location: ../profileSettings.php");
+}
+
 //------------------------------------------------SAVE GROUP SETTINGS--------------------------------//
 if(isset($_GET['saveGroupSettings'])){
-	saveGroupSettings($connection);
+    saveGroupSettings($connection);
 }
 
 function saveGroupSettings($connection){
@@ -614,7 +614,7 @@ function saveGroupSettings($connection){
 	$result = $connection->query($sql);
 	uploadGroupIcon($connection, $gID); //save the image to file and put the path in the database
 
-	header("Location: ../group.php?gID=$gID");
+    header("Location: ../group.php?gID=$gID");
 }
 
 //------------------------------------------------TAG GROUP------------------------------------------//
@@ -624,7 +624,7 @@ if (isset($_GET['tagGroup'])) {
 
 function tagGroup($connection, $gID)
 {
-    $tagName = $_POST["tagName"];
+    $tagName = addslashes($_POST["tagName"]);
     
 	$tagName = addSlashes($tagName);
     //make a new tag
@@ -702,39 +702,59 @@ function RemoveContact($connection)
     
 }
 
-//-------------------------------------------------BLOCK OR UNBLOCK USER------------------------------------------------------------------//
-if (isset($_GET['blocked'])) {
-    $blockedUser = $_GET['blocked'];
-    if (!$blockedUser) {
-        BlockUser($connection);
-    } else {
-        UnBlockUser($connection);
-    }
+//-------------------------------------------------BLOCK USER------------------------------------------------------------------//
+// if (isset($_GET['blocked'])) {
+//     $blockedUser = $_POST['hiddenUID'];
+//     //If the user is not currently blocked, block them!
+//     if (!$blockedUser) {
+//         BlockUser($connection);
+//     } 
+//     //Otherwise, unblock the user.
+//     else {
+//         UnBlockUser($connection);
+//     }
+// }
+if (isset($_GET['blockUser'])) {
+    BlockUser($connection);
 }
 
 function BlockUser($connection)
 {
     
     //insert uID and contacts uID
-    $contactID = $_GET["uID"]; //the user id of the contact (passed from userButtons.php)
+    $contactID = $_POST["hiddenUID"]; //the user id of the contact (passed from profileSettings.php)
     $uID       = $_SESSION["uID"]; //the user's ID
+
+    // For testing
+    // echo "BLOCKED!";
+    // var_dump($contactID,$uID);
     
     $sql    = "INSERT INTO u_blocks (uID, blocked) VALUES ('$uID', '$contactID')"; //put the block in the database
     $result = $connection->query($sql);
-    header('Location: ../profile.php');
+    
+    header('Location: ../profileSettings.php');
     
 }
 
+//-------------------------------------------------UNBLOCK USER------------------------------------------------------------------//
+if (isset($_GET['unBlockUser'])) {
+    UnBlockUser($connection);
+}
 function UnBlockUser($connection)
 {
     
     //insert uID and contacts uID
-    $contactID = $_GET["uID"]; //the user id of the contact (passed from userButtons.php)
+    $contactID = $_GET["blockedUser"]; //the user id of the contact (passed from userButtons.php)
     $uID       = $_SESSION["uID"]; //the user's ID
     
+    // For testing
+    // echo "UNBLOCKED!";
+    // var_dump($contactID,$uID);
+
     $sql    = "DELETE FROM u_blocks WHERE uID='$uID' AND blocked='$contactID'"; //remove the block from the database
     $result = $connection->query($sql);
-    header('Location: ../profile.php');
+
+    header('Location: ../profileSettings.php');
     
 }
 
@@ -746,7 +766,7 @@ if(isset($_GET['tagUser']) && isset($_POST["tagName"]) && $_POST["tagName"] != "
 
 function CreateTag($connection)
 {
-    $tagName = $_POST["tagName"];
+    $tagName = addslashes($_POST["tagName"]);
     $user    = $_SESSION["uID"]; //doesn't have access to this variable because it is a separate php page
     
     //make a new tag

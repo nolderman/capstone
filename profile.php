@@ -65,6 +65,7 @@
 
 			<!-- Column for profile information -->
 			<div id="centerColumn">
+
 				<h1>
 					<?php 
 						//display profile's name
@@ -72,8 +73,39 @@
 					?>
 				</h1>
 
-				<!--change this to profile image when that is implemented-->
-				<img class = "image" src="images/silhouette.jpg">
+				<?php 
+				//If this is our profile
+				if(is_null($otherUser)){
+					echo "<!-- Uploading profile picture -->
+					<form action='uploadPicture.php' enctype='multipart/form-data' method='post'>
+						<table style='border-collapse: collapse; font: 12px Tahoma;' border='1' cellspacing='5' cellpadding='5'>
+							<tbody><tr>
+							<td>
+							<input name='uploadedimage' type='file'>
+							</td>
+
+							</tr>
+
+							<tr>
+							<td>
+							<input name='Upload Now' class= 'button hvr-fade-green' type='submit' value='Upload Image'>
+							</td>
+							</tr>
+						</tbody></table>
+					</form>";
+				}
+				?>
+				
+				<?php
+					//display profile picture
+					//If the string is "NULL" (aka, no picture in the database for this person) then upload a silhouette instead.
+					if (($profileInfo['picture']) == 'NULL'){
+						echo "<img class = 'image' src='images/silhouette.jpg'>";
+					}
+					else{
+						echo "<img class = 'image' src='images/profile_images/" .$profileInfo["picture"]. "'>";
+					}
+				?>
 				
 				</br>
 				
