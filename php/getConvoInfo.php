@@ -15,6 +15,7 @@ if(!isset($_GET["cID"])){
 $user = $_SESSION["uID"];
 $cID = $_GET["cID"];
 
+
 //query database for the conversation info that will be needed
 //first, check if this user is a participant of the conversation, and direct away if they aren't
 $sql = "SELECT uID, joined
@@ -37,10 +38,9 @@ $result = $connection->query($sql);
 $getName = $result->fetch_array(MYSQLI_ASSOC);
 $convoName = $getName["c_name"];
 
-//third, delete the unread data from the database
-$sql = "UPDATE unreadMessages
-		SET count ='0'
-		WHERE uID = '$user' AND cID = '$cID')";
-$result = $connection->query($sql);
-var_dump($result);
+//third set as this user read the messages
+$updateUnreadQuery = "UPDATE participates
+                      SET unread_count = '0'
+                      WHERE (uID = '$user' AND cID = '$cID')";
+$connection->query($updateUnreadQuery);
 ?>

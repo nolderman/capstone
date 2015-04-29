@@ -42,6 +42,8 @@ function Search($connection)
     echo $jsonArray;
     return $jsonArray;
 }
+
+
 //----------------------------------------------------GROUP SEARCH-------------------------------------------------------------------------------------//
 if (isset($_GET["groupSearchInput"])) {
     groupSearch($connection);
@@ -70,6 +72,7 @@ function groupSearch($connection)
     return $jsonArray;
 }
 
+
 //--------------------------------------------------CREATE CONVERSATION-------------------------------------------------------------------------------//
 if (isset($_GET["createConversation"])) { //only save a contact if the user put something in the submit box
     createConversation($connection);
@@ -83,22 +86,17 @@ function createConversation($connection)
     $dateTime = new DateTime(null, new DateTimeZone('America/Los_Angeles'));
     $dateTime = $dateTime->format('Y-m-d H:i:s'); //set the dateTime format and put it back in the variable
     
-    
+    //add new conversation
     $sql = "INSERT INTO conversation (cID,c_name) 
-	       VALUES ('0', '')";
+	        VALUES ('0', '')";
     $connection->query($sql);
     
     //get the ID of the conversation just created
     $cID = mysqli_insert_id($connection); 
     
     //insert this user as a participant
-    $sql = "INSERT INTO participates (uID,cID,joined) 
-	       VALUES('$user','$cID','$dateTime')";
-    $connection->query($sql);
-
-    //insert the tuple for unread messages
-    $sql = "INSERT INTO unreadMessages (uID,cID,count) 
-           VALUES('$user','$cID','0')";
+    $sql = "INSERT INTO participates (uID,cID,joined,unread_count) 
+	       VALUES('$user','$cID','$dateTime','0')";
     $connection->query($sql);
 
     
@@ -106,13 +104,8 @@ function createConversation($connection)
         $otherUser = $_GET["uID"];
 
         //insert this otherUser as a participant
-        $sql = "INSERT INTO participates (uID,cID,joined) 
-                VALUES('$otherUser','$cID','$dateTime')";
-        $connection->query($sql);
-
-        //insert the tuple for unread messages
-        $sql = "INSERT INTO unreadMessages (uID,cID,count) 
-                VALUES('$otherUser','$cID','0')";
+        $sql = "INSERT INTO participates (uID,cID,joined,unread_count) 
+                VALUES('$otherUser','$cID','$dateTime','0')";
         $connection->query($sql);
     }
 
@@ -141,25 +134,14 @@ function sendMessage($connection)
     $cID     = $_GET["cID"];
 
     //insert the message into the database
-    $sql     = "INSERT INTO message(mID,uID,cID,date_time,content) 
-                VALUES('0','$uID','$cID','$dateTime','$message')";
-
+    $sql     = "INSERT INTO message(uID,cID,date_time,content) 
+                VALUES('$uID','$cID','$dateTime','$message')";
     $result  = $connection->query($sql);
-    $mID     = mysqli_insert_id($connection); //get the message ID just inserted
 
-    //insert into the database every other user hasn't read it yet
-    $otherUserQuery = "SELECT uID
-                        FROM participates
-                        WHERE cID = '$cID' AND uID <> '$uID'";
-
-    if($otherUserResult = $connection->query($otherUserQuery)){
-        while($otherUser = $otherUserResult->fetch_array(MYSQLI_ASSOC)) {
-            $otherUserID = $otherUser["uID"];
-            $insertUnreadQuery = "INSERT INTO messageNotRead (uID,mID)
-                                    VALUES ('$otherUserID','$mID')";
-            $connection->query($insertUnreadQuery);
-        }
-    }
+    $updateUnreadQuery = "UPDATE participates
+                          SET unread_count = (unread_count + 1)
+                          WHERE uID != '$uID' AND cID = '$cID'";
+    $connection->query($updateUnreadQuery);
 }
 
 //--------------------------------------------------ADD USER TO CONVERSATION-------------------------------------------------------------------------//
@@ -175,13 +157,8 @@ function addParticipant($connection)
     $cID      = $_GET["cID"];
 
     //insert this new user into participates table
-    $sql      = "INSERT INTO participates (uID,cID,joined) 
-                 VALUES ('$newUser', '$cID', '$dateTime')";
-    $connection->query($sql);
-
-    //insert the tuple for unread messages
-    $sql      = "INSERT INTO unreadMessages (uID,cID,count) 
-                 VALUES('$newUser','$cID','0')";
+    $sql      = "INSERT INTO participates (uID,cID,joined,unread_count) 
+                 VALUES ('$newUser', '$cID', '$dateTime','0')";
     $connection->query($sql);
     
     header("Location: ../conversation.php?cID=$cID");
@@ -212,23 +189,6 @@ function removeUserFromConvo($connection){
     if($result->num_rows == 0){
         $sql = "DELETE FROM conversation
                 WHERE cID = $cID";
-        $result = $connection->query($sql);
-
-        //this should happen automatically
-        // //and delete all messages (this should delete unread messages as well)
-        // $sql = "DELETE FROM message
-        //         WHERE cID = $cID";
-        // $result = $connection->query($sql);
-    }
-
-    //otherwise just delete unread messages from this user in this conversation 
-    else { 
-        $messages = "SELECT mID
-                    FROM message
-                    WHERE uID = $uID AND cID = $cID";
-
-        $sql = "DELETE FROM messageNotRead
-                WHERE mID IN $messages AND uID = $uID";
         $result = $connection->query($sql);
     }
     
@@ -359,13 +319,18 @@ function PostMessageToGroup($connection, $message, $gID)
     } else
         return $pID;
 }
+
+
 //---------------------------------------------------MARK POST AS READ------------------------------------------------------------------//
-function markAsRead($connection, $gID, $uID){
-	
+function markAsRead($connection, $gID, $uID)
+{
 	//var_dump($result);
 	$sql = "UPDATE members SET unread_count='0' WHERE gID=$gID AND uID=$uID";
 	$deletion = $connection->query($sql);	
+
 }
+
+
 //--------------------------------------------------REPLY TO POST------------------------------------------------------------------------//
 if (isset($_GET['replyToPost'])) {
     postReply($connection);
