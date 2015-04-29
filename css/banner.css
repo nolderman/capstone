@@ -38,7 +38,7 @@
 		position: absolute;	
 		
 		float:right;
-        left:88%;
+        left:34%;
         padding: 10px 15px;
 
         font-weight: 300;
@@ -109,6 +109,23 @@
     border: 1px solid #2980b9; /*Blue border*/;
     color: white;
 }
+
+.banner .settingsButton {
+  position: absolute;
+
+    float:right;
+    left:88%;
+    padding: 10px 15px;
+    padding-right: 20px;
+
+    font-weight: 300;
+    font-size: 18px;
+        
+    text-shadow: 0px 1px 0 rgba(0,0,0,0.25);
+    border-radius: 5px;
+    text-decoration: none;
+
+}
 /*Wrapper for the searchbarInput and searchButton*/
 .banner #searchbar {
 	position:absolute;
@@ -119,6 +136,7 @@
 .banner #searchbarInput{
 	background: #2c3e50;
 	color: #27ae60; /*Connakt green*/
+  height: 17px;
 	box-shadow: none;
 }
 
@@ -128,7 +146,7 @@
 	/*Position it so it sits just off to the right side of the searchbarInput*/
 	top: 5px;
 	right: -10px;
-	height: 22px;
+	height: 21.5px;
 	border-radius: 8px;
 	border-color: transparent;
 
@@ -142,16 +160,16 @@
     background-position: center;*/
 }
 .banner #searchButton:hover{
-	cursor: pointer; /*change cursor to be a hand*/
+	cursor: pointer; /*change cursor to be a pointing hand*/
 }
 
 /*CSS for the input field specifically in the banner.*/
 /*Some padding on the right side so the search button doesn't overlap.*/
-.banner input[type=text], textarea {
+#searchbar input[type=text], textarea {
 	padding-right: 25px;
 	border-width: 0px;
 }
-.banner input[type=text]:focus, textarea:focus {
+#searchBar input[type=text]:focus, textarea:focus {
 	padding-right: 25px;
 	border-width: 0px;
 	border-color: transparent;
