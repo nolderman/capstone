@@ -24,7 +24,7 @@ if (!empty($_FILES["uploadedimage"]["name"])) {
     $imgtype=$_FILES["uploadedimage"]["type"];
     $ext= GetImageExtension($imgtype);
     $imagename=date("d-m-Y")."-".time().$ext;
-    $target_path = "images/profile_images/".$imagename;
+    $target_path = "uploads/profile_images/".$imagename;
 
     $uID = $_SESSION['uID'];
      

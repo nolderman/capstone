@@ -28,7 +28,7 @@ if($result->num_rows > 0){
 						echo "<img class = 'image' src='images/silhouette.jpg'>";
 					}
 					else{
-						echo "<img class = 'image' src='images/profile_images/".$row['picture']."''>";
+						echo "<img class = 'image' src='uploads/profile_images/".$row['picture']."''>";
 					}
 				echo"</div>";
 	
@@ -46,7 +46,7 @@ if($result->num_rows > 0){
 						echo "<img class = 'image' src='images/silhouette.jpg'>";
 					}
 					else{
-						echo "<img class = 'image' src='images/profile_images/".$row['picture']."''>";
+						echo "<img class = 'image' src='uploads/profile_images/".$row['picture']."''>";
 					}
 				echo"</div>";
 
