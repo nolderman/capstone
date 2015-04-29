@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 if (is_null($otherUser) || ($profileInfo["tags_visible"] && !$blockedUser)) {
     $sql = "SELECT tag_name 
@@ -9,8 +9,9 @@ if (is_null($otherUser) || ($profileInfo["tags_visible"] && !$blockedUser)) {
     
     if ($result = $connection->query($sql)) {
         //write out each tag
+        echo "This part of the code is executing.";
         while ($tags = $result->fetch_array(MYSQLI_ASSOC)) {
-            echo "<div class='tag hvr-fade-cloud'>" . $tags["tag_name"] . "</div>";
+            echo "<div class='tag hvr-fade-cloud'>".$tags["tag_name"]."</div>";
             echo "   "; //spacing between tags		
         }
     }
@@ -22,6 +23,7 @@ if (is_null($otherUser) || ($profileInfo["tags_visible"] && !$blockedUser)) {
     //if this is their profile page, show tags
     //This now appears within the tag wrapper after all the other tags. It will only appear if you are on your own page. 	
     if (is_null($otherUser)) {
+
         //form for user to tag themself
         echo "<form name='tagUser' class='tagUser' id='tagUser' method= 'POST' action='php/functions.php?tagUser=true'>";
         echo "<input type='text' name='tagName' id='tagNameInput' class='input tagName' placeholder='Add a tag'/>";

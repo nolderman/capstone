@@ -1,4 +1,5 @@
 <?php
+
 // Parse and find the basename of the page we are on. Profile page -> profile.php -> profile, for example.
 $basename = substr(strtolower(basename($_SERVER['PHP_SELF'])), 0, strlen(basename($_SERVER['PHP_SELF'])) - 4);
 
@@ -15,20 +16,30 @@ if ($basename != 'index') { //if you are not on the index page, aka on profile, 
 		
         echo "<form name='searchBar' class='content' id='searchbar' method= 'POST' action='php/functions.php?addUserToGroup=true&gID=$gID'> ";
     } 
-
+    // Otherwise, if we are not on the group, then we do normal search.
     else { 
         echo "<form name='searchBar' class='content' id='searchbar' method= 'POST' action='profile.php'> ";
     }
-    echo "		<input type='text' name='typeahead' class='typeahead' id='searchbarInput' placeholder='Search'/>	
-				<input type='hidden' name='hiddenUID' id='userID' value='' />						
-				<input type='submit' name='addContact' value='Go!' class='hvr-fade-green button' id='searchButton' hideFocus='true'> 
-			</form>		
 
-			<a class = 'hvr-fade-green button content logout' href='php/functions.php?userLogout=true'>Logout</a>				
+    echo "<input type='text' name='typeahead' class='typeahead' id='searchbarInput' placeholder='Search'/>	
+			<input type='hidden' name='hiddenUID' id='userID' value='' />						
+			<input type='submit' name='addContact' value='Go!' class='hvr-fade-green button' id='searchButton' hideFocus='true'> 
+		  </form>		
 
-			<img id='connaktSymbol' src='images/banner/center_banner.png'></img>";
+		  <a class = 'hvr-fade-green button content logout' href='php/functions.php?userLogout=true'>Logout</a>				
+
+		  <img id='connaktSymbol' src='images/banner/center_banner.png'></img>";
     
+    // If you are on YOUR profile page
+    if ($basename == 'profile' && is_null($otherUser)){
+        echo "<a href='php/functions.php?removeUserFromAll=true'> X </a>";
+    	require_once 'php/getContacts.php';
+    	echo "<div class = 'hvr-fade-green button content' id='yourProfileButton' onmousedown='toggleDiv(\"contactsList\");'>Contacts</div>"; //shares id with 'yourProfileButton' because it has the exact same positioning as that button.
+    	echo "<div class = 'content' id='contactsList' style='display:none'>";
+       		contactList($connection, $user, $otherUser);
+    	echo "</div>";
 
+    }
     // You are on a different person's profile page, or on group or conversation page, add the "Your Profile" button.
     if ($basename == 'profile' && !is_null($otherUser) || $basename != 'profile') {
         echo "<a class = 'hvr-fade-green button content' id='yourProfileButton' href='profile.php'>Profile</a>";

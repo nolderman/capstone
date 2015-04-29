@@ -234,7 +234,7 @@ function CreateGroup($connection)
     if (!empty($groupName)) { //make sure the user input a name for the group
         
         $groupName = addslashes($groupName);
-        $sql       = "INSERT INTO groups (gID, g_name, icon, visible, burn_date) VALUES ('0','$groupName', 'NULL', '1', '0000-00-00 00:00:00')"; //put the contact in the database
+        $sql       = "INSERT INTO groups (gID, g_name, icon, visible, burn_date) VALUES ('0','$groupName', 'NULL', '1', '0000-00-00 00:00:00')"; //put the group in the database
         $result    = $connection->query($sql);
         
         //Put the user in the member table with this group
@@ -407,10 +407,38 @@ function addUserToGroup($connection)
     header("Location: ../group.php?gID=$gID");
 }
 
+//--------------------------------------------------DELETE USER PROFILE-------------------------------------------------------------------------//
+if (isset($_GET["removeUserFromAll"])) {
+    removeUserFromAll($connection);
+}
+
+function removeUserFromAll($connection){
+
+    $uID = $_SESSION["uID"];
+    $sql    = "DELETE FROM members WHERE uID=$uID";
+    $result = $connection->query($sql);
+    $sql    = "DELETE FROM u_blocks WHERE uID=$uID OR blocked=$uID";
+    $result = $connection->query($sql);
+    $sql    = "DELETE FROM g_blocks WHERE uID=$uID";
+    $result = $connection->query($sql);
+    $sql    = "DELETE FROM contacts WHERE uID=$uID OR contact=$uID";
+    $result = $connection->query($sql);
+    $sql    = "DELETE FROM messageNotRead WHERE uID=$uID";
+    $result = $connection->query($sql);
+    $sql    = "DELETE FROM participates WHERE uID=$uID";
+    $result = $connection->query($sql);
+    $sql    = "DELETE FROM conversation WHERE uID=$uID";
+    $result = $connection->query($sql);
+    $sql    = "DELETE FROM user WHERE uID=$uID";
+    $result = $connection->query($sql);
+    header("Location: ../index.php");
+}
+
 //--------------------------------------------------DELETE USER FROM GROUP-------------------------------------------------------------------------//
 if (isset($_GET["removeUserFromGroup"])) {
     removeUserFromGroup($connection);
 }
+
 
 function removeUserFromGroup($connection)
 {

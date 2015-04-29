@@ -14,7 +14,7 @@ if(!isset($_POST["hiddenUID"]) || $_SESSION["uID"] == $_POST["hiddenUID"]){
 	$otherUser = null; 
 
 	//get the info for this profile that will be needed
-	$sql = "SELECT uID, f_name, l_name, tags_visible, profile_visible, block_invites, block_messages 
+	$sql = "SELECT uID, f_name, l_name, picture, tags_visible, profile_visible, block_invites, block_messages 
 			FROM user 
 			WHERE (uID = '$user')";
 }
@@ -22,7 +22,7 @@ else{
 	$otherUser = $_POST["hiddenUID"];
 
 	//get the info for this profile that will be needed
-	$sql = "SELECT uID, f_name, l_name, tags_visible, profile_visible, block_invites, block_messages 
+	$sql = "SELECT uID, f_name, l_name, picture, tags_visible, profile_visible, block_invites, block_messages 
 			FROM user 
 			WHERE (uID = '$otherUser')";
 }
