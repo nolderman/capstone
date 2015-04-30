@@ -89,7 +89,8 @@
 					$sql = "SELECT icon FROM groups WHERE gID='$gID'";
 					$result = $connection->query($sql);
 					$row = $result->fetch_array(MYSQLI_ASSOC);
-					if(is_null($row['icon'])){
+					if(!($row['icon'] == 'NULL')){
+						
 						$imageLocation = $row['icon'];
 						echo  "<img src='uploads/$imageLocation' height='42' width='42'>"; 
 					}else{
