@@ -16,6 +16,8 @@
 		<link href="css/searchBar.css" rel="stylesheet" type="text/css"> <!-- CSS file for banner for main pages -->
 		<link href="css/tags.css" rel="stylesheet" type="text/css"> <!-- CSS file for tags -->
 		<link href="css/notifications.css" rel="stylesheet" type="text/css"> <!-- CSS file for notifications -->
+		<link href="css/settings.css" rel="stylesheet" type="text/css"> <!-- CSS file for settings menu -->
+
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		
 		<!-- searching javascript codes -->
@@ -42,6 +44,10 @@
 
 		<!-- Banner PHP code, dynamic per page you're on -->
 		<?php include 'php/banner.php';?>
+		<!-- Hidden box for settings that is toggled from the banner. -->
+		<div class='settingsBox' id='profileSettings' style='display:none'>
+            <?php include 'profileSettings.php';?>
+       	</div>
 
 
 		<!--Sits around all three columns, keeping them aligned together easily. Move this around (in CSS) if you want to shift or affect all 3 columns.  -->

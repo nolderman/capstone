@@ -12,9 +12,10 @@
 		<link href="css/group.css" rel="stylesheet" media="all">
 		<link href="css/buttons.css" rel="stylesheet" media="all">
 		<script src="javascript/jquery-1.11.2.min.js"></script>
-		<link href="css/columns.css" rel="stylesheet" type="text/css"> <!-- CSS file for right and left columns -->
+		<link href="css/columns.css" rel="stylesheet" type="text/css"> <!-- CSS file for right and left and middle columns -->
 		<link href="css/banner.css" rel="stylesheet" type="text/css"> <!-- CSS file for header for main pages -->
 		<link href="css/searchBar.css" rel="stylesheet" type="text/css"> <!-- CSS file for banner for main pages -->
+		<link href="css/notifications.css" rel="stylesheet" type="text/css"> <!-- CSS file for notifications -->
 		<link href="css/message.css" rel="stylesheet" type="text/css">
 		<link href="css/tags.css" rel="stylesheet" type="text/css"> <!-- CSS file for tags -->
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -43,12 +44,11 @@
 	<body>
 		<?php 
 			include 'php/banner.php';
-			require_once 'php/groupTags.php';
 			markAsRead($connection, $gID, $_SESSION['uID']);//mark all posts from this group as read by the user
-			if($moderator){
-				echo "<a class='button' href='php/functions.php?deleteGroup=true&gID=$gID'>Delete Group </a>";
-			}	
 		?>
+			<div class='settingsBox' id='groupSettings' style='display:none'>
+				<?php include 'groupSettings.php';?>
+			</div>
 
 		<!-- wrapper for all divs within the main body of the page. -->
 		<div id="columnWrapper">
@@ -98,7 +98,7 @@
 					}
 					
 					echo "$g_name";
-					
+
 					
 					if($moderator){
 						echo	"<a href='' id='$gID' class ='editName groupActionLink'> Edit Group Name </a>
@@ -108,7 +108,7 @@
 								</form>";	
 						}
 						echo "</div>";
-				
+					require_once 'php/groupTags.php';
 					echo "<form name='postMessage' method='POST' action='php/functions.php?postMessage=true&gID=$gID'>;
 								<textarea cols='50' rows='4' name='message' id='postInput' placeholder='Type Your Message Here'></textarea>;     
 								<input type='submit' name='postMessage' value='Post' class='button' id='postButton'>;				

@@ -13,6 +13,7 @@
 		<script src="javascript/jquery-1.11.2.min.js"></script>
 		<link href="css/banner.css" rel="stylesheet" type="text/css"> <!-- CSS file for header for main pages -->
 		<link href="css/searchBar.css" rel="stylesheet" type="text/css"> <!-- CSS file for banner for main pages -->
+		<link href="css/settings.css" rel="stylesheet" type="text/css"> <!-- CSS file for settings menu -->
 		<link href="css/groupSettings.css" rel="stylesheet" type="text/css">
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script type="text/javascript" src="javascript/bootstrap.js"></script> 
@@ -20,14 +21,11 @@
 		<script type="text/javascript" src="javascript/search.js" language="javascript"> </script>
 	</head>
 	
-	<body>
-	
-	<div class='groupSettings'>
 	
 	<?php
 
 
-		echo "<a href='profile.php' class='button'> Back To Profile </a>";
+		// echo "<a href='profile.php' class='button-hollow-green hvr-fade-green'> Back To Profile </a>";
 		
 		
 			$tags_public="";//this goes into the radio buttons and checks the one from the database
@@ -57,18 +55,19 @@
 				<input type='radio' name='profile_visible' value='1' $profile_public>Keep profile public
 				<br>
 
-				<input type='submit' class='button hvr-fade-green' value='Save Settings'>	
+				<input type='submit' class='button-hollow-green hvr-fade-green' value='Save Settings'>	
 			</form>
+			<br>";
 
-
+			echo "<a class='button-hollow-green hvr-fade-red deleteButton' href='php/functions.php?removeUserFromAll=true'> Delete Profile </a>";
 			
-			<h5>Block User</h5>";
+			echo "<h5>Block User</h5>";
 			
 			echo
 			"<form name='searchBar' class='content' id='searchbar' method='POST' action='php/functions.php?blockUser=true'>
 				<input type='text' name='typeahead' class='typeahead' id='searchbarInput' placeholder='Search'/>	
 				<input type='hidden' name='hiddenUID' id='userID' />						
-				<input type='submit' name='blockUser' value='Block User' class='hvr-fade-red button' id='searchButton' hideFocus='true'> 
+				<input type='submit' name='blockUser' value='Block User' class='hvr-fade-red button-hollow-green' id='searchButton' hideFocus='true'> 
 			</form>";
 			
 			
@@ -83,7 +82,4 @@
 	
 			?>
 				
-	</div>
-	
-	</body>
 </html>
