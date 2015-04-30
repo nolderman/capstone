@@ -44,6 +44,7 @@
 	<body>
 		<?php 
 			include 'php/banner.php';
+			require_once 'php/groupTags.php';
 			markAsRead($connection, $gID, $_SESSION['uID']);//mark all posts from this group as read by the user
 		?>
 			<div class='settingsBox' id='groupSettings' style='display:none'>
@@ -82,9 +83,7 @@
 				<!--Form to post a message-->
 				<div id="postWrapper">
 				<?php 
-					
-			
-					
+				
 					echo "<div class='groupName' >";
 					$sql = "SELECT icon FROM groups WHERE gID='$gID'";
 					$result = $connection->query($sql);
@@ -108,7 +107,7 @@
 								</form>";	
 						}
 						echo "</div>";
-					require_once 'php/groupTags.php';
+					
 					echo "<form name='postMessage' method='POST' action='php/functions.php?postMessage=true&gID=$gID'>;
 								<textarea cols='50' rows='4' name='message' id='postInput' placeholder='Type Your Message Here'></textarea>;     
 								<input type='submit' name='postMessage' value='Post' class='button' id='postButton'>;				

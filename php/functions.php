@@ -43,7 +43,6 @@ function Search($connection)
     return $jsonArray;
 }
 
-
 //----------------------------------------------------GROUP SEARCH-------------------------------------------------------------------------------------//
 if (isset($_GET["groupSearchInput"])) {
     groupSearch($connection);
