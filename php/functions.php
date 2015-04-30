@@ -87,7 +87,7 @@ function createConversation($connection)
     
     //add new conversation
     $sql = "INSERT INTO conversation (cID,c_name) 
-	        VALUES ('0', '')";
+	        VALUES ('0', 'No other participants')";
     $connection->query($sql);
     
     //get the ID of the conversation just created
@@ -159,7 +159,21 @@ function addParticipant($connection)
     $sql      = "INSERT INTO participates (uID,cID,joined,unread_count) 
                  VALUES ('$newUser', '$cID', '$dateTime','0')";
     $connection->query($sql);
-    
+
+    //if this conversation has a name indicating that it used to be with somebody else
+    //and another person is invited to the conversation, update the conversation name to be blank
+    $sql      = "SELECT c_name
+                 FROM conversation
+                 WHERE cID = '$cID' AND (c_name LIKE 'Old conversation with%' OR c_name LIKE 'No other participants')";
+    $result   = $connection->query($sql);
+
+    if($result->num_rows == 1){
+        $sql  = "UPDATE conversation
+                 SET c_name = ''
+                 WHERE cID = '$cID'";
+        $connection->query($sql);
+    }
+
     header("Location: ../conversation.php?cID=$cID");
 }
 
@@ -188,6 +202,20 @@ function removeUserFromConvo($connection){
     if($result->num_rows == 0){
         $sql = "DELETE FROM conversation
                 WHERE cID = $cID";
+        $result = $connection->query($sql);
+    }
+    //if there is only one user left in this conversation, change the name of the conversation to what it used to be with
+    else if($result->num_rows == 1){
+        $sql = "SELECT f_name
+                FROM user
+                WHERE uID = $uID";
+        $result = $connection->query($sql);
+        $row = $result->fetch_array(MYSQLI_ASSOC);
+        $convoName = "Old conversation with ".$row["f_name"];
+
+        $sql = "UPDATE conversation
+                SET c_name = '$convoName'
+                WHERE cID = '$cID'";
         $result = $connection->query($sql);
     }
     
