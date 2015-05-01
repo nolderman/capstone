@@ -1,7 +1,7 @@
 <?php 
-	require_once 'php/connect.php';
-	require_once 'php/sessionStatus.php';
-	require_once 'php/getProfileInfo.php';
+require_once 'php/connect.php';
+require_once 'php/sessionStatus.php';
+require_once 'php/getProfileInfo.php';
 
 
 
@@ -29,5 +29,3 @@ function contactList($connection, $user, $profile){
 		}
 }
 ?>
-
-

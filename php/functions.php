@@ -46,7 +46,6 @@ function Search($connection)
     return $jsonArray;
 }
 
-
 //----------------------------------------------------GROUP SEARCH-------------------------------------------------------------------------------------//
 if (isset($_GET["groupSearchInput"])) {
     groupSearch($connection);
@@ -93,7 +92,7 @@ function createConversation($connection)
     
     //add new conversation
     $sql = "INSERT INTO conversation (cID,c_name) 
-	        VALUES ('0', '')";
+	        VALUES ('0', 'No other participants')";
     $connection->query($sql);
     
     //get the ID of the conversation just created
@@ -165,7 +164,21 @@ function addParticipant($connection)
     $sql      = "INSERT INTO participates (uID,cID,joined,unread_count) 
                  VALUES ('$newUser', '$cID', '$dateTime','0')";
     $connection->query($sql);
-    
+
+    //if this conversation has a name indicating that it used to be with somebody else
+    //and another person is invited to the conversation, update the conversation name to be blank
+    $sql      = "SELECT c_name
+                 FROM conversation
+                 WHERE cID = '$cID' AND (c_name LIKE 'Old conversation with%' OR c_name LIKE 'No other participants')";
+    $result   = $connection->query($sql);
+
+    if($result->num_rows == 1){
+        $sql  = "UPDATE conversation
+                 SET c_name = ''
+                 WHERE cID = '$cID'";
+        $connection->query($sql);
+    }
+
     header("Location: ../conversation.php?cID=$cID");
 }
 
@@ -196,6 +209,20 @@ function removeUserFromConvo($connection){
                 WHERE cID = $cID";
         $result = $connection->query($sql);
     }
+    //if there is only one user left in this conversation, change the name of the conversation to what it used to be with
+    else if($result->num_rows == 1){
+        $sql = "SELECT f_name
+                FROM user
+                WHERE uID = $uID";
+        $result = $connection->query($sql);
+        $row = $result->fetch_array(MYSQLI_ASSOC);
+        $convoName = "Old conversation with ".$row["f_name"];
+
+        $sql = "UPDATE conversation
+                SET c_name = '$convoName'
+                WHERE cID = '$cID'";
+        $result = $connection->query($sql);
+    }
     
     header("Location: ../profile.php");
 }
@@ -213,14 +240,15 @@ function conversationToGroup($connection)
     $uID    = $_SESSION["uID"];
     
     //make a new group
-    $dateTime = new DateTime(null, new DateTimeZone('America/Los_Angeles'));
-    $dateTime = $dateTime->format('Y-m-d H:i:s');
     $sql      = "INSERT INTO groups (gID, g_name, icon, visible, burn_date) VALUES ('0','$c_name', 'NULL', '1', '0000-00-00 00:00:00')";
     $result   = $connection->query(test_input($sql));
     $gID      = mysqli_insert_id($connection); //get the id of the last inserted record (in this case it is the group ID)
     
     //Put the user in the member table with this group
-    $insertMember = "INSERT INTO members (uID,gID,moderator) VALUES ('$uID','$gID','1')"; //set the creator to a moderator
+	$dateTime = new DateTime(null, new DateTimeZone('America/Los_Angeles'));
+    $dateTime = $dateTime->format('Y-m-d H:i:s');
+	//set the creator to a moderator and unread count to 0
+    $insertMember = "INSERT INTO members (uID,gID,moderator,joined,unread_count) VALUES ('$uID','$gID','1','$dateTime','0')"; 
     $insertMember = $connection->query($insertMember);
 
     //Make the group own the conversation
@@ -232,21 +260,9 @@ function conversationToGroup($connection)
     $result = $connection->query($sql);
     while ($row = $result->fetch_array(MYSQLI_ASSOC)) { //move all participants into members as non mods
         $uID            = $row["uID"];
-        $moveToMember   = "INSERT INTO members (uID,gID,moderator) VALUES ('$uID','$gID','0')"; //put in members 
+        $moveToMember   = "INSERT INTO members (uID,gID,moderator,joined,unread_count) VALUES ('$uID','$gID','0','$dateTime','0')"; //put in members 
         $toMemberResult = $connection->query($moveToMember);
     }
-    
-    /**get all of the messages and put them in the post NOT NEEDED BUT IT WAS COOL FOR ABOUT 30 SECONDS SO I AM LEAVING IT <--- lol alright (nate)
-    $sql = "SELECT * FROM message WHERE cID=$cID";
-    $result = $connection->query($sql);
-    while($row = $result->fetch_array(MYSQLI_ASSOC)){
-    $uID = $row["uID"];
-    $content = $row["content"];
-    $date_time = $row["date_time"];
-    $moveToPost = "INSERT INTO post (uID,gID,date_time,content,edited) VALUES ('$uID', '$gID', '$date_time', '$content', '0')";//put in post
-    $moveResult = $connection->query($moveToPost);
-    }
-    **/
     header("Location: ../group.php?gID=$gID");
 }
 
@@ -515,12 +531,13 @@ if(isset($_GET['blockUserFromGroup'])){
 
 function blockUserFromGroup($connection){
 	
-	$blockedUID = $_POST["hiddenUID"];
+	$blockedUID = $_POST["blockedHiddenUID"];
 	$gID = $_GET['gID'];
 	$sql = "INSERT INTO g_blocks (gID,uID) VALUES ($gID, $blockedUID)";
 	$connection->query($sql);
-	
-	header("Location: ../groupSettings.php?gID=$gID");
+
+	header("Location: ../group.php?gID=$gID");
+
 }
 
 
@@ -554,11 +571,6 @@ if(isset($_POST["submit"])) {
         echo "File is not an image.";
         $uploadOk = 0;
     }
-}
-// Check if file already exists
-if (file_exists($target_file)) {
-    echo "Sorry, file already exists.";
-    $uploadOk = 0;
 }
 // Check file size
 if ($_FILES["fileToUpload"]["size"] > 500000) {
@@ -631,6 +643,7 @@ function tagGroup($connection, $gID)
 {
     $tagName = addslashes($_POST["tagName"]);
     
+	$tagName = addSlashes($tagName);
     //make a new tag
     $insert_tag = "INSERT INTO tag (tag_name) 
 					VALUES ('$tagName')";
@@ -652,9 +665,10 @@ function deleteGroupTag($connection, $gID, $tag_name)
 {
     echo $gID;
     echo $tag_name;
+	$tag_name = addSlashes($tag_name);
     $sql    = "DELETE FROM g_tagged WHERE gID='$gID' AND tag_name='$tag_name'";
     $result = $connection->query($sql);
-    header("Location: ../group.php?gID=$gID");
+   //header("Location: ../group.php?gID=$gID");
 }
 
 //-------------------------------------------------CHECK IF MODERATOR OF GROUP-------------------------------------------//
