@@ -200,15 +200,16 @@ function participantSidebar($connection, $cID, $user){
 			//write out each participant's name to the sidebar
 			while($participants = $result->fetch_array(MYSQLI_ASSOC)){
 				// it is not you, do the normal anchor tag without any special delete button CSS
-				if($participants["uID"] != $user){ 
-				echo "<a href = 'profile.php?uID=".$participants["uID"]."'>";
-				}
+
 				echo "<div class='sidebarLink profileLink hvr-fade-green'>".$participants["f_name"]." ".$participants["l_name"];
+				if($participants["uID"] != $user){ 
+				echo "<a href = 'profile.php?uID=".$participants["uID"]."'></a>";
+				}
 				if($participants["uID"] == $user){ 
-					echo "<a class='actionArea' href = 'profile.php?uID=".$participants["uID"]."'>";
+					echo "<a class='actionArea' href = 'profile.php?uID=".$participants["uID"]."'></a>";
 					echo "<a class='deleteButton hvr-fade-red' href='php/functions.php?removeUserFromConvo=true&cID=$cID'>X</a>";
 				}
-				echo "</div></a>";		
+				echo "</div>";		
 			}	
 		}
 		else{
