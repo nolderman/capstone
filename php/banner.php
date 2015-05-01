@@ -63,10 +63,10 @@ else { //this is if you're on the index page.
 			<form name='login' class='content loginform cf' accept-charset='utf-8' method= 'POST' action='php/functions.php?userLogin=true'>  			       
 				 <input type='email' id='email' name='usermail' placeholder='example@email.com' required>
 				 <input type='password'  id='password' name='password' placeholder='password' required>
-				 <input type='submit' class='submit hvr-fade-blue' name = 'submit'  value='Login'>
+				 <input type='submit' class='content submit hvr-fade-blue' name = 'submit'  value='Login'>
 			</form>   
 
-		    <a href='register.php' class='content signup hvr-fade-green'> Sign Up!</a>
+		    <a href='register.php' class='content button signup hvr-fade-green'> Sign Up!</a>
 			<img id='connaktSymbol' src='images/banner/center_banner.png'></img>
 		  </div>";
 }

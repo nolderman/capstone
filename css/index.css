@@ -42,22 +42,6 @@ body{
 
 }
 
-.signup{
-		position: absolute;	
-		
-		float:right;
-        left:80%;
-        padding: 10px 15px;
-        
-        font-weight: 300;
-        font-size: 18px;
-        color: #fff;
-		
-		background: #34495e;
-        border-radius: 5px;
-		text-decoration: none;
-}
-
 .loginform {
 		position: absolute;		
 		float:right;
@@ -67,10 +51,13 @@ body{
 
 .loginform #email, #password {  
     padding: 5px;  
-    margin-right: 10px;  
-    border: 1px solid rgba(0, 0, 0, 0.3);  
+    margin-right: 10px; 
+    background: #34495e; 
+    border: 1px solid #34495e;  
     border-radius: 3px;  
     width: 32%;
+    /*Text is cloud color*/
+    color: #ecf0f1;
 } 
 
 .loginform .submit {  
@@ -79,6 +66,9 @@ body{
         color: #fff;
 		
 		padding: 9px 15px;  
+		height:35px;
+
+		line-height: 50%;
 	
 		background: #34495e;
 		border: 1px solid #fff;

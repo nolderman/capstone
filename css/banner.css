@@ -131,6 +131,22 @@
     text-decoration: none;
 
 }
+.banner .signup{
+    position: absolute; 
+    width: 60px;
+    
+    float:right;
+        left:80%;
+        padding: 10px 15px;
+        
+        font-weight: 300;
+        font-size: 15px;
+        color: #fff;
+    
+    background: #34495e;
+    border-radius: 5px;
+    text-decoration: none;
+}
 /*Wrapper for the searchbarInput and searchButton*/
 .banner #searchbar {
 	position:absolute;
