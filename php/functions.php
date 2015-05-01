@@ -34,12 +34,17 @@ function Search($connection)
     $jsonArray = array(); //the json array we will be passing back
     
     $searchInput = $_GET["searchInput"];
-    
-    $sql = "SELECT uID, f_name, l_name
+    $tagSearch = "SELECT uID, f_name, l_name
+            FROM user NATURAL JOIN u_tagged
+            WHERE (tag_name LIKE '%$searchInput%' AND profile_visible=1)";
+
+    $userSearch = "SELECT uID, f_name, l_name
             FROM user
-            WHERE f_name LIKE '%$searchInput%' 
-                OR l_name LIKE '%$searchInput%'
-                AND profile_visible=1";
+            WHERE ((f_name LIKE '%$searchInput%' 
+                OR l_name LIKE '%$searchInput%')
+                AND profile_visible=1)";
+
+    $sql = "(".$tagSearch.") UNION (".$userSearch.")";
     $result = $connection->query($sql);
     
     while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
@@ -69,11 +74,15 @@ function groupSearch($connection)
     $jsonArray = array(); //the json array we will be passing back
     $searchInput = $_GET["groupSearchInput"];
     
-    $sql = "SELECT gID, g_name
+    $tagSearch = "SELECT gID, g_name
             FROM groups NATURAL JOIN g_tagged
-            WHERE g_name LIKE '%$searchInput%' 
-                OR tag_name LIKE '%$searchInput%' 
-                AND visible=1";
+            WHERE (tag_name LIKE '%$searchInput%' AND visible=1)";
+
+    $groupSearch = "SELECT gID, g_name
+            FROM groups
+            WHERE (g_name LIKE '%$searchInput%' AND visible=1)";
+
+    $sql = "(".$tagSearch.") UNION (".$groupSearch.")";
     $result = $connection->query($sql);
     
     while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
