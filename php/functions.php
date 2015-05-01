@@ -21,9 +21,12 @@ function Search($connection)
     
     $searchInput = $_GET["searchInput"];
     
-    $sql = "SELECT uID,f_name, l_name 
-            FROM user 
-            WHERE f_name LIKE '%$searchInput%' OR l_name LIKE '%$searchInput%' AND profile_visible=1";
+    $sql = "SELECT uID, f_name, l_name
+            FROM user NATURAL JOIN u_tagged
+            WHERE f_name LIKE '%$searchInput%' 
+                OR l_name LIKE '%$searchInput%'
+                OR tag_name LIKE '%$searchInput%' 
+                AND profile_visible=1";
     $result = $connection->query($sql);
     
     while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
@@ -54,9 +57,11 @@ function groupSearch($connection)
     $jsonArray = array(); //the json array we will be passing back
     $searchInput = $_GET["groupSearchInput"];
     
-    $sql = "SELECT gID, g_name 
-            FROM groups 
-            WHERE g_name LIKE '%$searchInput%' AND visible=1";
+    $sql = "SELECT gID, g_name
+            FROM groups NATURAL JOIN g_tagged
+            WHERE g_name LIKE '%$searchInput%' 
+                OR tag_name LIKE '%$searchInput%' 
+                AND visible=1";
     $result = $connection->query($sql);
     
     while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
@@ -515,7 +520,7 @@ function blockUserFromGroup($connection){
 	$sql = "INSERT INTO g_blocks (gID,uID) VALUES ($gID, $blockedUID)";
 	$connection->query($sql);
 	
-	header("Location: ../group.php?gID=$gID");
+	header("Location: ../groupSettings.php?gID=$gID");
 }
 
 
@@ -778,6 +783,19 @@ function CreateTag($connection)
     $connection->query($insert_u_tagged);
     
     header('Location: ../profile.php');
+}
+
+//----------------------------------------------------DELETE USER TAG-----------------------------------------------//
+if (isset($_GET['deleteUserTag'])) {
+    deleteUserTag($connection, $_GET['tag_name']);
+}
+
+function deleteUserTag($connection, $tag_name)
+{
+    $uID = $_SESSION["uID"];
+    $sql    = "DELETE FROM u_tagged WHERE uID='$uID' AND tag_name='$tag_name'";
+    $result = $connection->query($sql);
+    header("Location: ../profile.php?gID=$gID"); 
 }
 
 
