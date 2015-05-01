@@ -61,6 +61,7 @@ function groupSearch($connection)
     while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
         $array = array(); //array we are going to give back to the search
         if (isset($row["g_name"])) {
+				//check if the user is blocked and only display if not
 			   $array["g_name"] = $row["g_name"];
                $array["gID"] = $row["gID"];
                array_push($jsonArray, $array); //put the array of f_name and uID on the jsonArray as a single json
