@@ -40,10 +40,6 @@
 	<body>
 		<?php 
 		include 'php/banner.php';
-		echo "<form name=toGroup' method='POST' action='php/functions.php?toGroup=true&cID=$cID'>
-				<input type='text' name='toGroup' placeholder='New Group Name'/>	
-				<input type='submit' value='Turn Into Group' class='hvr-fade-green button'>
-			</form>";
 		?>
 
 		<div id="columnWrapper">

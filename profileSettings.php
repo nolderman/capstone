@@ -70,14 +70,21 @@
 				<input type='submit' name='blockUser' value='Block User' class='hvr-fade-red button-hollow-green' id='searchButton' hideFocus='true'> 
 			</form>";
 			
-			
-				$sql = "SELECT * FROM u_blocks	NATURAL JOIN user WHERE uID=$user";
+			$sql = "SELECT uID as blockedID, f_name as b_f_name, l_name as b_l_name
+				 FROM user
+				 where uID IN 
+				  			-- contactID is the contact (cID) in contacts where the user=$user
+				 			(SELECT blocked FROM user NATURAL JOIN u_blocks WHERE uID ='$user')";
+
+				// $sql = "SELECT * FROM u_blocks	NATURAL JOIN user WHERE uID=$user";
 				$result = $connection->query($sql);
 		
 				while($row = $result->fetch_array(MYSQLI_ASSOC)){
-						$blockedUser = $row['blocked'];
-						echo $blockedUser;
-						echo "<a href='php/functions.php?unBlockUser=true?&blockedUser=$blockedUser'> Unblock </a>";
+						$blockedUID = $row['blockedID'];
+						$blocked_f_name = $row['b_f_name'];
+						$blocked_l_name = $row['b_l_name'];
+						echo "AAAGGHHH!";
+						echo "<a href='php/functions.php?unBlockUser=true?&blockedUser=$blockedUID'> Unblock </a>";
 				}
 	
 			?>
