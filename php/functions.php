@@ -115,7 +115,7 @@ function createConversation($connection)
     
     //insert this user as a participant
     $sql = "INSERT INTO participates (uID,cID,joined,unread_count) 
-	       VALUES('$user','$cID','$dateTime','0')";
+	        VALUES('$user','$cID','$dateTime','0')";
     $connection->query($sql);
 
     
@@ -125,6 +125,11 @@ function createConversation($connection)
         //insert this otherUser as a participant
         $sql = "INSERT INTO participates (uID,cID,joined,unread_count) 
                 VALUES('$otherUser','$cID','$dateTime','0')";
+        $connection->query($sql);
+
+         $sql  = "UPDATE conversation
+                 SET c_name = ''
+                 WHERE cID = '$cID'";
         $connection->query($sql);
     }
 
