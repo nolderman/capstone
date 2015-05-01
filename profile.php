@@ -99,9 +99,10 @@
 							</tr>
 						</tbody></table>
 					</form>";
+					echo "<a href='php/functions.php?removeProfilePicture=true'>REMOVE PICTURE</a>";
 				}
 				?>
-				<a href='php/functions.php?removeProfilePicture=true'>REMOVE PICTURE</a>
+
 				<?php
 					//display profile picture
 					//If the string is "NULL" (aka, no picture in the database for this person) then upload a silhouette instead.
