@@ -19,6 +19,7 @@
 		<script type="text/javascript" src="javascript/bootstrap.js"></script> 
 		<script type="text/javascript" src="javascript/typeahead.js"></script>  
 		<script type="text/javascript" src="javascript/search.js" language="javascript"> </script>
+		<script type="text/javascript" src="javascript/blockSearch.js" language="javascript"> </script>
 	</head>
 	
 	
@@ -66,7 +67,7 @@
 			echo
 			"<form name='searchBar' class='content' id='searchbar' method='POST' action='php/functions.php?blockUser=true'>
 				<input type='text' name='typeahead' class='typeahead' id='searchbarInput' placeholder='Search'/>	
-				<input type='hidden' name='hiddenUID' id='userID' />						
+				<input type='hidden' name='blockedHiddenUID' id='blockedUserID' />						
 				<input type='submit' name='blockUser' value='Block User' class='hvr-fade-red button-hollow-green' id='searchButton' hideFocus='true'> 
 			</form>";
 			
