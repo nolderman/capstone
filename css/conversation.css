@@ -77,6 +77,11 @@ body{
   right:0px;
   margin-bottom: 5px;
   max-width: 70%;
+
+  position:relative;
+  padding:15px;
+
+  background:#ecf0f1; /* default background for browsers without gradient support */
 }
 /*CSS for the messages from the conversation that appear in the message feed*/
 .otherMessageWrapper .message {
@@ -86,6 +91,11 @@ body{
   left:0px;
   margin-bottom: 5px;
   max-width: 80%;
+
+  position:relative;
+  padding:15px;
+
+  background:#ecf0f1; /* default background for browsers without gradient support */
 }
 
 /*Wrapper containing the text input area and the "Post Message" button*/

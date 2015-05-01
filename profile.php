@@ -38,7 +38,15 @@
 					document.getElementById(divid).style.display = 'none';
 				}
 		    }
-		</script>		
+			function expandTag(divid){ //Function for showing the full text of a tag
+				if(document.getElementById(divid).style.width != 'auto'){
+					document.getElementById(divid).style.width = 'auto';
+				}
+				else{
+					document.getElementById(divid).style.width = '100px';
+				}
+		    }
+		</script>			
 	</head>
 
 	<body>
@@ -100,7 +108,9 @@
 							</tr>
 						</tbody></table>
 					</form>";
-					echo "<a href='php/functions.php?removeProfilePicture=true'>REMOVE PICTURE</a>";
+					if (($profileInfo['picture']) != 'NULL'){
+						echo "<a class='button hvr-fade-red removePicture' href='php/functions.php?removeProfilePicture=true'>REMOVE PICTURE</a>";
+					}
 				}
 				?>
 

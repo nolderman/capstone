@@ -10,7 +10,7 @@ if ($basename != 'index') { //if you are not on the index page, aka on profile, 
 	    // If you are on the group page
 	    if ($basename == 'group') { //if we are on the group page searching on the group page we want to add this user to the group
 	        $gID = $_GET["gID"];
-	        
+
 			if($moderator){ //only allow changing info if a moderator
 				echo "<a  class ='hvr-fade-green button content settingsButton' onmousedown='toggleDiv(\"groupSettings\");'> Settings </a>";
 			}
@@ -18,9 +18,9 @@ if ($basename != 'index') { //if you are not on the index page, aka on profile, 
 
 	    // If you are on the conversation page
 	    if ($basename == 'conversation') {
-	    		echo "<form name=toGroup' method='POST' action='php/functions.php?toGroup=true&cID=$cID'>
+	    		echo "<form name=toGroup' id='toGroup' class='content' method='POST' action='php/functions.php?toGroup=true&cID=$cID'>
 					<input type='text' name='toGroup' placeholder='New Group Name'/>	
-					<input type='submit' value='Turn Into Group' class='hvr-fade-green button'>
+					<input type='submit' value='Turn Into Group' id='toGroupButton' class='hvr-fade-green button'>
 				</form>";
 		}
 

@@ -60,7 +60,7 @@
 			</form>
 			<br>";
 
-			echo "<a class='button-hollow-green hvr-fade-red deleteButton' href='php/functions.php?removeUserFromAll=true'> Delete Profile </a>";
+			echo "<a class='button-hollow-green hvr-fade-red' href='php/functions.php?removeUserFromAll=true'> Delete Profile </a>";
 			
 			echo "<h5>Block User</h5>";
 			
@@ -84,7 +84,7 @@
 						$blockedUID = $row['blockedID'];
 						$blocked_f_name = $row['b_f_name'];
 						$blocked_l_name = $row['b_l_name'];
-						echo "AAAGGHHH!";
+						echo $blocked_f_name." ".$blocked_l_name;
 						echo "<a href='php/functions.php?unBlockUser=true?&blockedUser=$blockedUID'> Unblock </a>";
 				}
 	

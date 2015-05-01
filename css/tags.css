@@ -11,8 +11,9 @@
     margin-bottom: 5px;
     margin-left: 5px;
     margin-right: 5px;
-    
+
     padding: 1px 2px 3px 3px;
+    padding-right: 25px;
     font-size: 50%;
     /*border and text color is Cloud color*/
     color: #ecf0f1;
@@ -21,19 +22,29 @@
 
     /*Position & Sizing*/
     text-align: center;
-    width: 120px;
+    width: 100px;
     height:25px;
 
+    z-index: -100;
     /*From http://stackoverflow.com/questions/3779534/how-to-disable-text-selection-with-css-or-js  disables highlighting text on double click.*/
     -moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;
 }
-/*Make it so the tag expands on hover if there is text that would make it stretch above 130px*/
-.tag:hover{
+/*Button to press for expanding the tag*/
+.backdrop {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100px;
+  height: 40px;
+  z-index: 1;
+
+  border-radius: 10px;
+}
+.backdrop:hover{
   cursor: zoom-in;
 }
 .tag:active {
-  min-width: 120px;
-  width: auto;
+  min-width: 100px;
 }
 
 /*More details for the input field for tags is located on profile.css*/
@@ -49,4 +60,26 @@
 }
 #tagInputButton{
   visibility: hidden;
+}
+
+.removeTagButton {
+  /*Size and positioning*/
+  position: absolute;
+  right: 0px;
+  top: -1px;  
+  width: 20px;
+  height: 100%;
+  z-index: 100;
+
+  border-radius: 10px;
+
+
+  /*Text color is background blue color*/
+  color: #34495e;
+  border: 1px solid #34495e;
+
+  line-height: 170%;
+  text-decoration: none;
+  /*From http://stackoverflow.com/questions/3779534/how-to-disable-text-selection-with-css-or-js  disables highlighting text on double click.*/
+  -moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;
 }

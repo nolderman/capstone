@@ -14,9 +14,9 @@ CSS in this block is the "default" or inherited data for the rest of the CSS in 
     /*Width is set to a percentage so that it resizes as the screen does.
     Once the width reaches 1080px, the most common of smaller screens, it stops resizing.*/
     width: 99%; /*this is 99% not 100%, because otherwise the right sidebar gets cut off a little*/
-    height: 83%;
+    height: 86%;
     min-width: 1024px;
-    min-height: 560px;
+    min-height: 800px;
 
     /*Centered position*/
 }
@@ -77,6 +77,46 @@ CSS in this block is the "default" or inherited data for the rest of the CSS in 
     margin-top: 15%;
     height: 87%;
 }
+.actionArea {
+  /*Size and positioning*/
+  position: absolute;
+  left: 0px;
+  top: 0px;  
+  width: 303px;
+  height: 95%;
+  z-index: 1;
+
+  text-decoration: none;
+
+  /*Text color is background blue color*/
+  color: #2980b9;
+  border-radius: 5px;
+  line-height: 170%;
+  text-decoration: none;
+  /*From http://stackoverflow.com/questions/3779534/how-to-disable-text-selection-with-css-or-js  disables highlighting text on double click.*/
+  -moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;
+}
+.deleteButton {
+  /*Size and positioning*/
+  position: absolute;
+  right: 0px;
+  top: 0px;  
+  width: 40px;
+  height: 100%;
+  z-index: 1;
+  /*Text color is background blue color*/
+  color: #2980b9;
+  /*border: 1px solid #2980b9;*/
+  border-radius: 5px;
+
+  text-align: center;
+  line-height: 260%;
+  text-decoration: none;
+  /*From http://stackoverflow.com/questions/3779534/how-to-disable-text-selection-with-css-or-js  disables highlighting text on double click.*/
+  -moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;
+}
+
+
 
 .sidebarAddWrapper{
     position: absolute;

@@ -11,8 +11,9 @@ if (is_null($otherUser) || ($profileInfo["tags_visible"] && !$blockedUser)) {
         //write out each tag
         while ($tags = $result->fetch_array(MYSQLI_ASSOC)) {
             $tag_name = $tags["tag_name"];
-            echo "<div class='tag hvr-fade-cloud'>".$tags["tag_name"];
-            echo "<a href='php/functions.php?deleteUserTag=true&tag_name=$tag_name'>X</a>";
+            echo "<div class='tag hvr-fade-cloud' id='".$tag_name."'>".$tag_name;
+                echo "<a class='backdrop' onmousedown='expandTag(\"".$tag_name."\");' onmouseup='expandTag(\"".$tag_name."\");'></a>";
+                echo "<a href='php/functions.php?deleteUserTag=true&tag_name=$tag_name' class='removeTagButton hvr-fade-red'>X</a>";
             echo "</div>";		
         }
     }
@@ -27,8 +28,8 @@ if (is_null($otherUser) || ($profileInfo["tags_visible"] && !$blockedUser)) {
 
         //form for user to tag themself
         echo "<form name='tagUser' class='tagUser' id='tagUser' method= 'POST' action='php/functions.php?tagUser=true'>";
-        echo "<input type='text' name='tagName' id='tagNameInput' class='input tagName' placeholder='Add a tag'/>";
-        echo "<input type='submit' name='addTag' value='Add Tag' class='button' id='tagInputButton'>";
+            echo "<input type='text' name='tagName' id='tagNameInput' class='input tagName' placeholder='Add a tag'/>";
+            echo "<input type='submit' name='addTag' value='Add Tag' class='button' id='tagInputButton'>";
         echo "</form>";
     }
     echo "</div>";

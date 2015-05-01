@@ -83,13 +83,17 @@ function membersSidebar($connection, $user, $gID, $moderator, $members){
 		while($members = $result->fetch_array(MYSQLI_ASSOC)){
 			$memberID = $members["uID"];
 
-			echo "<a href = 'profile.php?uID=$memberID'>";
-				echo "<div class='sidebarLink profileLink hvr-fade-green'>".$members["f_name"]." ".$members["l_name"];
+			// If the user is a member and not a moderator, do the normal anchor tag without any special delete button CSS
+			if($memberID == $user && !$moderator){ 
+				echo "<a href = 'profile.php?uID=$memberID'>";
+			}
+			echo "<div class='sidebarLink profileLink hvr-fade-green'>".$members["f_name"]." ".$members["l_name"];
 				//if you are the user or mod, you can delete this user
 				if($memberID == $user || $moderator){ 
-					echo "<a href='php/functions.php?removeUserFromGroup=true&uID=$memberID&gID=$gID'> ~Remove~ </a>";
+					echo "<a class='actionArea' href = 'profile.php?uID=$memberID'>"; //Clickable area separate from the delete tag (takes up left 80% of link)
+					echo "<a class='deleteButton hvr-fade-red' href='php/functions.php?removeUserFromGroup=true&uID=$memberID&gID=$gID'> X </a>"; //Clickable delete button
 				}
-			echo "</div></a></br>";		
+			echo "</div></a>";		
 		}	
 	echo "</div>";
 }
@@ -168,7 +172,7 @@ function conversationSidebar($connection, $user, $profile){
 			            	$unread = $unreadResult->fetch_array(MYSQLI_ASSOC);
 			                echo $unread["unread_count"];
 			        	echo "</div>";
-		            echo "</div></a></br>";
+		            echo "</div></a>";
 		        }
 		    }
 		}
@@ -192,12 +196,16 @@ function participantSidebar($connection, $cID, $user){
 		if($result = $connection->query($sql)){
 			//write out each participant's name to the sidebar
 			while($participants = $result->fetch_array(MYSQLI_ASSOC)){
+				// it is not you, do the normal anchor tag without any special delete button CSS
+				if($participants["uID"] != $user){ 
 				echo "<a href = 'profile.php?uID=".$participants["uID"]."'>";
+				}
 				echo "<div class='sidebarLink profileLink hvr-fade-green'>".$participants["f_name"]." ".$participants["l_name"];
 				if($participants["uID"] == $user){ 
-					echo "<a href='php/functions.php?removeUserFromConvo=true&cID=$cID'>X</a>";
+					echo "<a class='actionArea' href = 'profile.php?uID=".$participants["uID"]."'>";
+					echo "<a class='deleteButton hvr-fade-red' href='php/functions.php?removeUserFromConvo=true&cID=$cID'>X</a>";
 				}
-				echo "</div></a></br>";		
+				echo "</div></a>";		
 			}	
 		}
 		else{

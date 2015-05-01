@@ -137,7 +137,7 @@
 .hvr-fade-cloud:hover, .hvr-fade-cloud:focus, .hvr-fade-cloud:active {
   background-color: #ecf0f1; /*color to fade into*/
   color: #34495e;
-  cursor: pointer;
+  /*cursor: pointer;*/
 }
 
 .hvr-fade-red {
@@ -247,10 +247,6 @@
 ------------------------------------------------------------------------------------------------------------------------------- */
 
 .triangle-right {
-  position:relative;
-  padding:15px;
-  color:#fff;
-  background:#ecf0f1; /* default background for browsers without gradient support */
   /* css3 */
   -webkit-border-radius:10px;
   -moz-border-radius:10px;
@@ -287,16 +283,7 @@
 ------------------------------------------------------------------------------------------------------------------------------- */
 
 .triangle-right:after {
-  content:"";
-  position:absolute;
-  bottom:-20px; /* value = - border-top-width - border-bottom-width */
-  left:50px; /* controls horizontal position */
-  border-width:20px 0 0 20px; /* vary these values to change the angle of the vertex */
-  border-style:solid;
-  border-color:#ecf0f1 transparent;
-  /* reduce the damage in FF3.0 */
-  display:block;
-  width:0;
+
 }
 
 /* Variant : top

@@ -1,11 +1,10 @@
 	.banner{
 		font-family: 'Roboto Slab', serif;
 
-		
 		text-align: center;
 		width: 100%;
 		min-width: 1024px ;
-		height:160px;
+		height:120px;
         margin:0;
 		padding:0;
         position: relative;
@@ -25,14 +24,15 @@
 
 /*General CSS for content within the banner. Used for things like keeping them all in line and evenly spaced.*/
 .banner .content {
-	top: 36.5%;
+	top: 35.5%;
 	text-align: center;
 	/*From http://stackoverflow.com/questions/3779534/how-to-disable-text-selection-with-css-or-js  disables highlighting text on double click.*/
     -moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;
 }
 .banner .button{
-	height: 20px;
-	width: 50px;
+  font-size: 15px;
+	height: 15px;
+	width: 40px;
 }
 .banner .logout{
 		position: absolute;	
@@ -42,11 +42,19 @@
         padding: 10px 15px;
 
         font-weight: 300;
-        font-size: 18px;
         
         text-shadow: 0px 1px 0 rgba(0,0,0,0.25);
         border-radius: 5px;
 		text-decoration: none;
+}
+
+.banner #toGroup{
+  position: absolute;
+  right: 8%;
+  top: 40%;
+}
+.banner #toGroupButton {
+  width: auto;
 }
 
 .banner #yourProfileButton{
@@ -60,7 +68,6 @@
         padding-right: 20px;
 
         font-weight: 300;
-        font-size: 18px;
         
         border-radius: 5px;
 		text-decoration: none;
@@ -78,7 +85,6 @@
         width: 150px;
 
         font-weight: 300;
-        font-size: 18px;
         
         border-radius: 5px;
 		text-decoration: none;
@@ -119,7 +125,6 @@
     padding-right: 20px;
 
     font-weight: 300;
-    font-size: 18px;
         
     text-shadow: 0px 1px 0 rgba(0,0,0,0.25);
     border-radius: 5px;
@@ -149,6 +154,7 @@
 	height: 21.5px;
 	border-radius: 8px;
 	border-color: transparent;
+  font-size: 13px;
 
 	/*Set background color as the same dark blue as search bar*/
 	background-color: #2c3e50;
