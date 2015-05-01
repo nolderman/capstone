@@ -21,8 +21,6 @@ function groupSidebar($connection, $user, $profile){
 		}
 	echo "</div>";
 	
-		
-
 	//get the user's groups
 	$sql = "SELECT gID, g_name 
 			FROM (user NATURAL JOIN members NATURAL JOIN groups) 
