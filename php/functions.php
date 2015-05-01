@@ -88,6 +88,7 @@ function groupSearch($connection)
     while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
         $array = array(); //array we are going to give back to the search
         if (isset($row["g_name"])) {
+				//check if the user is blocked and only display if not
 			   $array["g_name"] = $row["g_name"];
                $array["gID"] = $row["gID"];
                array_push($jsonArray, $array); //put the array of f_name and uID on the jsonArray as a single json
@@ -766,7 +767,7 @@ function BlockUser($connection)
 {
     
     //insert uID and contacts uID
-    $contactID = $_POST["hiddenUID"]; //the user id of the contact (passed from profileSettings.php)
+    $contactID = $_POST["blockedHiddenUID"]; //the user id of the contact (passed from profileSettings.php)
     $uID       = $_SESSION["uID"]; //the user's ID
 
     // For testing
@@ -811,6 +812,7 @@ if(isset($_GET['tagUser']) && isset($_POST["tagName"]) && $_POST["tagName"] != "
 function CreateTag($connection)
 {
     $tagName = addslashes($_POST["tagName"]);
+		
     $user    = $_SESSION["uID"]; //doesn't have access to this variable because it is a separate php page
     
     //make a new tag

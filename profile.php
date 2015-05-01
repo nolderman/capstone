@@ -28,6 +28,7 @@
 		<script src="javascript/expandingWindows.js"></script>
 		<script type="text/javascript" src="javascript/search.js" language="javascript"></script>
 		<script type="text/javascript" src="javascript/groupSearch.js" language="javascript"></script>
+		<script type="text/javascript" src="javascript/searchToAdd.js" language="javascript"> </script>
 		<script type="text/javascript" language="javascript"> 
 			function toggleDiv(divid){ //Function for toggling a chat window up and down
 				if(document.getElementById(divid).style.display == 'none'){
