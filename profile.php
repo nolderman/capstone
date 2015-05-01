@@ -100,6 +100,7 @@
 							</tr>
 						</tbody></table>
 					</form>";
+					echo "<a href='php/functions.php?removeProfilePicture=true'>REMOVE PICTURE</a>";
 				}
 				?>
 

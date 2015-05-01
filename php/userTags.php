@@ -10,8 +10,10 @@ if (is_null($otherUser) || ($profileInfo["tags_visible"] && !$blockedUser)) {
     if ($result = $connection->query($sql)) {
         //write out each tag
         while ($tags = $result->fetch_array(MYSQLI_ASSOC)) {
-            echo "<div class='tag hvr-fade-cloud'>".$tags["tag_name"]."</div>";
-            echo "   "; //spacing between tags		
+            $tag_name = $tags["tag_name"];
+            echo "<div class='tag hvr-fade-cloud'>".$tags["tag_name"];
+            echo "<a href='php/functions.php?deleteUserTag=true&tag_name=$tag_name'>X</a>";
+            echo "</div>";		
         }
     }
     
