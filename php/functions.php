@@ -36,10 +36,9 @@ function Search($connection)
     $searchInput = $_GET["searchInput"];
     
     $sql = "SELECT uID, f_name, l_name
-            FROM user NATURAL JOIN u_tagged
+            FROM user
             WHERE f_name LIKE '%$searchInput%' 
                 OR l_name LIKE '%$searchInput%'
-                OR tag_name LIKE '%$searchInput%' 
                 AND profile_visible=1";
     $result = $connection->query($sql);
     
