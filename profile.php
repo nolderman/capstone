@@ -108,22 +108,25 @@
 							</tr>
 						</tbody></table>
 					</form>";
-					if (($profileInfo['picture']) != 'NULL'){
-						echo "<a class='button hvr-fade-red removePicture' href='php/functions.php?removeProfilePicture=true'>REMOVE PICTURE</a>";
-					}
 				}
 				?>
 
 				<?php
-					//display profile picture
-					//If the string is "NULL" (aka, no picture in the database for this person) then upload a silhouette instead.
-					if (($profileInfo['picture']) == 'NULL'){
-						echo "<img class = 'image' src='images/silhouette.jpg'>";
-					}
-					else{
-						echo "<img class = 'image' src='uploads/profile_images/" .$profileInfo["picture"]. "'>";
-					}
+					echo "<div id='pictureWrapper'>";
+						if (($profileInfo['picture']) != 'NULL' && is_null($otherUser)){
+							echo "<a class='button hvr-fade-red removePicture' href='php/functions.php?removeProfilePicture=true'>REMOVE PICTURE</a>";
+						}
+						//display profile picture
+						//If the string is "NULL" (aka, no picture in the database for this person) then upload a silhouette instead.
+						if (($profileInfo['picture']) == 'NULL'){
+							echo "<img class = 'image' src='images/silhouette.jpg'>";
+						}
+						else{
+							echo "<img class = 'image' src='uploads/profile_images/" .$profileInfo["picture"]. "'>";
+						}
+					echo "</div>";
 				?>
+
 				
 				</br>
 				

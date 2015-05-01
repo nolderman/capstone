@@ -57,7 +57,7 @@ body{
 .postContent { /*below postWrapper, contained in center column*/
 	
     position: relative;
-    top: 2%;
+    top: 4%;
     height: 75%;
 	width:100%;
 	overflow-y:scroll;

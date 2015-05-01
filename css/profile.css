@@ -15,6 +15,7 @@ body{
 #centerColumn .profileName{
   line-height:100%;
   font-size: 60px;
+  color: #2980b9;
 }
 #tagsWrapper {
   width: 95%;	

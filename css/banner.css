@@ -51,10 +51,11 @@
 .banner #toGroup{
   position: absolute;
   right: 8%;
-  top: 40%;
+  top: 37%;
 }
-.banner #toGroupButton {
+.banner #toGroup #toGroupButton {
   width: auto;
+  height: 22.5px;
 }
 
 .banner #yourProfileButton{
@@ -150,7 +151,7 @@
 /*Wrapper for the searchbarInput and searchButton*/
 .banner #searchbar {
 	position:absolute;
-	top: 42%;
+	top: 38%;
 	left: 65%;
 	width: 200px;
 }
