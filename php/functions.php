@@ -9,6 +9,20 @@ function test_input($data)
     $data = stripslashes($data); //remove backslashes
     return $data;
 }
+//---------------------------------------------------REMOVE PICTURE FROM USER--------------------------------------------------------------------------------//
+if (isset($_GET["removeProfilePicture"])) {
+    removeProfilePicture($connection);
+}
+
+function removeProfilePicture($connection)
+{   
+    $user = $_SESSION['uID'];
+    $sql = "UPDATE user
+            SET picture='NULL'
+            WHERE uID ='$user'";
+    $result = $connection->query($sql);
+    header("Location: ../profile.php?");
+}
 
 //---------------------------------------------------USER SEARCH--------------------------------------------------------------------------------//
 if (isset($_GET["searchInput"])) {
