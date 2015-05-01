@@ -207,14 +207,15 @@ function conversationToGroup($connection)
     $uID    = $_SESSION["uID"];
     
     //make a new group
-    $dateTime = new DateTime(null, new DateTimeZone('America/Los_Angeles'));
-    $dateTime = $dateTime->format('Y-m-d H:i:s');
     $sql      = "INSERT INTO groups (gID, g_name, icon, visible, burn_date) VALUES ('0','$c_name', 'NULL', '1', '0000-00-00 00:00:00')";
     $result   = $connection->query(test_input($sql));
     $gID      = mysqli_insert_id($connection); //get the id of the last inserted record (in this case it is the group ID)
     
     //Put the user in the member table with this group
-    $insertMember = "INSERT INTO members (uID,gID,moderator) VALUES ('$uID','$gID','1')"; //set the creator to a moderator
+	$dateTime = new DateTime(null, new DateTimeZone('America/Los_Angeles'));
+    $dateTime = $dateTime->format('Y-m-d H:i:s');
+	//set the creator to a moderator and unread count to 0
+    $insertMember = "INSERT INTO members (uID,gID,moderator,joined,unread_count) VALUES ('$uID','$gID','1','$dateTime','0')"; 
     $insertMember = $connection->query($insertMember);
 
     //Make the group own the conversation
@@ -226,21 +227,9 @@ function conversationToGroup($connection)
     $result = $connection->query($sql);
     while ($row = $result->fetch_array(MYSQLI_ASSOC)) { //move all participants into members as non mods
         $uID            = $row["uID"];
-        $moveToMember   = "INSERT INTO members (uID,gID,moderator) VALUES ('$uID','$gID','0')"; //put in members 
+        $moveToMember   = "INSERT INTO members (uID,gID,moderator,joined,unread_count) VALUES ('$uID','$gID','0','$dateTime','0')"; //put in members 
         $toMemberResult = $connection->query($moveToMember);
     }
-    
-    /**get all of the messages and put them in the post NOT NEEDED BUT IT WAS COOL FOR ABOUT 30 SECONDS SO I AM LEAVING IT <--- lol alright (nate)
-    $sql = "SELECT * FROM message WHERE cID=$cID";
-    $result = $connection->query($sql);
-    while($row = $result->fetch_array(MYSQLI_ASSOC)){
-    $uID = $row["uID"];
-    $content = $row["content"];
-    $date_time = $row["date_time"];
-    $moveToPost = "INSERT INTO post (uID,gID,date_time,content,edited) VALUES ('$uID', '$gID', '$date_time', '$content', '0')";//put in post
-    $moveResult = $connection->query($moveToPost);
-    }
-    **/
     header("Location: ../group.php?gID=$gID");
 }
 
@@ -509,11 +498,10 @@ if(isset($_GET['blockUserFromGroup'])){
 
 function blockUserFromGroup($connection){
 	
-	$blockedUID = $_POST["hiddenUID"];
+	$blockedUID = $_POST["blockedHiddenUID"];
 	$gID = $_GET['gID'];
 	$sql = "INSERT INTO g_blocks (gID,uID) VALUES ($gID, $blockedUID)";
 	$connection->query($sql);
-	
 	header("Location: ../group.php?gID=$gID");
 }
 
