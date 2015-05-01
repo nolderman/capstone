@@ -83,19 +83,22 @@ function membersSidebar($connection, $user, $gID, $moderator, $members){
 		while($members = $result->fetch_array(MYSQLI_ASSOC)){
 			$memberID = $members["uID"];
 
-			// If the user is a member and not a moderator, do the normal anchor tag without any special delete button CSS
-			if($memberID == $user && !$moderator){ 
-				echo "<a href = 'profile.php?uID=$memberID'>";
-			}
+
 			echo "<div class='sidebarLink profileLink hvr-fade-green'>".$members["f_name"]." ".$members["l_name"];
-				//if you are the user or mod, you can delete this user
+
+				//If you are the user or you are a mod, you can delete this user
 				if($memberID == $user || $moderator){ 
-					echo "<a class='actionArea' href = 'profile.php?uID=$memberID'>"; //Clickable area separate from the delete tag (takes up left 80% of link)
+					echo "<a class='actionArea' href = 'profile.php?uID=$memberID'></a>"; //Clickable area separate from the delete tag (takes up left 80%ish of link)
 					echo "<a class='deleteButton hvr-fade-red' href='php/functions.php?removeUserFromGroup=true&uID=$memberID&gID=$gID'> X </a>"; //Clickable delete button
 				}
-			echo "</div></a>";		
+				// Otherwise, you can't delete this user, and the delete button is not included.
+				else{ 
+					echo "<a href ='profile.php?uID=$memberID'></a>"; //clickable area without special CSS, so it takes up whole sidebarLink div.
+				}
+
+			echo "</div>";	//end profileLink	
 		}	
-	echo "</div>";
+	echo "</div>"; //end sidebarContent
 }
 
 
