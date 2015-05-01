@@ -167,7 +167,7 @@ function conversationSidebar($connection, $user, $profile){
 			            }
 
 			            //fill out how many unread messages there are for this conversation
-			            echo "<div class=notificationBubble>";
+			            echo "<div class='notificationBubble'>";
 			            	$unreadQuery = "SELECT unread_count
 			            					FROM participates
 			            					WHERE uID = '$user' AND cID = '$cID'";

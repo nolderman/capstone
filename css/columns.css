@@ -110,7 +110,7 @@ CSS in this block is the "default" or inherited data for the rest of the CSS in 
   border-radius: 5px;
 
   text-align: center;
-  line-height: 260%;
+  line-height: 47.5px;
   text-decoration: none;
   /*From http://stackoverflow.com/questions/3779534/how-to-disable-text-selection-with-css-or-js  disables highlighting text on double click.*/
   -moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;
@@ -184,9 +184,9 @@ CSS in this block is the "default" or inherited data for the rest of the CSS in 
 
     /*Position & Sizing*/
     text-align: left;
-    line-height: 60px; /*line height = height so text is centered vertically.*/
+    line-height: 45px; /*line height = height so text is centered vertically.*/
     width: 95%;
-    height:60px;
+    height:45px;
 
     border-radius: 5px;
 }
