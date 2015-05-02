@@ -11,16 +11,18 @@ function groupSidebar($connection, $user, $profile){
 
 	// echo "</div>";
 	echo "<div class='sidebarHeader'> Groups";
-		echo "<form name='groupSearchBar' class='content' id='groupSearchbar' method= 'POST' action='php/functions.php?addGroup=true'>
-				<input type='text' name='groupTypeahead' class='groupTypeahead' id='groupSearchbarInput' placeholder='Search'/>	
-				<input type='hidden' name='hiddenGID' id='groupID' value='' />						
-				<input type='submit' name='findGroup' value='Find Group!' class='hvr-fade-green button' id='searchButton' hideFocus='true'> 
-		</form>";
+
 		//if user is viewing another user's profile, $profile won't be null
 		if (!is_null($profile)) {
 			echo " in Common";
 		}
+		echo "<form name='groupSearchBar' class='content' id='groupSearchbar' method= 'POST' action='php/functions.php?addGroup=true'>
+			<input type='text' name='groupTypeahead' class='groupTypeahead' id='groupSearchbarInput' placeholder='Search'/>	
+			<input type='hidden' name='hiddenGID' id='groupID' value='' />						
+			<input type='submit' name='findGroup' value='Find Group!' class='hvr-fade-green button' id='searchButton' hideFocus='true'> 
+		</form>";
 	echo "</div>";
+
 	
 	//get the user's groups
 	$sql = "SELECT gID, g_name 
