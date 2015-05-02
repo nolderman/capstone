@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <HTML5>
 	<head>
-		<title>~Capstone~</title>
+		<title>Connackt</title>
 		<link rel="stylesheet" type="text/css" href="css/index.css">
 		<link rel="stylesheet" type="text/css" href="css/hover.css">
 		<link rel="stylesheet" type="text/css" href="css/banner.css">
@@ -34,16 +34,20 @@
 			<a id="Mission"></a>
 			<h1>Mission</h1>
 			<h2 class="missionContent">
-				Simplify the way students form course groups. 
-				For our capstone project, we have decided to work
-				on a new social-media platform. A user of this platform 
-				will not have a profile, just their name and a picture. 
-				The focus would be on participating in groups that people are 
-				free to create and invite others to. These groups would allow
-				for creating events, having discussions, posting photos, and 
-				more! In addition to this, there would be a messaging component 
-				so people that are not in groups with each other could still 
-				communicate through this platform. 
+			Most social networking sites are focused around the individual. 
+			Communication gets lost in a broadcasted wall of miscellaneous 
+			posts that often contain no information you are interested in. 
+			People are starting to move away from this paradigm in search 
+			of direct contact and privacy. Connackt strives to make that 
+			shift and focus on the connections between people. You can use 
+			Connackt to message another person or start a group of people 
+			who share a similar interest. Messages are simple exchanges between 
+			two or more users with a straight forward interface to facilitate it. 
+			If you believe you want a more structured environment, you can create 
+			a group or shift over an existing conversation with all of it's participants 
+			into a group. The group page allows for posting and replies but it retains 
+			a conversation as part of the group for a quick exchange that doesn't
+			require any kind of structure. Connackt is the straight forward answer for quick communication.
 			</h2>
 		</div>
 				
@@ -52,15 +56,17 @@
 			<h1>Features</h1>
 			<ol class="featuresContent">
 				<h2>
-				<li class="featuresPanelContent">Create a group with everyone in the room</li>
-				<li class="featuresPanelContent">Create a calendar that the group can see</li>
-				<li class="featuresPanelContent">Create a group meeting time from individual's schedules</li>
-				<li class="featuresPanelContent">Set a  group self-destruct date</li>
-				<li class="featuresPanelContent">Convert a conversation into a group</li>
-				<li class="featuresPanelContent">Define group level of visibility (only share what you want)</li>
+				<li class="featuresPanelContent">Simply create conversations or groups</li>
+				<li class="featuresPanelContent">Define a level of visibility for your profile and groups (only share what you want)</li>
+				<li class="featuresPanelContent">Convert a conversation into a group in one click</li>
 				<li class="featuresPanelContent">Create a conversation with multiple people</li>
-				<li class="featuresPanelContent">Search people who have an account</li>
-				<li class="featuresPanelContent">Post message and pictures to groups/conversations</li>
+				<li class="featuresPanelContent">Search people who have an account set to visible</li>
+				<li class="featuresPanelContent">Post message to groups/conversations</li>
+				<li class="featuresPanelContent">Edit group name and change group visibility if a moderator</li>
+				<li class="featuresPanelContent">Delete post or edit your post</li>
+				<li class="featuresPanelContent">Block users from messaging you or adding you to a group</li>
+				<li class="featuresPanelContent">Block users from joining a group</li>
+				<li class="featuresPanelContent">Quickly see how many unread messages you have for all groups and conversations</li>
 				<li class="featuresPanelContent">Delete post or edit your post</li>
 				</h2>
 			</ol>
@@ -70,11 +76,11 @@
 			<a id="AboutUs"></a>
 			<h1>About Us</h1>
 			<div class="teamMember">
-				 <img class="teamMemberImage" src="images/ericHoney.png" alt=""> 
+				 <img class="teamMemberImage" src="images/EricSculac.jpg" alt=""> 
 				 <h2>Eric Sculac</h2>
 			</div>
 			<div class="teamMember">
-				 <img class="teamMemberImage" src="images/nateTents.jpg" alt=""> 
+				 <img class="teamMemberImage" src="images/NateOlderman.jpg" alt=""> 
 				 <h2>Nate Olderman</h2>
 			</div>
 			<div class="teamMember">

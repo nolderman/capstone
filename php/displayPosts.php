@@ -42,7 +42,7 @@ while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
         echo "</div>";
         echo "</div>";
 		
-		$getReplies = "SELECT * FROM reply NATURAL JOIN post WHERE parent=$pID";//get the replies for this post
+		$getReplies = "SELECT * FROM reply NATURAL JOIN post NATURAL JOIN user WHERE parent=$pID";//get the replies for this post
 		$repliesResult = $connection->query($getReplies);
 		
 		while ($replies = $repliesResult->fetch_array(MYSQLI_ASSOC)) {
@@ -51,21 +51,28 @@ while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
 				echo $replyContent;
 
 				$replyPID = $replies['pID'];
-				echo $posterID;
-				echo $_SESSION['uID'];
+				$replyUID = $replies['uID'];
 			//delete the post link if the users' post or a moderator
-			if ($posterID == $_SESSION['uID'] || $moderator) {
+			if ($replyUID == $_SESSION['uID'] || $moderator) {
 				echo "<a class='groupActionLink' href='php/functions.php?deleteReply=true&gID=$gID&pID=$replyPID'> Delete Post</a>";
 			}
 			//edit the post    if users' post
-			if ($posterID == $_SESSION['uID']) {
+			if ($replyUID == $_SESSION['uID']) {
 				echo "<a href='' id='$pID' class ='edit-reply groupActionLink'> Edit Reply </a>
                        <form class='edit-reply-form' method='POST' action='php/functions.php?editPost=true&gID=$gID&pID=$replyPID' >
 							<textarea cols='20' rows='4' name='editPost' id='postInput'> $replyContent </textarea>
 							<input class='button' type='submit' value='Accept' />
 						</form>";
         }
+		
+			echo "<div class='subPost'>";
+			
+			 echo $replies['f_name'] . " " . $replies['date_time'];
+			
 			echo "</div>";
+			echo "</div>";
+			
+			
 		}		
 		
 		
