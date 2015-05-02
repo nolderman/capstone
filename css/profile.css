@@ -35,8 +35,10 @@ body{
 /*----------------------------------PROFILE IMAGE STUFF-------------------------------------*/
 
 #pictureUpload {
-  background: black;
-  width: 140px;
+  position: absolute;
+  margin-top: -70px;
+  width: 120px;
+  height: 70px;
 }
 #pictureUpload #pictureInputField {
   background: white;
@@ -49,6 +51,7 @@ body{
   height: 15px;
   line-height: 100%;
   font-size: 10px;
+  background: #2980b9;
 }
 
 #pictureWrapper {
@@ -57,17 +60,18 @@ body{
   /*center it*/
   margin-left: auto;
   margin-right: auto;
+  margin-top: 70px;
 }
 
 
-#pictureWrapper:hover > .addPicture{
+#pictureWrapper:hover > #addPicture{
   display:block;
 }
 #pictureWrapper:hover > .removePicture{
   display:block;
 }
 
-#pictureWrapper .addPicture {
+#pictureWrapper #addPicture {
   display:none;
   position: absolute;
   font-size: 15px;
@@ -83,6 +87,9 @@ body{
   font-size: 10px;
   margin-top: 0px;
   margin-left: 100px;
+
+  /*From http://stackoverflow.com/questions/3779534/how-to-disable-text-selection-with-css-or-js  disables highlighting text on double click.*/
+  -moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;
 }
 #pictureWrapper .removePicture  {
   display:none;

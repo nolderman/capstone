@@ -39,8 +39,18 @@ CSS in this block is the "default" or inherited data for the rest of the CSS in 
     /*center the div between the two sidebars*/
 }
 
-
-
+/*Add Group input*/
+#groupName {
+  background-color: #2c3e50;
+  width: 80%;
+}
+/*#groupSearchBarWrapper {
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+  background: black;
+}
+*/
 
 .sidebar{ /*class for the attributes that both sidebars share*/
     font-size: 90%;
@@ -74,8 +84,8 @@ CSS in this block is the "default" or inherited data for the rest of the CSS in 
 }
 .sidebarContent { /*wrapper for content appearing in sidebars under the header*/
     overflow: auto;
-    margin-top: 15%;
-    height: 87%;
+    margin-top: 17%;
+    height: 85%;
 }
 .actionArea {
   /*Size and positioning*/
