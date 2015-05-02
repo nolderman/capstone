@@ -7,7 +7,7 @@
 		<link rel="stylesheet" type="text/css" href="css/hover.css">
 		<link rel="stylesheet" type="text/css" href="css/banner.css">
 		<link rel="stylesheet" type="text/css" href="css/buttons.css">
-		<link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,700' rel='stylesheet' type='text/css'>
+	
 		<script src='http://codepen.io/assets/libs/fullpage/jquery.js'></script>
 		<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/392/TweenMax.min.js'></script>
 		<script src='https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.1/ScrollMagic.js'></script>

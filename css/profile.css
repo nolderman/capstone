@@ -15,7 +15,8 @@ body{
 #centerColumn .profileName{
   line-height:100%;
   font-size: 60px;
-  color: #2980b9;
+  /*Text is cloud color*/
+  color: #ecf0f1;
 }
 #tagsWrapper {
   width: 95%;	
@@ -31,6 +32,25 @@ body{
 /*profile button is in buttons.css*/
 
 
+/*----------------------------------PROFILE IMAGE STUFF-------------------------------------*/
+
+#pictureUpload {
+  background: black;
+  width: 140px;
+}
+#pictureUpload #pictureInputField {
+  background: white;
+  border-radius: 5px;
+  width: 100%;
+  font-size: 8px;
+}
+
+#pictureUpload #uploadPictureButton {
+  height: 15px;
+  line-height: 100%;
+  font-size: 10px;
+}
+
 #pictureWrapper {
   width: 120px;
   height: 120px;
@@ -39,10 +59,31 @@ body{
   margin-right: auto;
 }
 
+
+#pictureWrapper:hover > .addPicture{
+  display:block;
+}
 #pictureWrapper:hover > .removePicture{
   display:block;
 }
 
+#pictureWrapper .addPicture {
+  display:none;
+  position: absolute;
+  font-size: 15px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 2px;
+  padding-bottom: 0px;  
+
+  height: 10px;
+  width: 10px;
+
+  line-height: 10px;
+  font-size: 10px;
+  margin-top: 0px;
+  margin-left: 100px;
+}
 #pictureWrapper .removePicture  {
   display:none;
   position: absolute;

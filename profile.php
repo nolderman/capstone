@@ -92,21 +92,9 @@
 				//If this is our profile
 				if(is_null($otherUser)){
 					echo "<!-- Uploading profile picture -->
-					<form action='uploadPicture.php' enctype='multipart/form-data' method='post'>
-						<table style='border-collapse: collapse; font: 12px Tahoma;' border='1' cellspacing='5' cellpadding='5'>
-							<tbody><tr>
-							<td>
-							<input name='uploadedimage' type='file'>
-							</td>
-
-							</tr>
-
-							<tr>
-							<td>
-							<input name='Upload Now' class= 'button hvr-fade-green' type='submit' value='Upload Image'>
-							</td>
-							</tr>
-						</tbody></table>
+					<form id='pictureUpload' action='uploadPicture.php' enctype='multipart/form-data' method='post'>
+							<input id='pictureInputField' name='uploadedimage' type='file'>
+							<input name='Upload Now' id='uploadPictureButton' class= 'button hvr-fade-green' type='submit' value='Upload Image'>
 					</form>";
 				}
 				?>
@@ -114,6 +102,7 @@
 				<?php
 					echo "<div id='pictureWrapper'>";
 						if (($profileInfo['picture']) != 'NULL' && is_null($otherUser)){
+							echo "<a class='button hvr-fade-cloud addPicture' onmousedown=\"toggleDiv('pictureUpload');\">+</a>";
 							echo "<a class='button hvr-fade-red removePicture' href='php/functions.php?removeProfilePicture=true'>REMOVE PICTURE</a>";
 						}
 						//display profile picture
