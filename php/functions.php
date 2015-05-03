@@ -849,9 +849,6 @@ if (isset($_GET['signUp']) && isset($_POST["submit"])) {
 
 function SignUp($connection)
 {
-    //Set the error variables to empty
-    $firstNameErr = $lastNameErr = $emailErr = $passErr = ""; //NOT USED YET (meant for displaying user input errors on the signup page)
-    
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		
         if ($_POST["firstName"]=='') {
@@ -887,6 +884,7 @@ function SignUp($connection)
             
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 $emailErr = "Invalid email format";
+				header("Location: ../register.php?loginError=$emailErr"); //log the user in
             }
         }
         
@@ -902,19 +900,21 @@ function SignUp($connection)
 			header("Location: ../register.php?loginError=$passswordMismatch"); 
 		}
     }
+    if(!isset($firstNameErr) && !isset($lastNameErr) && !isset($emailErr) && !isset($passErr) && !isset($passwordMismatch)){
+		
+		$pass   = sha1($password, $raw_output = false); //encrypt their password
+		//$pass = password_hash($password, PASSWORD_DEFAULT);//encrypt their password
+		$sql    = "INSERT INTO user (uID,email,pass,picture,f_Name,m_name,l_Name,tags_visible,profile_visible,block_invites,block_messages) 
+				VALUES ('0','$email','$pass','NULL','$firstName','NULL','$lastName','1','1','0','0')"; //make them a profile
+		$result = $connection->query($sql);
+	
+		$uID     = mysqli_insert_id($connection); //get the id of the last inserted record
+		$uIDName = "uID";
     
-    $pass   = sha1($password, $raw_output = false); //encrypt their password
-    //$pass = password_hash($password, PASSWORD_DEFAULT);//encrypt their password
-    $sql    = "INSERT INTO user (uID,email,pass,picture,f_Name,m_name,l_Name,tags_visible,profile_visible,block_invites,block_messages) 
-			VALUES ('0','$email','$pass','NULL','$firstName','NULL','$lastName','1','1','0','0')"; //make them a profile
-    $result = $connection->query($sql);
-    
-    $uID     = mysqli_insert_id($connection); //get the id of the last inserted record
-    $uIDName = "uID";
-    
-    $_SESSION["uID"] = $uID;
-    //setcookie($uIDName, $uID, time()+60*60*24, '/');//set the user ID cookie for a day so we can get all of their information later
-    header('Location: ../profile.php'); //log the user in
+		$_SESSION["uID"] = $uID;
+	
+		//header('Location: ../profile.php'); //log the user in
+	}
 }
 
 //------------------------------------------------USER LOGIN-----------------------------------------------------------------------//
