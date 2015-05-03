@@ -853,9 +853,10 @@ function SignUp($connection)
     $firstNameErr = $lastNameErr = $emailErr = $passErr = ""; //NOT USED YET (meant for displaying user input errors on the signup page)
     
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        
-        if (empty($_POST["firstName"])) {
+		
+        if ($_POST["firstName"]=='') {
             $firstNameErr = "First name is required.";
+			header("Location: ../register.php?loginError=$firstNameErr"); //log the user in
         } else {
             $firstName = test_Input($_POST["firstName"]);
             if (!preg_match("/^[a-zA-Z ]*$/", $firstName)) {
@@ -863,15 +864,22 @@ function SignUp($connection)
             }
         }
         
-        if (empty($_POST["lastName"])) {
+        if ($_POST["lastName"]=='') {
             $lastNameErr = "Last name is required.";
+			header("Location: ../register.php?loginError=$lastNameErr"); //log the user in
         } else {
             $lastName = test_Input($_POST["lastName"]);
             if (!preg_match("/^[a-zA-Z ]*$/", $lastName)) {
                 $lastNameErr = "Only letters and white space allowed";
             }
         }
-        
+		
+        $email = test_input($_POST["eMail"]);
+		if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+			$emailErr = "Invalid email format";
+			header("Location: ../register.php?loginError=$emailErr"); //log the user in
+		}
+		
         if (empty($_POST["eMail"])) {
             $emailErr = "Email is required";
         } else {
@@ -884,9 +892,15 @@ function SignUp($connection)
         
         if (empty($_POST["password"])) {
             $passErr = "Password is required";
+			header("Location: ../register.php?loginError=$passErr"); 
         } else {
             $password = test_Input($_POST["password"]);
         }
+		
+		if($_POST["password"] != $_POST["confirmPassword"]){
+			$passswordMismatch = "The passwords did not match";
+			header("Location: ../register.php?loginError=$passswordMismatch"); 
+		}
     }
     
     $pass   = sha1($password, $raw_output = false); //encrypt their password
@@ -900,7 +914,7 @@ function SignUp($connection)
     
     $_SESSION["uID"] = $uID;
     //setcookie($uIDName, $uID, time()+60*60*24, '/');//set the user ID cookie for a day so we can get all of their information later
-    header('Location: ../profile.php'); //log the user in
+  //  header('Location: ../profile.php'); //log the user in
 }
 
 //------------------------------------------------USER LOGIN-----------------------------------------------------------------------//
