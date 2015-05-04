@@ -851,70 +851,66 @@ function SignUp($connection)
 {
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		
-        if ($_POST["firstName"]=='') {
-            $firstNameErr = "First name is required.";
-			header("Location: ../register.php?loginError=$firstNameErr"); //log the user in
+        if (!isset($_POST["firstName"])) {
+            $registerErr = "First name is required";
         } else {
             $firstName = test_Input($_POST["firstName"]);
             if (!preg_match("/^[a-zA-Z ]*$/", $firstName)) {
-                $firstNameErr = "Only letters and white space allowed";
+                $registerErr = "Only letters and white space allowed in first name";
             }
         }
         
         if ($_POST["lastName"]=='') {
-            $lastNameErr = "Last name is required.";
-			header("Location: ../register.php?loginError=$lastNameErr"); //log the user in
+            $registerErr = "Last name is required.";
         } else {
             $lastName = test_Input($_POST["lastName"]);
             if (!preg_match("/^[a-zA-Z ]*$/", $lastName)) {
-                $lastNameErr = "Only letters and white space allowed";
+               $registerErr = "Only letters and white space allowed in last name";
             }
         }
 		
         $email = test_input($_POST["eMail"]);
 		if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-			$emailErr = "Invalid email format";
-			header("Location: ../register.php?loginError=$emailErr"); //log the user in
+			$registerErr = "Invalid email format";
 		}
 		
         if (empty($_POST["eMail"])) {
-            $emailErr = "Email is required";
+            $registerErr = "Email is required";
         } else {
             $email = test_Input($_POST["eMail"]);
             
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $emailErr = "Invalid email format";
-				header("Location: ../register.php?loginError=$emailErr"); //log the user in
+                $registerErr = "Invalid email format";
             }
         }
         
         if (empty($_POST["password"])) {
-            $passErr = "Password is required";
-			header("Location: ../register.php?loginError=$passErr"); 
+            $registerErr = "Password is required";
         } else {
             $password = test_Input($_POST["password"]);
         }
 		
 		if($_POST["password"] != $_POST["confirmPassword"]){
-			$passswordMismatch = "The passwords did not match";
-			header("Location: ../register.php?loginError=$passswordMismatch"); 
+			$registerErr = "The passwords did not match";
+		}
+		
+		if(isset($registerErr)){ //if there was an error redirect back to register
+			header("Location: ../register.php?loginError=$registerErr"); 
+		}else{
+			$pass   = sha1($password, $raw_output = false); //encrypt their password
+			//$pass = password_hash($password, PASSWORD_DEFAULT);//encrypt their password
+			$sql    = "INSERT INTO user (uID,email,pass,picture,f_Name,m_name,l_Name,tags_visible,profile_visible,block_invites,block_messages) 
+				VALUES ('0','$email','$pass','NULL','$firstName','NULL','$lastName','1','1','0','0')"; //make them a profile
+			$result = $connection->query($sql);
+	
+			$uID     = mysqli_insert_id($connection); //get the id of the last inserted record
+			$uIDName = "uID";
+    
+			$_SESSION["uID"] = $uID;
+	
+			header('Location: ../profile.php'); //log the user in
 		}
     }
-    if(!isset($firstNameErr) && !isset($lastNameErr) && !isset($emailErr) && !isset($passErr) && !isset($passwordMismatch)){
-		
-		$pass   = sha1($password, $raw_output = false); //encrypt their password
-		//$pass = password_hash($password, PASSWORD_DEFAULT);//encrypt their password
-		$sql    = "INSERT INTO user (uID,email,pass,picture,f_Name,m_name,l_Name,tags_visible,profile_visible,block_invites,block_messages) 
-				VALUES ('0','$email','$pass','NULL','$firstName','NULL','$lastName','1','1','0','0')"; //make them a profile
-		$result = $connection->query($sql);
-	
-		$uID     = mysqli_insert_id($connection); //get the id of the last inserted record
-		$uIDName = "uID";
-    
-		$_SESSION["uID"] = $uID;
-	
-		//header('Location: ../profile.php'); //log the user in
-	}
 }
 
 //------------------------------------------------USER LOGIN-----------------------------------------------------------------------//
