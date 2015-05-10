@@ -87,12 +87,23 @@ function groupSearch($connection)
     
     while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
         $array = array(); //array we are going to give back to the search
-        if (isset($row["g_name"])) {
-				//check if the user is blocked and only display if not
-			   $array["g_name"] = $row["g_name"];
-               $array["gID"] = $row["gID"];
-               array_push($jsonArray, $array); //put the array of f_name and uID on the jsonArray as a single json
-        }
+		
+		
+		if (isset($row["g_name"])) {
+				
+			//check if the user is blocked and only display if not
+			$gID = $row["gID"];
+			$uID = $_SESSION["uID"];
+			$searchBlocked = "SELECT * FROM groups NATURAL JOIN g_blocks WHERE gID='$gID' AND uID='$uID'";
+			$blockedResult = $connection->query($searchBlocked);
+			$blockedRow = $blockedResult->fetch_array(MYSQLI_ASSOC);
+
+			if(count($blockedRow)==0){//only display if the user was not blocked
+				$array["g_name"] = $row["g_name"];
+				$array["gID"] = $row["gID"];
+				array_push($jsonArray, $array); //put the array of f_name and uID on the jsonArray as a single json
+			}
+		}
     }
     $jsonArray = json_encode($jsonArray);
     echo $jsonArray;
