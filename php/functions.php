@@ -87,12 +87,23 @@ function groupSearch($connection)
     
     while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
         $array = array(); //array we are going to give back to the search
-        if (isset($row["g_name"])) {
-				//check if the user is blocked and only display if not
-			   $array["g_name"] = $row["g_name"];
-               $array["gID"] = $row["gID"];
-               array_push($jsonArray, $array); //put the array of f_name and uID on the jsonArray as a single json
-        }
+		
+		
+		if (isset($row["g_name"])) {
+				
+			//check if the user is blocked and only display if not
+			$gID = $row["gID"];
+			$uID = $_SESSION["uID"];
+			$searchBlocked = "SELECT * FROM groups NATURAL JOIN g_blocks WHERE gID='$gID' AND uID='$uID'";
+			$blockedResult = $connection->query($searchBlocked);
+			$blockedRow = $blockedResult->fetch_array(MYSQLI_ASSOC);
+
+			if(count($blockedRow)==0){//only display if the user was not blocked
+				$array["g_name"] = $row["g_name"];
+				$array["gID"] = $row["gID"];
+				array_push($jsonArray, $array); //put the array of f_name and uID on the jsonArray as a single json
+			}
+		}
     }
     $jsonArray = json_encode($jsonArray);
     echo $jsonArray;
@@ -297,7 +308,7 @@ function conversationToGroup($connection)
 
 //--------------------------------------------------CREATE GROUP-------------------------------------------------------------------------------//
 
-if (isset($_GET['createGroup']) && isset($_POST["groupName"])) { //only save a contact if the user put something in the submit box
+if (isset($_GET["createGroup"]) && isset($_POST["groupName"])) { //only save a contact if the user put something in the submit box
     CreateGroup($connection);
 }
 
@@ -849,58 +860,68 @@ if (isset($_GET['signUp']) && isset($_POST["submit"])) {
 
 function SignUp($connection)
 {
-    //Set the error variables to empty
-    $firstNameErr = $lastNameErr = $emailErr = $passErr = ""; //NOT USED YET (meant for displaying user input errors on the signup page)
-    
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        
-        if (empty($_POST["firstName"])) {
-            $firstNameErr = "First name is required.";
+		
+        if (!isset($_POST["firstName"])) {
+            $registerErr = "First name is required";
         } else {
             $firstName = test_Input($_POST["firstName"]);
             if (!preg_match("/^[a-zA-Z ]*$/", $firstName)) {
-                $firstNameErr = "Only letters and white space allowed";
+                $registerErr = "Only letters and white space allowed in first name";
             }
         }
         
-        if (empty($_POST["lastName"])) {
-            $lastNameErr = "Last name is required.";
+        if ($_POST["lastName"]=='') {
+            $registerErr = "Last name is required.";
         } else {
             $lastName = test_Input($_POST["lastName"]);
             if (!preg_match("/^[a-zA-Z ]*$/", $lastName)) {
-                $lastNameErr = "Only letters and white space allowed";
+               $registerErr = "Only letters and white space allowed in last name";
             }
         }
-        
+		
+        $email = test_input($_POST["eMail"]);
+		if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+			$registerErr = "Invalid email format";
+		}
+		
         if (empty($_POST["eMail"])) {
-            $emailErr = "Email is required";
+            $registerErr = "Email is required";
         } else {
             $email = test_Input($_POST["eMail"]);
             
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $emailErr = "Invalid email format";
+                $registerErr = "Invalid email format";
             }
         }
         
         if (empty($_POST["password"])) {
-            $passErr = "Password is required";
+            $registerErr = "Password is required";
         } else {
             $password = test_Input($_POST["password"]);
         }
+		
+		if($_POST["password"] != $_POST["confirmPassword"]){
+			$registerErr = "The passwords did not match";
+		}
+		
+		if(isset($registerErr)){ //if there was an error redirect back to register
+			header("Location: ../register.php?loginError=$registerErr"); 
+		}else{
+			$pass   = sha1($password, $raw_output = false); //encrypt their password
+			//$pass = password_hash($password, PASSWORD_DEFAULT);//encrypt their password
+			$sql    = "INSERT INTO user (uID,email,pass,picture,f_Name,m_name,l_Name,tags_visible,profile_visible,block_invites,block_messages) 
+				VALUES ('0','$email','$pass','NULL','$firstName','NULL','$lastName','1','1','0','0')"; //make them a profile
+			$result = $connection->query($sql);
+	
+			$uID     = mysqli_insert_id($connection); //get the id of the last inserted record
+			$uIDName = "uID";
+    
+			$_SESSION["uID"] = $uID;
+	
+			header('Location: ../profile.php'); //log the user in
+		}
     }
-    
-    $pass   = sha1($password, $raw_output = false); //encrypt their password
-    //$pass = password_hash($password, PASSWORD_DEFAULT);//encrypt their password
-    $sql    = "INSERT INTO user (uID,email,pass,picture,f_Name,m_name,l_Name,tags_visible,profile_visible,block_invites,block_messages) 
-			VALUES ('0','$email','$pass','NULL','$firstName','NULL','$lastName','1','1','0','0')"; //make them a profile
-    $result = $connection->query($sql);
-    
-    $uID     = mysqli_insert_id($connection); //get the id of the last inserted record
-    $uIDName = "uID";
-    
-    $_SESSION["uID"] = $uID;
-    //setcookie($uIDName, $uID, time()+60*60*24, '/');//set the user ID cookie for a day so we can get all of their information later
-    header('Location: ../profile.php'); //log the user in
 }
 
 //------------------------------------------------USER LOGIN-----------------------------------------------------------------------//

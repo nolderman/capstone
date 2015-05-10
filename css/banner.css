@@ -16,6 +16,15 @@
         background-size: 100% 100%;
 }
 
+.banner #bannerTitle {
+  position: absolute;
+  left: 20%;
+  top: 0px;
+  font-size: 38px;
+  color: #ecf0f1;
+  font-weight: 590;
+}
+
 .banner #connaktSymbol {
 	margin-left: auto;
 	margin-right: auto;
@@ -50,12 +59,22 @@
 
 .banner #toGroup{
   position: absolute;
-  right: 8%;
+  right: 13%;
   top: 37%;
 }
+.banner #toGroup #toGroupInput {
+  position: absolute;
+  top:0px;
+
+  background: #34495e;
+  border: none;
+}
 .banner #toGroup #toGroupButton {
+  position: absolute;
+  top: 5px;
+  left: -125px;
   width: auto;
-  height: 22.5px;
+  height: 22px;
 }
 
 .banner #yourProfileButton{
@@ -152,7 +171,7 @@
 .banner #searchbar {
 	position:absolute;
 	top: 38%;
-	left: 65%;
+	left: 56%;
 	width: 200px;
 }
 .banner #searchbarInput{

@@ -7,18 +7,19 @@
 	//$user - the user's ID number
 	//$profile - ID number of the profile the user is viewing (if on profile page and it is not the user's)
 function groupSidebar($connection, $user, $profile){
-	echo "<form name='groupSearchBar' class='content' id='groupSearchbar' method= 'POST' action='php/functions.php?addGroup=true'>
-				<input type='text' name='groupTypeahead' class='groupTypeahead' id='groupSearchbarInput' placeholder='Search'/>	
-				<input type='hidden' name='hiddenGID' id='groupID' value='' />						
-				<input type='submit' name='findGroup' value='Find Group!' class='hvr-fade-green button' id='searchButton' hideFocus='true'> 
-		</form>";
-
 	echo "<div class='sidebarHeader'> Groups";
+
 		//if user is viewing another user's profile, $profile won't be null
 		if (!is_null($profile)) {
 			echo " in Common";
 		}
+		echo "<form name='groupSearchBar' class='content' id='groupSearchbar' method= 'POST' action='php/functions.php?addGroup=true'>
+			<input type='text' name='groupTypeahead' class='groupTypeahead' id='groupSearchbarInput' placeholder='Search'/>	
+			<input type='hidden' name='hiddenGID' id='groupID' value='' />						
+			<input type='submit' name='findGroup' value='Find Group!' class='hvr-fade-green button' id='searchButton' hideFocus='true'> 
+		</form>";
 	echo "</div>";
+
 	
 	//get the user's groups
 	$sql = "SELECT gID, g_name 

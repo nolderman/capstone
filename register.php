@@ -9,6 +9,15 @@
 	</head>
 <body>
 
+
+	<div class="loginError">
+	<?php  
+		if(isset($_GET["loginError"])){
+			$error =  $_GET["loginError"];
+			echo $error;
+		}
+	?>
+	</div>
 	<div id="wrapper">
 		<form name="login" class="login" id = "login" method = "POST" action = "php/functions.php?signUp=true">
 			
@@ -19,11 +28,11 @@
 
 			<!--Sign up fields-->
 			<div class="content">
-				<input class="input firstName" type="text" name = "firstName" id="firstName" placeholder="firstName"/>
-				<input class="input lastName" type="text" name = "lastName" id="lastName" placeholder="lastName"/>
+				<input class="input firstName" type="text" name = "firstName" id="firstName" placeholder="First Name"/>
+				<input class="input lastName" type="text" name = "lastName" id="lastName" placeholder="Last Name"/>
 				<input type="text" name = "eMail" id="eMail" class="input email" placeholder="Email"/>
 				<input type="password" name = "password" id="password" class="input password" placeholder="Password"/>
-				<input type="password" name="confirm password" class="input confirm password" placeholder="Confirm Password"/>
+				<input type="password" name="confirmPassword" class="input confirm password" placeholder="Confirm Password"/>
 			</div>
 
 			<!--Submit and cancel buttons-->

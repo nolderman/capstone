@@ -1,6 +1,7 @@
 <?php
 //set up the session
-if(session_status() == PHP_SESSION_NONE) {
+$sessionID = session_id();
+if($sessionID == '') {//session_status() == PHP_SESSION_NONE
 	session_start();
 }
 

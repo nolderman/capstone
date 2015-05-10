@@ -69,7 +69,7 @@
 				<div class="sidebarAddWrapper" id="createGroupWrapper"  style="display:none">
 					<form name="createGroup" class="createGroup"  id="createGroup" method= "POST" action="php/functions.php?createGroup=true">  
 						<input type="text" name = "groupName" id="groupName" class="input groupName" placeholder="Group Name"/>	
-						<input type="submit" name="createGroup" value="Create Group" class="hvr-fade-green button">
+						<!-- <input type="submit" name="createGroup" value="Create Group" class="hvr-fade-green button"> -->
 					</form>
 					<div class="minimizeAddWrapper" href="javascript:;" onmousedown="toggleDiv('createGroupWrapper'); toggleDiv('createGroupMini');" >-</div>
 				</div>
@@ -88,32 +88,19 @@
 					?>
 				</h1>
 
-				<?php 
-				//If this is our profile
-				if(is_null($otherUser)){
-					echo "<!-- Uploading profile picture -->
-					<form action='uploadPicture.php' enctype='multipart/form-data' method='post'>
-						<table style='border-collapse: collapse; font: 12px Tahoma;' border='1' cellspacing='5' cellpadding='5'>
-							<tbody><tr>
-							<td>
-							<input name='uploadedimage' type='file'>
-							</td>
-
-							</tr>
-
-							<tr>
-							<td>
-							<input name='Upload Now' class= 'button hvr-fade-green' type='submit' value='Upload Image'>
-							</td>
-							</tr>
-						</tbody></table>
-					</form>";
-				}
-				?>
 
 				<?php
 					echo "<div id='pictureWrapper'>";
+						//If this is our profile
+						if(is_null($otherUser)){
+							echo "<!-- Uploading profile picture -->
+							<form id='pictureUpload' action='uploadPicture.php' enctype='multipart/form-data' method='post'>
+									<input id='pictureInputField' name='uploadedimage' type='file'>
+									<input name='Upload Now' id='uploadPictureButton' class= 'button hvr-fade-green' type='submit' value='Upload Image'>
+							</form>";
+						}
 						if (($profileInfo['picture']) != 'NULL' && is_null($otherUser)){
+							echo "<a class='button hvr-fade-green' id= 'addPicture' onmousedown=\"toggleDiv('pictureUpload');\" onmousedown=\"toggleDiv('addPicture');\">+</a>";
 							echo "<a class='button hvr-fade-red removePicture' href='php/functions.php?removeProfilePicture=true'>REMOVE PICTURE</a>";
 						}
 						//display profile picture

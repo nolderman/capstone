@@ -6,6 +6,9 @@ $basename = substr(strtolower(basename($_SERVER['PHP_SELF'])), 0, strlen(basenam
 
 if ($basename != 'index') { //if you are not on the index page, aka on profile, group, or conversation pages..
     echo "<div class = 'banner'> ";
+
+    	//No matter where you're at, Connakt is there for you.
+    	echo "<div id='bannerTitle'>Connackt</div>";
 		
 	    // If you are on the group page
 	    if ($basename == 'group') { //if we are on the group page searching on the group page we want to add this user to the group
@@ -19,7 +22,7 @@ if ($basename != 'index') { //if you are not on the index page, aka on profile, 
 	    // If you are on the conversation page
 	    if ($basename == 'conversation') {
 	    		echo "<form name=toGroup' id='toGroup' class='content' method='POST' action='php/functions.php?toGroup=true&cID=$cID'>
-					<input type='text' name='toGroup' placeholder='New Group Name'/>	
+					<input type='text' id='toGroupInput' name='toGroup' placeholder='New Group Name'/>	
 					<input type='submit' value='Turn Into Group' id='toGroupButton' class='hvr-fade-green button'>
 				</form>";
 		}
@@ -55,8 +58,11 @@ if ($basename != 'index') { //if you are not on the index page, aka on profile, 
 
 
 else { //this is if you're on the index page. 
-    echo "<div class = 'banner'>
-			<a id='top'></a>
+    echo "<div class = 'banner'>";
+    //No matter where you're at, Connakt is there for you.
+    echo "<div id='bannerTitle'>Connackt</div>";
+
+	echo	"<a id='top'></a>
 					
 
 			<!--Login Form-->
