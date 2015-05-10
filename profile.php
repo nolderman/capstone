@@ -94,13 +94,13 @@
 						//If this is our profile
 						if(is_null($otherUser)){
 							echo "<!-- Uploading profile picture -->
-							<form id='pictureUpload' action='uploadPicture.php' enctype='multipart/form-data' method='post'>
+							<form id='pictureUpload' action='uploadPicture.php' enctype='multipart/form-data' method='post' style='display:none' >
 									<input id='pictureInputField' name='uploadedimage' type='file'>
 									<input name='Upload Now' id='uploadPictureButton' class= 'button hvr-fade-green' type='submit' value='Upload Image'>
 							</form>";
+							echo "<a class='button hvr-fade-green' id= 'addPicture' onmousedown=\"toggleDiv('pictureUpload');\" onmousedown=\"toggleDiv('addPicture');\">+</a>";
 						}
 						if (($profileInfo['picture']) != 'NULL' && is_null($otherUser)){
-							echo "<a class='button hvr-fade-green' id= 'addPicture' onmousedown=\"toggleDiv('pictureUpload');\" onmousedown=\"toggleDiv('addPicture');\">+</a>";
 							echo "<a class='button hvr-fade-red removePicture' href='php/functions.php?removeProfilePicture=true'>REMOVE PICTURE</a>";
 						}
 						//display profile picture

@@ -160,7 +160,7 @@ function createConversation($connection, $convoName)
 
 //--------------------------------------------------SEND MESSAGE IN CONVERSATION--------------------------------------------------------------------------//
 //if it was clicked from the convo page
-if (isset($_GET["sendMessage"]) && isset($_POST["sendMessage"]) && isset($_POST["message"])) {
+if (isset($_GET["sendMessage"]) && isset($_POST["sendMessage"]) && isset($_POST["message"]) && !isset($_GET["gID"])) {
     
     if($_POST["message"] != ""){
         sendMessage($connection);
