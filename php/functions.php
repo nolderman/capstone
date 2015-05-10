@@ -88,7 +88,6 @@ function groupSearch($connection)
     while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
         $array = array(); //array we are going to give back to the search
 		
-		
 		if (isset($row["g_name"])) {
 				
 			//check if the user is blocked and only display if not
@@ -789,17 +788,6 @@ function RemoveContact($connection)
 }
 
 //-------------------------------------------------BLOCK USER------------------------------------------------------------------//
-// if (isset($_GET['blocked'])) {
-//     $blockedUser = $_POST['hiddenUID'];
-//     //If the user is not currently blocked, block them!
-//     if (!$blockedUser) {
-//         BlockUser($connection);
-//     } 
-//     //Otherwise, unblock the user.
-//     else {
-//         UnBlockUser($connection);
-//     }
-// }
 if (isset($_GET['blockUser'])) {
     BlockUser($connection);
 }
@@ -810,11 +798,6 @@ function BlockUser($connection)
     //insert uID and contacts uID
     $contactID = $_POST["blockedHiddenUID"]; //the user id of the contact (passed from profileSettings.php)
     $uID       = $_SESSION["uID"]; //the user's ID
-
-    // For testing
-    // echo "BLOCKED!";
-    // var_dump($contactID,$uID);
-    
     $sql    = "INSERT INTO u_blocks (uID, blocked) VALUES ('$uID', '$contactID')"; //put the block in the database
     $result = $connection->query($sql);
     
@@ -832,10 +815,6 @@ function UnBlockUser($connection)
     //insert uID and contacts uID
     $contactID = $_GET["blockedUser"]; //the user id of the contact (passed from userButtons.php)
     $uID       = $_SESSION["uID"]; //the user's ID
-    
-    // For testing
-    // echo "UNBLOCKED!";
-    // var_dump($contactID,$uID);
 
     $sql    = "DELETE FROM u_blocks WHERE uID='$uID' AND blocked='$contactID'"; //remove the block from the database
     $result = $connection->query($sql);
@@ -876,7 +855,7 @@ if (isset($_GET['deleteUserTag'])) {
 
 function deleteUserTag($connection, $tag_name)
 {
-    $uID = $_SESSION["uID"];
+    $uID    = $_SESSION["uID"];
     $sql    = "DELETE FROM u_tagged WHERE uID='$uID' AND tag_name='$tag_name'";
     $result = $connection->query($sql);
     header("Location: ../profile.php?gID=$gID"); 
