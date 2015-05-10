@@ -34,7 +34,6 @@ $members = $result->fetch_array(MYSQLI_ASSOC);
 if(isset($members["uID"])){
 	$isMember = true;
 	$moderator = groupModCheck($connection, $user, $gID);//check if the current user is a moderator of the group
-	echo "Moderator: ".$moderator;
 	$date_joined = $members["joined"];
 }
 else{

@@ -24,7 +24,7 @@ if (!empty($_FILES["uploadedimage"]["name"])) {
     $temp_name=$_FILES["uploadedimage"]["tmp_name"];
     $imgtype=$_FILES["uploadedimage"]["type"];
     $ext= GetImageExtension($imgtype);
-    $imagename=$uID.$ext; // Saves it as the uID.extension so that they are unique, and overwrite when the user uploads a new image. 
+    $imagename=$uID.$ext; // Saves it as the uID.extension so that they are unique, and overwrite when the user uploads a new image.  
     $target_path = "uploads/profile_images/".$imagename;
 
     
