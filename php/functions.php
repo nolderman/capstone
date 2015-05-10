@@ -308,7 +308,7 @@ function conversationToGroup($connection)
 
 //--------------------------------------------------CREATE GROUP-------------------------------------------------------------------------------//
 
-if (isset($_GET['createGroup']) && isset($_POST["groupName"])) { //only save a contact if the user put something in the submit box
+if (isset($_GET["createGroup"]) && isset($_POST["groupName"])) { //only save a contact if the user put something in the submit box
     CreateGroup($connection);
 }
 
