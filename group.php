@@ -123,14 +123,10 @@
 
 			<!--Right column. List of conversations the group contains-->
 			<div class="sidebar" id="convSidebar">
-				<div class="sidebarContent">
-					<div id="conversationFeed">
-						This is where the default and other conversations' messages will appear
-					</div>
-					<div id="conversationInputField">
-						This is where you will type and send your message
-					</div>
-				</div>
+				<!--generates the links to groups the person is a part of-->
+				<?php				
+					groupConvoSidebar($connection,$user,$_GET["gID"]);
+				?>
 			</div>
 
 		</div>

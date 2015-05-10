@@ -1,5 +1,4 @@
 <?php
-
 //Generates a sidebar listing the groups the user is a member of
 //if on a profile page that is not the user's, the sidebar will only display groups in common with the viewed profile
 //Parameters:
@@ -125,7 +124,7 @@ function groupConvoSidebar($connection, $user, $gID){
 		include "php/displayMessages.php";
 
 		echo "<div id='messageInputWrapper'>";
-			echo "<form name='sendMessage' method='POST' action='php/functions.php?sendMessage=true&cID=$cID'>";
+			echo "<form name='sendMessage' method='POST' action='php/functions.php?sendMessage=true&cID=$cID&gID=$gID'>";
 			echo "<textarea cols='50' rows='4' name='message' id='messageInput' placeholder='Type Your Message Here'></textarea>";     
 			echo "<input type='submit' name='sendMessage' value='Send Message' class='button hvr-fade-green' id='sendButton'>";				
 			echo "</form>";

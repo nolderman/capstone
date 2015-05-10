@@ -156,8 +156,8 @@ function createConversation($connection)
 }
 
 //--------------------------------------------------SEND MESSAGE IN CONVERSATION--------------------------------------------------------------------------//
-//if the user clicks the submit button on the page
-if (isset($_GET['sendMessage']) && isset($_POST["sendMessage"]) && isset($_POST["message"])) {
+//if it was clicked from the convo page
+if (isset($_GET["sendMessage"]) && isset($_POST["sendMessage"]) && isset($_POST["message"])) {
     
     if($_POST["message"] != ""){
         sendMessage($connection);
@@ -166,6 +166,18 @@ if (isset($_GET['sendMessage']) && isset($_POST["sendMessage"]) && isset($_POST[
     $cID = $_GET["cID"];
     header("Location: ../conversation.php?cID=$cID"); //go back to the conversation page
 }
+
+//if it was clicked from the group page
+if(isset($_GET["sendMessage"]) && isset($_POST["sendMessage"]) && isset($_POST["message"]) && isset($_GET["gID"])) {
+    
+    if($_POST["message"] != ""){
+        sendMessage($connection);
+    }
+
+    $gID = $_GET["gID"];
+    header("Location: ../group.php?gID=$gID"); //go back to the conversation page
+}
+
 
 function sendMessage($connection)
 {
