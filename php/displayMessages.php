@@ -31,7 +31,6 @@ if($result->num_rows > 0){
 						echo "<img class = 'image' src='uploads/profile_images/".$row['picture']."''>";
 					}
 				echo"</div>";
-	
 
 			echo "</li>";
 		}

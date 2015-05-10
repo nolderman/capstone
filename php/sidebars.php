@@ -7,7 +7,6 @@
 	//$user - the user's ID number
 	//$profile - ID number of the profile the user is viewing (if on profile page and it is not the user's)
 function groupSidebar($connection, $user, $profile){
-	
 	echo "<form name='groupSearchBar' class='content' id='groupSearchbar' method= 'POST' action='php/functions.php?addGroup=true'>
 				<input type='text' name='groupTypeahead' class='groupTypeahead' id='groupSearchbarInput' placeholder='Search'/>	
 				<input type='hidden' name='hiddenGID' id='groupID' value='' />						
@@ -104,6 +103,37 @@ function membersSidebar($connection, $user, $gID, $moderator, $members){
 }
 
 
+//Generates a sidebar with the group's conversation
+//Parameters: 
+	//$connection - the connection to the database
+	//$user - the user's ID number
+	//$gID - the group's ID number
+function groupConvoSidebar($connection, $user, $gID){
+	echo "<div class='sidebarHeader'>Group Conversation</div>";
+
+	echo "<div class='sidebarContent'>";
+		$sql = "SELECT cID, joined
+				FROM (g_owns NATURAL JOIN participates) 
+				WHERE (gID = '$gID' AND uID = '$user')";
+		$result = $connection->query($sql);
+		$convo = $result->fetch_array(MYSQLI_ASSOC);
+		
+		$cID = $convo["cID"];
+		$joined = $convo["joined"];
+
+		include "php/displayMessages.php";
+
+		echo "<div id='messageInputWrapper'>";
+			echo "<form name='sendMessage' method='POST' action='php/functions.php?sendMessage=true&cID=$cID'>";
+			echo "<textarea cols='50' rows='4' name='message' id='messageInput' placeholder='Type Your Message Here'></textarea>";     
+			echo "<input type='submit' name='sendMessage' value='Send Message' class='button hvr-fade-green' id='sendButton'>";				
+			echo "</form>";
+		echo "</div>";
+
+	echo "</div>";
+}
+
+
 //Generates a sidebar listing the conversations the user participates in
 //if on a profile page that is not the user's, the sidebar will only display conversations in common with the viewed profile
 //Parameters:
@@ -144,7 +174,7 @@ function conversationSidebar($connection, $user, $profile){
 		    } 
 		    else{
 		        //write out each conversation to the sidebar
-		        while ($convos = $result->fetch_array(MYSQLI_ASSOC)) {
+		        while ($convos = $result->fetch_array(MYSQLI_ASSOC)){
 		            $cID = $convos["cID"];
 
 		            echo "<a href = 'conversation.php?cID=$cID'>";
