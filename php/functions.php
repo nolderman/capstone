@@ -16,7 +16,7 @@ if (isset($_GET["removeProfilePicture"])) {
 
 function removeProfilePicture($connection)
 {   
-    $user = $_SESSION['uID'];
+    $user = $_SESSION["uID"];
     $sql = "UPDATE user
             SET picture='NULL'
             WHERE uID ='$user'";
@@ -331,7 +331,7 @@ function CreateGroup($connection)
         $uID = $_SESSION["uID"]; //get the creator's uID
         $gID = mysqli_insert_id($connection); //get the id of the last inserted record (in this case it is the group ID)
         
-        $insertMember = "INSERT INTO members (uID,gID,moderator,joined) VALUES ('$uID','$gID','1','$dateTime')"; //set the creator to a moderator
+        $insertMember = "INSERT INTO members (uID,gID,moderator,joined, unread_count) VALUES ('$uID','$gID','1','$dateTime', '0')"; //set the creator to a moderator
         $insertMember = $connection->query($insertMember);
         
         header("Location: ../group.php?gID=$gID");
@@ -341,8 +341,8 @@ function CreateGroup($connection)
 }
 
 //--------------------------------------------------POST MESSAGE TO GROUP---------------------------------------------------------------------//
-if (isset($_GET['postMessage']) && isset($_POST["postMessage"]) && isset($_POST["message"])) { //if the user clicks the submit button on the groupPage
-    PostMessageToGroup($connection, $_POST["message"], $_GET['gID']);
+if (isset($_GET["postMessage"]) && isset($_POST["postMessage"]) && isset($_POST["message"])) { //if the user clicks the submit button on the groupPage
+    PostMessageToGroup($connection, $_POST["message"], $_GET["gID"]);
 }
 
 function PostMessageToGroup($connection, $message, $gID)
@@ -368,8 +368,8 @@ function PostMessageToGroup($connection, $message, $gID)
 	
 	//update the number of unread posts for every member
 	while($members = $result->fetch_array(MYSQLI_ASSOC)){
-		$uID = $members['uID'];
-		$unreadCount = $members['unread_count'] + 1;
+		$uID = $members["uID"];
+		$unreadCount = $members["unread_count"] + 1;
 		$sql = "UPDATE members SET unread_count=$unreadCount WHERE gID=$gID AND uID=$uID";
 		$insertUnread = $connection->query($sql);
 	}
@@ -390,7 +390,6 @@ function markAsRead($connection, $gID, $uID)
 
 }
 
-
 //--------------------------------------------------REPLY TO POST------------------------------------------------------------------------//
 if (isset($_GET['replyToPost'])) {
     postReply($connection);
@@ -400,7 +399,7 @@ function postReply($connection)
 {
     $gID      = $_GET["gID"];
     $pID      = PostMessageToGroup($connection, $_POST["message"], $gID); //make a new post with the message and groupID and get the pID of the new reply back
-    $parentID = $_GET['pID']; //take the pID that we are replying to
+    $parentID = $_GET["pID"]; //take the pID that we are replying to
     echo $pID;
     
     $sql    = "INSERT INTO reply (pID, parent) VALUES ('$pID' ,'$parentID')"; //set a new reply for the parent post
