@@ -510,7 +510,7 @@ function addUserToGroup($connection)
     $newUser  = $_POST["hiddenUID"];
     $gID      = $_GET["gID"];	
     
-    $sql    = "INSERT INTO members (uID,gID,moderator,joined) VALUES ('$newUser', '$gID', '0', '$dateTime')"; //insert the user without mod permissions
+    $sql    = "INSERT INTO members (uID,gID,moderator,joined,unread_count) VALUES ('$newUser', '$gID', '0', '$dateTime', '0')"; //insert the user without mod permissions
     $result = $connection->query($sql);
 	header("Location: ../group.php?gID=$gID");
 }
@@ -528,7 +528,7 @@ function addGroup($connection, $gID, $uID){
 	$dateTime = new DateTime(null, new DateTimeZone('America/Los_Angeles'));
     $dateTime = $dateTime->format('Y-m-d H:i:s'); //set the dateTime format and put it back in the variable
 	
-	$sql    = "INSERT INTO members (uID,gID,moderator,joined) VALUES ('$uID', '$gID', '0', '$dateTime')"; //insert the user without mod permissions
+	$sql    = "INSERT INTO members (uID,gID,moderator,joined,unread_count) VALUES ('$uID', '$gID', '0', '$dateTime','0')"; //insert the user without mod permissions
     $result = $connection->query($sql);
     header("Location: ../group.php?gID=$gID");
 }
