@@ -44,7 +44,6 @@
 	<body>
 		<?php 
 			include 'php/banner.php';
-			require_once 'php/groupTags.php';
 			markAsRead($connection, $gID, $_SESSION['uID']);//mark all posts from this group as read by the user
 		?>
 			<div class='settingsBox' id='groupSettings' style='display:none'>
@@ -53,6 +52,7 @@
 
 		<!-- wrapper for all divs within the main body of the page. -->
 		<div id="columnWrapper">
+
 
 			<!-- Column wrapper for group information and notifications -->
 			<div class="sidebar" id="groupSidebar">
@@ -97,6 +97,7 @@
 					}
 					
 					echo "$g_name";
+					require_once 'php/groupTags.php';
 
 					
 					if($moderator){

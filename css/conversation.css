@@ -17,15 +17,13 @@ body{
 
 
 #messageFeed { /*within center column*/
-    /*Text settings specific to the message feed*/
-    text-align: left;
     font-size: 50%; /*size of the text in the message feed*/
     line-height:34px;
     color: white;
     overflow: auto;
 
     /*Sizing and positioning*/
-    position: absolute;
+    
     top: 0px;
     left: 0px;
     width: 100%;
@@ -33,69 +31,82 @@ body{
 }
 /*CSS for wrapper that contains the message sent by the user, and also the PICTURE of the sending user.*/
 .selfMessageWrapper {
-  display: flex;
-   /* switch horizontal layout */
-  justify-content: flex-end;
-  /* switch vertical layout */
-  align-items: flex-end;
+  overflow: hidden;
+
+  float: top; /*Makes it so that as more divs are added, then float in order from top to bottom*/
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: auto;
+  margin-right: auto;
+
+  padding-left: 5px;
+
+  /*Position & Sizing*/
+  text-align: left;
+  width: 100%;
+  border-radius: 5px;
 }
 .otherMessageWrapper {
-  display: flex;
-}
-.selfMessageWrapper .image:after{
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 0;
-  height: 0;
+
+  overflow: hidden;
+
+  float: top; /*Makes it so that as more divs are added, then float in order from top to bottom*/
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: auto;
+  margin-right: auto;
+
+  padding-left: 5px;
+
+  /*Position & Sizing*/
+  text-align: left;
+  width: 100%;
+  border-radius: 5px;
 }
 
-.otherMessageWrapper .image:after{
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 0;
-  height: 0;
-}
-
+/*CSS for images within the message feed.*/
 .image {
   width:40px;
   height: 40px;
+  /*border: 1px solid #2980b9;*/
+  border-radius: 5px;
 }
-.image img{
-  width: 40px;
-  height: 100%;
-  display: block;
+.selfMessageWrapper .image{
+  /*Size and positioning*/
+  position: relative;
+  float: right;
+  right: 5px;
+  top: 0px;  
+  z-index: 1;
+}
+.otherMessageWrapper .image{
+  position: relative;
+  float: left;
+  left: 0px;
+  top: 0px;
+}
+
+
+.message {
+  max-width: 70%;
+  line-height: 20px;
+  border-radius: 10px;
+
+  padding:15px;
+  background:#ecf0f1;
+  color: #34495e;
+
+  position:relative;
+  top:0px;
 }
 /*CSS for the messages from the conversation that appear in the message feed*/
 .selfMessageWrapper .message {
-  color: #34495e;
-  line-height: 100%;
-  top:0px;
-  right:0px;
-  margin-bottom: 5px;
-  max-width: 70%;
-
-  position:relative;
-  padding:15px;
-
-  background:#ecf0f1; /* default background for browsers without gradient support */
+  right: 10px;
+  float: right;
 }
 /*CSS for the messages from the conversation that appear in the message feed*/
 .otherMessageWrapper .message {
-  color: #34495e;
-  line-height: 100%;
-  top:0px;
-  left:0px;
-  margin-bottom: 5px;
-  max-width: 80%;
-
-  position:relative;
-  padding:15px;
-
-  background:#ecf0f1; /* default background for browsers without gradient support */
+  float: left;
 }
 
 /*Wrapper containing the text input area and the "Post Message" button*/

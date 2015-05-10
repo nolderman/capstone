@@ -160,7 +160,7 @@ function createConversation($connection, $convoName)
 
 //--------------------------------------------------SEND MESSAGE IN CONVERSATION--------------------------------------------------------------------------//
 //if it was clicked from the convo page
-if (isset($_GET["sendMessage"]) && isset($_POST["sendMessage"]) && isset($_POST["message"])) {
+if (isset($_GET["sendMessage"]) && isset($_POST["sendMessage"]) && isset($_POST["message"]) && !isset($_GET["gID"])) {
     
     if($_POST["message"] != ""){
         sendMessage($connection);
@@ -737,7 +737,7 @@ function deleteGroupTag($connection, $gID, $tag_name)
 	$tag_name = addSlashes($tag_name);
     $sql    = "DELETE FROM g_tagged WHERE gID='$gID' AND tag_name='$tag_name'";
     $result = $connection->query($sql);
-   //header("Location: ../group.php?gID=$gID");
+   header("Location: ../group.php?gID=$gID");
 }
 
 //-------------------------------------------------CHECK IF MODERATOR OF GROUP-------------------------------------------//
@@ -747,7 +747,7 @@ function groupModCheck($connection, $uID, $gID)
     $result = $connection->query($sql);
     $row    = $result->fetch_array(MYSQLI_ASSOC); //get the array with uID and pass
     
-    return $moderator = $row['moderator'];
+    return $moderator = $row["moderator"];
 }
 
 //--------------------------------------------------ADD CONTACT OR REMOVE CONTACT--------------------------------------------------------//
