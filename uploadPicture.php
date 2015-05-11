@@ -19,14 +19,15 @@ require_once 'php/sessionStatus.php';
 
 if (!empty($_FILES["uploadedimage"]["name"])) {
 
+    $uID = $_SESSION['uID'];
     $file_name=$_FILES["uploadedimage"]["name"];
     $temp_name=$_FILES["uploadedimage"]["tmp_name"];
     $imgtype=$_FILES["uploadedimage"]["type"];
     $ext= GetImageExtension($imgtype);
-    $imagename=date("d-m-Y")."-".time().$ext;
+    $imagename=$uID.$ext; // Saves it as the uID.extension so that they are unique, and overwrite when the user uploads a new image. 
     $target_path = "uploads/profile_images/".$imagename;
 
-    $uID = $_SESSION['uID'];
+    
      
 
 	if(move_uploaded_file($temp_name, $target_path)) {

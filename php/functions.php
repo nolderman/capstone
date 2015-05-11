@@ -113,10 +113,13 @@ function groupSearch($connection)
 
 //--------------------------------------------------CREATE CONVERSATION-------------------------------------------------------------------------------//
 if (isset($_GET["createConversation"])) { //only save a contact if the user put something in the submit box
-    createConversation($connection);
+    //set the convo name to "No other participants" because the base assumption is that this is a blank new conversation
+    $cID = createConversation($connection, "No other participants");
+
+    header("Location: ../conversation.php?cID=$cID");
 }
 
-function createConversation($connection)
+function createConversation($connection, $convoName)
 {
     $user = $_SESSION["uID"];
 
@@ -124,9 +127,10 @@ function createConversation($connection)
     $dateTime = new DateTime(null, new DateTimeZone('America/Los_Angeles'));
     $dateTime = $dateTime->format('Y-m-d H:i:s'); //set the dateTime format and put it back in the variable
     
+
     //add new conversation
     $sql = "INSERT INTO conversation (cID,c_name) 
-	        VALUES ('0', 'No other participants')";
+	        VALUES ('0', '$convoName')";
     $connection->query($sql);
     
     //get the ID of the conversation just created
@@ -151,13 +155,12 @@ function createConversation($connection)
                  WHERE cID = '$cID'";
         $connection->query($sql);
     }
-
-    header("Location: ../conversation.php?cID=$cID");
+    return $cID;
 }
 
 //--------------------------------------------------SEND MESSAGE IN CONVERSATION--------------------------------------------------------------------------//
-//if the user clicks the submit button on the page
-if (isset($_GET['sendMessage']) && isset($_POST["sendMessage"]) && isset($_POST["message"])) {
+//if it was clicked from the convo page
+if (isset($_GET["sendMessage"]) && isset($_POST["sendMessage"]) && isset($_POST["message"]) && !isset($_GET["gID"])) {
     
     if($_POST["message"] != ""){
         sendMessage($connection);
@@ -166,6 +169,18 @@ if (isset($_GET['sendMessage']) && isset($_POST["sendMessage"]) && isset($_POST[
     $cID = $_GET["cID"];
     header("Location: ../conversation.php?cID=$cID"); //go back to the conversation page
 }
+
+//if it was clicked from the group page
+if(isset($_GET["sendMessage"]) && isset($_POST["sendMessage"]) && isset($_POST["message"]) && isset($_GET["gID"])) {
+    
+    if($_POST["message"] != ""){
+        sendMessage($connection);
+    }
+
+    $gID = $_GET["gID"];
+    header("Location: ../group.php?gID=$gID"); //go back to the conversation page
+}
+
 
 function sendMessage($connection)
 {
@@ -250,17 +265,26 @@ function removeUserFromConvo($connection){
     }
     //if there is only one user left in this conversation, change the name of the conversation to what it used to be with
     else if($result->num_rows == 1){
-        $sql = "SELECT f_name
-                FROM user
-                WHERE uID = $uID";
-        $result = $connection->query($sql);
-        $row = $result->fetch_array(MYSQLI_ASSOC);
-        $convoName = "Old conversation with ".$row["f_name"];
-
-        $sql = "UPDATE conversation
-                SET c_name = '$convoName'
+        //first check if it is owned by a group
+        $sql = "SELECT gID
+                FROM conversation NATURAL JOIN g_owns
                 WHERE cID = '$cID'";
         $result = $connection->query($sql);
+
+        //if it is owned by a group, there will be a result, otherwise feel free to rename convo
+        if($result->num_rows != 0){
+            $sql = "SELECT f_name
+                    FROM user
+                    WHERE uID = $uID";
+            $result = $connection->query($sql);
+            $row = $result->fetch_array(MYSQLI_ASSOC);
+            $convoName = "Old conversation with ".$row["f_name"];
+
+            $sql = "UPDATE conversation
+                    SET c_name = '$convoName'
+                    WHERE cID = '$cID'";
+            $result = $connection->query($sql);
+        }
     }
     
     header("Location: ../profile.php");
@@ -332,8 +356,15 @@ function CreateGroup($connection)
         $gID = mysqli_insert_id($connection); //get the id of the last inserted record (in this case it is the group ID)
         
         $insertMember = "INSERT INTO members (uID,gID,moderator,joined, unread_count) VALUES ('$uID','$gID','1','$dateTime', '0')"; //set the creator to a moderator
-        $insertMember = $connection->query($insertMember);
-        
+        $connection->query($insertMember);
+
+        //create this group's conversation
+        $cID = createConversation($connection, $groupName);
+        //attach the conversation to this group
+        $sql = "INSERT INTO g_owns (gID,cID,o_participation)
+                VALUES ('$gID','$cID','0')";
+        $connection->query($sql);
+
         header("Location: ../group.php?gID=$gID");
     }
     

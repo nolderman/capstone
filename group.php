@@ -44,7 +44,6 @@
 	<body>
 		<?php 
 			include 'php/banner.php';
-			require_once 'php/groupTags.php';
 			markAsRead($connection, $gID, $_SESSION['uID']);//mark all posts from this group as read by the user
 		?>
 			<div class='settingsBox' id='groupSettings' style='display:none'>
@@ -53,6 +52,7 @@
 
 		<!-- wrapper for all divs within the main body of the page. -->
 		<div id="columnWrapper">
+
 
 			<!-- Column wrapper for group information and notifications -->
 			<div class="sidebar" id="groupSidebar">
@@ -97,6 +97,7 @@
 					}
 					
 					echo "$g_name";
+					require_once 'php/groupTags.php';
 
 					
 					if($moderator){
@@ -123,14 +124,10 @@
 
 			<!--Right column. List of conversations the group contains-->
 			<div class="sidebar" id="convSidebar">
-				<div class="sidebarContent">
-					<div id="conversationFeed">
-						This is where the default and other conversations' messages will appear
-					</div>
-					<div id="conversationInputField">
-						This is where you will type and send your message
-					</div>
-				</div>
+				<!--generates the links to groups the person is a part of-->
+				<?php				
+					groupConvoSidebar($connection,$user,$_GET["gID"]);
+				?>
 			</div>
 
 		</div>

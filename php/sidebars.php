@@ -1,5 +1,4 @@
 <?php
-
 //Generates a sidebar listing the groups the user is a member of
 //if on a profile page that is not the user's, the sidebar will only display groups in common with the viewed profile
 //Parameters:
@@ -82,7 +81,6 @@ function membersSidebar($connection, $user, $gID, $moderator, $members){
 		//loop though each member of the group
 		while($members = $result->fetch_array(MYSQLI_ASSOC)){
 			$memberID = $members["uID"];
-
 			// If you are not a moderator, any users that aren't you are not deletable.
 			if ($memberID != $user && !$moderator){ 
 				echo "<a href ='profile.php?uID=$memberID'>"; //clickable area without special CSS, so it takes up whole sidebarLink div.
@@ -125,8 +123,8 @@ function groupConvoSidebar($connection, $user, $gID){
 		include "php/displayMessages.php";
 
 		echo "<div id='messageInputWrapper'>";
-			echo "<form name='sendMessage' method='POST' action='php/functions.php?sendMessage=true&cID=$cID'>";
-			echo "<textarea cols='50' rows='4' name='message' id='messageInput' placeholder='Type Your Message Here'></textarea>";     
+			echo "<form name='sendMessage' method='POST' action='php/functions.php?sendMessage=true&cID=$cID&gID=$gID'>";
+			echo "<textarea cols='50' rows='4' name='message' id='messageInput' placeholder='Type your message to the group here!'></textarea>";     
 			echo "<input type='submit' name='sendMessage' value='Send Message' class='button hvr-fade-green' id='sendButton'>";				
 			echo "</form>";
 		echo "</div>";
@@ -232,7 +230,7 @@ function participantSidebar($connection, $cID, $user){
 		if($result = $connection->query($sql)){
 			//write out each participant's name to the sidebar
 			while($participants = $result->fetch_array(MYSQLI_ASSOC)){
-				// it is not you, do the normal anchor tag without any special delete button CSS
+				// it is not you, do the normal anchor tag without any special delete button CS
 
 				if($participants["uID"] != $user){ 
 				echo "<a href = 'profile.php?uID=".$participants["uID"]."'>";
