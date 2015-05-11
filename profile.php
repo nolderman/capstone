@@ -2,8 +2,46 @@
 	require_once 'php/connect.php';
 	require_once 'php/sessionStatus.php';
 	require_once 'php/sidebars.php';
-	require_once 'php/getProfileInfo.php';
+	require_once 'php/functions.php';
+
+	//the following code sets up these variables for the page's use:
+	//$user - the user's ID number
+	//$otherUser - the ID number of the profile viewed if not the user (null if it is the user)
+	//$profileInfo - an associative array for the profile's information needed
+
+	$user = $_SESSION["uID"];//will need user's uID no matter what
+
+	if((isset($_POST["hiddenUID"]) && $_SESSION["uID"] != $_POST["hiddenUID"]) || (isset($_GET["uID"]) && $_SESSION["uID"] != $_GET["uID"])){
+		
+		if(isset($_POST["hiddenUID"])){
+			$otherUser = $_POST["hiddenUID"];
+		}
+		else{
+			$otherUser = $_GET["uID"];
+		}
+
+		//get the info for this profile that will be needed
+		$sql = "SELECT uID, f_name, l_name, picture, tags_visible, profile_visible, block_invites, block_messages 
+				FROM user 
+				WHERE (uID = '$otherUser')";
+	}
+	else{
+		$otherUser = null; 
+
+		//get the info for this profile that will be needed
+		$sql = "SELECT uID, f_name, l_name, picture, tags_visible, profile_visible, block_invites, block_messages 
+				FROM user 
+				WHERE (uID = '$user')";
+	}
+
+	$result = $connection->query($sql);
+	$profileInfo = $result->fetch_array(MYSQLI_ASSOC);
+
+	$tags_visible = $profileInfo['tags_visible'] == 1;//get whether or not the profile's tags are visible to other users
+	$profile_visible = $profileInfo['profile_visible'] == 1;//get whether or not the profile is visible to other users
 ?>
+
+
 <!DOCTYPE html>
 <HTML5>
 	<head>
@@ -114,47 +152,67 @@
 					echo "</div>";
 				?>
 
-				
 				</br>
 				
 				<!-- profile details include tags and if this isn't the user's profile, buttons for interacting with the other user-->
-				<?php include "php/profileDetails.php";?>
-				
+				<?php 
+					//if this is the user's profile page, $otherUser will be null
+					if(!is_null($otherUser)){
+						//check if this profile is the user's contact
+						$contact = True;
+						$sql = "SELECT *
+								FROM contacts
+								WHERE (uID = '$user' AND contact = '$otherUser')";
+						$result = $connection->query($sql);
+						if($result->num_rows == 0){
+							$contact = False;
+						}
+
+						//check if this user is blocked by the profile
+						$blockedUser = True;
+						$sql = "SELECT *
+								FROM u_blocks
+								WHERE (uID = '$otherUser' AND blocked = '$user')";
+						$result = $connection->query($sql);
+						if($result->num_rows == 0){
+							$blockedUser = False;
+						}
+
+						//check if this profile is blocked by the user
+						$blockedProfile = True;
+						$sql = "SELECT *
+								FROM u_blocks
+								WHERE (uID = '$user' AND blocked = '$otherUser')";
+						$result = $connection->query($sql);
+						if($result->num_rows == 0){
+							$blockedProfile = False;
+						}
+
+						echo "<div id='profileButtonsWrapper'>";
+							if(!$blockedUser){
+								echo "<a href='php/functions.php?createConversation=true&uID=$otherUser' class='button profileButton hvr-fade-blue'>New Conversation</a>";
+							}
+							if(!$contact){
+								echo "<a href='php/functions.php?uID=$otherUser&contact=$contact' class='button profileButton hvr-fade-green'>Add Contact</a>";
+							}
+							else{
+								echo "<a href='php/functions.php?uID=$otherUser&contact=$contact' class='button profileButton hvr-fade-green'>Remove Contact</a>";
+							}
+						echo "</div>";
+					}
+
+					//write out the profile's tags
+					include "userTags.php";
+				?>
 			</div>
 
 			<!--Conversation links and notifications -->
 			<div class="sidebar" id="convSidebar">
 				<!--form to create a conversation-->
 				<a href="php/functions.php?createConversation=true" class="maximizeAddWrapper"></a>
-				<!-- <div class="maximizeAddWrapper" id="createConvMini" href="javascript:;" onmousedown="toggleDiv('createConvWrapper'); toggleDiv('createConvMini');"></div>
-				<div class="sidebarAddWrapper" id="createConvWrapper"  style="display:none">
-					<form name="createConversation" class="createConversation"  id="createConversation" method= "POST" action="php/functions.php?createConversation=true">  
-						<input type="text" name = "conversationName" id="conversationName" class="input conversationName" placeholder="Conversation Name"/>	
-						<input type="submit" name="createConversation" value="Create Conversation" class="hvr-fade-green button">
-					</form>
-					<div class="minimizeAddWrapper" href="javascript:;" onmousedown="toggleDiv('createConvWrapper'); toggleDiv('createConvMini');" >-</div>
-				</div> -->
 				<?php conversationSidebar($connection, $user, $otherUser); ?>
 			</div>
 
 	    </div>
-
-
-<!-- 	    <!-- Wrapper div for the chat boxes at the bottom of the page. Temporarily taken out so it doesnt overlap things during presentation.
-		<div class="chatWindowWrapper"> 
-  			<div class="hvr-bubble-top" id="smallChatWindow"  href="javascript:;" onmousedown="toggleDiv('bigChatWindow'); toggleDiv('smallChatWindow');" >Click to Expand</div>
-  			<div id="bigChatWindow" style="display:none">
-  				<div class="chatWindowHeader" id="chatWindowHeader" href="javascript:;" onmousedown="toggleDiv('bigChatWindow'); toggleDiv('smallChatWindow');">
-  					minimize
-  				</div>
-				<div id="inputField">
-					<form name="postMessage" method="POST" action="php/postMessage.php">
-					<textarea  name="message" id="message" placeholder="Type your message here!"></textarea>
-					<!-- <input type="submit" name="postMessage" value="Post Message" class="button hvr-fade-green">			
-					</form>
-				</div>
-  			</div>
-		</div> -->
-		
 	</body>
 </HTML>
