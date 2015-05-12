@@ -3,7 +3,61 @@
 	require_once 'php/sessionStatus.php';
 	require_once 'php/functions.php';
 	require_once 'php/sidebars.php';
-	require_once 'php/getGroupInfo.php';
+	
+	//the following code sets up these variables for the page's use:
+	//$user - the user's ID
+	//$gID - the group's ID
+	//$groupInfo - an array of associative arrays with the needed information for this group
+	//$members - an array of associative arrays with the needed information for the members of this group
+	//$isMember - boolean for whether or not the user is a member of the group
+	//$date_joined - date the user joined the group (if they are a member)
+	//$moderator - boolean for whether or not the user is a moderator
+	//$g_name - name of the group
+
+	//if no group is selected, redirect to profile page
+	if(!isset($_GET["gID"])){
+		header('Location: profile.php');
+	}
+
+	$user = $_SESSION["uID"];
+	$gID = $_GET["gID"];
+
+	//get the info for this group that will be needed
+	$groupQuery = "SELECT gID, g_name, icon, visible
+					FROM (groups)
+					WHERE (gID = '$gID')";
+	$result = $connection->query($groupQuery);
+	$groupInfo = $result->fetch_array(MYSQLI_ASSOC);
+
+	//get the members of the group
+	$memberQuery = "SELECT uID, joined
+					FROM (($groupQuery) subquery0 NATURAL JOIN members)";
+	$result = $connection->query($memberQuery);
+	$members = $result->fetch_array(MYSQLI_ASSOC);
+
+	if(isset($members["uID"])){
+		$isMember = true;
+		$moderator = groupModCheck($connection, $user, $gID);//check if the current user is a moderator of the group
+		$date_joined = $members["joined"];
+	}
+	else{
+		$isMember = false;
+		$moderator = false;
+	}
+
+	$g_name = $groupInfo["g_name"];
+	$visible = $groupInfo['visible'] == 1;//get whether or not the group is visible to the public
+
+
+	if(!$isMember && $visible){ //if the group is visible redirect to the permissions page
+		echo "<a href ='php/functions.php?requestGroupMembership=true&uID=$user'> Request Membership </a>";
+		echo "<a href ='profile.php'> Back to Profile </a>";
+	}
+	//if they aren't a member, and the group is set to be invisible, redirect them away from the page
+	if(!$isMember && !$visible){
+		header('Location: profile.php');
+	}
+
 ?>
 <!DOCTYPE html>
 <HTML5>
@@ -53,7 +107,6 @@
 		<!-- wrapper for all divs within the main body of the page. -->
 		<div id="columnWrapper">
 
-
 			<!-- Column wrapper for group information and notifications -->
 			<div class="sidebar" id="groupSidebar">
 				<!--form to create a group - NOTE: THIS ONLY EXISTS FOR TESTING-->
@@ -73,7 +126,7 @@
 
 				<!--generates the links to groups the person is a part of-->
 				<?php				
-					membersSidebar($connection,$user,$_GET["gID"],$moderator,$members);
+					membersSidebar($connection,$user,$gID,$moderator,$members);
 				?>
 
 			</div>
@@ -126,7 +179,7 @@
 			<div class="sidebar" id="convSidebar">
 				<!--generates the links to groups the person is a part of-->
 				<?php				
-					groupConvoSidebar($connection,$user,$_GET["gID"]);
+					groupConvoSidebar($connection,$user,$gID);
 				?>
 			</div>
 

@@ -2,7 +2,7 @@
 	require_once 'php/connect.php';
 	require_once 'php/sessionStatus.php';
 	require_once 'php/functions.php';
-	require_once 'php/getGroupInfo.php';
+	//require_once 'php/getGroupInfo.php';
 	
 ?>
 <!DOCTYPE html>
