@@ -93,7 +93,7 @@
 		<?php include 'php/banner.php';?>
 		<!-- Hidden box for settings that is toggled from the banner. -->
 		<div class='settingsBox' id='profileSettings' style='display:none'>
-            <?php include 'profileSettings.php';?>
+            <?php include 'php/profileSettings.php';?>
        	</div>
 
 
@@ -202,7 +202,7 @@
 					}
 
 					//write out the profile's tags
-					include "userTags.php";
+					include "php/userTags.php";
 				?>
 			</div>
 

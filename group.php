@@ -70,6 +70,7 @@
 		<link href="css/banner.css" rel="stylesheet" type="text/css"> <!-- CSS file for header for main pages -->
 		<link href="css/searchBar.css" rel="stylesheet" type="text/css"> <!-- CSS file for banner for main pages -->
 		<link href="css/notifications.css" rel="stylesheet" type="text/css"> <!-- CSS file for notifications -->
+		<link href="css/settings.css" rel="stylesheet" type="text/css"> <!-- CSS file for settings menu -->
 		<link href="css/message.css" rel="stylesheet" type="text/css">
 		<link href="css/tags.css" rel="stylesheet" type="text/css"> <!-- CSS file for tags -->
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -101,7 +102,7 @@
 			markAsRead($connection, $gID, $_SESSION['uID']);//mark all posts from this group as read by the user
 		?>
 			<div class='settingsBox' id='groupSettings' style='display:none'>
-				<?php include 'groupSettings.php';?>
+				<?php include 'php/groupSettings.php';?>
 			</div>
 
 		<!-- wrapper for all divs within the main body of the page. -->

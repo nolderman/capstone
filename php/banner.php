@@ -31,10 +31,9 @@ if ($basename != 'index') { //if you are not on the index page, aka on profile, 
 	    if ($basename == 'profile' && is_null($otherUser)){
 	        echo "<a class='hvr-fade-green button content settingsButton' onmousedown='toggleDiv(\"profileSettings\");'>Settings</a>";
 
-	    	require_once 'php/getContacts.php';
 	    	echo "<div class = 'hvr-fade-green button content' id='yourProfileButton' onmousedown='toggleDiv(\"contactsList\");'>Contacts</div>"; //shares id with 'yourProfileButton' because it has the exact same positioning as that button.
 	    	echo "<div class = 'content' id='contactsList' style='display:none'>";
-	       		contactList($connection, $user, $otherUser);
+	       		include 'php/displayContacts.php';
 	    	echo "</div>";
 	    }
 
