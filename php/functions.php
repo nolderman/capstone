@@ -743,11 +743,7 @@ function deleteGroupTag($connection, $gID, $tag_name)
 //-------------------------------------------------CHECK IF MODERATOR OF GROUP-------------------------------------------//
 function groupModCheck($connection, $uID, $gID)
 {
-<<<<<<< HEAD
-    $sql    = "SELECT moderator FROM members WHERE uID = '$uID' AND gID='$gID'";
-=======
     $sql    = "SELECT moderator FROM members WHERE uID = '$uID' AND gID = '$gID'";
->>>>>>> 1bdc0023485f83f82a195ff1db6f0d996e1d626f
     $result = $connection->query($sql);
     $row    = $result->fetch_array(MYSQLI_ASSOC); //get the array with uID and pass
     
