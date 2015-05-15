@@ -64,6 +64,7 @@
 	<head>
 		<title>Group Name</title>
 		<link href="css/group.css" rel="stylesheet" media="all">
+
 		<link href="css/buttons.css" rel="stylesheet" media="all">
 		<script src="javascript/jquery-1.11.2.min.js"></script>
 		<link href="css/columns.css" rel="stylesheet" type="text/css"> <!-- CSS file for right and left and middle columns -->
@@ -91,6 +92,16 @@
 				}
 				else{
 					document.getElementById(divid).style.display = 'none';
+				}
+		    }
+		    function expandTag(divid){ //Function for showing the full text of a tag
+				if(document.getElementById(divid).style.width != 'auto'){
+					document.getElementById(divid).style.minWidth = '110px';
+					document.getElementById(divid).style.width = 'auto';
+				}
+				else{
+					document.getElementById(divid).style.minWidth = '100px';
+					document.getElementById(divid).style.width = '100px';
 				}
 		    }
 		</script>	
@@ -138,34 +149,30 @@
 				<div id="postWrapper">
 				<?php 
 				
-					echo "<div class='groupName' >";
+					echo "<div class='groupInfoWrapper'>";
 					$sql = "SELECT icon FROM groups WHERE gID='$gID'";
 					$result = $connection->query($sql);
 					$row = $result->fetch_array(MYSQLI_ASSOC);
+					echo "<h3> $g_name </h3>";
 					if(!($row['icon'] == 'NULL')){
 						
 						$imageLocation = $row['icon'];
-						echo  "<img src='uploads/$imageLocation' height='42' width='42'>"; 
+						echo  "<img src='uploads/$imageLocation' class = 'image'>"; 
 					}else{
-						echo "<img src='images/worldBase.png' height='42' width='42'>"; 
+						echo "<img src='images/worldBase.png' class = 'image'>"; 
 					}
 					
-					echo "$g_name";
 					require_once 'php/groupTags.php';
 
 					
 					if($moderator){
-						echo	"<a href='' id='$gID' class ='editName groupActionLink'> Edit Group Name </a>
-								<form class='editName-form' name='editName' method='POST' action='php/functions.php?editName=true&gID=$gID' >
-									<input name='editName' value='$g_name'  />
-									<input class='button' type='submit' value='Change Name' />
-								</form>";	
-						}
+												}
 						echo "</div>";
-					
-					echo "<form name='postMessage' method='POST' action='php/functions.php?postMessage=true&gID=$gID'>;
-								<textarea cols='50' rows='4' name='message' id='postInput' placeholder='Type Your Message Here'></textarea>;     
-								<input type='submit' name='postMessage' value='Post' class='button' id='postButton'>;				
+
+					//form to post a message to the group
+					echo "<form name='postMessage' method='POST' action='php/functions.php?postMessage=true&gID=$gID'>
+								<textarea cols='50' rows='4' name='message' id='postInput' placeholder='Type Your Message Here'></textarea>     
+								<input type='submit' name='postMessage' value='Post' class='button' id='postButton'>				
 						</form>";
 				?>
 				</div>

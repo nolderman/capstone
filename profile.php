@@ -78,11 +78,13 @@
 		    }
 			function expandTag(divid){ //Function for showing the full text of a tag
 				if(document.getElementById(divid).style.width != 'auto'){
+					document.getElementById(divid).style.minWidth = '110px';
 					document.getElementById(divid).style.width = 'auto';
 				}
 				else{
+					document.getElementById(divid).style.minWidth = '100px';
 					document.getElementById(divid).style.width = '100px';
-				}
+				}		
 		    }
 		</script>			
 	</head>

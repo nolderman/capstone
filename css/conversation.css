@@ -29,39 +29,30 @@ body{
     width: 100%;
     height: 85%;
 }
+.messageWrapper {
+  overflow: hidden;
+
+  float: top; /*Makes it so that as more divs are added, then float in order from top to bottom*/
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: auto;
+  margin-right: auto;
+
+  padding-left: 5px;
+
+  /*Position & Sizing*/
+  text-align: left;
+  width: 100%;
+  border-radius: 5px;
+  text-align: left;
+}
 /*CSS for wrapper that contains the message sent by the user, and also the PICTURE of the sending user.*/
 .selfMessageWrapper {
-  overflow: hidden;
-
-  float: top; /*Makes it so that as more divs are added, then float in order from top to bottom*/
-  margin-top: 5px;
-  margin-bottom: 5px;
-  margin-left: auto;
-  margin-right: auto;
-
-  padding-left: 5px;
-
-  /*Position & Sizing*/
-  text-align: left;
-  width: 100%;
-  border-radius: 5px;
+  /*Simply for the purpose of separating the two types of messages.*/
 }
+
 .otherMessageWrapper {
-
-  overflow: hidden;
-
-  float: top; /*Makes it so that as more divs are added, then float in order from top to bottom*/
-  margin-top: 5px;
-  margin-bottom: 5px;
-  margin-left: auto;
-  margin-right: auto;
-
-  padding-left: 5px;
-
-  /*Position & Sizing*/
-  text-align: left;
-  width: 100%;
-  border-radius: 5px;
+  /*Simply for the purpose of separating the two types of messages.*/
 }
 
 /*CSS for images within the message feed.*/

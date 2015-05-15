@@ -22,6 +22,14 @@
 	if($moderator){
 		echo "<a class='button-hollow-green hvr-fade-red' href='php/functions.php?deleteGroup=true&gID=$gID'>Delete Group </a>";
 	}
+	echo "<br><br>";
+	echo	"<a id='$gID' class ='button button-hollow-green hvr-fade-green' onmousedown='toggleDiv(\"editName-form\");'>Edit Group Name</a>
+			<br><br>
+			<form  id='editName-form' style='display:none' name='editName' method='POST' action='php/functions.php?editName=true&gID=$gID' >
+				<input name='editName' value='$g_name'/>
+				<input class='button' type='submit' value='Change Name'/>
+			</form>";	
+
 	echo "<h5>Block User</h5>";
 
 	echo	"<form name='searchBar' class='content' id='searchbar' method='POST' action='php/functions.php?blockUserFromGroup=true&gID=$gID'>

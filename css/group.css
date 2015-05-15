@@ -9,13 +9,25 @@ body{
 }
 
 
-.groupName{
+.groupInfoWrapper{
 	position:relative;
 	width:100%;
-	height:100%;
+	height: 200px;
 	float:center;
-	color:white;
-	background: #2980b9;
+	color: #ecf0f1; /*cloud color*/
+}
+.groupInfoWrapper .image {
+  height: 42px; 
+  width: 42px; 
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+
+#tagsWrapper { 
+  background: black;
+  max-height: 120px;
+  overflow: auto;
 }
 
 /*Wrapper that surrounds the input field and the button for submitting a post*/
@@ -23,7 +35,6 @@ body{
     position: relative;
     height: 10%;
     width: 100%;
-	
 }
 
 /*Text input field for the post*/
@@ -43,51 +54,49 @@ body{
 
 /*Styling that is specific to the "Submit post" or "Post message" button.*/
 #postButton{/*within postWrapper*/
-    position: relative;/*absulute*/
-    margin-top: 14px;/*top*/
+  position: relative;/*absolute*/
+  margin-top: 14px;/*top*/
 	float:right;
 	margin-right:5px;
-    height: 50px;/*height=111%*/
-    width: 11%;/*width=11%*/
-    color: white;
-    right: 0px;
+  height: 50px;
+  width: 11%;
+  color: white;
+  right: 0px;
 }
 
 /*Wrapper where the posts will be contained in.*/
 .postContent { /*below postWrapper, contained in center column*/
-	
-    position: relative;
-    top: 4%;
-    height: 75%;
+  position: relative;
+  top: 4%;
+  height: 61%;
 	width:100%;
 	overflow-y:scroll;
 }
 
 /*CSS for actual posts within the postContent*/
 .postContent .post{
-    display: block;
-    width:98%;
-    margin: 5px 5px 5px 5px;
-    height:75px;
-    background: #2980b9;
-    color:#fff;
-	
-	font-size:55%;
-    /*From http://stackoverflow.com/questions/3779534/how-to-disable-text-selection-with-css-or-js  disables highlighting text on double click.*/
-    -moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;
+  display: block;
+  width:98%;
+  margin: 5px 5px 5px 5px;
+  min-height:75px;
+  background: #2980b9;
+  color:#fff;
+  padding-bottom: 20px;
+  padding-top: 20px;
+
+  position:relative;
+  font-size:50%;  
+  /*From http://stackoverflow.com/questions/3779534/how-to-disable-text-selection-with-css-or-js  disables highlighting text on double click.*/
+  -moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;
 }
 
-/*CSS for if YOU submitted the post.*/
-.postContent .subPost{
-    position:relative;
-    font-size:50%;
-}
 
 /*CSS for REPLIES to posts (any reply should also have the .post class associated with it, but with this added on*/
 .postContent .reply{
     width: 88%;
     left: 10px; /*slightly indented.*/
 }
+
 
 .reply-form{
 	display:none;
@@ -109,38 +118,28 @@ body{
 .edit-form .button{
 	position:relative;
 	float:right;
-	width: 11%;/*width=11%*/
-	height: 30px;/*height=111%*/
+	width: 11%;
+	height: 30px;
 	margin-top:10px;
 	margin-right:5px;
 }
 
-.editName-form {
-	display:none;
-	position:relative;
-	float:right;
-	margin-top:-10px;
-	margin-right:5px;
-}
 
-.editName-form .button{
-	position:relative;
-}
-
-.reply{
-    display: block;
-    width:75%;
-    margin-left:5px;
+.reply {
+  display: block;
+  width:75%;
+  margin-left:5px;
 	margin-top:-5px;
 	
 	border-top: 1px solid;
-    height:75px;
-    background: #2980b9;
-    color:#fff;
+  height:75px;
+  background: #2980b9;
+  color:#fff;
 	
+  position: relative;
 	font-size:55%;
-    /*From http://stackoverflow.com/questions/3779534/how-to-disable-text-selection-with-css-or-js  disables highlighting text on double click.*/
-    -moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;
+  /*From http://stackoverflow.com/questions/3779534/how-to-disable-text-selection-with-css-or-js  disables highlighting text on double click.*/
+  -moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;
 }
 
 .edit-reply-form {
@@ -165,6 +164,33 @@ body{
 	margin-right:5px;
 }
 
+.reply-post {
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+  left: 0px;
+  height: 20px;
+  line-height: 20px;
+}
+.edit-post {
+  position: absolute;
+  font-size: 15px;
+  width: 40px;
+  top: 0px;
+  right: -5px;
+}
+.delete-post {
+  position: absolute;
+  font-size: 20px;
+  width: 40px;
+  top: 0px;
+  left: 0px;
+}
+
+
+
+
+/*===========================================CONVERSATION SIDEBAR====================================================*/
 
 
 /*The container where the conversation's messages will be put in*/
@@ -214,8 +240,7 @@ body{
     right:2%;
 }
 
-.groupMessageWrapper {
-
+.messageWrapper {
   overflow: hidden;
 
   float: top; /*Makes it so that as more divs are added, then float in order from top to bottom*/
@@ -226,37 +251,96 @@ body{
 
   padding-left: 5px;
 
+  font-size: 15px;
+
   /*Position & Sizing*/
   text-align: left;
   width: 98%;
   border-radius: 5px;
+  text-align: left;
 }
 
+/*CSS for wrapper that contains the message sent by the user, and also the PICTURE of the sending user.*/
+.selfMessageWrapper {
+  /*Simply for the purpose of separating the two types of messages.*/
+}
 
-.groupMessageWrapper .image{
-  position: relative;
-  float: left;
-  left: 0px;
-  top: 0px;
+.otherMessageWrapper {
+  /*Simply for the purpose of separating the two types of messages.*/
+}
+
+/*CSS for images within the message feed.*/
+.image {
   width:20px;
   height: 20px;
   /*border: 1px solid #2980b9;*/
   border-radius: 5px;
 }
 
-/*CSS for the messages from the conversation that appear in the message feed*/
-.groupMessageWrapper .message {
+.selfMessageWrapper .image{
+  /*Size and positioning*/
+  position: relative;
+  float: right;
+  right: 5px;
+  top: 0px;  
+  z-index: 1;
+}
+
+.otherMessageWrapper .image{
+  position: relative;
+  float: left;
+  left: 0px;
+  top: 0px;
+}
+
+
+.message {
   max-width: 70%;
-  line-height: 12px;
+  line-height: 20px;
   border-radius: 10px;
 
-  font-size: 12px;
-
-  padding:15px;
-  background:#ecf0f1; /*cloud color*/
-  color: #34495e;
+  padding:8px;
+  color:#ecf0f1;
+  background-color: #34495e;
 
   position:relative;
   top:0px;
+}
+/*CSS for the messages from the conversation that appear in the message feed*/
+.selfMessageWrapper .message {
+  right: 10px;
+  float: right;
+}
+/*CSS for the messages from the conversation that appear in the message feed*/
+.otherMessageWrapper .message {
   float: left;
+}
+
+
+/*CSS specifically for the input field for tags on this page.*/
+#tagsWrapper input[type=text], textarea {
+  -webkit-transition: all 0.30s ease-in-out;
+  -moz-transition: all 0.30s ease-in-out;
+  -ms-transition: all 0.30s ease-in-out;
+  -o-transition: all 0.30s ease-in-out;
+  outline: none;
+  padding: 5px 0px 3px 5px; /*top, right, bottom, left*/
+  /*Has the same margin, width, and height as an actual tag*/
+  margin: 5px 5px 5px 5px; 
+  width: 120px; 
+  height: 20px;
+  border: 1px solid transparent; /*it is solid and 1px so there isnt any shift when selecting it*/
+  border-radius: 8px;
+
+}
+ 
+/*When selecting the text field this happens. Highlights emerald green (connakt main green)*/
+#tagsWrapper input[type=text]:focus, textarea:focus {
+  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+  padding: 5px 0px 3px 5px;
+  margin: 5px 5px 5px 5px;
+  width: 120px;
+  height: 20px;
+  border: 1px solid #27ae60;
+  border-radius: 8px;
 }

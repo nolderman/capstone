@@ -9,9 +9,10 @@ if ($result = $connection->query($sql)) {
     //write out each tag
     while ($tags = $result->fetch_array(MYSQLI_ASSOC)) {
         $tag_name = $tags["tag_name"];
-        echo "<div class='tag hvr-fade-cloud'>" . $tag_name;
+        echo "<div class='tag hvr-fade-cloud' id='".$tag_name."'>".$tag_name;
+        echo "<a class='backdrop' onmousedown='expandTag(\"".$tag_name."\");' onmouseup='expandTag(\"".$tag_name."\");'></a>";
         if ($moderator) { //only delete tags if you are a moderator
-            echo "<a href='php/functions.php?deleteGroupTag=true&gID=$gID&tag_name=$tag_name'>~X~</a>";
+            echo "<a href='php/functions.php?deleteGroupTag=true&gID=$gID&tag_name=$tag_name' class='removeTagButton hvr-fade-red'>X</a>";
         }
         echo "</div>   "; //spacing between tags		
     }
@@ -23,7 +24,7 @@ if ($result = $connection->query($sql)) {
 if ($isMember) {
     //do something maybe
 }
-echo "<form name='tagUser' class='tagUser' id='tagUser' method= 'POST' action='php/functions.php?tagGroup=true&gID=$gID'>
+echo "<form name='tagUser' class='tagGroup' id='tagGroup' method= 'POST' action='php/functions.php?tagGroup=true&gID=$gID'>
 		<input type='text' name='tagName' id='tagNameInput' class='input tagName' placeholder='Add a tag'/>
 		<input type='submit' name='addTag' value='Add Tag' class='button' id='tagInputButton'>
 	</form>

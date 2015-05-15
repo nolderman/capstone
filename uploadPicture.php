@@ -2,18 +2,18 @@
 require_once 'php/connect.php';
 require_once 'php/sessionStatus.php';
 
-    function GetImageExtension($imagetype)
-     {
-       if(empty($imagetype)) return false;
-       switch($imagetype)
-       {
-           case 'image/bmp': return '.bmp';
-           case 'image/gif': return '.gif';
-           case 'image/jpeg': return '.jpg';
-           case 'image/png': return '.png';
-           default: return false;
-       }
-     }
+function GetImageExtension($imagetype)
+  {
+    if(empty($imagetype)) return false;
+    switch($imagetype)
+    {
+      case 'image/bmp': return '.bmp';
+      case 'image/gif': return '.gif';
+      case 'image/jpeg': return '.jpg';
+      case 'image/png': return '.png';
+      default: return false;
+    }
+}
       
 
 
@@ -50,17 +50,5 @@ if (!empty($_FILES["uploadedimage"]["name"])) {
 }
  header("Location: profile.php");
 
-if (isset($_GET['editName'])) {
-    editGroupName($connection, $_POST['editName']);
-}
 
-function editGroupName($connection, $newName)
-{
-    $gID = $_GET['gID'];
-    
-    $sql    = "UPDATE groups SET g_name='$newName' WHERE gID=$gID";
-    $result = $connection->query($sql);
-    
-    header("Location: ../group.php?gID=$gID"); //go back to the group page
-}
 ?>

@@ -14,32 +14,30 @@ while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
     
    // if ($date_time > $date_joined) {
         echo "<div class='post'>";
-        $content = $row['content'];
-			
-        echo $content;
-        echo "<div class='subPost'>";
-        echo $row['f_name'] . " " . $row['date_time'];
-        $pID = $row['pID'];
-        
-        //reply to the post
-        echo "<a href='' class ='reply-post groupActionLink'> Reply </a>
-                                        <form class='reply-form' method='POST' action='php/functions.php?replyToPost=true&gID=$gID&pID=$pID' >
-                                            <textarea cols='20' rows='4' name='message' id='postInput' placeholder='Type Your Message Here'></textarea>
-                                            <input class='button' type='submit' value='Reply' />
-                                        </form>";
-        //delete the post link if the users' post or a moderator
-        if ($posterID == $_SESSION['uID'] || $moderator) {
-            echo "<a class='groupActionLink' href='php/functions.php?deletePost=true&gID=$gID&pID=$pID'>Delete Post</a>";
-        }
-        //edit the post    if users' post
-        if ($posterID == $_SESSION['uID']) {
-            echo "<a href='' id='$pID' class ='edit-post groupActionLink'> Edit Post </a>
-                                        <form class='edit-form' name='editPost' method='POST' action='php/functions.php?editPost=true&gID=$gID&pID=$pID' >
-                                            <textarea cols='20' rows='4' name='editPost' id='postInput'>$content</textarea>
-                                            <input class='button' type='submit' value='Accept' />
-                                        </form>";
-        }
-        echo "</div>";
+	        $content = $row['content']; // Print out the text of the post
+	        echo $content;
+	        echo "<br>";
+	        echo $row['f_name'] . " " . $row['date_time'];
+	        $pID = $row['pID'];
+	        
+	        //reply to the post
+	        echo "<a href='' class ='postReplyButton groupActionLink reply-post'>Reply</a>
+	                                        <form class='reply-form' method='POST' action='php/functions.php?replyToPost=true&gID=$gID&pID=$pID' >
+	                                            <textarea cols='20' rows='4' name='message' id='postInput' placeholder='Type Your Message Here'></textarea>
+	                                            <input class='button' type='submit' value='Reply' />
+	                                        </form>";
+	        //delete the post link if the users' post or a moderator
+	        if ($posterID == $_SESSION['uID'] || $moderator) {
+	            echo "<a class='delete-post groupActionLink' href='php/functions.php?deletePost=true&gID=$gID&pID=$pID'>X</a>";
+	        }
+	        //edit the post    if users' post
+	        if ($posterID == $_SESSION['uID']) {
+	            echo "<a href='' id='$pID' class ='edit-post groupActionLink'>Edit</a>
+	                                        <form class='edit-form' name='editPost' method='POST' action='php/functions.php?editPost=true&gID=$gID&pID=$pID' >
+	                                            <textarea cols='20' rows='4' name='editPost' id='postInput'>$content</textarea>
+	                                            <input class='button' type='submit' value='Accept' />
+	                                        </form>";
+	        }
         echo "</div>";
 		
 		$getReplies = "SELECT * FROM reply NATURAL JOIN post NATURAL JOIN user WHERE parent=$pID";//get the replies for this post
@@ -54,11 +52,11 @@ while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
 				$replyUID = $replies['uID'];
 			//delete the post link if the users' post or a moderator
 			if ($replyUID == $_SESSION['uID'] || $moderator) {
-				echo "<a class='groupActionLink' href='php/functions.php?deleteReply=true&gID=$gID&pID=$replyPID'> Delete Post</a>";
+				echo "<a class='delete-post groupActionLink' href='php/functions.php?deleteReply=true&gID=$gID&pID=$replyPID'>X</a>";
 			}
 			//edit the post    if users' post
 			if ($replyUID == $_SESSION['uID']) {
-				echo "<a href='' id='$pID' class ='edit-reply groupActionLink'> Edit Reply </a>
+				echo "<a href='' id='$pID' class ='edit-post edit-reply groupActionLink'>Edit</a>
                        <form class='edit-reply-form' method='POST' action='php/functions.php?editPost=true&gID=$gID&pID=$replyPID' >
 							<textarea cols='20' rows='4' name='editPost' id='postInput'> $replyContent </textarea>
 							<input class='button' type='submit' value='Accept' />

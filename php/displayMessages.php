@@ -14,8 +14,9 @@ $basename = substr(strtolower(basename($_SERVER['PHP_SELF'])), 0, strlen(basenam
 //if there are any messages, print them out
 if($result->num_rows > 0){
 	while($row = $result->fetch_array(MYSQLI_ASSOC)){
-		if ($basename == 'group') { // if we are on the group page
-			echo "<div class='groupMessageWrapper'>";
+
+		if($row['uID'] == $user){ // If the message is from you
+			echo "<div class='messageWrapper selfMessageWrapper'>";
 			 	
 				//Image of the user. change this to profile image when that is implemented
 				echo"<div class='image'>";
@@ -35,50 +36,27 @@ if($result->num_rows > 0){
 			echo "</div>";
 		}
 
-		if ($basename != 'group') { // Else, we are on the conversation page, and need different CSS for us and others 
-			if($row['uID'] == $user){ // If the message is from you
-				echo "<div class='selfMessageWrapper'>";
-				 	
-					//Image of the user. change this to profile image when that is implemented
-					echo"<div class='image'>";
-						//If the string is "NULL" (aka, no picture in the database for this person) then upload a silhouette instead.
-						if (($row['picture']) == 'NULL'){
-							echo "<img class = 'image' src='images/silhouette.jpg'>";
-						}
-						else{
-							echo "<img class = 'image' src='uploads/profile_images/".$row['picture']."''>";
-						}
-					echo"</div>";
-					//actual message content, within a chat bubble.
-					echo "<div class='message'>";		
-						echo $row["f_name"].": ".$row["content"];
-					echo "</div>";
+		else { // If the message is from another user.
+			echo "<div class='messageWrapper otherMessageWrapper'>";
+				
+				//Image of the user. change this to profile image when that is implemented
+				echo"<div class='image'>";
+								//If the string is "NULL" (aka, no picture in the database for this person) then upload a silhouette instead.
+					if (($row['picture']) == 'NULL'){
+						echo "<img class = 'image' src='images/silhouette.jpg'>";
+					}
+					else{
+						echo "<img class = 'image' src='uploads/profile_images/".$row['picture']."''>";
+					}
+				echo"</div>";
 
+				//actual message content, within a chat bubble.
+				echo "<div class='message'>";		
+					echo $row["f_name"].": ".$row["content"];
 				echo "</div>";
-			}
 
-			else { // If the message is from another user.
-				echo "<div class='otherMessageWrapper'>";
-					
-					//Image of the user. change this to profile image when that is implemented
-					echo"<div class='image'>";
-									//If the string is "NULL" (aka, no picture in the database for this person) then upload a silhouette instead.
-						if (($row['picture']) == 'NULL'){
-							echo "<img class = 'image' src='images/silhouette.jpg'>";
-						}
-						else{
-							echo "<img class = 'image' src='uploads/profile_images/".$row['picture']."''>";
-						}
-					echo"</div>";
-
-					//actual message content, within a chat bubble.
-					echo "<div class='message'>";		
-						echo $row["f_name"].": ".$row["content"];
-					echo "</div>";
-
-				echo "</div>";
-			}
+			echo "</div>";
 		}
-	}	
+	}
 }		
 ?>
