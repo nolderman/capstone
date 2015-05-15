@@ -598,12 +598,14 @@ if(isset($_GET['blockUserFromGroup'])){
 }
 
 function blockUserFromGroup($connection){
-	
+	if(isset($_POST["blockedHiddenUID"])){
 	$blockedUID = $_POST["blockedHiddenUID"];
 	$gID = $_GET['gID'];
+	echo $gID;
+	
 	$sql = "INSERT INTO g_blocks (gID,uID) VALUES ($gID, $blockedUID)";
 	$connection->query($sql);
-
+	}
 	header("Location: ../group.php?gID=$gID");
 
 }
