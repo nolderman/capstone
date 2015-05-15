@@ -24,8 +24,7 @@ body{
   top: 0px;
 }
 
-#tagsWrapper { 
-  background: black;
+#tagsWrapper {
   max-height: 120px;
   overflow: auto;
 }
