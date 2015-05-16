@@ -23,7 +23,7 @@ while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
 	        //reply to the post
 	        echo "<a href='' class ='postReplyButton groupActionLink reply-post'>Reply</a>
 	                                        <form class='reply-form' method='POST' action='php/functions.php?replyToPost=true&gID=$gID&pID=$pID' >
-	                                            <textarea cols='20' rows='4' name='message' id='postInput' placeholder='Type Your Message Here'></textarea>
+	                                            <textarea cols='20' rows='4' name='message' id='replyPostInput' placeholder='Type Your Message Here'></textarea>
 	                                            <input class='button' type='submit' value='Reply' />
 	                                        </form>";
 	        //delete the post link if the users' post or a moderator
