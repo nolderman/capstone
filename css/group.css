@@ -14,6 +14,7 @@ body{
 	width:100%;
 	height: 200px;
 	float:center;
+  float: top;
 	color: #ecf0f1; /*cloud color*/
 }
 .groupInfoWrapper .image {
@@ -33,8 +34,10 @@ body{
 /*Wrapper that surrounds the input field and the button for submitting a post*/
 #postWrapper {
     position: relative;
-    height: 10%;
+    float: top;
+    height: 80px;
     width: 100%;
+    z-index: 1;
 }
 
 /*Text input field for the post*/
@@ -42,6 +45,7 @@ body{
     font-weight: 300;
     font-size: 15px;
     line-height:15px;
+    float: top;
 
     resize: none; /*Keep the input box from being resizable (as is the default)*/
 
@@ -59,17 +63,18 @@ body{
   margin-top: 14px;/*top*/
 	float:right;
 	margin-right:5px;
-  height: 50px;
-  width: 11%;
+  height: 70px;
+  width: 100px;
   color: white;
-  right: 0px;
+  right: 5px;
 }
 
 /*Wrapper where the posts will be contained in.*/
 .postContent { /*below postWrapper, contained in center column*/
   position: relative;
-  top: 4%;
-  height: 460px;
+  top: 2%;
+  float: top;
+  height: 470px;
 	width:100%;
 	overflow-y:scroll;
 }
