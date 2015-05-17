@@ -20,8 +20,9 @@ body{
   height: 42px; 
   width: 42px; 
   position: absolute;
-  left: 0px;
-  top: 0px;
+  left: 48%;
+  right: auto;
+  top: -40px;
 }
 
 #tagsWrapper {
@@ -39,8 +40,8 @@ body{
 /*Text input field for the post*/
 #postInput { /*within postWrapper*/
     font-weight: 300;
-    font-size: 20px;
-    line-height:10px;
+    font-size: 15px;
+    line-height:15px;
 
     resize: none; /*Keep the input box from being resizable (as is the default)*/
 
@@ -50,6 +51,7 @@ body{
     height: 100%;
     left: 0px;
 }
+
 
 /*Styling that is specific to the "Submit post" or "Post message" button.*/
 #postButton{/*within postWrapper*/
@@ -67,7 +69,7 @@ body{
 .postContent { /*below postWrapper, contained in center column*/
   position: relative;
   top: 4%;
-  height: 61%;
+  height: 460px;
 	width:100%;
 	overflow-y:scroll;
 }
@@ -89,28 +91,60 @@ body{
   -moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;
 }
 
-
 /*CSS for REPLIES to posts (any reply should also have the .post class associated with it, but with this added on*/
 .postContent .reply{
-    width: 88%;
-    left: 10px; /*slightly indented.*/
+  display: block;
+  width:88%;
+  margin-left:5px;
+  margin-top:-5px;
+  
+  border-top: 1px solid;
+  height:75px;
+  background: #2980b9;
+  color:#fff;
+  
+  position: relative;
+  left: 10%;
+  font-size:55%;
+  /*From http://stackoverflow.com/questions/3779534/how-to-disable-text-selection-with-css-or-js  disables highlighting text on double click.*/
+  -moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;
 }
-
 
 .reply-form{
-	display:none;
+  display:none;
 }
 
-.reply-form .button{
-	position:relative;
-	float:right;
-	width: 11%;/*width=11%*/
-	height: 30px;/*height=111%*/
-	margin-top:10px;
-	margin-right:5px;
+#replyPostInput {
+  font-weight: 300;
+  font-size: 15px;
+  line-height:15px;
+
+  resize: none; /*Keep the input box from being resizable (as is the default)*/
+
+  /*Size and positioning of the div*/
+  position: absolute;
+  width: 99.5%;
+  height: 80px;
+  left: 0px;
+  z-index: 1;
 }
+.reply-form .button{
+  position:relative;
+  float:right;
+  width: 70px;
+  height: 70px;
+  margin-top:10px;
+  margin-right:5px;
+  z-index: 1;
+}
+
 
 .edit-form{
+  position: absolute;
+  top: -6px;
+  left: 0px;
+  height: 95%;
+  width: 100%;
 	display:none;
 }
 
@@ -123,37 +157,40 @@ body{
 	margin-right:5px;
 }
 
-
-.reply {
-  display: block;
-  width:75%;
-  margin-left:5px;
-	margin-top:-5px;
-	
-	border-top: 1px solid;
-  height:75px;
-  background: #2980b9;
-  color:#fff;
-	
-  position: relative;
-	font-size:55%;
-  /*From http://stackoverflow.com/questions/3779534/how-to-disable-text-selection-with-css-or-js  disables highlighting text on double click.*/
-  -moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;
-}
-
 .edit-reply-form {
-	position:relative;
+	position:absolute;
+  top: 0px;
+  left: 0px;
 	display:none;
 	width: 100%;
+  height: 95%;
 	margin-top:-10px;
 	margin-right:5px;
 }
 
+/*Styling that is specific to the "Edit reply" or input.*/
+#editReplyInput {/*within postWrapper*/
+    font-weight: 300;
+    font-size: 15px;
+    line-height:15px;
+
+    resize: none; /*Keep the input box from being resizable (as is the default)*/
+
+    /*Size and positioning of the div*/
+    position: absolute;
+    width: 99.5%;
+    height: 100%;
+    left: 0px;
+}
+
 .edit-reply-form .button {
 	position:relative;
-	width:25%;
-	height:75%;
-	margin-left:50%;
+  float:right;
+  width: 70px;
+  height: 60px;
+  margin-top:10px;
+  margin-right:5px;
+  z-index: 1;
 }
 
 .groupActionLink{

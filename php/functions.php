@@ -385,7 +385,7 @@ function PostMessageToGroup($connection, $message, $gID)
     //Insert the message with the user who posted, group posted to, dateTime posted, and the message itself.
     $uID = $_SESSION["uID"];
     if (!empty($message)) { //only post if not empty
-        $sql    = "INSERT INTO post (pID, uID, gID, date_time, content, edited) VALUES ('','$uID', '$gID', '$dateTime', '$message', '0')";
+        $sql    = "INSERT INTO post (pID,uID,gID,date_time,content,edited) VALUES ('0','$uID','$gID','$dateTime','$message','0')";
         $result = $connection->query($sql);
     }
     $pID = mysqli_insert_id($connection); //get the id of the last inserted record
@@ -406,8 +406,9 @@ function PostMessageToGroup($connection, $message, $gID)
 	
     if (!isset($_GET['replyToPost'])) { //if we came from posting a regular message go back to the group page now
       header("Location: ../group.php?gID=$gID"); //go back to the group page
-    } else
+    } else{
         return $pID;
+    }
 }
 
 
