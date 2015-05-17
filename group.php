@@ -81,7 +81,7 @@
 		<script type="text/javascript" src="javascript/typeahead.js"></script>  
 		<script type="text/javascript" src="javascript/search.js" language="javascript"> </script>
 		<script type="text/javascript" src="javascript/searchToAdd.js" language="javascript"> </script>
-		<script type="text/javascript" src="javascript/groupSearch.js" language="javascript"></script>
+		<script type="text/javascript" src="javascript/blockSearch.js" language="javascript"></script>
 
 		<script type="text/javascript" src="javascript/groupFunctions.js" language="javascript"> </script>
 		<script type="text/javascript" language="javascript">		

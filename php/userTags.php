@@ -1,9 +1,15 @@
-    <?php
-
+<?php
 if (is_null($otherUser) || ($profileInfo["tags_visible"] && !$blockedUser)) {
-    $sql = "SELECT tag_name 
-			FROM (user NATURAL JOIN u_tagged) 
-			WHERE (uID = '$user')";
+    if(is_null($otherUser)){
+        $sql = "SELECT tag_name 
+            FROM (user NATURAL JOIN u_tagged) 
+            WHERE (uID = '$user')";
+    }
+    else{
+        $sql = "SELECT tag_name 
+            FROM (user NATURAL JOIN u_tagged) 
+            WHERE (uID = '$otherUser')";
+    }
     
     echo "<div id='tagsWrapper'>";
     
